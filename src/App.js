@@ -1,10 +1,16 @@
 import './App.css';
-import Player from './views/Player'
+import Backdrop from './components/Backdrop'
+import AudioPanel from './components/AudioPanel'
+
+const appStyle = {
+  position: 'relative',
+}
 
 function App() {
   return (
-    <div className="App">
-      <Player />
+    <div className="App" style={appStyle}>
+      <Backdrop />
+      <AudioPanel />
     </div>
   );
 }
