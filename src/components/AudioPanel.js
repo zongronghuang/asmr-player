@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
+import DemoAudio from '../assets/audios/seaside_seagulls.mp3'
 
 // 操作按鈕元件
-const RawButtons = ({ className }) => (
+const RawButtons = ({ className, play }) => (
   <div className={className}>
     <button id="prev">Previous</button>
-    <button id="play">Play</button>
+    <button id="play" onClick={play}>Play</button>
     <button id="next">Next</button>
   </div>
 )
@@ -13,6 +14,8 @@ const Buttons = styled(RawButtons)`
   display: flex;
   justify-content: space-between;
 `
+
+
 
 // 音訊資訊元件 (名稱、時間、播放進度)
 const RawInfo = ({ className }) => (
@@ -65,26 +68,36 @@ const Controls = styled(RawControls)`
 `
 
 // audio 控制面板元件 (匯整上面元件)
-const RawAudioPanel = ({ className }) => (
-  <div className={className}>
-    <Buttons />
-    <Info />
-    <Controls />
-  </div>
-)
+const RawAudioPanel = ({ className }) => {
+  const play = () => {
+    const audio = document.querySelector('audio')
+    audio.play()
+  }
+
+  return (
+    <div className={className}>
+      <Buttons play={play} />
+      <Info />
+      <Controls />
+      <audio preload="auto">
+        <source src={DemoAudio} type="audio/mpeg" />
+      </audio>
+    </div>
+  )
+}
 
 const AudioPanel = styled(RawAudioPanel)`
  display: flex;
  justify-content: space-between;
 
-/**  position: absolute; top: 50%; */
+ position: absolute; top: 50%; 
 
  border: 1px solid black;
  width: 50%;
  text-align: center;
  padding: 0;
  margin: auto;
- background-color: transparent;
+ 
 `
 
 export default AudioPanel
