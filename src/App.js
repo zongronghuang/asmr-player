@@ -11,6 +11,7 @@ function App() {
     <div className="App" style={appStyle}>
       <Backdrop />
       <AudioPanel />
+      {console.log('app render')}
     </div>
   );
 }
