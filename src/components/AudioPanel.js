@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import styled from '@emotion/styled'
 
-
 import PlaybackButtons from './AudioPanel_parts/PlaybackButtons'
 import AudioTrack from './AudioPanel_parts/AudioTrack'
 import TrackInfo from './AudioPanel_parts/TrackInfo'
@@ -12,6 +11,7 @@ import VolumeAndMode from './AudioPanel_parts/VolumeAndMode'
 const AudioPanelJSX = ({ className }) => {
   const [duration, setDuration] = useState()
   const [currentTime, setCurrentTime] = useState(7)
+  const [volume, setVolume] = useState()
 
   // 播放音軌
   const handlePlayback = () => {
@@ -43,10 +43,15 @@ const AudioPanelJSX = ({ className }) => {
     console.log('*** current time', currentTime)
   }
 
-  // 取得音量大小
-  const handleTrackVolume = () => {
-    console.log('=== volume')
+  // 設定音量大小
+  const handleTrackVolume = (e) => {
+    const audio = document.querySelector('audio')
+    audio.volume = e.target.value
+
+    // 達成 controlled component
+    setVolume(e.target.value)
   }
+
 
   // 切換到下一個音軌
   const handleNextTrack = () => {
@@ -66,11 +71,17 @@ const AudioPanelJSX = ({ className }) => {
         handleNextTrack={handleNextTrack}
         handlePreviousTrack={handlePreviousTrack}
       />
-      <TrackInfo duration={duration} currentTime={currentTime} />
-      <VolumeAndMode handleTrackVolume={handleTrackVolume} />
-      <AudioTrack handleCurrentTime={handleCurrentTime} duration={duration} currentTime={currentTime} />
+      <TrackInfo
+        duration={duration}
+        currentTime={currentTime} />
+      <VolumeAndMode
+        handleTrackVolume={handleTrackVolume}
+        volume={volume} />
+      <AudioTrack
+        handleCurrentTime={handleCurrentTime}
+        duration={duration}
+        currentTime={currentTime} />
       {console.log('audio panel render')}
-      <progress></progress>
     </div>
   )
 }

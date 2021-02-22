@@ -12,7 +12,7 @@ const TrackInfoJSX = ({ className, duration, currentTime }) => {
         <span>Name</span>
         <time>{currentTimeSecs}/{durationSecs}</time>
       </div>
-      <progress max="100"></progress>
+      <input type="range"></input>
     </div>
   )
 }
