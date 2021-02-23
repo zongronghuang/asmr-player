@@ -9,7 +9,7 @@ const BackdropJSX = ({ className, track }) => (
 )
 
 const Backdrop = styled(BackdropJSX)`
- 
+
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

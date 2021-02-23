@@ -9,7 +9,7 @@ import VolumeAndMode from './AudioPanel_parts/VolumeAndMode'
 
 
 // audio 控制面板元件 (匯整上面元件)
-const AudioPanelJSX = ({ className, track }) => {
+const AudioPanelJSX = ({ className, track, handleNextTrack, handlePrevTrack }) => {
   const [duration, setDuration] = useState()
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState()
@@ -45,24 +45,13 @@ const AudioPanelJSX = ({ className, track }) => {
     setVolume(e.target.value)
   }
 
-
-  // 切換到下一個音軌
-  const handleNextTrack = () => {
-    console.log('=== next track')
-  }
-
-  // 切換到上一個音軌
-  const handlePreviousTrack = () => {
-    console.log('=== prev track')
-  }
-
   return (
     <div className={className}>
       <PlaybackButtons
         handlePlayback={handlePlayback}
         handlePause={handlePause}
         handleNextTrack={handleNextTrack}
-        handlePreviousTrack={handlePreviousTrack}
+        handlePrevTrack={handlePrevTrack}
       />
       <TrackInfo
         duration={duration}

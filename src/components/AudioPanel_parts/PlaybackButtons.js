@@ -6,11 +6,11 @@ const PlaybackButtonsJSX = ({
   handlePlayback,
   handlePause,
   handleNextTrack,
-  handlePreviousTrack
+  handlePrevTrack
 }) => (
   <div className={className}>
     {console.log('buttons render')}
-    <button id="prev" onClick={handlePreviousTrack}>Previous</button>
+    <button id="prev" onClick={handlePrevTrack}>Previous</button>
     <button id="play" onClick={handlePlayback}>Play</button>
     <button id="pause" onClick={handlePause}>Pause</button>
     <button id="next" onClick={handleNextTrack}>Next</button>
