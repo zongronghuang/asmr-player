@@ -10,7 +10,7 @@ import VolumeAndMode from './AudioPanel_parts/VolumeAndMode'
 // audio 控制面板元件 (匯整上面元件)
 const AudioPanelJSX = ({ className }) => {
   const [duration, setDuration] = useState()
-  const [currentTime, setCurrentTime] = useState(7)
+  const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState()
 
   // 播放音軌
@@ -19,7 +19,6 @@ const AudioPanelJSX = ({ className }) => {
     const audio = document.querySelector('audio')
     audio.play()
     setDuration(audio.duration)
-    setCurrentTime(audio.currentTime)
   }
 
   // 暫停音軌播放
@@ -30,17 +29,10 @@ const AudioPanelJSX = ({ className }) => {
   }
 
   // 取得音軌長度和目前時間
-  const handleCurrentTime = () => {
-    console.log('== update current time')
-    const audio = document.querySelector('audio')
-
-    console.log('audio current time', audio.currentTime)
-
-    // currentTime 的 state 有更新，也有更新到畫面上
-    setCurrentTime(prevCurrentTime => prevCurrentTime + 10)
-
-    // currentTime 的 state 抓不到值???!!!
-    console.log('*** current time', currentTime)
+  const handleCurrentTime = (e) => {
+    console.log('target', e.target.currentTime)
+    console.log('playing; updating current time')
+    setCurrentTime(prevCurrentTime => e.target.currentTime)
   }
 
   // 設定音量大小
@@ -73,14 +65,14 @@ const AudioPanelJSX = ({ className }) => {
       />
       <TrackInfo
         duration={duration}
-        currentTime={currentTime} />
+        currentTime={currentTime}
+      />
       <VolumeAndMode
         handleTrackVolume={handleTrackVolume}
         volume={volume} />
       <AudioTrack
         handleCurrentTime={handleCurrentTime}
-        duration={duration}
-        currentTime={currentTime} />
+      />
       {console.log('audio panel render')}
     </div>
   )
