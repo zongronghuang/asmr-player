@@ -1,7 +1,7 @@
 import DemoAudio from '../../assets/audios/seaside_seagulls.mp3'
 
 // 音軌元件
-const AudioTrack = ({ handleCurrentTime }) => {
+const AudioTrack = ({ track, handleCurrentTime }) => {
 
   return (
     <audio preload="auto" onTimeUpdate={handleCurrentTime}>

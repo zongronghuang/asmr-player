@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 // 音訊資訊元件 (名稱、時間、播放進度)
-const TrackInfoJSX = ({ className, duration, currentTime }) => {
+const TrackInfoJSX = ({ className, duration, currentTime, track }) => {
   const durationSecs = Math.round(duration) || 0
   const currentTimeSecs = Math.round(currentTime) || 0
 
@@ -9,7 +9,7 @@ const TrackInfoJSX = ({ className, duration, currentTime }) => {
     <div className={className}>
       {console.log('info render')}
       <div id="info">
-        <span>Name</span>
+        <span>{track.name}</span>
         <time>{currentTimeSecs}/{durationSecs}</time>
       </div>
       <progress value={currentTimeSecs} max={durationSecs}></progress>

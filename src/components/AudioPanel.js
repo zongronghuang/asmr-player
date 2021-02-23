@@ -7,8 +7,9 @@ import TrackInfo from './AudioPanel_parts/TrackInfo'
 import VolumeAndMode from './AudioPanel_parts/VolumeAndMode'
 
 
+
 // audio 控制面板元件 (匯整上面元件)
-const AudioPanelJSX = ({ className }) => {
+const AudioPanelJSX = ({ className, track }) => {
   const [duration, setDuration] = useState()
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState()
@@ -28,7 +29,7 @@ const AudioPanelJSX = ({ className }) => {
     console.log('== paused')
   }
 
-  // 取得音軌長度和目前時間
+  // 更新音軌目前時間
   const handleCurrentTime = (e) => {
     console.log('target', e.target.currentTime)
     console.log('playing; updating current time')
@@ -65,12 +66,14 @@ const AudioPanelJSX = ({ className }) => {
       />
       <TrackInfo
         duration={duration}
+        track={track}
         currentTime={currentTime}
       />
       <VolumeAndMode
         handleTrackVolume={handleTrackVolume}
         volume={volume} />
       <AudioTrack
+        track={track}
         handleCurrentTime={handleCurrentTime}
       />
       {console.log('audio panel render')}
