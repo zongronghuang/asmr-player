@@ -9,7 +9,7 @@ const PlaybackButtonsJSX = ({
   handlePrevTrack
 }) => (
   <div className={className}>
-    {console.log('buttons render')}
+    {console.log('[render] PlaybackButtons')}
     <button id="prev" onClick={handlePrevTrack}>Previous</button>
     <button id="play" onClick={handlePlayback}>Play</button>
     <button id="pause" onClick={handlePause}>Pause</button>

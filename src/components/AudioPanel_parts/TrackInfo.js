@@ -7,7 +7,7 @@ const TrackInfoJSX = ({ className, duration, currentTime, track }) => {
 
   return (
     <div className={className}>
-      {console.log('info render')}
+      {console.log('[render] TrackInfo')}
       <div id="info">
         <span>{track.name}</span>
         <time>{currentTimeSecs}/{durationSecs}</time>

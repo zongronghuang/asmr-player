@@ -47,6 +47,7 @@ const AudioPanelJSX = ({ className, track, handleNextTrack, handlePrevTrack }) =
 
   return (
     <div className={className}>
+      {console.log('[render] AudioPanel')}
       <PlaybackButtons
         handlePlayback={handlePlayback}
         handlePause={handlePause}
@@ -65,7 +66,6 @@ const AudioPanelJSX = ({ className, track, handleNextTrack, handlePrevTrack }) =
         track={track}
         handleCurrentTime={handleCurrentTime}
       />
-      {console.log('audio panel render')}
     </div>
   )
 }

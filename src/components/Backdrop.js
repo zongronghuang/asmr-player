@@ -5,7 +5,9 @@ const BackdropJSX = ({ className, track }) => (
   <div
     className={className}
     style={{ backgroundImage: `url(${track.imageUrl})` }}
-  >{console.log('image url', track.imageUrl)}</div>
+  >
+    {console.log('[render] Backdrop')}
+  </div>
 )
 
 const Backdrop = styled(BackdropJSX)`
