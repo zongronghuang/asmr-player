@@ -54,30 +54,29 @@ const AudioPanelJSX = ({ className, track, handleNextTrack, handlePrevTrack }) =
         handleNextTrack={handleNextTrack}
         handlePrevTrack={handlePrevTrack}
       />
-      <TrackInfo
-        duration={duration}
-        track={track}
-        currentTime={currentTime}
-      />
-      <Volume
-        handleTrackVolume={handleTrackVolume}
-        volume={volume} />
-      <AudioTrack
-        track={track}
-        handleCurrentTime={handleCurrentTime}
-      />
+      <div>
+        <TrackInfo
+          duration={duration}
+          track={track}
+          currentTime={currentTime}
+        />
+        <Volume
+          handleTrackVolume={handleTrackVolume}
+          volume={volume} />
+        <AudioTrack
+          track={track}
+          handleCurrentTime={handleCurrentTime}
+        />
+      </div>
     </div>
   )
 }
 
 const AudioPanel = styled(AudioPanelJSX)`
  display: flex;
- justify-content: space-between;
-
+ justify-content: center;
  position: absolute; top: 50%; 
-
  border: 1px solid black;
- width: 100%;
  text-align: center;
  padding: 0;
  margin: auto;

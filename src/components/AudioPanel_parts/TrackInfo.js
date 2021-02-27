@@ -20,8 +20,6 @@ const TrackInfoJSX = ({ className, duration, currentTime, track }) => {
 const TrackInfo = styled(TrackInfoJSX)`
   display: flex;
   flex-direction: column;
-  width: 50%;
-
   & > #info {
   background-color: green;  
   display: flex;

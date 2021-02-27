@@ -4,9 +4,8 @@
 const AudioTrack = ({ track, handleCurrentTime }) => {
 
   return (
-    <audio onTimeUpdate={handleCurrentTime}>
-      {console.log('[render] AudioTrack')}
-      <source src={track.src} type="audio/mpeg" />
+    <audio onTimeUpdate={handleCurrentTime} src={track.src} >
+      {console.log('[render] AudioTrack', track.src)}
     </audio>
   )
 }
