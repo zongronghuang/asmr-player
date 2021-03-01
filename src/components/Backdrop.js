@@ -4,7 +4,7 @@ import DemoImg from '../assets/images/backdrop_1.jpg'
 const BackdropJSX = ({ className, track }) => (
   <div
     className={className}
-    style={{ backgroundImage: `url(${track.imageUrl})` }}
+    style={{ backgroundImage: `url(${track.imageSrc})` }}
   >
     {console.log('[render] Backdrop')}
   </div>

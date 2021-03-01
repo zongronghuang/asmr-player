@@ -16,7 +16,6 @@ const AudioPanelJSX = ({ className, track, handleNextTrack, handlePrevTrack }) =
 
   // 播放音軌
   const handlePlayback = () => {
-    console.log('=== play track')
     const audio = document.querySelector('audio')
     audio.play()
     setDuration(audio.duration)
@@ -26,13 +25,11 @@ const AudioPanelJSX = ({ className, track, handleNextTrack, handlePrevTrack }) =
   const handlePause = () => {
     const audio = document.querySelector('audio')
     audio.pause()
-    console.log('== paused')
   }
 
   // 更新音軌目前時間
   const handleCurrentTime = (e) => {
     console.log('target', e.target.currentTime)
-    console.log('playing; updating current time')
     setCurrentTime(prevCurrentTime => e.target.currentTime)
   }
 
