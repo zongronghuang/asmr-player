@@ -5,6 +5,7 @@ import PlaybackButtons from './AudioPanel_parts/PlaybackButtons'
 import AudioTrack from './AudioPanel_parts/AudioTrack'
 import TrackInfo from './AudioPanel_parts/TrackInfo'
 import Volume from './AudioPanel_parts/Volume'
+import Modes from './AudioPanel_parts/Modes'
 
 // audio 控制面板元件 (匯整上面元件)
 const AudioPanelJSX = ({ className, track, handleNextTrack, handlePrevTrack }) => {
@@ -66,6 +67,7 @@ const AudioPanelJSX = ({ className, track, handleNextTrack, handlePrevTrack }) =
           handleCurrentTime={handleCurrentTime}
         />
       </div>
+      <Modes />
     </div>
   )
 }

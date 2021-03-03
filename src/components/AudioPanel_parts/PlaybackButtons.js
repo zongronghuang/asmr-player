@@ -19,7 +19,6 @@ const PlaybackButtonsJSX = ({
 
 const PlaybackButtons = styled(PlaybackButtonsJSX)`
   display: flex;
-  justify-conten
 `
 
 export default PlaybackButtons
