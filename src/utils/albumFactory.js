@@ -8,12 +8,13 @@ import Img_1 from '../assets/images/backdrop_1.jpg'
 import Img_2 from '../assets/images/backdrop_2.jpg'
 import Img_3 from '../assets/images/backdrop_3.jpg'
 
-const imgs = [Img_0, Img_1, Img_2, Img_3, Img_3]
-const audios = [Audio_0, Audio_1, Audio_2, Audio_3, Audio_3]
+const imgs = [Img_0, Img_1, Img_2, Img_3]
+const audios = [Audio_0, Audio_1, Audio_2, Audio_3]
+
 
 // 檢查是否有重覆的檔案
 // 顯示重覆檔案 id
-const findRedundantItemsById = (fileArray, mediaType) => {
+const findRedundantItems = (fileArray, mediaType) => {
   // 進行檔案分類並列出 id
   // {'檔案 a': [id, id, ...]}
   const sortedFiles = fileArray.reduce((base, element, index) => {
@@ -47,8 +48,8 @@ const album = (imageArray, audioArray) => {
     console.log(`Not equal in number: audios: ${audioArray.length} | images: ${imageArray.length}`)
   }
 
-  findRedundantItemsById(audioArray, 'audio')
-  findRedundantItemsById(imageArray, 'image')
+  findRedundantItems(audioArray, 'audio')
+  findRedundantItems(imageArray, 'image')
 
   // 建立曲目清單
   const trackList = Array(audios.length)
