@@ -3,17 +3,20 @@ import { useEffect, useState } from 'react'
 
 import Backdrop from './components/Backdrop'
 import AudioPanel from './components/AudioPanel'
-import defaultAlbum from './utils/albumFactory'
+import defaultTracks from './utils/trackFactory'
 
 // App 的基本 style
 const appStyle = {
   position: 'relative',
 }
 
+const getRandomNum = (max) => {
+  return Math.floor(Math.random() * max)
+}
+
 function App() {
   const [mode, setMode] = useState('loopAlbum')
-  const [randomTracks, setRandomTracks] = useState(Array(defaultAlbum.length))
-  const album = mode === 'shuffleAll' ? randomTracks : defaultAlbum
+  const [album, setAlbum] = useState(defaultTracks)
   const [track, setTrack] = useState(album[0])
 
   const handleNextTrack = () => {
@@ -46,6 +49,30 @@ function App() {
 
   const handleModeChange = (e) => {
     setMode(e.target.value)
+
+    if (e.target.value === 'shuffleAll') {
+      const numberOfTracks = defaultTracks.length
+      const usedRandomIndexes = []
+      const newRandomTracks = Array(numberOfTracks)
+      let randomIndex = getRandomNum(numberOfTracks)
+
+      defaultTracks.forEach(track => {
+        while (usedRandomIndexes.includes(randomIndex)) {
+          // 重新建立 randomIndex
+          randomIndex = getRandomNum(numberOfTracks)
+        }
+
+        usedRandomIndexes.push(randomIndex)
+        newRandomTracks[randomIndex] = track
+      })
+
+      console.log('new random tracks', newRandomTracks)
+
+      // 問題發生處????
+      setAlbum(prevAlbum => newRandomTracks)
+      console.log('new album', album)
+      setTrack(prevTrack => album[0])
+    }
   }
 
 
