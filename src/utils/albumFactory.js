@@ -35,7 +35,7 @@ const findRedundantItems = (fileArray, mediaType) => {
   })
 }
 
-const album = (audioArray, imageArray) => {
+const defaultAlbum = (audioArray, imageArray) => {
   // 必須至少有一個 image 和 audio
   if (!imageArray.length || !audioArray.length) {
     console.log('No available audios or images')
@@ -64,4 +64,4 @@ const album = (audioArray, imageArray) => {
   return trackList
 }
 
-export default album(audios, images)
+export default defaultAlbum(audios, images)

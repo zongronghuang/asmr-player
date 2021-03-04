@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import Backdrop from './components/Backdrop'
 import AudioPanel from './components/AudioPanel'
-import album from './utils/albumFactory'
+import defaultAlbum from './utils/albumFactory'
 
 // App 的基本 style
 const appStyle = {
@@ -11,8 +11,10 @@ const appStyle = {
 }
 
 function App() {
-  const [track, setTrack] = useState(album[0])
   const [mode, setMode] = useState('loopAlbum')
+  const [randomTracks, setRandomTracks] = useState(Array(defaultAlbum.length))
+  const album = mode === 'shuffleAll' ? randomTracks : defaultAlbum
+  const [track, setTrack] = useState(album[0])
 
   const handleNextTrack = () => {
     setTrack(prevTrack => {
@@ -45,6 +47,7 @@ function App() {
   const handleModeChange = (e) => {
     setMode(e.target.value)
   }
+
 
   return (
     <div className="App" style={appStyle}>

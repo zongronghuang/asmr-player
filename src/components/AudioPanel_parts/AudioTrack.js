@@ -1,7 +1,10 @@
-// import DemoAudio from '../../assets/audios/seaside_seagulls.mp3'
-
-// 音軌元件
-const AudioTrack = ({ track, mode, handleCurrentTime, handleNextTrack, handlePlayback }) => (
+const AudioTrack = ({
+  track,
+  mode,
+  handleCurrentTime,
+  handleNextTrack,
+  handlePlayback
+}) => (
   <audio
     onTimeUpdate={handleCurrentTime}
     onEnded={handleNextTrack}
