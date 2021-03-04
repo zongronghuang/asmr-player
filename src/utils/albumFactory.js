@@ -13,8 +13,8 @@ const audios = [Audio_0, Audio_1, Audio_2, Audio_3]
 
 const findRedundantItems = (fileArray, mediaType) => {
   // 進行檔案分類並列出 id
-  // 無重複檔案：{'檔案 a (路徑)': [id]}
-  // 有重複檔案：{'檔案 a (路徑)': [id, id, ...]}
+  // 無重複檔案：{'檔案 a (路徑)': [id]}
+  // 有重複檔案：{'檔案 a (路徑)': [id, id, ...]}
   const numeratedFiles = fileArray.reduce((base, element, index) => {
     if (!base[element]) {
       base[element] = []

@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 
-const ModesJSX = ({ className }) => {
+const ModesJSX = ({ className, handleModeChange }) => {
   return (
-    <form className={className}>
+    <form className={className} onChange={handleModeChange}>
       {console.log('[render] Modes')}
       <div>
         <input type="radio" id="loop-album" value="loopAlbum" name="mode" defaultChecked></input>

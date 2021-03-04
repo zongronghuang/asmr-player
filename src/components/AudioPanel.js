@@ -8,7 +8,7 @@ import Volume from './AudioPanel_parts/Volume'
 import Modes from './AudioPanel_parts/Modes'
 
 // audio 控制面板元件 (匯整上面元件)
-const AudioPanelJSX = ({ className, track, handleNextTrack, handlePrevTrack }) => {
+const AudioPanelJSX = ({ className, track, mode, handleNextTrack, handlePrevTrack, handleModeChange }) => {
   const [duration, setDuration] = useState()
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState()
@@ -62,12 +62,15 @@ const AudioPanelJSX = ({ className, track, handleNextTrack, handlePrevTrack }) =
           volume={volume} />
         <AudioTrack
           track={track}
+          mode={mode}
           handleNextTrack={handleNextTrack}
           handlePlayback={handlePlayback}
           handleCurrentTime={handleCurrentTime}
         />
       </div>
-      <Modes />
+      <Modes
+        handleModeChange={handleModeChange}
+      />
     </div>
   )
 }

@@ -12,6 +12,7 @@ const appStyle = {
 
 function App() {
   const [track, setTrack] = useState(album[0])
+  const [mode, setMode] = useState('loopAlbum')
 
   const handleNextTrack = () => {
     setTrack(prevTrack => {
@@ -41,14 +42,20 @@ function App() {
     })
   }
 
+  const handleModeChange = (e) => {
+    setMode(e.target.value)
+  }
+
   return (
     <div className="App" style={appStyle}>
       { console.log('[render] App')}
       <Backdrop track={track} />
       <AudioPanel
         track={track}
+        mode={mode}
         handleNextTrack={handleNextTrack}
         handlePrevTrack={handlePrevTrack}
+        handleModeChange={handleModeChange}
       />
     </div>
   );
