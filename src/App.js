@@ -3,15 +3,11 @@ import { useEffect, useState } from 'react'
 
 import Backdrop from './components/Backdrop'
 import AudioPanel from './components/AudioPanel'
-import defaultTracks from './utils/trackFactory'
+import defaultTracks, { randomizeTracks } from './utils/trackFactory'
 
 // App 的基本 style
 const appStyle = {
   position: 'relative',
-}
-
-const getRandomNum = (max) => {
-  return Math.floor(Math.random() * max)
 }
 
 function App() {
@@ -50,31 +46,15 @@ function App() {
   const handleModeChange = (e) => {
     setMode(e.target.value)
 
+    // 如果是 Shuffle all 模式，則建立隨機排列曲目
     if (e.target.value === 'shuffleAll') {
-      const numberOfTracks = defaultTracks.length
-      const usedRandomIndexes = []
-      const newRandomTracks = Array(numberOfTracks)
-      let randomIndex = getRandomNum(numberOfTracks)
-
-      defaultTracks.forEach(track => {
-        while (usedRandomIndexes.includes(randomIndex)) {
-          // 重新建立 randomIndex
-          randomIndex = getRandomNum(numberOfTracks)
-        }
-
-        usedRandomIndexes.push(randomIndex)
-        newRandomTracks[randomIndex] = track
-      })
-
-      console.log('new random tracks', newRandomTracks)
-
+      const randomTracks = randomizeTracks(defaultTracks)
       // 問題發生處????
-      setAlbum(prevAlbum => newRandomTracks)
+      setAlbum(prevAlbum => randomTracks)
       console.log('new album', album)
-      setTrack(prevTrack => album[0])
+      // setTrack(prevTrack => album[0])
     }
   }
-
 
   return (
     <div className="App" style={appStyle}>

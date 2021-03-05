@@ -64,4 +64,27 @@ const defaultTracks = (audioArray, imageArray) => {
   return trackList
 }
 
+const getRandomNum = (max) => {
+  return Math.floor(Math.random() * max)
+}
+
+export const randomizeTracks = (trackArray) => {
+  const usedIndexes = []
+  const randomTracks = Array(trackArray.length)
+  let index = getRandomNum(trackArray.length)
+
+  trackArray.forEach(track => {
+    // 如果 index 已存在於 usedIndexes，就重新建立 index
+    while (usedIndexes.includes(index)) {
+      index = getRandomNum(trackArray.length)
+    }
+
+    usedIndexes.push(index)
+    randomTracks[index] = track
+  })
+
+  console.log('random tracks', randomTracks)
+  return randomTracks
+}
+
 export default defaultTracks(audios, images)
