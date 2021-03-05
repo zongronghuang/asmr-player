@@ -53,7 +53,6 @@ const defaultTracks = (audioArray, imageArray) => {
   const trackList = Array(audios.length)
     .fill({})
     .map((track, index) => ({
-      order: index,
       name: `track_${index}`,
       audioSrc: audios[index],
       imageSrc: images[index],

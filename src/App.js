@@ -17,43 +17,51 @@ function App() {
 
   const handleNextTrack = () => {
     setTrack(prevTrack => {
-      let newOrder
+      const prevTrackId = album.findIndex(track => track.name === prevTrack.name)
+      let newTrackId
 
-      if (prevTrack.order === album.length - 1) {
-        newOrder = 0
+      if (prevTrackId === album.length - 1) {
+        newTrackId = 0
       } else {
-        newOrder = prevTrack.order + 1
+        newTrackId = prevTrackId + 1
       }
 
-      return album[newOrder]
+      return album[newTrackId]
     })
   }
 
   const handlePrevTrack = () => {
     setTrack(prevTrack => {
-      let newOrder
+      const prevTrackId = album.findIndex(track => track.name === prevTrack.name)
+      let newTrackId
 
-      if (prevTrack.order === 0) {
-        newOrder = album.length - 1
+      if (prevTrackId === 0) {
+        newTrackId = album.length - 1
       } else {
-        newOrder = prevTrack.order - 1
+        newTrackId = prevTrackId - 1
       }
 
-      return album[newOrder]
+      return album[newTrackId]
     })
   }
 
   const handleModeChange = (e) => {
-    setMode(e.target.value)
+
 
     // 如果是 Shuffle all 模式，則建立隨機排列曲目
     if (e.target.value === 'shuffleAll') {
       const randomTracks = randomizeTracks(defaultTracks)
       // 問題發生處????
-      setAlbum(prevAlbum => randomTracks)
+      console.log('random tracks', randomTracks)
+      setAlbum(prevAlbum => {
+        console.log('in to the update')
+        return [...randomTracks]
+      })
       console.log('new album', album)
-      // setTrack(prevTrack => album[0])
     }
+    // 無法將目前播放音軌改為新專輯的第一首
+    setTrack(prevTrack => album[0])
+    setMode(e.target.value)
   }
 
   return (
