@@ -11,6 +11,8 @@ import Image_3 from '../assets/images/backdrop_3.jpg'
 const images = [Image_0, Image_1, Image_2, Image_3]
 const audios = [Audio_0, Audio_1, Audio_2, Audio_3]
 
+// ----- 建立 defaultTracks() 製作符合一般順序的曲目列表 -----
+
 const findRedundantItems = (fileArray, mediaType) => {
   // 進行檔案分類並列出 id
   // 無重複檔案：{'檔案 a (路徑)': [id]}
@@ -53,6 +55,7 @@ const defaultTracks = (audioArray, imageArray) => {
   const trackList = Array(audios.length)
     .fill({})
     .map((track, index) => ({
+      order: index,
       name: `track_${index}`,
       audioSrc: audios[index],
       imageSrc: images[index],
@@ -63,8 +66,25 @@ const defaultTracks = (audioArray, imageArray) => {
   return trackList
 }
 
+export default defaultTracks(audios, images)
+
+// ----- 建立 randomizeTracks() 讓專輯曲目順序符合直觀的隨機順序 -----
+
 const getRandomNum = (max) => {
   return Math.floor(Math.random() * max)
+}
+
+const isInSequentialOrder = (trackArray) => {
+  // 以 order 0 的曲目作為分界點，將 trackArray 拆成兩個子陣列
+  const orderZeroId = trackArray.findIndex(track => track.order === 0)
+  const tracksFromOrderZero = trackArray.slice(orderZeroId)
+  const tracksBeforeOrderZero = trackArray.slice(0, orderZeroId)
+
+  // 重新接合子陣列，確認 track order 是否從 0 開始逐次加一
+  // true (播放順序不符合直觀的隨機順序) false (播放順序符合直觀的隨機順序)
+  return tracksFromOrderZero
+    .concat(tracksBeforeOrderZero)
+    .every((track, id) => track.order === id)
 }
 
 export const randomizeTracks = (trackArray) => {
@@ -77,13 +97,13 @@ export const randomizeTracks = (trackArray) => {
     while (usedIndexes.includes(index)) {
       index = getRandomNum(trackArray.length)
     }
-
     usedIndexes.push(index)
     randomTracks[index] = track
   })
 
-  console.log('random tracks', randomTracks)
+  if (isInSequentialOrder(randomTracks)) {
+    return randomizeTracks(trackArray)
+  }
+
   return randomTracks
 }
-
-export default defaultTracks(audios, images)
