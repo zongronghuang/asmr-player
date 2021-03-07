@@ -46,28 +46,23 @@ function App() {
   }
 
   const handleModeChange = (e) => {
-
-
     // 如果是 Shuffle all 模式，則建立隨機排列曲目
     if (e.target.value === 'shuffleAll') {
       const randomTracks = randomizeTracks(defaultTracks)
-      // 問題發生處????
       console.log('random tracks', randomTracks)
+
       setAlbum(prevAlbum => {
-        console.log('in to the update')
         return [...randomTracks]
       })
-      console.log('new album', album)
     }
-    // 無法將目前播放音軌改為新專輯的第一首
-    setTrack(prevTrack => album[0])
+
     setMode(e.target.value)
   }
 
   return (
-    <div className="App" style={appStyle}>
+    < div className="App" style={appStyle} >
       { console.log('[render] App')}
-      <Backdrop track={track} />
+      < Backdrop track={track} />
       <AudioPanel
         track={track}
         mode={mode}
@@ -75,7 +70,7 @@ function App() {
         handlePrevTrack={handlePrevTrack}
         handleModeChange={handleModeChange}
       />
-    </div>
+    </div >
   );
 }
 
