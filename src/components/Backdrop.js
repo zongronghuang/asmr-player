@@ -1,8 +1,16 @@
 import styled from '@emotion/styled'
 import DemoImg from '../assets/images/backdrop_1.jpg'
 
-const BackdropJSX = ({ className, track }) => (
+const BackdropJSX = ({
+  className,
+  track,
+  handleDragOver,
+  handleDrop
+}) => (
   <div
+    id="dropZone"
+    onDragOver={handleDragOver}
+    onDrop={handleDrop}
     className={className}
     style={{ backgroundImage: `url(${track.imageSrc})` }}
   >

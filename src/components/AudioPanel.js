@@ -8,7 +8,16 @@ import Volume from './AudioPanel_parts/Volume'
 import Modes from './AudioPanel_parts/Modes'
 
 // audio 控制面板元件 (匯整上面元件)
-const AudioPanelJSX = ({ className, track, mode, handleNextTrack, handlePrevTrack, handleModeChange }) => {
+const AudioPanelJSX = ({
+  className,
+  track,
+  mode,
+  handleNextTrack,
+  handlePrevTrack,
+  handleModeChange,
+  handleDrag,
+  handleDragStart
+}) => {
   const [duration, setDuration] = useState()
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState()
@@ -43,7 +52,13 @@ const AudioPanelJSX = ({ className, track, mode, handleNextTrack, handlePrevTrac
   }
 
   return (
-    <div className={className}>
+    <div
+      className={className}
+      draggable="true"
+      id="dragItem"
+      onDrag={handleDrag}
+      onDragStart={handleDragStart}
+    >
       {console.log('[render] AudioPanel')}
       <PlaybackButtons
         handlePlayback={handlePlayback}
@@ -78,12 +93,15 @@ const AudioPanelJSX = ({ className, track, mode, handleNextTrack, handlePrevTrac
 const AudioPanel = styled(AudioPanelJSX)`
  display: flex;
  justify-content: center;
- position: absolute; top: 50%; 
+ position: absolute; 
+ top: 50%;
  border: 1px solid black;
  text-align: center;
  padding: 0;
  margin: auto;
  background-color: gray;
+ width: 40%;
+ height: 10%;
 `
 
 export default AudioPanel

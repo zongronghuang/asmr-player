@@ -59,16 +59,46 @@ function App() {
     setMode(e.target.value)
   }
 
+  const handleDragStart = (e) => {
+    console.log('==Drag Start==')
+    console.log('drag item', e.target.id)
+  }
+
+  const handleDrag = (e) => {
+    console.log('==Drag==')
+    console.log('drag item', e.target.id)
+  }
+
+  const handleDragOver = (e) => {
+    e.preventDefault()
+    console.log('==Drag Over==')
+  }
+
+  const handleDrop = (e) => {
+    e.preventDefault()
+    console.log('==Drop==')
+    console.log(`X: ${e.pageX}  Y: ${e.pageY}`)
+    const dragItem = document.querySelector('#dragItem')
+    dragItem.style.left = `${e.pageX}px`
+    dragItem.style.top = `${e.pageY}px`
+  }
+
   return (
-    < div className="App" style={appStyle} >
+    < div className="App" style={appStyle}>
       { console.log('[render] App')}
-      < Backdrop track={track} />
+      < Backdrop
+        track={track}
+        handleDragOver={handleDragOver}
+        handleDrop={handleDrop}
+      />
       <AudioPanel
         track={track}
         mode={mode}
         handleNextTrack={handleNextTrack}
         handlePrevTrack={handlePrevTrack}
         handleModeChange={handleModeChange}
+        handleDrag={handleDrag}
+        handleDragStart={handleDragStart}
       />
     </div >
   );

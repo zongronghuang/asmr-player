@@ -5,7 +5,7 @@ const VolumeJSX = ({ className, handleTrackVolume, volume }) => (
   <div className={className}>
     {console.log('[render] Volume')}
     <div id="volume">
-      <label htmlFor="volume">Volume</label>
+      <label htmlFor="volume">Vol</label>
       <input id="volume" type="range" value={volume} min="0" max="1" step="0.1" onChange={handleTrackVolume}></input>
     </div>
 
