@@ -95,13 +95,13 @@ const AudioPanel = styled(AudioPanelJSX)`
  justify-content: center;
  position: absolute; 
  top: 50%;
+ left: 50%;
  border: 1px solid black;
  text-align: center;
  padding: 0;
  margin: auto;
  background-color: gray;
- width: 40%;
- height: 10%;
+ width: 300px;
 `
 
 export default AudioPanel

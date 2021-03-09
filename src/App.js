@@ -1,8 +1,11 @@
 import './App.css';
 import { useEffect, useState } from 'react'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo } from '@fortawesome/free-solid-svg-icons'
 
 import Backdrop from './components/Backdrop'
 import AudioPanel from './components/AudioPanel'
+
 import defaultTracks from './utils/trackFactory'
 import { randomizeTracks } from './utils/helpers'
 
@@ -10,6 +13,9 @@ import { randomizeTracks } from './utils/helpers'
 const appStyle = {
   position: 'relative',
 }
+
+// 註冊 fontAwesome SVG icons
+library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo)
 
 function App() {
   const [mode, setMode] = useState('loopAlbum')
