@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // 音訊資訊元件 (名稱、時間、播放進度)
 const TrackInfoJSX = ({ className, duration, currentTime, track }) => {
@@ -9,6 +10,7 @@ const TrackInfoJSX = ({ className, duration, currentTime, track }) => {
     <div className={className}>
       {console.log('[render] TrackInfo')}
       <div id="info">
+        <FontAwesomeIcon icon={['fas', 'music']} />
         <span>{track.name}</span>
         <time>{currentTimeSecs}/{durationSecs}</time>
       </div>
