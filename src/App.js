@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react'
 
 import Backdrop from './components/Backdrop'
 import AudioPanel from './components/AudioPanel'
-import defaultTracks, { randomizeTracks } from './utils/trackFactory'
+import defaultTracks from './utils/trackFactory'
+import { randomizeTracks } from './utils/helpers'
 
 // App 的基本 style
 const appStyle = {

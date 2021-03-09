@@ -8,8 +8,6 @@ const VolumeJSX = ({ className, handleTrackVolume, volume }) => (
       <label htmlFor="volume">Vol</label>
       <input id="volume" type="range" value={volume} min="0" max="1" step="0.1" onChange={handleTrackVolume}></input>
     </div>
-
-
   </div>
 )
 
