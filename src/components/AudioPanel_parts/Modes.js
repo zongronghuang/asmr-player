@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ModesJSX = ({ className, handleModeChange }) => {
   return (
@@ -6,17 +7,23 @@ const ModesJSX = ({ className, handleModeChange }) => {
       {console.log('[render] Modes')}
       <div>
         <input type="radio" id="loop-album" value="loopAlbum" name="mode" defaultChecked></input>
-        <label htmlFor="loop-album">Loop album</label>
+        <label htmlFor="loop-album">
+          <FontAwesomeIcon icon={['fas', 'sync']} />
+        </label>
       </div>
 
       <div>
         <input type="radio" id="loop-track" value="loopTrack" name="mode"></input>
-        <label htmlFor="loop-track">Loop track</label>
+        <label htmlFor="loop-track">
+          <FontAwesomeIcon icon={['fas', 'redo']} />
+        </label>
       </div>
 
       <div>
         <input type="radio" id="shuffle-all" value="shuffleAll" name="mode"></input>
-        <label htmlFor="shuffle-all">Shuffle all</label>
+        <label htmlFor="shuffle-all">
+          <FontAwesomeIcon icon={['fas', 'random']} />
+        </label>
       </div>
     </form>
   )
