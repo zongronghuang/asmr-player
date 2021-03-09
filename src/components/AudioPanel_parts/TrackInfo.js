@@ -12,6 +12,7 @@ const TrackInfoJSX = ({ className, duration, currentTime, track }) => {
       <div id="info">
         <FontAwesomeIcon icon={['fas', 'music']} />
         <span>{track.name}</span>
+        <FontAwesomeIcon icon={['fas', 'clock']} />
         <time>{currentTimeSecs}/{durationSecs}</time>
       </div>
       <progress value={currentTimeSecs} max={durationSecs}></progress>
