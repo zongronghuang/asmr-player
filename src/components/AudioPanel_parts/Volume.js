@@ -18,14 +18,14 @@ const VolumeJSX = ({ className, handleTrackVolume, volume }) => (
 const Volume = styled(VolumeJSX)`
   display: flex;
   justify-content: space-between;
+  margin-right: 10px;
+  margin-left: 10px;
 
   & > #volume {
-    border: 1px solid black;
     cursor: pointer;
   }
 
   & > #mode {
-    border: 1px solid black;
     cursor: pointer;
   }
 `

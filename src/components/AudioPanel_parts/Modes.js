@@ -31,9 +31,8 @@ const ModesJSX = ({ className, handleModeChange }) => {
 
 const Modes = styled(ModesJSX)`
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
-  background-color: HotPink;
+  border-radius: 0px 10px 10px 0px;
 
   div {
     margin: 2px 5px;
@@ -41,6 +40,7 @@ const Modes = styled(ModesJSX)`
 
   input {
     margin-right: 5px;
+    display: none;
   };
 `
 

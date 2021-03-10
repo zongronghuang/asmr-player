@@ -1,5 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react'
+import styled from '@emotion/styled'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock } from '@fortawesome/free-solid-svg-icons'
 
@@ -9,15 +10,10 @@ import AudioPanel from './components/AudioPanel'
 import defaultTracks from './utils/trackFactory'
 import { randomizeTracks } from './utils/helpers'
 
-// App 的基本 style
-const appStyle = {
-  position: 'relative',
-}
-
 // 註冊 fontAwesome SVG icons
 library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock)
 
-function App() {
+const AppJSX = ({ className }) => {
   const [mode, setMode] = useState('loopAlbum')
   const [album, setAlbum] = useState(defaultTracks)
   const [track, setTrack] = useState(album[0])
@@ -91,7 +87,7 @@ function App() {
   }
 
   return (
-    < div className="App" style={appStyle}>
+    < div className={className, 'App'}>
       { console.log('[render] App')}
       < Backdrop
         track={track}
@@ -110,5 +106,9 @@ function App() {
     </div >
   );
 }
+
+const App = styled(AppJSX)`
+  position: relative;
+`
 
 export default App;

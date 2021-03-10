@@ -67,11 +67,11 @@ const AudioPanelJSX = ({
         handlePrevTrack={handlePrevTrack}
       />
       <div>
-        <TrackInfo
+        {/* <TrackInfo
           duration={duration}
           track={track}
           currentTime={currentTime}
-        />
+        /> */}
         <Volume
           handleTrackVolume={handleTrackVolume}
           volume={volume} />
@@ -96,12 +96,14 @@ const AudioPanel = styled(AudioPanelJSX)`
  position: absolute; 
  top: 50%;
  left: 50%;
- border: 1px solid black;
  text-align: center;
- padding: 0;
+ padding: 5px;
  margin: auto;
- background-color: gray;
- width: 300px;
+ border: 5px solid red;
+ border-radius: 10px;
+ background-color: silver;
+ filter: constrast (200%);
+ width: 400px;
 `
 
 export default AudioPanel
