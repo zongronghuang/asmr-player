@@ -8,21 +8,21 @@ const ModesJSX = ({ className, handleModeChange }) => {
       <div>
         <input type="radio" id="loop-album" value="loopAlbum" name="mode" defaultChecked></input>
         <label htmlFor="loop-album">
-          <FontAwesomeIcon icon={['fas', 'sync']} />
+          <FontAwesomeIcon icon={['fas', 'sync']} title="Loop album" alt="Loop album" />
         </label>
       </div>
 
       <div>
         <input type="radio" id="loop-track" value="loopTrack" name="mode"></input>
         <label htmlFor="loop-track">
-          <FontAwesomeIcon icon={['fas', 'redo']} />
+          <FontAwesomeIcon icon={['fas', 'redo']} className="checked" title="Loop track" alt="Loop track" />
         </label>
       </div>
 
       <div>
         <input type="radio" id="shuffle-all" value="shuffleAll" name="mode"></input>
-        <label htmlFor="shuffle-all">
-          <FontAwesomeIcon icon={['fas', 'random']} />
+        <label htmlFor="shuffle-all" >
+          <FontAwesomeIcon icon={['fas', 'random']} title="Shuffle all" alt="Shuffle all" />
         </label>
       </div>
     </form>
@@ -42,6 +42,10 @@ const Modes = styled(ModesJSX)`
     margin-right: 5px;
     display: none;
   };
+
+  .checked {
+    color: blue;
+  }
 `
 
 export default Modes
