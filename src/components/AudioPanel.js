@@ -85,6 +85,7 @@ const AudioPanelJSX = ({
       </div>
       <Modes
         handleModeChange={handleModeChange}
+        mode={mode}
       />
     </div>
   )
