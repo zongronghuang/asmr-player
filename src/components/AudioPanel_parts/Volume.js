@@ -6,9 +6,13 @@ const VolumeJSX = ({ className, handleTrackVolume, volume }) => (
   <div className={className}>
     {console.log('[render] Volume')}
     <div id="volume">
-      <label htmlFor="volume"></label>
-      <FontAwesomeIcon icon={['fas', 'volume-mute']} title="Muted" alt="Muted" />
-      <FontAwesomeIcon icon={['fas', 'volume-down']} title="Volume down" alt="Volume down" />
+      <label htmlFor="volume" title="Muted" alt="Muted" >
+        <FontAwesomeIcon icon={['fas', 'volume-mute']} />
+      </label>
+      <label htmlFor="volume" title="Volume down" alt="Volume down">
+        <FontAwesomeIcon icon={['fas', 'volume-down']} />
+      </label>
+
       <input id="volume" type="range" value={volume} min="0" max="1" step="0.1" onChange={handleTrackVolume}></input>
       <FontAwesomeIcon icon={['fas', 'volume-up']} title="Volume up" alt="Volume up" />
     </div>
