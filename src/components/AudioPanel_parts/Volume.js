@@ -13,7 +13,7 @@ const VolumeJSX = ({ className, handleTrackVolume, volume }) => (
         <FontAwesomeIcon icon={['fas', 'volume-down']} />
       </label>
 
-      <input id="volume" type="range" value={volume} min="0" max="1" step="0.1" onChange={handleTrackVolume}></input>
+      <input id="volume" type="range" value={volume} min="0" max="1" step="0.1" onInput={handleTrackVolume}></input>
       <FontAwesomeIcon icon={['fas', 'volume-up']} title="Volume up" alt="Volume up" />
     </div>
   </div>
@@ -24,6 +24,7 @@ const Volume = styled(VolumeJSX)`
   justify-content: space-between;
   margin-right: 10px;
   margin-left: 10px;
+  z-index: 10;
 
   & > #volume {
     cursor: pointer;

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // 操作按鈕元件
 const PlaybackButtonsJSX = ({
   className,
+  activeButton,
   handlePlayback,
   handlePause,
   handleNextTrack,
@@ -11,17 +12,28 @@ const PlaybackButtonsJSX = ({
 }) => (
   <div className={className}>
     {console.log('[render] PlaybackButtons')}
-    <button id="prev" onClick={handlePrevTrack}>
-      <FontAwesomeIcon icon={['fas', 'backward']} title="Previous track" alt="Previous track" />
+    <button id="prev" onClick={handlePrevTrack} title="Previous track" alt="Previous track">
+      <FontAwesomeIcon icon={['fas', 'backward']} />
     </button>
-    <button id="play" onClick={handlePlayback}>
-      <FontAwesomeIcon icon={['fas', 'play']} title="Play" alt="Play" />
-    </button>
-    <button id="pause" onClick={handlePause}>
-      <FontAwesomeIcon icon={['fas', 'pause']} title="Pause" alt="Pause" />
-    </button>
-    <button id="next" onClick={handleNextTrack}>
-      <FontAwesomeIcon icon={['fas', 'forward']} title="Next track" alt="Next track" />
+
+    {/* 
+      只顯示可用的按鍵
+      按下 play 鍵，顯示 pause 鍵
+      按下 pause 鍵，顯示 play 鍵 
+    */}
+    {
+      (activeButton === 'play') ?
+        (<button id="play" onClick={handlePlayback} title="Play" alt="Play" >
+          <FontAwesomeIcon icon={['fas', 'play']} />
+        </button>)
+        :
+        (<button id="pause" onClick={handlePause} title="Pause" alt="Pause">
+          <FontAwesomeIcon icon={['fas', 'pause']} />
+        </button>)
+    }
+
+    <button id="next" onClick={handleNextTrack} title="Next track" alt="Next track">
+      <FontAwesomeIcon icon={['fas', 'forward']} />
     </button>
   </div>
 )

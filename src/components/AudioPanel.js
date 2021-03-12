@@ -21,6 +21,7 @@ const AudioPanelJSX = ({
   const [duration, setDuration] = useState()
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState()
+  const [activeButton, setActiveButton] = useState('play')
 
   const handlePlayback = () => {
     const audio = document.querySelector('audio')
@@ -32,11 +33,16 @@ const AudioPanelJSX = ({
       .catch(error => { return })
 
     setDuration(audio.duration)
+    // 隱藏 play 鍵，顯示 pause 鍵
+    setActiveButton('pause')
   }
 
   const handlePause = () => {
     const audio = document.querySelector('audio')
+
     audio.pause()
+    // 隱藏 pause 鍵，顯示 play 鍵
+    setActiveButton('play')
   }
 
   const handleCurrentTime = (e) => {
@@ -44,6 +50,7 @@ const AudioPanelJSX = ({
   }
 
   const handleTrackVolume = (e) => {
+    e.stopPropagation()
     const audio = document.querySelector('audio')
 
     // 達成 controlled component
@@ -61,6 +68,7 @@ const AudioPanelJSX = ({
     >
       {console.log('[render] AudioPanel')}
       <PlaybackButtons
+        activeButton={activeButton}
         handlePlayback={handlePlayback}
         handlePause={handlePause}
         handleNextTrack={handleNextTrack}

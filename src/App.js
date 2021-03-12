@@ -63,22 +63,26 @@ const AppJSX = ({ className }) => {
   }
 
   const handleDragStart = (e) => {
+    e.stopPropagation()
     console.log('==Drag Start==')
     console.log('drag item', e.target.id)
   }
 
   const handleDrag = (e) => {
+    e.stopPropagation()
     console.log('==Drag==')
     console.log('drag item', e.target.id)
   }
 
   const handleDragOver = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     console.log('==Drag Over==')
   }
 
   const handleDrop = (e) => {
     e.preventDefault()
+    e.stopPropagation()
     console.log('==Drop==')
     console.log(`X: ${e.pageX}  Y: ${e.pageY}`)
     const dragItem = document.querySelector('#dragItem')
