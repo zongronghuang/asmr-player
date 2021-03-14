@@ -31,6 +31,9 @@ const AudioPanelJSX = ({
     // 用 catch() 接到錯誤訊息並忽略
     audio.play()
       .catch(error => { return })
+    audio.volume = volume
+
+    console.log('playback volume', audio.volume)
 
     setDuration(audio.duration)
     setActiveButton('pause') // 隱藏 play 鍵，顯示 pause 鍵
@@ -50,17 +53,17 @@ const AudioPanelJSX = ({
   const handleTrackVolume = (direction) => (e) => {
     e.stopPropagation()
     const audio = document.querySelector('audio')
+    const step = 0.1
 
     switch (direction) {
       case 'up':
-        setVolume(audio.volume + 0.1)
+        console.log('go up', audio.volume)
         break
       case 'down':
-        setVolume(audio.volume - 0.1)
+        console.log('go down')
         break
       default:
-        setVolume(Number(e.target.value))
-        break
+        console.log('manual')
     }
   }
 
