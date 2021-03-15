@@ -51,16 +51,35 @@ const AudioPanelJSX = ({
   }
 
   const handleTrackVolume = (direction) => (e) => {
-    e.stopPropagation()
+    //e.stopPropagation()
     const audio = document.querySelector('audio')
     const step = 0.1
 
     switch (direction) {
       case 'up':
-        console.log('go up', audio.volume)
+        setVolume(prevVolume => {
+          console.log('UP==old vol', prevVolume)
+          if (prevVolume >= 1) {
+            return prevVolume
+          } else {
+            // toFixed 解除浮點數運算不精確問題
+            audio.volume = Number((prevVolume + step).toFixed(1))
+            console.log('UP==new vol', audio.volume)
+            return audio.volume
+          }
+        })
         break
       case 'down':
-        console.log('go down')
+        setVolume(prevVolume => {
+          console.log('DOWN==old vol', prevVolume)
+          if (prevVolume <= 0) {
+            return prevVolume
+          } else {
+            audio.volume = Number((prevVolume - step).toFixed(1))
+            console.log('DOWN==new vol', audio.volume)
+            return audio.volume
+          }
+        })
         break
       default:
         console.log('manual')
