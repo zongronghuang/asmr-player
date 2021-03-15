@@ -11,19 +11,19 @@ const VolumeJSX = ({ className, handleVolumeUpDown, volume }) => (
     */}
     {
       (volume === 0) ?
-        (<label htmlFor="volume" title="Muted" alt="Muted" >
+        (<button htmlFor="volume" title="Muted" alt="Muted" >
           <FontAwesomeIcon icon={['fas', 'volume-mute']} size="lg" />
-        </label>) :
-        (<label htmlFor="volume" title="Volume down" alt="Volume down" onClick={handleVolumeUpDown('down')}>
+        </button>) :
+        (<button htmlFor="volume" title="Volume down" alt="Volume down" onClick={handleVolumeUpDown('down')}>
           <FontAwesomeIcon icon={['fas', 'volume-down']} size="lg" />
-        </label>)
+        </button>)
     }
 
     <input id="volume" type="range" value={volume} min="0" max="1" step="0.1" onChange={handleVolumeUpDown('manual')}></input>
 
-    <label htmlFor="volume" title="Volume up" alt="Volume up" onClick={handleVolumeUpDown('up')}>
+    <button htmlFor="volume" title="Volume up" alt="Volume up" onClick={handleVolumeUpDown('up')}>
       <FontAwesomeIcon icon={['fas', 'volume-up']} size="lg" />
-    </label>
+    </button>
   </div>
 )
 
@@ -32,15 +32,16 @@ const Volume = styled(VolumeJSX)`
   justify-content: space-between;
   margin-right: 10px;
   margin-left: 10px;
-  z-index: 10;
 
-  label {
-    margin-right: 5px;
-    margin-left:  5px;
+  button {
+    border-width: 0px;
+    border-radius: 5px;
   }
 
   & > #volume {
     cursor: pointer;
+    margin-left: 2px;
+    margin-right: 2px;
   }
 
   & > #mode {

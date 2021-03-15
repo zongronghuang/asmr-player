@@ -3,38 +3,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const ModesJSX = ({ className, mode, handleModeChange }) => {
   return (
-    <form className={className} onChange={handleModeChange}>
+    <div className={className}>
       { console.log('[render] Modes')}
-      < div >
-        <input type="radio" id="loop-album" value="loopAlbum" name="mode" defaultChecked></input>
-        <label htmlFor="loop-album" title="Loop album" alt="Loop album">
-          <FontAwesomeIcon
-            icon={['fas', 'sync']}
-            color={(mode === 'loopAlbum') ? 'blue' : 'black'}
-          />
-        </label>
-      </div >
 
-      <div>
-        <input type="radio" id="loop-track" value="loopTrack" name="mode"></input>
-        <label htmlFor="loop-track" title="Loop track" alt="Loop track">
-          <FontAwesomeIcon
-            icon={['fas', 'redo']}
-            color={(mode === 'loopTrack') ? 'blue' : 'black'}
-          />
-        </label>
-      </div>
+      <button title="Loop album" alt="Loop album"
+        onClick={handleModeChange('loopAlbum')}
+      >
+        <FontAwesomeIcon
+          icon={['fas', 'sync']}
+          color={(mode === 'loopAlbum') ? 'blue' : 'black'}
+          size="lg"
+        />
+      </button>
 
-      <div>
-        <input type="radio" id="shuffle-all" value="shuffleAll" name="mode"></input>
-        <label htmlFor="shuffle-all" title="Shuffle all" alt="Shuffle all">
-          <FontAwesomeIcon
-            icon={['fas', 'random']}
-            color={(mode === 'shuffleAll') ? 'blue' : 'black'}
-          />
-        </label>
-      </div>
-    </form >
+      <button title="Loop track" alt="Loop track"
+        onClick={handleModeChange('loopTrack')}
+      >
+        <FontAwesomeIcon
+          icon={['fas', 'redo']}
+          color={(mode === 'loopTrack') ? 'blue' : 'black'}
+          size="lg"
+        />
+      </button>
+
+      <button title="Shuffle all" alt="Shuffle all"
+        onClick={handleModeChange('shuffleAll')}
+      >
+        <FontAwesomeIcon
+          icon={['fas', 'random']}
+          color={(mode === 'shuffleAll') ? 'blue' : 'black'}
+          size="lg"
+        />
+      </button>
+    </div>
   )
 }
 
@@ -43,14 +44,12 @@ const Modes = styled(ModesJSX)`
   align-items: flex-start;
   border-radius: 0px 10px 10px 0px;
 
-  div {
-    margin: 2px 5px;
+  button {
+   margin-left: 2px;
+   margin-right: 2px;
+   border-radius: 5px;
+   border-width: 0px;
   }
-
-  input {
-    margin-right: 5px;
-    display: none;
-  };
 
   .checked {
     color: blue;

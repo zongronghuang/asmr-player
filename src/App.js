@@ -48,9 +48,9 @@ const AppJSX = ({ className }) => {
     })
   }
 
-  const handleModeChange = (e) => {
+  const handleModeChange = (mode) => (e) => {
     // 如果是 Shuffle all 模式，則建立隨機排列曲目
-    if (e.target.value === 'shuffleAll') {
+    if (mode === 'shuffleAll') {
       const randomTracks = randomizeTracks(defaultTracks)
       console.log('random tracks', randomTracks)
 
@@ -59,7 +59,7 @@ const AppJSX = ({ className }) => {
       })
     }
 
-    setMode(e.target.value)
+    setMode(mode)
   }
 
   const handleDragStart = (e) => {

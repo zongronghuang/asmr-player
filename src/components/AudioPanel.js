@@ -138,15 +138,18 @@ const AudioPanel = styled(AudioPanelJSX)`
  justify-content: center;
  position: absolute; 
  top: 50%;
- left: 50%;
+ left: 25%;
  text-align: center;
  padding: 5px;
  margin: auto;
  border: 5px solid red;
  border-radius: 10px;
- background-color: silver;
+ background-color: transparent;
  filter: constrast (200%);
- width: 400px;
+ 
+ svg {
+   background-color: rgb (239, 239, 239);
+ }
 `
 
 export default AudioPanel
