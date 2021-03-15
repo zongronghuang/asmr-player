@@ -2,24 +2,26 @@ import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // 音量和設定模式元件
-const VolumeJSX = ({ className, handleTrackVolume, volume }) => (
+const VolumeJSX = ({ className, handleVolumeUpDown, volume }) => (
   <div className={className}>
     {console.log('[render] Volume')}
-    {/* volume 為 0 => 顯示靜音圖示
-          volume 不為 0 => 顯示降低音量圖示 */}
+    {/* 
+      volume 為 0 => 顯示靜音圖示
+      volume 不為 0 => 顯示降低音量圖示 
+    */}
     {
       (volume === 0) ?
         (<label htmlFor="volume" title="Muted" alt="Muted" >
           <FontAwesomeIcon icon={['fas', 'volume-mute']} size="lg" />
         </label>) :
-        (<label htmlFor="volume" title="Volume down" alt="Volume down" onClick={handleTrackVolume('down')}>
+        (<label htmlFor="volume" title="Volume down" alt="Volume down" onClick={handleVolumeUpDown('down')}>
           <FontAwesomeIcon icon={['fas', 'volume-down']} size="lg" />
         </label>)
     }
 
-    <input id="volume" type="range" value={volume} min="0" max="1" step="0.1" onChange={handleTrackVolume('manual')}></input>
+    <input id="volume" type="range" value={volume} min="0" max="1" step="0.1" onChange={handleVolumeUpDown('manual')}></input>
 
-    <label htmlFor="volume" title="Volume up" alt="Volume up" onClick={handleTrackVolume('up')}>
+    <label htmlFor="volume" title="Volume up" alt="Volume up" onClick={handleVolumeUpDown('up')}>
       <FontAwesomeIcon icon={['fas', 'volume-up']} size="lg" />
     </label>
   </div>

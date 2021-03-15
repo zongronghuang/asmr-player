@@ -50,12 +50,12 @@ const AudioPanelJSX = ({
     setCurrentTime(prevCurrentTime => e.target.currentTime)
   }
 
-  const handleTrackVolume = (direction) => (e) => {
-    //e.stopPropagation()
+  // 點按圖示或拖拉 input 欄位的拉桿調整音量
+  const handleVolumeUpDown = (method) => (e) => {
     const audio = document.querySelector('audio')
     const step = 0.1
 
-    switch (direction) {
+    switch (method) {
       case 'up':
         setVolume(prevVolume => {
           console.log('UP==old vol', prevVolume)
@@ -75,14 +75,20 @@ const AudioPanelJSX = ({
           if (prevVolume <= 0) {
             return prevVolume
           } else {
+            // toFixed 解除浮點數運算不精確問題
             audio.volume = Number((prevVolume - step).toFixed(1))
             console.log('DOWN==new vol', audio.volume)
             return audio.volume
           }
         })
         break
+      case 'manual':
       default:
         console.log('manual')
+        setVolume(prevVolume => {
+          audio.volume = Number(e.target.value)
+          return audio.volume
+        })
     }
   }
 
@@ -109,7 +115,7 @@ const AudioPanelJSX = ({
           currentTime={currentTime}
         /> */}
         <Volume
-          handleTrackVolume={handleTrackVolume}
+          handleVolumeUpDown={handleVolumeUpDown}
           volume={volume} />
         <AudioTrack
           track={track}
