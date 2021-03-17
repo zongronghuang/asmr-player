@@ -142,13 +142,29 @@ const AudioPanel = styled(AudioPanelJSX)`
  text-align: center;
  padding: 5px;
  margin: auto;
- border: 5px solid red;
- border-radius: 10px;
- background-color: transparent;
  filter: constrast (200%);
- 
+
+ @keyframes outline-filler {
+  25% {outline: 1px dotted #EFEFEF;}
+  50% {outline: 2px dashed #EFEFEF;}
+  75% {outline: 3px double #EFEFEF;}
+  100% {outline: 3px solid blue;}
+}
+
+ :hover {
+  animation-name: outline-filler;
+  animation-iteration-count: 1;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+ }
+
  svg {
    background-color: rgb (239, 239, 239);
+ }
+
+ button:hover {
+   color: blue;
  }
 `
 
