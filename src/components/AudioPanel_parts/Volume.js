@@ -34,7 +34,7 @@ const Volume = styled(VolumeJSX)`
   margin-left: 10px;
 
   button {
-    border-width: 0px;
+    border: 1px solid black;
     border-radius: 5px;
   }
 

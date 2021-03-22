@@ -47,8 +47,8 @@ const Modes = styled(ModesJSX)`
   button {
    margin-left: 2px;
    margin-right: 2px;
+   border: 1px solid black;
    border-radius: 5px;
-   border-width: 0px;
   }
 
   .checked {

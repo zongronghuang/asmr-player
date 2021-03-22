@@ -41,7 +41,7 @@ const PlaybackButtonsJSX = ({
 const PlaybackButtons = styled(PlaybackButtonsJSX)`
   display: flex;
   & > button {
-   border-width: 0px;
+   border: 1px solid black;
    border-radius: 5px;
    margin-left: 2px;
    margin-right: 2px;
