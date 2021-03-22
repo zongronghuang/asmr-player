@@ -17,6 +17,7 @@ const AppJSX = ({ className }) => {
   const [mode, setMode] = useState('loopAlbum')
   const [album, setAlbum] = useState(defaultTracks)
   const [track, setTrack] = useState(album[0])
+  const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
 
   const handleNextTrack = () => {
     setTrack(prevTrack => {
@@ -63,31 +64,38 @@ const AppJSX = ({ className }) => {
   }
 
   const handleDragStart = (e) => {
-    e.stopPropagation()
     console.log('==Drag Start==')
-    console.log('drag item', e.target.id)
+    // 取得游標和 drag item 原點的距離
+    const distToDragItemOrigin = {
+      left: e.clientX - e.target.offsetLeft,
+      top: e.clientY - e.target.offsetTop
+    }
+
+    console.log(distToDragItemOrigin)
+
+    setDistToEleOrigin(distToDragItemOrigin)
   }
 
   const handleDrag = (e) => {
-    e.stopPropagation()
     console.log('==Drag==')
-    console.log('drag item', e.target.id)
   }
 
   const handleDragOver = (e) => {
     e.preventDefault()
-    e.stopPropagation()
     console.log('==Drag Over==')
   }
 
   const handleDrop = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
     console.log('==Drop==')
-    console.log(`X: ${e.pageX}  Y: ${e.pageY}`)
+    e.preventDefault()
     const dragItem = document.querySelector('#dragItem')
-    dragItem.style.left = `${e.pageX}px`
-    dragItem.style.top = `${e.pageY}px`
+
+    // 計算 drag item 降落位置 (新的 left 和 top) 
+    const dragItemLeft = e.clientX - distToEleOrigin.left
+    const dragItemTop = e.clientY - distToEleOrigin.top
+
+    dragItem.style.left = `${dragItemLeft}px`
+    dragItem.style.top = `${dragItemTop}px`
   }
 
   return (
