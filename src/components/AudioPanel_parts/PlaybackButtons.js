@@ -16,18 +16,12 @@ const PlaybackButtonsJSX = ({
       <FontAwesomeIcon icon={['fas', 'backward']} />
     </button>
 
-    {/* 
-      只顯示可用的按鍵
-      按下 play 鍵，顯示 pause 鍵
-      按下 pause 鍵，顯示 play 鍵 
-    */}
     {
-      (activeButton === 'play') ?
-        (<button id="play" onClick={handlePlayback} title="Play" alt="Play" >
+      (activeButton === 'play')
+        ? (<button id="play" title="Play" alt="Play" onClick={handlePlayback} >
           <FontAwesomeIcon icon={['fas', 'play']} />
         </button>)
-        :
-        (<button id="pause" onClick={handlePause} title="Pause" alt="Pause">
+        : (<button id="pause" onClick={handlePause} title="Pause" alt="Pause">
           <FontAwesomeIcon icon={['fas', 'pause']} />
         </button>)
     }

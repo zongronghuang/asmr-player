@@ -43,7 +43,7 @@ const Modes = styled(ModesJSX)`
   display: flex;
   align-items: flex-start;
   border-radius: 0px 10px 10px 0px;
-
+   
   button {
    margin-left: 2px;
    margin-right: 2px;
