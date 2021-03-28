@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import DemoImg from '../assets/images/backdrop_1.jpg'
+
 
 const BackdropJSX = ({
   className,
@@ -19,7 +19,6 @@ const BackdropJSX = ({
 )
 
 const Backdrop = styled(BackdropJSX)`
-
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

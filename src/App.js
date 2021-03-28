@@ -6,6 +6,7 @@ import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDo
 
 import Backdrop from './components/Backdrop'
 import AudioPanel from './components/AudioPanel'
+import InfoButtons from './components/InfoButtons'
 
 import defaultTracks from './utils/trackFactory'
 import { randomizeTracks } from './utils/helpers'
@@ -115,6 +116,7 @@ const AppJSX = ({ className }) => {
         handleDrag={handleDrag}
         handleDragStart={handleDragStart}
       />
+      <InfoButtons />
     </div >
   );
 }
