@@ -1,26 +1,49 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const InfoButtonsJSX = ({ className }) => (
-  <aside className={className}>
-    {console.log('[render] InfoButtons')}
-    <a className="option" id="info" url="">
-      <FontAwesomeIcon icon={['fas', 'info']} />
-    </a>
-    <a className="option" id="photographer" url="">
-      <FontAwesomeIcon icon={['fas', 'user-circle']} />
-    </a>
-    <a className="option" id="website" url="">
-      <FontAwesomeIcon icon={['fas', 'globe']} />
-    </a>
-  </aside>
-)
+const InfoButtonsJSX = ({ className }) => {
+  const handleAnimationAdding = () => {
+    const webIcon = document.querySelector('#website')
+    const photographerIcon = document.querySelector('#photographer')
+
+    photographerIcon.classList.add('float-photographer')
+    webIcon.classList.add('float-website')
+  }
+
+  const handleAnimationRemoval = () => {
+    const webIcon = document.querySelector('#website')
+    const photographerIcon = document.querySelector('#photographer')
+
+    photographerIcon.classList.remove('float-photographer')
+    webIcon.classList.remove('float-website')
+  }
+
+  return (
+    <aside className={className}>
+      {console.log('[render] InfoButtons')}
+      <a
+        className="option"
+        id="info"
+        title="Click and hide"
+        onClick={handleAnimationRemoval}
+        onMouseEnter={handleAnimationAdding}
+      >
+        <FontAwesomeIcon icon={['fas', 'info']} />
+      </a>
+      <a className="option" id="photographer" url="" title="View profile">
+        <FontAwesomeIcon icon={['fas', 'user-circle']} />
+      </a>
+      <a className="option" id="website" url="" title="Visit website">
+        <FontAwesomeIcon icon={['fas', 'globe']} />
+      </a>
+    </aside>
+  )
+}
 
 const InfoButtons = styled(InfoButtonsJSX)`
-  outline: 1px solid yellow;
   position: absolute;
-  right: 0px;
-  top: 98%;
+  right: 10px;
+  bottom: 3%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -44,13 +67,29 @@ const InfoButtons = styled(InfoButtonsJSX)`
   #info {
     z-index: 10;
   }
-
-  #photographer {
+  #website {
     z-index: 5;
   }
+  #photographer {
+    z-index: 1;
+  }
 
-  #web {
-    z-index: 3;
+  @keyframes float-photographer {
+    to { bottom: 70px; }
+  }
+  .float-photographer {
+    animation-name: float-photographer;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes float-website {
+    to { bottom: 35px; }
+  }
+  .float-website {
+    animation-name: float-website;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
   }
 `
 
