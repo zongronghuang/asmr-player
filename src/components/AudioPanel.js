@@ -161,10 +161,6 @@ const AudioPanel = styled(AudioPanelJSX)`
   animation-fill-mode: forwards;
  }
 
- svg {
-   background-color: rgb (239, 239, 239);
- }
-
  button:hover {
    color: blue;
  }

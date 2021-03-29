@@ -5,10 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const VolumeJSX = ({ className, handleVolumeUpDown, volume }) =>
 (<div className={className}>
   {console.log('[render] Volume')}
-  {/* 
-      volume 為 0 => 顯示靜音圖示
-      volume 不為 0 => 顯示降低音量圖示 
-    */}
+
   {
     (volume === 0)
       ? (<button htmlFor="volume" title="Muted" alt="Muted" >
