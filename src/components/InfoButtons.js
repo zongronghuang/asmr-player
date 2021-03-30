@@ -1,21 +1,13 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const InfoButtonsJSX = ({ className }) => {
-  const handleAnimationAdding = () => {
+const InfoButtonsJSX = ({ className, track }) => {
+  const handleTogglingAnimation = () => {
     const webIcon = document.querySelector('#website')
     const photographerIcon = document.querySelector('#photographer')
 
-    photographerIcon.classList.add('float-photographer')
-    webIcon.classList.add('float-website')
-  }
-
-  const handleAnimationRemoval = () => {
-    const webIcon = document.querySelector('#website')
-    const photographerIcon = document.querySelector('#photographer')
-
-    photographerIcon.classList.remove('float-photographer')
-    webIcon.classList.remove('float-website')
+    photographerIcon.classList.toggle('float-photographer')
+    webIcon.classList.toggle('float-website')
   }
 
   return (
@@ -25,15 +17,16 @@ const InfoButtonsJSX = ({ className }) => {
         className="option"
         id="info"
         title="Click and hide"
-        onClick={handleAnimationRemoval}
-        onMouseEnter={handleAnimationAdding}
+        onClick={handleTogglingAnimation}
       >
         <FontAwesomeIcon icon={['fas', 'info']} />
       </a>
-      <a className="option" id="photographer" url="" title="View profile">
+
+      <a className="option" id="photographer" href={track.user.links.self} target="_blank" title="View photographer profile">
         <FontAwesomeIcon icon={['fas', 'user-circle']} />
       </a>
-      <a className="option" id="website" url="" title="Visit website">
+
+      <a className="option" id="website" href={track.user.portfolio_url} target="_blank" title="Visit website">
         <FontAwesomeIcon icon={['fas', 'globe']} />
       </a>
     </aside>

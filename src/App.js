@@ -116,7 +116,7 @@ const AppJSX = ({ className }) => {
         handleDrag={handleDrag}
         handleDragStart={handleDragStart}
       />
-      <InfoButtons />
+      <InfoButtons track={track} />
     </div >
   );
 }
