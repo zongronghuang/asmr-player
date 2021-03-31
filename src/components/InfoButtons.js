@@ -22,11 +22,11 @@ const InfoButtonsJSX = ({ className, track }) => {
         <FontAwesomeIcon icon={['fas', 'info']} />
       </a>
 
-      <a className="option" id="photographer" href={track.user.links.self} target="_blank" title="View photographer profile">
+      <a className="option" id="photographer" href={track.profileURL} target="_blank" title={track.photographer}>
         <FontAwesomeIcon icon={['fas', 'user-circle']} />
       </a>
 
-      <a className="option" id="website" href={track.user.portfolio_url} target="_blank" title="Visit website">
+      <a className="option" id="website" href={track.webURL} target="_blank" title="Visit website">
         <FontAwesomeIcon icon={['fas', 'globe']} />
       </a>
     </aside>

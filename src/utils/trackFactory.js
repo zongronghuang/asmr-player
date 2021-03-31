@@ -59,12 +59,9 @@ const defaultTracks = (audioArray, imageArray) => {
       name: `track_${index}`,
       audioSrc: audios[index],
       imageSrc: images[index],
-      user: {                                                    // 與 Unsplash API 相同格式
-        "portfolio_url": 'http://www.vivianmaier.com/',          // 攝影師作品集
-        links: {
-          self: 'http://www.vivianmaier.com/about-vivian-maier/' // 攝影師個人介紹
-        }
-      }
+      photographer: 'Vivian Maier',
+      profileURL: 'http://www.vivianmaier.com/',
+      webURL: 'http://www.vivianmaier.com/about-vivian-maier/'
     }))
 
   console.log('track list', trackList)
