@@ -50,6 +50,7 @@ const InfoButtons = styled(InfoButtonsJSX)`
     border-radius: 50%;
     line-height: 30px;
     text-align: center;
+    color: black;
     background-color: rgb(239, 239, 239);
   }
 
