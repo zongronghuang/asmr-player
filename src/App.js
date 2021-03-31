@@ -19,6 +19,13 @@ const AppJSX = ({ className }) => {
   const [album, setAlbum] = useState(defaultTracks)
   const [track, setTrack] = useState(album[0])
   const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
+  const [appStatus, setAppStatus] = useState('online')
+
+  useEffect(() => {
+    if (appStatus === 'online') {
+      // 向 unsplash 取資料
+    }
+  })
 
   const handleNextTrack = () => {
     setTrack(prevTrack => {

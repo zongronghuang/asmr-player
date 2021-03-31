@@ -11,6 +11,9 @@ import Image_3 from '../assets/images/backdrop_3.jpg'
 const images = [Image_0, Image_1, Image_2, Image_3]
 const audios = [Audio_0, Audio_1, Audio_2, Audio_3]
 
+// 用來搜尋圖片的曲目關鍵字
+const searchTerms = ['countryside', 'seaside', 'train', 'park']
+
 // ----- 建立 defaultTracks() 製作符合一般順序的曲目列表 -----
 
 const findRedundantItems = (fileArray, mediaType) => {
@@ -57,11 +60,14 @@ const defaultTracks = (audioArray, imageArray) => {
     .map((track, index) => ({
       order: index,
       name: `track_${index}`,
+      searchTerm: searchTerms[index],
       audioSrc: audios[index],
       imageSrc: images[index],
-      photographer: 'Vivian Maier',
-      profileURL: 'http://www.vivianmaier.com/',
-      webURL: 'http://www.vivianmaier.com/about-vivian-maier/'
+      photographer: {
+        name: 'Vivian Maier',
+        webURL: 'http://www.vivianmaier.com/',
+        profileURL: 'http://www.vivianmaier.com/about-vivian-maier/'
+      }
     }))
 
   console.log('track list', trackList)
