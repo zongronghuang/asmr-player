@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const InfoButtonsJSX = ({ className, track, appStatus }) => {
+const InfoButtonsJSX = ({ className, track, isOnline, setIsOnline }) => {
   const handleTogglingAnimation = () => {
     const webIcon = document.querySelector('#website')
     const photographerIcon = document.querySelector('#photographer')
@@ -11,7 +11,7 @@ const InfoButtonsJSX = ({ className, track, appStatus }) => {
     photographerIcon.classList.toggle('float-photographer')
     webIcon.classList.toggle('float-website')
 
-    appStatus === 'online'
+    isOnline
       ? onlineIcon.classList.toggle('float-network')
       : offlineIcon.classList.toggle('float-network')
   }
@@ -37,15 +37,14 @@ const InfoButtonsJSX = ({ className, track, appStatus }) => {
       </a>
 
       {
-        appStatus === 'online'
-          ? (<a className="option" id="online" title="Internet OK">
+        isOnline
+          ? (<a className="option" id="online" title="Online" onClick={() => setIsOnline(false)}>
             <FontAwesomeIcon icon={['fas', 'plane']} size="lg" />
           </a>)
-          : (<a className="option" id="offline" title="No Internet">
+          : (<a className="option" id="offline" title="Offline" onClick={() => setIsOnline(true)}>
             <FontAwesomeIcon icon={['fas', 'plane-slash']} size="lg" />
           </a>)
       }
-
     </aside>
   )
 }

@@ -10,6 +10,7 @@ import InfoButtons from './components/InfoButtons'
 
 import defaultTracks from './utils/trackFactory'
 import { randomizeTracks } from './utils/helpers'
+import apiHelpers from './utils/apiHelpers'
 
 // 註冊 fontAwesome SVG icons
 library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash)
@@ -19,13 +20,11 @@ const AppJSX = ({ className }) => {
   const [album, setAlbum] = useState(defaultTracks)
   const [track, setTrack] = useState(album[0])
   const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
-  const [appStatus, setAppStatus] = useState('online')
+  const [isOnline, setIsOnline] = useState(true)
 
   useEffect(() => {
-    if (appStatus === 'online') {
-      // 向 unsplash 取資料
-    }
-  })
+    apiHelpers.getRandomImage(track)
+  }, [])
 
   const handleNextTrack = () => {
     setTrack(prevTrack => {
@@ -123,7 +122,7 @@ const AppJSX = ({ className }) => {
         handleDrag={handleDrag}
         handleDragStart={handleDragStart}
       />
-      <InfoButtons track={track} appStatus={appStatus} />
+      <InfoButtons track={track} isOnline={isOnline} setIsOnline={setIsOnline} />
     </div >
   );
 }
