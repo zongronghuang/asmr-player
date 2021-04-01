@@ -25,24 +25,24 @@ const InfoButtonsJSX = ({ className, track, appStatus }) => {
         title="Click for more"
         onClick={handleTogglingAnimation}
       >
-        <FontAwesomeIcon icon={['fas', 'info']} />
+        <FontAwesomeIcon icon={['fas', 'info']} size="lg" />
       </a>
 
       <a className="option" id="photographer" href={track.photographer.profileURL} target="_blank" title={track.photographer.name}>
-        <FontAwesomeIcon icon={['fas', 'user-circle']} />
+        <FontAwesomeIcon icon={['fas', 'user-circle']} size="lg" />
       </a>
 
       <a className="option" id="website" href={track.photographer.webURL} target="_blank" title="Visit website">
-        <FontAwesomeIcon icon={['fas', 'globe']} />
+        <FontAwesomeIcon icon={['fas', 'globe']} size="lg" />
       </a>
 
       {
         appStatus === 'online'
           ? (<a className="option" id="online" title="Internet OK">
-            <FontAwesomeIcon icon={['fas', 'plane']} />
+            <FontAwesomeIcon icon={['fas', 'plane']} size="lg" />
           </a>)
           : (<a className="option" id="offline" title="No Internet">
-            <FontAwesomeIcon icon={['fas', 'plane-slash']} />
+            <FontAwesomeIcon icon={['fas', 'plane-slash']} size="lg" />
           </a>)
       }
 
@@ -69,6 +69,7 @@ const InfoButtons = styled(InfoButtonsJSX)`
     text-align: center;
     color: black;
     background-color: rgb(239, 239, 239);
+    cursor: pointer;
   }
 
   .option:hover {

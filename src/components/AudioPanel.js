@@ -145,6 +145,7 @@ const AudioPanel = styled(AudioPanelJSX)`
  margin: auto;
  filter: constrast (200%);
  border-radius: 10px 10px 10px 10px;
+ cursor: move;
 
  @keyframes background-filler {
   100% {
