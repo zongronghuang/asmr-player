@@ -2,14 +2,16 @@ import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const InfoButtonsJSX = ({ className, track, isOnline, setIsOnline }) => {
+  console.log('====', track)
+  console.log('******', track.photographer)
   const handleTogglingAnimation = () => {
-    const webIcon = document.querySelector('#website')
+    const imageIcon = document.querySelector('#image')
     const photographerIcon = document.querySelector('#photographer')
     const offlineIcon = document.querySelector('#offline')
     const onlineIcon = document.querySelector('#online')
 
     photographerIcon.classList.toggle('float-photographer')
-    webIcon.classList.toggle('float-website')
+    imageIcon.classList.toggle('float-image')
 
     isOnline
       ? onlineIcon.classList.toggle('float-network')
@@ -28,12 +30,12 @@ const InfoButtonsJSX = ({ className, track, isOnline, setIsOnline }) => {
         <FontAwesomeIcon icon={['fas', 'info']} size="lg" />
       </a>
 
-      <a className="option" id="photographer" href={track.photographer.profileURL} target="_blank" title={track.photographer.name}>
+      <a className="option" id="photographer" href={track.photographer.portfolioURL} target="_blank" title={track.photographer.name}>
         <FontAwesomeIcon icon={['fas', 'user-circle']} size="lg" />
       </a>
 
-      <a className="option" id="website" href={track.photographer.webURL} target="_blank" title="Visit website">
-        <FontAwesomeIcon icon={['fas', 'globe']} size="lg" />
+      <a className="option" id="image" href={track.photographer.remoteImageURL} target="_blank" title="View source image">
+        <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
       </a>
 
       {
@@ -81,7 +83,7 @@ const InfoButtons = styled(InfoButtonsJSX)`
   #online, #offline {
     z-index: 4;
   }
-  #website {
+  #image {
     z-index: 3;
   }
   #photographer {
@@ -97,11 +99,11 @@ const InfoButtons = styled(InfoButtonsJSX)`
     animation-fill-mode: forwards;
   }
 
-  @keyframes float-website {
+  @keyframes float-image {
     to { bottom: 70px; }
   }
-  .float-website {
-    animation-name: float-website;
+  .float-image {
+    animation-name: float-image;
     animation-duration: 0.4s;
     animation-fill-mode: forwards;
   }

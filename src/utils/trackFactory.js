@@ -12,7 +12,7 @@ const images = [Image_0, Image_1, Image_2, Image_3]
 const audios = [Audio_0, Audio_1, Audio_2, Audio_3]
 
 // 用來搜尋圖片的曲目關鍵字
-const searchTerms = ['countryside', 'seaside', 'train', 'park']
+const searchTerms = ['forest', 'seaside', 'train', 'street']
 
 // ----- 建立 defaultTracks() 製作符合一般順序的曲目列表 -----
 
@@ -65,8 +65,8 @@ const defaultTracks = (audioArray, imageArray) => {
       imageSrc: images[index],
       photographer: {
         name: 'Vivian Maier',
-        webURL: 'http://www.vivianmaier.com/',
-        profileURL: 'http://www.vivianmaier.com/about-vivian-maier/'
+        portfolioURL: 'http://www.vivianmaier.com/',
+        remoteImageURL: 'http://example.com'
       }
     }))
 
