@@ -22,17 +22,17 @@ const AppJSX = ({ className }) => {
   const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
   const [isOnline, setIsOnline] = useState(true)
 
-  useEffect(() => {
-    if (isOnline) {
-      const getOnlineTrack = async () => {
-        const onlineTrack = await apiHelpers.getRandomImage(track)
-        setTrack(onlineTrack)
-      }
+  // useEffect(() => {
+  //   if (isOnline) {
+  //     const getOnlineTrack = async () => {
+  //       const onlineTrack = await apiHelpers.getRandomImage(track)
+  //       setTrack(onlineTrack)
+  //     }
 
-      getOnlineTrack()
-    }
+  //     getOnlineTrack()
+  //   }
 
-  }, [track.order])
+  // }, [track.order])
 
   const handleNextTrack = () => {
     setTrack(prevTrack => {

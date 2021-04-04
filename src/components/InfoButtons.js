@@ -2,9 +2,7 @@ import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const InfoButtonsJSX = ({ className, track, isOnline, setIsOnline }) => {
-  console.log('====', track)
-  console.log('******', track.photographer)
-  const handleTogglingAnimation = () => {
+  const handleTogglingAnimations = () => {
     const imageIcon = document.querySelector('#image')
     const photographerIcon = document.querySelector('#photographer')
     const offlineIcon = document.querySelector('#offline')
@@ -25,16 +23,16 @@ const InfoButtonsJSX = ({ className, track, isOnline, setIsOnline }) => {
         className="option"
         id="info"
         title="Click for more"
-        onClick={handleTogglingAnimation}
+        onClick={handleTogglingAnimations}
       >
         <FontAwesomeIcon icon={['fas', 'info']} size="lg" />
       </a>
 
-      <a className="option" id="photographer" href={track.photographer.portfolioURL} target="_blank" title={track.photographer.name}>
+      <a className="option" id="photographer" href={track.localBackdrop.portfolio} target="_blank" title={track.localBackdrop.photographer}>
         <FontAwesomeIcon icon={['fas', 'user-circle']} size="lg" />
       </a>
 
-      <a className="option" id="image" href={track.photographer.remoteImageURL} target="_blank" title="View source image">
+      <a className="option" id="image" href={track.localBackdrop.URL} target="_blank" title="View source image">
         <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
       </a>
 

@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
 
-
 const BackdropJSX = ({
   className,
   track,
@@ -12,7 +11,7 @@ const BackdropJSX = ({
     onDragOver={handleDragOver}
     onDrop={handleDrop}
     className={className}
-    style={{ backgroundImage: `url(${track.imageSrc})` }}
+    style={{ backgroundImage: `url(${track.localBackdrop.URL})` }}
   >
     {console.log('[render] Backdrop')}
   </div>

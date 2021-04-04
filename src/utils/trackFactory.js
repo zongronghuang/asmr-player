@@ -8,14 +8,13 @@ import Image_1 from '../assets/images/backdrop_1.jpg'
 import Image_2 from '../assets/images/backdrop_2.jpg'
 import Image_3 from '../assets/images/backdrop_3.jpg'
 
-const images = [Image_0, Image_1, Image_2, Image_3]
 const audios = [Audio_0, Audio_1, Audio_2, Audio_3]
+const images = [Image_0, Image_1, Image_2, Image_3]
 
 // 用來搜尋圖片的曲目關鍵字
 const searchTerms = ['forest', 'seaside', 'train', 'street']
 
 // ----- 建立 defaultTracks() 製作符合一般順序的曲目列表 -----
-
 const findRedundantItems = (fileArray, mediaType) => {
   // 進行檔案分類並列出 id
   // 無重複檔案：{'檔案 a (路徑)': [id]}
@@ -62,11 +61,10 @@ const defaultTracks = (audioArray, imageArray) => {
       name: `track_${index}`,
       searchTerm: searchTerms[index],
       audioSrc: audios[index],
-      imageSrc: images[index],
-      photographer: {
-        name: 'Vivian Maier',
-        portfolioURL: 'http://www.vivianmaier.com/',
-        remoteImageURL: 'http://example.com'
+      localBackdrop: {
+        photographer: 'Vivian Maier',
+        portfolio: 'http://www.vivianmaier.com/',
+        URL: images[index]
       }
     }))
 
