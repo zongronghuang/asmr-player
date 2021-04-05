@@ -7,10 +7,12 @@ import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDo
 import Backdrop from './components/Backdrop'
 import AudioPanel from './components/AudioPanel'
 import InfoButtons from './components/InfoButtons'
+import Loader from './components/Loader'
 
-import defaultTracks from './utils/trackFactory'
+// <dirty code>
+import defaultTracks, { getRemoteBackdrops } from './utils/trackFactory'
+// </dirty code>
 import { randomizeTracks } from './utils/helpers'
-import apiHelpers from './utils/apiHelpers'
 
 // 註冊 fontAwesome SVG icons
 library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage)
@@ -20,19 +22,40 @@ const AppJSX = ({ className }) => {
   const [album, setAlbum] = useState(defaultTracks)
   const [track, setTrack] = useState(album[0])
   const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
-  const [isOnline, setIsOnline] = useState(true)
+  const [isOnline, setIsOnline] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
-  // useEffect(() => {
-  //   if (isOnline) {
-  //     const getOnlineTrack = async () => {
-  //       const onlineTrack = await apiHelpers.getRandomImage(track)
-  //       setTrack(onlineTrack)
-  //     }
+  // <dirty code>
+  useEffect(() => {
+    const remoteBackdrops = async () => {
+      const data = await getRemoteBackdrops()
+      console.log('data data', data)
 
-  //     getOnlineTrack()
-  //   }
+      if (data.every(item => Boolean(item) === true)) {
+        setIsLoaded(true)
+      }
 
-  // }, [track.order])
+      setAlbum(prevAlbum => {
+        return prevAlbum.map((track, index) => ({
+          ...track,
+          remoteBackdrop: { ...data[index] }
+        }))
+      })
+
+      setTrack(prevTrack => {
+        return {
+          ...prevTrack,
+          remoteBackdrop: {
+            ...data[prevTrack.order]
+          }
+        }
+      })
+    }
+
+    remoteBackdrops()
+  }, [])
+  // </dirty code>
+
 
   const handleNextTrack = () => {
     setTrack(prevTrack => {
@@ -116,21 +139,28 @@ const AppJSX = ({ className }) => {
   return (
     < div className={className, 'App'}>
       { console.log('[render] App')}
-      < Backdrop
-        track={track}
-        handleDragOver={handleDragOver}
-        handleDrop={handleDrop}
-      />
-      <AudioPanel
-        track={track}
-        mode={mode}
-        handleNextTrack={handleNextTrack}
-        handlePrevTrack={handlePrevTrack}
-        handleModeChange={handleModeChange}
-        handleDrag={handleDrag}
-        handleDragStart={handleDragStart}
-      />
-      <InfoButtons track={track} isOnline={isOnline} setIsOnline={setIsOnline} />
+
+      {isLoaded
+        ? (<>
+          <Backdrop
+            track={track}
+            handleDragOver={handleDragOver}
+            handleDrop={handleDrop}
+            isOnline={isOnline}
+          />
+          <AudioPanel
+            track={track}
+            mode={mode}
+            handleNextTrack={handleNextTrack}
+            handlePrevTrack={handlePrevTrack}
+            handleModeChange={handleModeChange}
+            handleDrag={handleDrag}
+            handleDragStart={handleDragStart}
+          />
+          <InfoButtons track={track} isOnline={isOnline} setIsOnline={setIsOnline} />
+        </>)
+        : (<Loader />)
+      }
     </div >
   );
 }

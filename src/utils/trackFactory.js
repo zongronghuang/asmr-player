@@ -1,3 +1,5 @@
+import apiHelpers from './apiHelpers'
+
 import Audio_0 from '../assets/audios/country_bird.mp3'
 import Audio_1 from '../assets/audios/seaside_seagulls.mp3'
 import Audio_2 from '../assets/audios/train_interior.mp3'
@@ -8,11 +10,23 @@ import Image_1 from '../assets/images/backdrop_1.jpg'
 import Image_2 from '../assets/images/backdrop_2.jpg'
 import Image_3 from '../assets/images/backdrop_3.jpg'
 
+// <dirty code>
 const audios = [Audio_0, Audio_1, Audio_2, Audio_3]
 const images = [Image_0, Image_1, Image_2, Image_3]
 
 // 用來搜尋圖片的曲目關鍵字
 const searchTerms = ['forest', 'seaside', 'train', 'street']
+
+export const getRemoteBackdrops = async () => {
+  const remoteBackdropPromises = searchTerms.reduce((base, searchTerm) => {
+    base.push(apiHelpers.getRandomImage(searchTerm))
+    return base
+  }, [])
+
+  const response = await Promise.all(remoteBackdropPromises)
+  console.log('== response', response)
+  return [...response]
+}
 
 // ----- 建立 defaultTracks() 製作符合一般順序的曲目列表 -----
 const findRedundantItems = (fileArray, mediaType) => {
@@ -39,7 +53,7 @@ const findRedundantItems = (fileArray, mediaType) => {
   })
 }
 
-const defaultTracks = (audioArray, imageArray) => {
+const defaultTracks = (audioArray, imageArray, termArray) => {
   // 必須至少有一個 image 和 audio
   if (!imageArray.length || !audioArray.length) {
     console.log('No available audios or images')
@@ -59,12 +73,12 @@ const defaultTracks = (audioArray, imageArray) => {
     .map((track, index) => ({
       order: index,
       name: `track_${index}`,
-      searchTerm: searchTerms[index],
-      audioSrc: audios[index],
+      searchTerm: termArray[index],
+      audioSrc: audioArray[index],
       localBackdrop: {
         photographer: 'Vivian Maier',
         portfolio: 'http://www.vivianmaier.com/',
-        URL: images[index]
+        source: imageArray[index]
       }
     }))
 
@@ -73,4 +87,5 @@ const defaultTracks = (audioArray, imageArray) => {
   return trackList
 }
 
-export default defaultTracks(audios, images)
+export default defaultTracks(audios, images, searchTerms)
+// </dirty code>

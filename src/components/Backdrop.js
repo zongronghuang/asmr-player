@@ -3,19 +3,28 @@ import styled from '@emotion/styled'
 const BackdropJSX = ({
   className,
   track,
+  isOnline,
   handleDragOver,
   handleDrop
-}) => (
-  <div
-    id="dropZone"
-    onDragOver={handleDragOver}
-    onDrop={handleDrop}
-    className={className}
-    style={{ backgroundImage: `url(${track.localBackdrop.URL})` }}
-  >
-    {console.log('[render] Backdrop')}
-  </div>
-)
+}) => {
+  { console.log('????', track) }
+  return (
+    <div
+      id="dropZone"
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+      className={className}
+      style={
+        isOnline
+          ? { backgroundImage: `url(${track.remoteBackdrop.source})` }
+          : { backgroundImage: `url(${track.localBackdrop.source})` }
+      }
+    >
+
+      {console.log('[render] Backdrop')}
+    </div>
+  )
+}
 
 const Backdrop = styled(BackdropJSX)`
   background-repeat: no-repeat;

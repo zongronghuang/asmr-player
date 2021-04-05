@@ -28,20 +28,31 @@ const InfoButtonsJSX = ({ className, track, isOnline, setIsOnline }) => {
         <FontAwesomeIcon icon={['fas', 'info']} size="lg" />
       </a>
 
-      <a className="option" id="photographer" href={track.localBackdrop.portfolio} target="_blank" title={track.localBackdrop.photographer}>
+      <a className="option" id="photographer" href={
+        isOnline
+          ? track.remoteBackdrop.portfolio
+          : track.localBackdrop.portfolio
+
+      } target="_blank" title={
+        isOnline
+          ? track.remoteBackdrop.photographer
+          : track.localBackdrop.photographer}>
         <FontAwesomeIcon icon={['fas', 'user-circle']} size="lg" />
       </a>
 
-      <a className="option" id="image" href={track.localBackdrop.URL} target="_blank" title="View source image">
+      <a className="option" id="image" href={
+        isOnline
+          ? track.remoteBackdrop.source
+          : track.localBackdrop.source} target="_blank" title="View source image">
         <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
       </a>
 
       {
         isOnline
-          ? (<a className="option" id="online" title="Online" onClick={() => setIsOnline(false)}>
+          ? (<a className="option" id="online" title="Online backdrops" onClick={() => setIsOnline(false)}>
             <FontAwesomeIcon icon={['fas', 'plane']} size="lg" />
           </a>)
-          : (<a className="option" id="offline" title="Offline" onClick={() => setIsOnline(true)}>
+          : (<a className="option" id="offline" title="Native backdrops" onClick={() => setIsOnline(true)}>
             <FontAwesomeIcon icon={['fas', 'plane-slash']} size="lg" />
           </a>)
       }
