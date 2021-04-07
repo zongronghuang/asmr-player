@@ -27,32 +27,35 @@ const AppJSX = ({ className }) => {
 
   // <dirty code>
   useEffect(() => {
-    const remoteBackdrops = async () => {
-      const data = await getRemoteBackdrops()
-      console.log('data data', data)
+    // const remoteBackdrops = async () => {
+    //   const data = await getRemoteBackdrops()
+    //   console.log('data data', data)
 
-      if (data.every(item => Boolean(item) === true)) {
-        setIsLoaded(true)
-      }
+    //   if (data.every(item => Boolean(item) === true)) {
+    //     setIsLoaded(true)
+    //   }
 
-      setAlbum(prevAlbum => {
-        return prevAlbum.map((track, index) => ({
-          ...track,
-          remoteBackdrop: { ...data[index] }
-        }))
-      })
+    //   setAlbum(prevAlbum => {
+    //     return prevAlbum.map((track, index) => ({
+    //       ...track,
+    //       remoteBackdrop: { ...data[index] }
+    //     }))
+    //   })
 
-      setTrack(prevTrack => {
-        return {
-          ...prevTrack,
-          remoteBackdrop: {
-            ...data[prevTrack.order]
-          }
-        }
-      })
-    }
+    //   setTrack(prevTrack => {
+    //     return {
+    //       ...prevTrack,
+    //       remoteBackdrop: {
+    //         ...data[prevTrack.order]
+    //       }
+    //     }
+    //   })
+    // }
 
-    remoteBackdrops()
+    // remoteBackdrops()
+
+    setTimeout(function () { setIsLoaded(true) }, 2000)
+
   }, [])
   // </dirty code>
 
