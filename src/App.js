@@ -9,10 +9,10 @@ import AudioPanel from './components/AudioPanel'
 import InfoButtons from './components/InfoButtons'
 import Loader from './components/Loader'
 
-// <dirty code>
-import defaultTracks, { getRemoteBackdrops } from './utils/trackFactory'
-// </dirty code>
+import { trackFactory } from './utils/trackFactory'
 import { randomizeTracks } from './utils/helpers'
+
+const { defaultTracks, makeBackdropPromises } = trackFactory
 
 // 註冊 fontAwesome SVG icons
 library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage)
@@ -25,40 +25,23 @@ const AppJSX = ({ className }) => {
   const [isOnline, setIsOnline] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
 
-  // <dirty code>
-  useEffect(() => {
-    // const remoteBackdrops = async () => {
-    //   const data = await getRemoteBackdrops()
-    //   console.log('data data', data)
+  useEffect(async () => {
+    const fetchedData = await makeBackdropPromises()
+    console.log('data', fetchedData)
 
-    //   if (data.every(item => Boolean(item) === true)) {
-    //     setIsLoaded(true)
-    //   }
+    // 確認是否取得所有背景圖片；否則重新請求資料
+    if (fetchedData.every(item => Boolean(item) === true)) {
+      setTimeout(() => { setIsLoaded(true) }, 2000)
+    } else { return }
 
-    //   setAlbum(prevAlbum => {
-    //     return prevAlbum.map((track, index) => ({
-    //       ...track,
-    //       remoteBackdrop: { ...data[index] }
-    //     }))
-    //   })
+    const updatedAlbum = album.map((track, index) => ({
+      ...track,
+      remoteBackdrop: { ...fetchedData[index] }
+    }))
 
-    //   setTrack(prevTrack => {
-    //     return {
-    //       ...prevTrack,
-    //       remoteBackdrop: {
-    //         ...data[prevTrack.order]
-    //       }
-    //     }
-    //   })
-    // }
-
-    // remoteBackdrops()
-
-    setTimeout(function () { setIsLoaded(true) }, 2000)
-
+    setAlbum(prevAlbum => updatedAlbum)
+    setTrack(prevTrack => updatedAlbum[prevTrack.order])
   }, [])
-  // </dirty code>
-
 
   const handleNextTrack = () => {
     setTrack(prevTrack => {

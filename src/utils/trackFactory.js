@@ -17,18 +17,7 @@ const images = [Image_0, Image_1, Image_2, Image_3]
 // 用來搜尋圖片的曲目關鍵字
 const searchTerms = ['forest', 'seaside', 'train', 'street']
 
-export const getRemoteBackdrops = async () => {
-  const remoteBackdropPromises = searchTerms.reduce((base, searchTerm) => {
-    base.push(apis.getRandomImage(searchTerm))
-    return base
-  }, [])
-
-  const response = await Promise.all(remoteBackdropPromises)
-  console.log('== response', response)
-  return [...response]
-}
-
-// ----- 建立 defaultTracks() 製作符合一般順序的曲目列表 -----
+// 檢查有無重覆的音訊或圖片
 const findRedundantItems = (fileArray, mediaType) => {
   // 進行檔案分類並列出 id
   // 無重複檔案：{'檔案 a (路徑)': [id]}
@@ -53,7 +42,23 @@ const findRedundantItems = (fileArray, mediaType) => {
   })
 }
 
-const defaultTracks = (audioArray, imageArray, termArray) => {
+// 建立請求背景圖片的 Promise 陣列
+const makeBackdropPromises = async () => {
+  try {
+    const backdropPromises = searchTerms.reduce((base, searchTerm) => {
+      base.push(apis.getRandomImage(searchTerm))
+      return base
+    }, [])
+
+    const response = await Promise.all(backdropPromises)
+
+    return [...response]
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const createDefaultTracks = (audioArray, imageArray, termArray) => {
   // 必須至少有一個 image 和 audio
   if (!imageArray.length || !audioArray.length) {
     console.log('No available audios or images')
@@ -87,5 +92,9 @@ const defaultTracks = (audioArray, imageArray, termArray) => {
   return trackList
 }
 
-export default defaultTracks(audios, images, searchTerms)
-// </dirty code>
+const defaultTracks = createDefaultTracks(audios, images, searchTerms)
+
+export const trackFactory = {
+  defaultTracks,
+  makeBackdropPromises
+}
