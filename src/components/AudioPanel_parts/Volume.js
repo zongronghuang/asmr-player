@@ -25,13 +25,14 @@ const VolumeJSX = ({ className, handleVolumeUpDown, volume }) =>
 
 const Volume = styled(VolumeJSX)`
   display: flex;
-  justify-content: space-between;
-  margin-right: 10px;
-  margin-left: 10px;
+  justify-content: center;
+  margin-right: 5px;
+  margin-left: 5px;
 
   button {
     border: 1px solid black;
     border-radius: 5px;
+    background-color: rgb(239, 239, 239);
   }
 
   & > #volume {
@@ -42,6 +43,11 @@ const Volume = styled(VolumeJSX)`
 
   & > #mode {
     cursor: pointer;
+  }
+
+  input {
+    width: 50%;
+    min-width: 30px;
   }
 `
 

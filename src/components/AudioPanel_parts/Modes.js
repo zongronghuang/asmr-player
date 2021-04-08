@@ -49,6 +49,7 @@ const Modes = styled(ModesJSX)`
    margin-right: 2px;
    border: 1px solid black;
    border-radius: 5px;
+   background-color: rgb(239, 239, 239);
   }
 
   .checked {

@@ -39,6 +39,7 @@ const PlaybackButtons = styled(PlaybackButtonsJSX)`
    border-radius: 5px;
    margin-left: 2px;
    margin-right: 2px;
+   background-color: rgb(239, 239, 239);
   }
 `
 
