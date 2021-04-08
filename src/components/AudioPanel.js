@@ -150,8 +150,8 @@ const AudioPanel = styled(AudioPanelJSX)`
 
  @keyframes background-filler {
   100% {
-    border: 3px solid mediumslateblue;
-    background-color: PaleGoldenRod;
+    border: 3px solid goldenrod;
+    background-color: black;
   }
 }
 

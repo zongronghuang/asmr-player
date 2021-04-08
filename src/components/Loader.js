@@ -26,7 +26,7 @@ background-color: black;
   text-align: center;
   line-height: 300px;
   color: goldenrod;
-  border: 3px double goldenrod;
+  border: 3px solid goldenrod;
   border-radius: 25%;
 }
  
@@ -52,8 +52,8 @@ background-color: black;
   #outer {
     width: 200px;
     height: 200px;
-    border-top: 3px double goldenrod;
-    border-bottom: 3px double goldenrod;
+    border-top: 3px solid goldenrod;
+    border-bottom: 3px solid goldenrod;
     animation-name: orbitting;
     animation-duration: 3s;
     animation-iteration-count: infinite;
@@ -62,8 +62,8 @@ background-color: black;
   }
 
   #inner {
-    border-top: 3px double goldenrod;
-    border-bottom: 3px double goldenrod;
+    border-top: 3px solid goldenrod;
+    border-bottom: 3px solid goldenrod;
     width: 100px;
     height: 100px;
     animation-name: orbitting;
@@ -76,7 +76,7 @@ background-color: black;
 
   #core {
     border-radius: 50%;
-    border: 5px double goldenrod;
+    border: 5px solid goldenrod;
     background-color: white;
     width: 10px;
     height: 10px;
