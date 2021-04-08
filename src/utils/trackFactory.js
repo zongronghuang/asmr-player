@@ -1,4 +1,4 @@
-import apiHelpers from './apiHelpers'
+import apis from './apis'
 
 import Audio_0 from '../assets/audios/country_bird.mp3'
 import Audio_1 from '../assets/audios/seaside_seagulls.mp3'
@@ -19,7 +19,7 @@ const searchTerms = ['forest', 'seaside', 'train', 'street']
 
 export const getRemoteBackdrops = async () => {
   const remoteBackdropPromises = searchTerms.reduce((base, searchTerm) => {
-    base.push(apiHelpers.getRandomImage(searchTerm))
+    base.push(apis.getRandomImage(searchTerm))
     return base
   }, [])
 

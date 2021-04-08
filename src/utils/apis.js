@@ -1,4 +1,4 @@
-const apiHelpers = {
+const apis = {
   getRandomImage: async (searchTerm) => {
     try {
       const url = `${process.env.REACT_APP_BASE_URL}photos/random?query=${searchTerm}&orientation=landscape`
@@ -10,15 +10,14 @@ const apiHelpers = {
           'Authorization': `Client-ID ${process.env.REACT_APP_ACCESS_KEY}`
         }
       })
-      // <dirty code>
+
       const { ok, statusText } = response
       if (!ok) { throw new Error(statusText) }
 
-      const remoteImageData = await response.json()
-      console.log('remote image data', remoteImageData)
+      const imageData = await response.json()
+      console.log('Fetched image data', imageData)
 
-      // nested destructuring
-      // 重新命名需要的資料
+      // 巢狀解構賦值 (nested destructuring) + 重新命名需要的資料
       const {
         urls: {
           regular: source
@@ -29,7 +28,7 @@ const apiHelpers = {
             html: portfolio
           },
         }
-      } = remoteImageData
+      } = imageData
 
       return {
         photographer,
@@ -37,10 +36,9 @@ const apiHelpers = {
         source
       }
     } catch (error) {
-      return console.log(error)
+      return console.error(error)
     }
-    // </dirty code>
   }
 }
 
-export default apiHelpers
+export default apis
