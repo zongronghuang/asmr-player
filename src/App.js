@@ -25,22 +25,24 @@ const AppJSX = ({ className }) => {
   const [isOnline, setIsOnline] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
 
-  useEffect(async () => {
-    const fetchedData = await makeBackdropPromises()
-    console.log('data', fetchedData)
+  useEffect(() => {
 
-    // 確認是否取得所有背景圖片；否則重新請求資料
-    if (fetchedData.every(item => Boolean(item) === true)) {
-      setTimeout(() => { setIsLoaded(true) }, 2000)
-    } else { return }
+    setTimeout(() => { setIsLoaded(true) }, 3000)
+    // const fetchedData = await makeBackdropPromises()
+    // console.log('data', fetchedData)
 
-    const updatedAlbum = album.map((track, index) => ({
-      ...track,
-      remoteBackdrop: { ...fetchedData[index] }
-    }))
+    // // 確認是否取得所有背景圖片；否則重新請求資料
+    // if (fetchedData.every(item => Boolean(item) === true)) {
+    //   setTimeout(() => { setIsLoaded(true) }, 2000)
+    // } else { return }
 
-    setAlbum(prevAlbum => updatedAlbum)
-    setTrack(prevTrack => updatedAlbum[prevTrack.order])
+    // const updatedAlbum = album.map((track, index) => ({
+    //   ...track,
+    //   remoteBackdrop: { ...fetchedData[index] }
+    // }))
+
+    // setAlbum(prevAlbum => updatedAlbum)
+    // setTrack(prevTrack => updatedAlbum[prevTrack.order])
   }, [])
 
   const handleNextTrack = () => {
@@ -127,26 +129,26 @@ const AppJSX = ({ className }) => {
       { console.log('[render] App')}
 
       {isLoaded
-        ? (<>
-          <Backdrop
-            track={track}
-            handleDragOver={handleDragOver}
-            handleDrop={handleDrop}
-            isOnline={isOnline}
-          />
-          <AudioPanel
-            track={track}
-            mode={mode}
-            handleNextTrack={handleNextTrack}
-            handlePrevTrack={handlePrevTrack}
-            handleModeChange={handleModeChange}
-            handleDrag={handleDrag}
-            handleDragStart={handleDragStart}
-          />
-          <InfoButtons track={track} isOnline={isOnline} setIsOnline={setIsOnline} />
-        </>)
-        : (<Loader />)
+        ? null
+        : <Loader />
       }
+
+      <Backdrop
+        track={track}
+        handleDragOver={handleDragOver}
+        handleDrop={handleDrop}
+        isOnline={isOnline}
+      />
+      <AudioPanel
+        track={track}
+        mode={mode}
+        handleNextTrack={handleNextTrack}
+        handlePrevTrack={handlePrevTrack}
+        handleModeChange={handleModeChange}
+        handleDrag={handleDrag}
+        handleDragStart={handleDragStart}
+      />
+      <InfoButtons track={track} isOnline={isOnline} setIsOnline={setIsOnline} />
     </div >
   );
 }

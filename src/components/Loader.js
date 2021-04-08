@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 
 const LoaderJSX = ({ className }) => (
   <div className={className}>
+    <div id="shade"></div>
     <div id="frame">
       <div className="stars" id="outer">●</div>
       <div className="stars" id="inner">●</div>
@@ -11,25 +12,32 @@ const LoaderJSX = ({ className }) => (
 )
 
 const Loader = styled(LoaderJSX)`
-width: 100vw;
-height: 100vh;
-background-color: black;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
 
-#frame {
- position: absolute;
-  width: 300px;
-  height: 300px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: black;
-  text-align: center;
-  line-height: 300px;
-  color: goldenrod;
-  border: 3px solid goldenrod;
-  border-radius: 25%;
-}
- 
+  #shade {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.7;
+  }
+
+  #frame {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    text-align: center;
+    line-height: 300px;
+    color: goldenrod;
+    border: 3px solid goldenrod;
+    border-radius: 25%;
+  }
 
   .stars {
     position: fixed;
