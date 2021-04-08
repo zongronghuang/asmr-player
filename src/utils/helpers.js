@@ -1,5 +1,3 @@
-// ----- 建立 randomizeTracks() 讓專輯曲目順序符合直觀的隨機順序 -----
-
 const getRandomNum = (max) => {
   return Math.floor(Math.random() * max)
 }
@@ -17,6 +15,7 @@ const isInIncrementalOrder = (trackArray) => {
     .every((track, id) => track.order === id)
 }
 
+// 建立 randomizeTracks() 讓專輯曲目順序符合直觀的隨機順序
 export const randomizeTracks = (trackArray) => {
   const usedIndexes = []
   const randomTracks = Array(trackArray.length)

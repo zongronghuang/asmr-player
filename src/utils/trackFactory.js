@@ -1,4 +1,4 @@
-import apis from './apis'
+import apis from '../components/apis/apis'
 
 import Audio_0 from '../assets/audios/country_bird.mp3'
 import Audio_1 from '../assets/audios/seaside_seagulls.mp3'
