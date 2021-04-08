@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const InfoButtonsJSX = ({ className, track, isOnline, setIsOnline }) => {
+const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIData }) => {
   const handleTogglingAnimations = () => {
     const imageIcon = document.querySelector('#image')
     const photographerIcon = document.querySelector('#photographer')
@@ -11,7 +11,7 @@ const InfoButtonsJSX = ({ className, track, isOnline, setIsOnline }) => {
     photographerIcon.classList.toggle('float-photographer')
     imageIcon.classList.toggle('float-image')
 
-    isOnline
+    shouldUseAPIData && track?.remoteBackdrop
       ? onlineIcon.classList.toggle('float-network')
       : offlineIcon.classList.toggle('float-network')
   }
@@ -28,32 +28,59 @@ const InfoButtonsJSX = ({ className, track, isOnline, setIsOnline }) => {
         <FontAwesomeIcon icon={['fas', 'info']} size="lg" />
       </a>
 
-      <a className="option" id="photographer" href={
-        isOnline
-          ? track.remoteBackdrop.portfolio
-          : track.localBackdrop.portfolio
-
-      } target="_blank" title={
-        isOnline
-          ? track.remoteBackdrop.photographer
-          : track.localBackdrop.photographer}>
+      <a
+        className="option"
+        id="photographer"
+        href={
+          shouldUseAPIData && track?.remoteBackdrop
+            ? track.remoteBackdrop.portfolio
+            : track.localBackdrop.portfolio
+        }
+        target="_blank"
+        title={
+          shouldUseAPIData && track?.remoteBackdrop
+            ? track.remoteBackdrop.photographer
+            : track.localBackdrop.photographer
+        }
+      >
         <FontAwesomeIcon icon={['fas', 'user-circle']} size="lg" />
       </a>
 
-      <a className="option" id="image" href={
-        isOnline
-          ? track.remoteBackdrop.source
-          : track.localBackdrop.source} target="_blank" title="View source image">
+      <a
+        className="option"
+        id="image"
+        href={
+          shouldUseAPIData && track?.remoteBackdrop
+            ? track.remoteBackdrop.source
+            : track.localBackdrop.source
+        }
+        target="_blank"
+        title="View source image"
+      >
         <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
       </a>
 
       {
-        isOnline
-          ? (<a className="option" id="online" title="Online backdrops" onClick={() => setIsOnline(false)}>
+        shouldUseAPIData && track?.remoteBackdrop
+          ? (<a
+            className="option"
+            id="online"
+            title="Online backdrops"
+            onClick={() => setShouldUseAPIData(false)}
+          >
             <FontAwesomeIcon icon={['fas', 'plane']} size="lg" />
           </a>)
-          : (<a className="option" id="offline" title="Native backdrops" onClick={() => setIsOnline(true)}>
-            <FontAwesomeIcon icon={['fas', 'plane-slash']} size="lg" />
+          : (<a
+            className="option"
+            id="offline"
+            title="Native backdrops"
+            onClick={() => { if (track?.remoteBackdrop) setShouldUseAPIData(true) }}
+          >
+            <FontAwesomeIcon
+              icon={['fas', 'plane-slash']}
+              size="lg"
+              color={track?.remoteBackdrop ? null : 'gray'}
+            />
           </a>)
       }
     </aside>

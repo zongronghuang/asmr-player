@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 const BackdropJSX = ({
   className,
   track,
-  isOnline,
+  shouldUseAPIData,
   handleDragOver,
   handleDrop
 }) => {
@@ -15,7 +15,7 @@ const BackdropJSX = ({
       onDrop={handleDrop}
       className={className}
       style={
-        isOnline
+        shouldUseAPIData && track.remoteBackdrop
           ? { backgroundImage: `url(${track.remoteBackdrop.source})` }
           : { backgroundImage: `url(${track.localBackdrop.source})` }
       }

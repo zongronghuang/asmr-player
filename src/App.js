@@ -22,18 +22,18 @@ const AppJSX = ({ className }) => {
   const [album, setAlbum] = useState(defaultTracks)
   const [track, setTrack] = useState(album[0])
   const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
-  const [isOnline, setIsOnline] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [shouldUseAPIData, setShouldUseAPIData] = useState(false)
+  const [isReady, setIsReady] = useState(false)
 
   useEffect(() => {
 
-    setTimeout(() => { setIsLoaded(true) }, 3000)
+    setTimeout(() => { setIsReady(true) }, 3000)
     // const fetchedData = await makeBackdropPromises()
     // console.log('data', fetchedData)
 
     // // 確認是否取得所有背景圖片；否則重新請求資料
     // if (fetchedData.every(item => Boolean(item) === true)) {
-    //   setTimeout(() => { setIsLoaded(true) }, 2000)
+    //   setTimeout(() => { setIsReady(true) }, 2000)
     // } else { return }
 
     // const updatedAlbum = album.map((track, index) => ({
@@ -128,7 +128,7 @@ const AppJSX = ({ className }) => {
     < div className={className, 'App'}>
       { console.log('[render] App')}
 
-      {isLoaded
+      {isReady
         ? null
         : <Loader />
       }
@@ -137,7 +137,7 @@ const AppJSX = ({ className }) => {
         track={track}
         handleDragOver={handleDragOver}
         handleDrop={handleDrop}
-        isOnline={isOnline}
+        shouldUseAPIData={shouldUseAPIData}
       />
       <AudioPanel
         track={track}
@@ -148,7 +148,7 @@ const AppJSX = ({ className }) => {
         handleDrag={handleDrag}
         handleDragStart={handleDragStart}
       />
-      <InfoButtons track={track} isOnline={isOnline} setIsOnline={setIsOnline} />
+      <InfoButtons track={track} shouldUseAPIData={shouldUseAPIData} setShouldUseAPIData={setShouldUseAPIData} />
     </div >
   );
 }
