@@ -11,6 +11,8 @@ const apis = {
         }
       })
 
+      console.log('response', response)
+
       const { ok, statusText } = response
       if (!ok) { throw new Error(statusText) }
 
