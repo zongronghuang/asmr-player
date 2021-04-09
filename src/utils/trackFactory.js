@@ -10,9 +10,11 @@ import Image_1 from '../assets/images/backdrop_1.jpg'
 import Image_2 from '../assets/images/backdrop_2.jpg'
 import Image_3 from '../assets/images/backdrop_3.jpg'
 
-// <dirty code>
 const audios = [Audio_0, Audio_1, Audio_2, Audio_3]
 const images = [Image_0, Image_1, Image_2, Image_3]
+
+// image 1 http://www.vivianmaier.com/gallery/street-3/#slide-33
+
 
 // 用來搜尋圖片的曲目關鍵字
 const searchTerms = ['forest', 'seaside', 'train', 'street']
@@ -94,7 +96,5 @@ const createDefaultTracks = (audioArray, imageArray, termArray) => {
 
 const defaultTracks = createDefaultTracks(audios, images, searchTerms)
 
-export const trackFactory = {
-  defaultTracks,
-  makeBackdropPromises
-}
+export { defaultTracks, makeBackdropPromises }
+
