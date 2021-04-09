@@ -39,8 +39,8 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
         target="_blank"
         title={
           shouldUseAPIData && track?.remoteBackdrop
-            ? track.remoteBackdrop.photographer
-            : track.localBackdrop.photographer
+            ? `Photo by ${track.remoteBackdrop.photographer}`
+            : `Photo by ${track.localBackdrop.photographer}`
         }
       >
         <FontAwesomeIcon icon={['fas', 'user-circle']} size="lg" />
@@ -73,8 +73,8 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
           : (<a
             className="option"
             id="offline"
-            title="Native backdrops"
-            onClick={() => { if (track?.remoteBackdrop) setShouldUseAPIData(true) }}
+            title={track?.remoteBackdrop ? 'Native backdrops' : 'Native backdrops only'}
+            onClick={() => track?.remoteBackdrop ? setShouldUseAPIData(true) : null}
           >
             <FontAwesomeIcon
               icon={['fas', 'plane-slash']}
