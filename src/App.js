@@ -9,10 +9,8 @@ import AudioPanel from './components/AudioPanel'
 import InfoButtons from './components/InfoButtons'
 import Loader from './components/Loader'
 
-import { trackFactory } from './utils/trackFactory'
+import { defaultTracks, makeBackdropPromises } from './utils/trackFactory'
 import { randomizeTracks } from './utils/helpers'
-
-const { defaultTracks, makeBackdropPromises } = trackFactory
 
 // 註冊 fontAwesome SVG icons
 library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage)
@@ -26,23 +24,30 @@ const AppJSX = ({ className }) => {
   const [isReady, setIsReady] = useState(false)
 
   useEffect(() => {
+    const fetchBackdrops = async () => {
+      const data = await makeBackdropPromises()
+      console.log('makeBackdropPromises', makeBackdropPromises)
+      console.log('fetched data', data)
 
-    setTimeout(() => { setIsReady(true) }, 3000)
-    // const fetchedData = await makeBackdropPromises()
-    // console.log('data', fetchedData)
+      // 確認是否取得所有線上背景圖片
+      if (data.some(item => Boolean(item) === false)) {
+        return
+      } else {
+        setTimeout(() => setIsReady(true), 2000)
+      }
 
-    // // 確認是否取得所有背景圖片；否則重新請求資料
-    // if (fetchedData.every(item => Boolean(item) === true)) {
-    //   setTimeout(() => { setIsReady(true) }, 2000)
-    // } else { return }
+      const updatedAlbum = album.map((track, index) => ({
+        ...track,
+        remoteBackdrop: { ...data[index] }
+      }))
+      console.log('updated album', updatedAlbum)
 
-    // const updatedAlbum = album.map((track, index) => ({
-    //   ...track,
-    //   remoteBackdrop: { ...fetchedData[index] }
-    // }))
+      setAlbum(updatedAlbum)
+      setTrack(prevTrack => updatedAlbum[prevTrack.order])
+      setShouldUseAPIData(true)
+    }
 
-    // setAlbum(prevAlbum => updatedAlbum)
-    // setTrack(prevTrack => updatedAlbum[prevTrack.order])
+    fetchBackdrops()
   }, [])
 
   const handleNextTrack = () => {
