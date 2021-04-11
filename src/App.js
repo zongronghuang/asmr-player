@@ -7,7 +7,7 @@ import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDo
 import Backdrop from './components/Backdrop'
 import AudioPanel from './components/AudioPanel'
 import InfoButtons from './components/InfoButtons'
-import Loader from './components/Loader'
+import Loader from './views/Loader'
 
 import { defaultTracks, makeBackdropPromises } from './utils/trackFactory'
 import { randomizeTracks } from './utils/helpers'
