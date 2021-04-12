@@ -11,3 +11,6 @@ body {
   width: 100%;
   border: 0.5px solid transparent;
 }
+
+@import-normalize
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');

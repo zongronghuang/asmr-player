@@ -8,6 +8,7 @@ import Backdrop from './components/Backdrop'
 import AudioPanel from './components/AudioPanel'
 import InfoButtons from './components/InfoButtons'
 import Loader from './views/Loader'
+import Login from './views/Login'
 
 import { defaultTracks, makeBackdropPromises } from './utils/trackFactory'
 import { randomizeTracks } from './utils/helpers'
@@ -22,6 +23,7 @@ const AppJSX = ({ className }) => {
   const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
   const [shouldUseAPIData, setShouldUseAPIData] = useState(false)
   const [isReady, setIsReady] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     const fetchBackdrops = async () => {
@@ -47,7 +49,7 @@ const AppJSX = ({ className }) => {
       setShouldUseAPIData(true)
     }
 
-    fetchBackdrops()
+    //fetchBackdrops()
   }, [])
 
   const handleNextTrack = () => {
@@ -131,29 +133,36 @@ const AppJSX = ({ className }) => {
 
   return (
     < div className={className, 'App'}>
-      { console.log('[render] App')}
+      {console.log('[render] App')}
 
-      {isReady
-        ? null
-        : <Loader />
+      {!isLoggedIn
+        ? (<Login />)
+        : (<>
+
+          {isReady
+            ? null
+            : <Loader />
+          }
+
+          <Backdrop
+            track={track}
+            handleDragOver={handleDragOver}
+            handleDrop={handleDrop}
+            shouldUseAPIData={shouldUseAPIData}
+          />
+          <AudioPanel
+            track={track}
+            mode={mode}
+            handleNextTrack={handleNextTrack}
+            handlePrevTrack={handlePrevTrack}
+            handleModeChange={handleModeChange}
+            handleDrag={handleDrag}
+            handleDragStart={handleDragStart}
+          />
+          <InfoButtons track={track} shouldUseAPIData={shouldUseAPIData} setShouldUseAPIData={setShouldUseAPIData} />
+        </>)
       }
 
-      <Backdrop
-        track={track}
-        handleDragOver={handleDragOver}
-        handleDrop={handleDrop}
-        shouldUseAPIData={shouldUseAPIData}
-      />
-      <AudioPanel
-        track={track}
-        mode={mode}
-        handleNextTrack={handleNextTrack}
-        handlePrevTrack={handlePrevTrack}
-        handleModeChange={handleModeChange}
-        handleDrag={handleDrag}
-        handleDragStart={handleDragStart}
-      />
-      <InfoButtons track={track} shouldUseAPIData={shouldUseAPIData} setShouldUseAPIData={setShouldUseAPIData} />
     </div >
   );
 }
