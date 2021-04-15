@@ -3,26 +3,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const LoginJSX = ({ className }) => (
   <main className={className}>
-
     <div className="circle" id="outer">
       <div className="circle" id="middle">
-        <div className="circle" id="inner"></div>
+        <div className="circle" id="inner">
+          <section>
+            <h1>ASMR Player</h1>
+            <a href="#" id="fb-login">Log in with Facebook</a>
+          </section>
+        </div>
       </div>
     </div>
 
-    <section>
-      <div>
-        <header>ASMR Player</header>
-      </div>
-
-      <div>
-        <i></i><a href="#" id="fb-link">Log in with Facebook</a>
-      </div>
-
-      <footer>
-        <small>Made with love by <a href="#">Zong-Rong</a></small>
-      </footer>
-    </section>
+    <footer>
+      <small>
+        Made with <FontAwesomeIcon icon={['fas', 'heart']} color={'goldenrod'} /> by <a href="#">Zong-Rong</a>
+      </small>
+    </footer>
   </main>
 )
 
@@ -31,32 +27,28 @@ display: flex;
 flex-direction: column;
 justify-content: space-around;
 align-items: center;
-width: 100vw;
+width: 100%;
 height: 100vh;
+padding: 0;
+margin: 0;
 text-align: center;
 background-color: black;
+font-family: Arial, Helvetica, sans-serif;
 
 section {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20%;
-  height: 30%;
-  box-shadow: 1px 1px 5px goldenrod, -1px -1px 5px goldenrod, 1px -1px 5px goldenrod, -1px 1px 5px goldenrod;
+  width: 60%;
+  height: 50%;
   border-radius: 10%;
+  transform: rotate(-45deg);
 }
 
-section > div {
+h1 {
   width: 100%;
-}
-
-header {
-  font-family: 'Courgette', cursive, monospace, Arial, sans-serif;
+  font-family: Courgette, Arial, cursive, monospace, sans-serif;
   font-size: x-large;
   font-weight: bold;
   color: goldenrod;
@@ -64,7 +56,16 @@ header {
 }
 
 footer {
+  position: absolute;
+  bottom: 50px;
+  margin: auto;
   color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
 }
 
 .circle {
@@ -73,13 +74,20 @@ footer {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border-top: 1px solid goldenrod;
-  border-bottom: 1px solid goldenrod;
+  border-top: 2px solid goldenrod;
+  border-bottom: 2px solid goldenrod;
+}
+
+.circle:hover {
+  border-width: 6px;
 }
 
 #inner {
   width: 300px;
   height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #middle {
@@ -93,17 +101,18 @@ footer {
   transform: translate(-50%, -50%) rotate(45deg);
 }
 
-#fb-link {
+#fb-login {
   display: block;
-  width: 150px;
-  height: 50px;
-  background-color: white;
-  line-height: 50px;
-  border: 1px solid black;
-  text-decoration: none;
-  margin: auto;
+  width: 100%;
+  height: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: rgb(66, 103, 178);
+  line-height: 30px;
+  font-size: 15px;
+  border-radius: 15px;
+  padding: 5px;
 }
-
 `
 
 export default Login

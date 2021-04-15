@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage } from '@fortawesome/free-solid-svg-icons'
+import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import Backdrop from './components/Backdrop'
 import AudioPanel from './components/AudioPanel'
@@ -14,7 +14,7 @@ import { defaultTracks, makeBackdropPromises } from './utils/trackFactory'
 import { randomizeTracks } from './utils/helpers'
 
 // 註冊 fontAwesome SVG icons
-library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage)
+library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart)
 
 const AppJSX = ({ className }) => {
   const [mode, setMode] = useState('loopAlbum')
