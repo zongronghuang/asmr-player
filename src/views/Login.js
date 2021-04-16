@@ -8,7 +8,7 @@ const LoginJSX = ({ className }) => (
         <div className="circle" id="inner">
           <section>
             <h1>ASMR Player</h1>
-            <a href="#" id="fb-login">Log in with Facebook</a>
+            <a href="#" id="fb-login">Facebook</a>
           </section>
         </div>
       </div>
@@ -25,19 +25,53 @@ const LoginJSX = ({ className }) => (
 const Login = styled(LoginJSX)`
 display: flex;
 flex-direction: column;
-justify-content: space-around;
+justify-content: center;
 align-items: center;
-width: 100%;
-height: 100vh;
+width: 100vw;
+min-height: 100vh;
 padding: 0;
 margin: 0;
 text-align: center;
 background-color: black;
 font-family: Arial, Helvetica, sans-serif;
 
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  border-radius: 50%;
+  border-top: 2px solid goldenrod;
+  border-bottom: 2px solid goldenrod;
+}
+
+.circle:hover {
+  border-width: 6px;
+}
+
+#inner {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#middle {
+  width: 300px;
+  height: 300px;
+}
+
+#outer {
+  width: 350px;
+  height: 350px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
 section {
   display: flex;
-  align-items: center;
+  align-items: space-around;
   justify-content: center;
   flex-wrap: wrap;
   width: 60%;
@@ -57,7 +91,7 @@ h1 {
 
 footer {
   position: absolute;
-  bottom: 50px;
+  bottom: 5%;
   margin: auto;
   color: white;
 }
@@ -66,39 +100,6 @@ a {
   text-decoration: none;
   color: white;
   font-weight: bold;
-}
-
-.circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border-top: 2px solid goldenrod;
-  border-bottom: 2px solid goldenrod;
-}
-
-.circle:hover {
-  border-width: 6px;
-}
-
-#inner {
-  width: 300px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#middle {
-  width: 400px;
-  height: 400px;
-}
-
-#outer {
-  width: 500px;
-  height: 500px;
-  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 #fb-login {
