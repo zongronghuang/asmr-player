@@ -1,14 +1,12 @@
-import './App.css';
 import { useEffect, useState } from 'react'
-import styled from '@emotion/styled'
 
 import Backdrop from '../components/Backdrop'
 import AudioPanel from '../components/AudioPanel'
 import InfoButtons from '../components/InfoButtons'
 import Loader from '../components/Loader'
 
-import { defaultTracks, makeBackdropPromises } from './utils/trackFactory'
-import { randomizeTracks } from './utils/helpers'
+import { defaultTracks, makeBackdropPromises } from '../utils/trackFactory'
+import { randomizeTracks } from '../utils/helpers'
 
 const ASMRApp = () => {
   const [mode, setMode] = useState('loopAlbum')
@@ -125,10 +123,8 @@ const ASMRApp = () => {
   }
 
   return (<>
-    {isReady
-      ? null
-      : <Loader />
-    }
+    {console.log('[render] ASMRApp')}
+    {isReady || <Loader />}
 
     <Backdrop
       track={track}
