@@ -14,7 +14,7 @@ const ASMRApp = () => {
   const [track, setTrack] = useState(album[0])
   const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
   const [shouldUseAPIData, setShouldUseAPIData] = useState(false)
-  const [isReady, setIsReady] = useState(false)
+  const [isReady, setIsReady] = useState(true)
 
   useEffect(() => {
     const fetchBackdrops = async () => {
