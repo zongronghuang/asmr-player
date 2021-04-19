@@ -7,9 +7,11 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
     const photographerIcon = document.querySelector('#photographer')
     const offlineIcon = document.querySelector('#offline')
     const onlineIcon = document.querySelector('#online')
+    const logoutIcon = document.querySelector('#logout')
 
     photographerIcon.classList.toggle('float-photographer')
     imageIcon.classList.toggle('float-image')
+    logoutIcon.classList.toggle('float-logout')
 
     shouldUseAPIData && track?.remoteBackdrop
       ? onlineIcon.classList.toggle('float-network')
@@ -83,6 +85,19 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
             />
           </a>)
       }
+
+      <a
+        className="option"
+        id="logout"
+        title='Click to log out'
+        onClick={() => console.log('!!!!log out clicked!!!!!')}
+      >
+        <FontAwesomeIcon
+          icon={['fas', 'sign-out-alt']}
+          size="lg"
+          color="red"
+        />
+      </a>
     </aside>
   )
 }
@@ -125,6 +140,12 @@ const InfoButtons = styled(InfoButtonsJSX)`
   #photographer {
     z-index: 2;
   }
+  #logout {
+    z-index: 1;
+  }
+  #logout:hover {
+    color: red;
+  }
 
   @keyframes float-photographer {
     to { bottom: 105px; }
@@ -151,6 +172,15 @@ const InfoButtons = styled(InfoButtonsJSX)`
     animation-name: float-network;
     animation-duration: 0.2s;
     animation-fill-mode: forwards;
+  }
+
+  @keyframes float-logout {
+    to {right: 40px;}
+  }
+  .float-logout {
+     animation-name: float-logout;
+     animation-duration: 0.2s;
+     animation-fill-mode: forwards;
   }
 `
 
