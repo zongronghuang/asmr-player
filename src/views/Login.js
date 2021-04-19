@@ -1,14 +1,14 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const LoginJSX = ({ className }) => (
+const LoginJSX = ({ className, handleFBLogin }) => (
   <main className={className}>
     <div className="circle" id="outer">
       <div className="circle" id="middle">
         <div className="circle" id="inner">
           <section>
             <h1>ASMR Player</h1>
-            <a href="#" id="fb-login">Facebook</a>
+            <a href="#" id="fb-login" onClick={handleFBLogin}>Facebook</a>
           </section>
         </div>
       </div>

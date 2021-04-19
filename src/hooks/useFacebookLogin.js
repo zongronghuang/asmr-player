@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 const useFacebookLogin = () => {
-  const [FBresponse, setFBResponse] = useState()
+  const [FBResponse, setFBResponse] = useState()
 
   useEffect(function logInToFB() {
     // IIFE 立即取得 FB SDK
@@ -22,21 +22,25 @@ const useFacebookLogin = () => {
     // FB SDK 初始化
     window.fbAsyncInit = function () {
       window.FB.init({
-        appId: null,  // 補上
+        appId: process.env.REACT_APP_FB_APP_ID,  // 補上
         cookie: true,
         xfbml: true,
-        version: null  // 補上
+        version: process.env.REACT_APP_FB_API_VERSION  // 補上
       })
+
+      console.log('[!FB SDK initialized!]')
+
+      // 取得登入狀態並記錄到 localStorage
+      window.FB.getLoginStatus(function (response) {
+        localStorage.setItem('facebookClientToken', response?.authResponse?.accessToken)
+        setFBResponse(response)
+      })
+
+      // 顯示 FB 登入頁面
+      window.FB.AppEvents.logPageView()
     }
 
-    // 取得登入狀態並記錄到 localStorage
-    window.FB.getLoginStatus(function (response) {
-      localStorage.setItem('facebookClientToken', response?.authResponse?.accessToken)
-      setFBResponse(response)
-    })
 
-    // 顯示 FB 登入頁面
-    window.FB.AppEvents.logPageView()
   }, [])
 
   // 登入 FB 並取得 access token
@@ -55,7 +59,7 @@ const useFacebookLogin = () => {
     })
   }
 
-  return [FBresponse, handleFBLogin, handleFBLogout]
+  return [FBResponse, handleFBLogin, handleFBLogout]
 }
 
 export default useFacebookLogin

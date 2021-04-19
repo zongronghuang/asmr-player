@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIData }) => {
+const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIData, handleFBLogout }) => {
   const handleTogglingAnimations = () => {
     const imageIcon = document.querySelector('#image')
     const photographerIcon = document.querySelector('#photographer')
@@ -90,7 +90,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
         className="option"
         id="logout"
         title='Click to log out'
-        onClick={() => console.log('!!!!log out clicked!!!!!')}
+        onClick={handleFBLogout}
       >
         <FontAwesomeIcon
           icon={['fas', 'sign-out-alt']}
@@ -143,39 +143,36 @@ const InfoButtons = styled(InfoButtonsJSX)`
   #logout {
     z-index: 1;
   }
-  #logout:hover {
-    color: red;
-  }
 
   @keyframes float-photographer {
-    to { bottom: 105px; }
+    to { bottom: 140px; }
   }
   .float-photographer {
     animation-name: float-photographer;
-    animation-duration: 0.6s;
+    animation-duration: 0.8s;
     animation-fill-mode: forwards;
   }
 
   @keyframes float-image {
-    to { bottom: 70px; }
+    to { bottom: 105px; }
   }
   .float-image {
     animation-name: float-image;
-    animation-duration: 0.4s;
+    animation-duration: 0.6s;
     animation-fill-mode: forwards;
   }
 
   @keyframes float-network {
-    to { bottom: 35px; }
+    to { bottom: 70px; }
   }
   .float-network {
     animation-name: float-network;
-    animation-duration: 0.2s;
+    animation-duration: 0.4s;
     animation-fill-mode: forwards;
   }
 
   @keyframes float-logout {
-    to {right: 40px;}
+    to {bottom: 35px;}
   }
   .float-logout {
      animation-name: float-logout;

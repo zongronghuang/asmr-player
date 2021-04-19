@@ -8,7 +8,7 @@ import Loader from '../components/Loader'
 import { defaultTracks, makeBackdropPromises } from '../utils/trackFactory'
 import { randomizeTracks } from '../utils/helpers'
 
-const ASMRApp = () => {
+const ASMRApp = ({ handleFBLogout }) => {
   const [mode, setMode] = useState('loopAlbum')
   const [album, setAlbum] = useState(defaultTracks)
   const [track, setTrack] = useState(album[0])
@@ -141,7 +141,7 @@ const ASMRApp = () => {
       handleDrag={handleDrag}
       handleDragStart={handleDragStart}
     />
-    <InfoButtons track={track} shouldUseAPIData={shouldUseAPIData} setShouldUseAPIData={setShouldUseAPIData} />
+    <InfoButtons track={track} shouldUseAPIData={shouldUseAPIData} setShouldUseAPIData={setShouldUseAPIData} handleFBLogout={handleFBLogout} />
   </>)
 }
 
