@@ -1,26 +1,28 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const LoginJSX = ({ className, handleFBLogin }) => (
-  <main className={className}>
-    <div className="circle" id="outer">
-      <div className="circle" id="middle">
-        <div className="circle" id="inner">
-          <section>
-            <h1>ASMR Player</h1>
-            <a href="#" id="fb-login" onClick={handleFBLogin}>Facebook</a>
-          </section>
+const LoginJSX = ({ className, handleFBLogin }) => {
+  return (
+    <main className={className}>
+      <div className="circle" id="outer">
+        <div className="circle" id="middle">
+          <div className="circle" id="inner">
+            <section>
+              <h1>ASMR Player</h1>
+              <a href="#" id="fb-login" onClick={handleFBLogin}>Facebook Login</a>
+            </section>
+          </div>
         </div>
       </div>
-    </div>
 
-    <footer>
-      <small>
-        Made with <FontAwesomeIcon icon={['fas', 'heart']} color={'goldenrod'} /> by <a href="#">Zong-Rong</a>
-      </small>
-    </footer>
-  </main>
-)
+      <footer>
+        <small>
+          Made with <FontAwesomeIcon icon={['fas', 'heart']} color={'goldenrod'} /> by <a href="#">Zong-Rong</a>
+        </small>
+      </footer>
+    </main>
+  )
+}
 
 const Login = styled(LoginJSX)`
 display: flex;
@@ -108,11 +110,16 @@ a {
   height: 30px;
   margin-right: auto;
   margin-left: auto;
-  background-color: rgb(66, 103, 178);
+  background-color: #1877f2;
   line-height: 30px;
   font-size: 15px;
+  font-family: 'Noto Sans TC', sans-serif;
   border-radius: 15px;
   padding: 5px;
+}
+
+#fb-login:hover{
+  background-color: #385898;
 }
 `
 

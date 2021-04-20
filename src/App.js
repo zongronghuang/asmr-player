@@ -1,6 +1,5 @@
 import './App.css'
 
-import { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect, useRouteMatch } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -15,20 +14,18 @@ library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolum
 
 const AppJSX = ({ className }) => {
   const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin()
-  const [isLoggedIn, setIsLoggedIn] = useState()
+  // const [isLoggedIn, setIsLoggedIn] = useState()
   // const isAtLogin = useRouteMatch('/login')
 
   console.log('fb response', FBResponse)
   // console.log('is at login', isAtLogin)
-
-
 
   return (
     < div className={className, 'App'}>
       {console.log('[render] App')}
 
       <Router>
-        {!FBResponse && <><h1>Error</h1></>}
+        {!FBResponse && <></>}
         {FBResponse?.status !== 'connected' && <Redirect to="/login" />}
         <Switch>
           <Route path="/">

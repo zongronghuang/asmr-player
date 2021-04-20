@@ -39,13 +39,12 @@ const useFacebookLogin = () => {
       // 顯示 FB 登入頁面
       window.FB.AppEvents.logPageView()
     }
-
-
   }, [])
 
   // 登入 FB 並取得 access token
   const handleFBLogin = () => {
     window.FB.login(function (response) {
+      console.log('log in response', response)
       setFBResponse(response)
       localStorage.setItem('facebookClientToken', response?.authResponse?.accessToken)
     }, { scope: 'public_profile,email' })
