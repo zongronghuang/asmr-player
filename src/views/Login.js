@@ -10,6 +10,7 @@ const LoginJSX = ({ className, handleFBLogin }) => {
             <section>
               <h1>ASMR Player</h1>
               <a href="#" id="fb-login" onClick={handleFBLogin}>Facebook Login</a>
+              <a href="#" id="twitter-login" onClick={() => console.log('twitter login clicked!')}>Twitter Login</a>
             </section>
           </div>
         </div>
@@ -104,12 +105,13 @@ a {
   font-weight: bold;
 }
 
-#fb-login {
+#fb-login, #twitter-login {
   display: block;
   width: 100%;
   height: 30px;
   margin-right: auto;
   margin-left: auto;
+  margin-bottom: 5px;
   background-color: #1877f2;
   line-height: 30px;
   font-size: 15px;

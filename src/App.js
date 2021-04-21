@@ -21,19 +21,19 @@ const AppJSX = ({ className }) => {
   console.log('fb response', FBResponse)
   // console.log('is at login', isAtLogin)
 
-  const userAuth = useContext(AuthContext)
+  // const userAuth = useContext(AuthContext)
 
-  userAuth = {
-    ...userAuth,
-    FB: {
-      status: FBResponse.status,
-      authResponse: FBResponse.authResponse,
-      loginMethod: handleFBLogin,
-      logoutMethod: handleFBLogout
-    }
-  }
+  // userAuth = {
+  //   ...userAuth,
+  //   FB: {
+  //     status: FBResponse.status,
+  //     authResponse: FBResponse.authResponse,
+  //     loginMethod: handleFBLogin,
+  //     logoutMethod: handleFBLogout
+  //   }
+  // }
 
-  console.log('updated user auth', userAuth)
+  // console.log('updated user auth', userAuth)
 
   return (
     < div className={className, 'App'}>
