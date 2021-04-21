@@ -7,7 +7,7 @@ const AuthContext = createContext({
     loginMethod: null,
     logoutMethod: null
   },
-  twitter: {
+  Twitter: {
     status: null,
     authResponse: null,
     loginMethod: null,

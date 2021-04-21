@@ -30,9 +30,13 @@ const AudioPanelJSX = ({
     // 第一次事件發生時，瀏覽器要求使用者必須手動觸發播放，否則會跑出錯誤訊息
     // 用 catch() 接到錯誤訊息並忽略
     audio.play()
-      .catch(error => { return console.log('有 error', error) })
-    audio.volume = volume
+      .catch(error => {
+        if (error) setActiveButton('play')
 
+        return console.log('有 error', error)
+      })
+
+    audio.volume = volume
     console.log('playback volume', audio.volume)
     console.log(audio.currentTime, audio.error, audio.ended, audio.readyState, audio.autoplay, audio.paused)
 

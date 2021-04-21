@@ -131,18 +131,22 @@ const InfoButtons = styled(InfoButtonsJSX)`
   #info {
     z-index: 5;
   }
-  #online, #offline {
+  #logout {
     z-index: 4;
   }
-  #image {
+  #online, #offline {
     z-index: 3;
   }
-  #photographer {
+  #offline {
+    cursor: default;
+  }
+  #image {
     z-index: 2;
   }
-  #logout {
+  #photographer {
     z-index: 1;
   }
+
 
   @keyframes float-photographer {
     to { bottom: 140px; }
