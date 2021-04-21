@@ -141,7 +141,12 @@ const ASMRApp = ({ handleFBLogout }) => {
       handleDrag={handleDrag}
       handleDragStart={handleDragStart}
     />
-    <InfoButtons track={track} shouldUseAPIData={shouldUseAPIData} setShouldUseAPIData={setShouldUseAPIData} handleFBLogout={handleFBLogout} />
+    <InfoButtons
+      track={track}
+      shouldUseAPIData={shouldUseAPIData}
+      setShouldUseAPIData={setShouldUseAPIData}
+      handleFBLogout={handleFBLogout}
+    />
   </>)
 }
 

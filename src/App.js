@@ -1,5 +1,6 @@
 import './App.css'
 
+import { useContext } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect, useRouteMatch } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -8,6 +9,7 @@ import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDo
 import Login from './views/Login'
 import ASMRApp from './views/ASMRApp'
 import useFacebookLogin from './hooks/useFacebookLogin'
+import AuthContext from './contexts/AuthContext'
 
 // 註冊 fontAwesome SVG icons
 library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt)
@@ -15,10 +17,23 @@ library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolum
 const AppJSX = ({ className }) => {
   const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin()
   // const [isLoggedIn, setIsLoggedIn] = useState()
-  // const isAtLogin = useRouteMatch('/login')
 
   console.log('fb response', FBResponse)
   // console.log('is at login', isAtLogin)
+
+  const userAuth = useContext(AuthContext)
+
+  userAuth = {
+    ...userAuth,
+    FB: {
+      status: FBResponse.status,
+      authResponse: FBResponse.authResponse,
+      loginMethod: handleFBLogin,
+      logoutMethod: handleFBLogout
+    }
+  }
+
+  console.log('updated user auth', userAuth)
 
   return (
     < div className={className, 'App'}>
@@ -47,7 +62,7 @@ const AppJSX = ({ className }) => {
 }
 
 const App = styled(AppJSX)`
-  position: relative;
+  position: absolute;
 `
 
 export default App;
