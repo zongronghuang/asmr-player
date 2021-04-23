@@ -25,7 +25,6 @@ const AppJSX = ({ className }) => {
   console.log('user auth', userAuth)
 
   userAuth.FB = {
-    ...userAuth.FB,
     status: FBResponse?.status,
     authResponse: FBResponse?.authResponse,
     loginMethod: handleFBLogin,
@@ -39,14 +38,14 @@ const AppJSX = ({ className }) => {
       {console.log('[render] App')}
 
       <Router>
-        {!FBResponse && <></>}
-        {FBResponse?.status !== 'connected' && <Redirect to="/login" />}
+        {/* {!FBResponse && <></>}
+        {FBResponse?.status !== 'connected' && <Redirect to="/login" />} */}
         <Switch>
           <Route path="/">
-            {FBResponse?.status === 'connected'
+            {/* {FBResponse?.status === 'connected'
               ? (<Redirect to={{ pathname: "/app" }} />)
               : (<Redirect to={{ pathname: "/login" }} />)
-            }
+            } */}
             <Route path="/login">
               <Login handleFBLogin={handleFBLogin} />
             </Route>

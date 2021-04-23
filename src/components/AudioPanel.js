@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 
 import PlaybackButtons from './AudioPanel_parts/PlaybackButtons'
 import AudioTrack from './AudioPanel_parts/AudioTrack'
-import TrackInfo from './AudioPanel_parts/TrackInfo'
 import Volume from './AudioPanel_parts/Volume'
 import Modes from './AudioPanel_parts/Modes'
 
@@ -114,11 +113,6 @@ const AudioPanelJSX = ({
         handlePrevTrack={handlePrevTrack}
       />
       <div>
-        {/* <TrackInfo
-          duration={duration}
-          track={track}
-          currentTime={currentTime}
-        /> */}
         <Volume
           handleVolumeUpDown={handleVolumeUpDown}
           volume={volume} />

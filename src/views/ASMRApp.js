@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Backdrop from '../components/Backdrop'
 import AudioPanel from '../components/AudioPanel'
 import InfoButtons from '../components/InfoButtons'
+import TrackInfo from '../components/TrackInfo'
 import Loader from '../components/Loader'
 
 import { defaultTracks, makeBackdropPromises } from '../utils/trackFactory'
@@ -125,7 +126,7 @@ const ASMRApp = ({ handleFBLogout }) => {
   return (<>
     {console.log('[render] ASMRApp')}
     {isReady || <Loader />}
-
+    <TrackInfo track={track} />
     <Backdrop
       track={track}
       handleDragOver={handleDragOver}
