@@ -1,19 +1,32 @@
+import { useEffect } from 'react'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // 音訊資訊元件 (名稱)
 const TrackInfoJSX = ({ className, track }) => {
-  // 用 useRef 記憶上一次的 track
-  // 如果新 track !== 舊 track，加上 fade-out class 觸發動畫
-  // 再提供 onAnimationEnd 的方法，把 fade-out class 移掉
+  // 更換 track 時，重新設定動畫 + 播放動畫
+  useEffect(() => {
+    console.log('[useEffect] Animating TrackInfo')
+    const animationTarget = document
+      .getElementById('animation-target')
+      .animate(
+        [
+          { opacity: 1 },
+          { opacity: 0 },
+        ], {
+        fill: 'forwards',
+        duration: 7000
+      })
+
+    animationTarget.play()
+  }, [track])
 
   return (
-    <div className={className}>
-      {console.log('[render] TrackInfo')}
-      <FontAwesomeIcon icon={['fas', 'music']} />
+    <div className={className} id="animation-target">
+      { console.log('[render] TrackInfo')}
+      < FontAwesomeIcon icon={['fas', 'music']} />
       <span>{track.name}</span>
-    </div>
-
+    </div >
   )
 }
 
@@ -34,18 +47,6 @@ const TrackInfo = styled(TrackInfoJSX)`
   border-radius: 15px;
   color: goldenrod;
   font-family: Arial, Helvetica, sans-serif;
-  
-  .fade-out {
-    animation-name: fade-out;
-    animation-duration: 5s;
-    animation-fill-mode: forwards;
-  }
-
-  @keyframes fade-out {
-    from { opacity: 0;}
-    50% { opacity: 1;}
-    100% { opacity: 0;}
-  }
 
   span {
     margin-left: 10px;
