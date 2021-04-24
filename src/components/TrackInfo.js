@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // 音訊資訊元件 (名稱)
 const TrackInfoJSX = ({ className, track }) => {
   // 更換 track 時，重新設定動畫 + 播放動畫
+  // CSS 動畫效果無法依特定條件重覆播放，需用 JavaScript Animation API 達成
   useEffect(() => {
     console.log('[useEffect] Animating TrackInfo')
     const animationTarget = document
@@ -24,8 +25,7 @@ const TrackInfoJSX = ({ className, track }) => {
   return (
     <div className={className} id="animation-target">
       { console.log('[render] TrackInfo')}
-      < FontAwesomeIcon icon={['fas', 'music']} />
-      <span>{track.name}</span>
+      <span>< FontAwesomeIcon icon={['fas', 'music']} />{`\u00A0  ${track.order} \u00A0${track.name}`}</span>
     </div >
   )
 }
@@ -35,7 +35,6 @@ const TrackInfo = styled(TrackInfoJSX)`
   top: 20px;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 10%;
   min-width: 100px;
   height: 20px;
   display: flex;
@@ -50,6 +49,7 @@ const TrackInfo = styled(TrackInfoJSX)`
 
   span {
     margin-left: 10px;
+    margin-right: 10px;
   }
 `
 

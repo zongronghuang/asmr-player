@@ -18,6 +18,7 @@ const images = [Image_0, Image_1, Image_2, Image_3]
 
 // 用來搜尋圖片的曲目關鍵字
 const searchTerms = ['forest', 'seaside', 'train', 'street']
+const titles = ['Bird chirps', 'Breaking waves', 'Train in motion', 'Street bustle']
 
 // 檢查有無重覆的音訊或圖片
 const findRedundantItems = (fileArray, mediaType) => {
@@ -60,7 +61,7 @@ const makeBackdropPromises = async () => {
   }
 }
 
-const createDefaultTracks = (audioArray, imageArray, termArray) => {
+const createDefaultTracks = (titleArray, audioArray, imageArray, keywordArray) => {
   // 必須至少有一個 image 和 audio
   if (!imageArray.length || !audioArray.length) {
     console.log('No available audios or images')
@@ -79,8 +80,8 @@ const createDefaultTracks = (audioArray, imageArray, termArray) => {
     .fill({})
     .map((track, index) => ({
       order: index,
-      name: `track_${index}`,
-      searchTerm: termArray[index],
+      name: titleArray[index],
+      searchTerm: keywordArray[index],
       audioSrc: audioArray[index],
       localBackdrop: {
         photographer: 'Vivian Maier',
@@ -94,7 +95,7 @@ const createDefaultTracks = (audioArray, imageArray, termArray) => {
   return trackList
 }
 
-const defaultTracks = createDefaultTracks(audios, images, searchTerms)
+const defaultTracks = createDefaultTracks(titles, audios, images, searchTerms)
 
 export { defaultTracks, makeBackdropPromises }
 
