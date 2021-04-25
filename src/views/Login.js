@@ -1,6 +1,9 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import apis from '../components/apis/apis'
+
+
 const LoginJSX = ({ className, handleFBLogin }) => {
   return (
     <main className={className}>
@@ -10,7 +13,10 @@ const LoginJSX = ({ className, handleFBLogin }) => {
             <section>
               <h1>ASMR Player</h1>
               <a href="#" id="fb-login" onClick={handleFBLogin}>Facebook Login</a>
-              <a href="#" id="twitter-login" onClick={() => console.log('twitter login clicked!')}>Twitter Login</a>
+              <a href="#" id="twitter-login" onClick={() => {
+                console.log('twitter login clicked!')
+                apis.getTwitterOAuthToken()
+              }}>Twitter Login</a>
             </section>
           </div>
         </div>

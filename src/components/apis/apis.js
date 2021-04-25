@@ -40,6 +40,27 @@ const apis = {
     } catch (error) {
       return console.error(error)
     }
+  },
+  getTwitterOAuthToken: async () => {
+    try {
+      const url = `${process.env.REACT_APP_TWITTER_BASE_URL}oauth/request_token`
+
+      const response = await fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `OAuth oauth_nonce="GsdfLZMZVhC", oauth_signature_method="HMAC-SHA1", oauth_signature="vnA9f8PDw3Tt/yU88K2k4ld7a78=", oauth_version="1.0", oauth_callback=${process.env.REACT_APP_TWITTER_CALLBACK_URL}, oauth_consumer_key=${process.env.REACT_APP_TWITTER_API_KEY}`
+        }
+      })
+
+      console.log('twitter response', response)
+
+
+    } catch (error) {
+      console.log('twitter error', error)
+    }
+
   }
 }
 
