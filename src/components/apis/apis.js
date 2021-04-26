@@ -43,14 +43,26 @@ const apis = {
   },
   getTwitterOAuthToken: async () => {
     try {
-      const url = `${process.env.REACT_APP_TWITTER_BASE_URL}oauth/request_token`
+
+      const timestamp = Date.now()
+      const nonce = btoa(timestamp + process.env.REACT_APP_TWITTER_API_KEY)
+      const callbackURI = encodeURIComponent(process.env.REACT_APP_TWITTER_CALLBACK_URL)
+
+      console.log(
+        'timestamp', timestamp,
+        'nonce', nonce,
+        'callbackURI', callbackURI
+      )
+
+      const url = "/oauth/request_token"
 
       const response = await fetch(url, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'cors',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `OAuth oauth_nonce="GsdfLZMZVhC", oauth_signature_method="HMAC-SHA1", oauth_signature="vnA9f8PDw3Tt/yU88K2k4ld7a78=", oauth_version="1.0", oauth_callback=${process.env.REACT_APP_TWITTER_CALLBACK_URL}, oauth_consumer_key=${process.env.REACT_APP_TWITTER_API_KEY}`
+          'Authorization': `Oauth oauth_nonce=, oauth_callback=, oauth_signature_method="HMAC-SHA1", oauth_timestamp=, oauth_consumer_key=, oauth_signature="Pc%2BMLdv028fxCErFyi8KXFM%2BddU%3D", oauth_version="1.0"`
         }
       })
 
