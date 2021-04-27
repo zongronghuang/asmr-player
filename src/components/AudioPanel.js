@@ -136,7 +136,7 @@ const AudioPanel = styled(AudioPanelJSX)`
  display: flex;
  justify-content: center;
  position: absolute; 
- top: 95%;
+ bottom: 5px;
  left: 50%;
  transform: translate(-50%, -50%);
  text-align: center;

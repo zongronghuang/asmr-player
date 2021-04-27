@@ -105,7 +105,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
 const InfoButtons = styled(InfoButtonsJSX)`
   position: absolute;
   right: 10px;
-  bottom: 3%;
+  bottom: 35px;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
