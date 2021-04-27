@@ -12,11 +12,11 @@ const LoginJSX = ({ className, handleFBLogin }) => {
           <div className="circle" id="inner">
             <section>
               <h1>ASMR Player</h1>
-              <a href="#" id="fb-login" onClick={handleFBLogin}>Facebook Login</a>
+              <a href="#" id="fb-login" onClick={handleFBLogin}><FontAwesomeIcon icon={['fab', 'facebook-square']} size="lg" /><span>Facebook Login</span></a>
               <a href="#" id="twitter-login" onClick={() => {
                 console.log('twitter login clicked!')
                 apis.getTwitterOAuthToken()
-              }}>Twitter Login</a>
+              }}><FontAwesomeIcon icon={['fab', 'twitter-square']} size="lg" /><span>Twitter Login</span></a>
             </section>
           </div>
         </div>
@@ -111,12 +111,15 @@ a {
   font-weight: bold;
 }
 
+span {
+  margin-left: 5px;
+}
+
 #fb-login, #twitter-login {
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 30px;
-  margin-right: auto;
-  margin-left: auto;
   margin-bottom: 5px;
   background-color: #1877f2;
   line-height: 30px;

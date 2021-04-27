@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect, useRouteMatch } from 
 import styled from '@emotion/styled'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 
 import Login from './views/Login'
 import ASMRApp from './views/ASMRApp'
@@ -12,7 +13,7 @@ import useFacebookLogin from './hooks/useFacebookLogin'
 import AuthContext from './contexts/AuthContext'
 
 // 註冊 fontAwesome SVG icons
-library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt)
+library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt, faFacebookSquare, faTwitterSquare)
 
 const AppJSX = ({ className }) => {
   const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin()
