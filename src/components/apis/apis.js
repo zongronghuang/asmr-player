@@ -44,25 +44,13 @@ const apis = {
   getTwitterOAuthToken: async () => {
     try {
 
-      const timestamp = Date.now()
-      const nonce = btoa(timestamp + process.env.REACT_APP_TWITTER_API_KEY)
-      const callbackURI = encodeURIComponent(process.env.REACT_APP_TWITTER_CALLBACK_URL)
-
-      console.log(
-        'timestamp', timestamp,
-        'nonce', nonce,
-        'callbackURI', callbackURI
-      )
-
-      const url = "/oauth/request_token"
-
+      const url = "/oauth/authorize?oauth_token=-ba8zAAAAAABOyYnAAABeRQ--rI"
       const response = await fetch(url, {
-        method: 'POST',
+        method: 'GET',
         mode: 'cors',
         credentials: 'include',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Oauth oauth_nonce=, oauth_callback=, oauth_signature_method="HMAC-SHA1", oauth_timestamp=, oauth_consumer_key=, oauth_signature="Pc%2BMLdv028fxCErFyi8KXFM%2BddU%3D", oauth_version="1.0"`
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
 

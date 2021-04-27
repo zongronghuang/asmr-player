@@ -115,6 +115,10 @@ span {
   margin-left: 5px;
 }
 
+svg {
+  margin-left: 1px;
+}
+
 #fb-login, #twitter-login {
   display: flex;
   align-items: center;
@@ -125,7 +129,7 @@ span {
   line-height: 30px;
   font-size: 15px;
   font-family: 'Noto Sans TC', sans-serif;
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 5px;
 }
 
