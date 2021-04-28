@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import apis from '../components/apis/apis'
 
-
 const LoginJSX = ({ className, handleFBLogin }) => {
   return (
     <main className={className}>
@@ -24,7 +23,7 @@ const LoginJSX = ({ className, handleFBLogin }) => {
 
       <footer>
         <small>
-          Made with <FontAwesomeIcon icon={['fas', 'heart']} color={'goldenrod'} /> by <a href="#">Zong-Rong</a>
+          Made with <FontAwesomeIcon icon={['fas', 'heart']} color={'goldenrod'} /> by <a href="https://github.com/zongronghuang/asmr-player" target="_blank">Zong-Rong</a>
         </small>
       </footer>
     </main>
@@ -53,10 +52,10 @@ font-family: Arial, Helvetica, sans-serif;
   border-radius: 50%;
   border-top: 2px solid goldenrod;
   border-bottom: 2px solid goldenrod;
-}
 
-.circle:hover {
-  border-width: 6px;
+  &:hover {
+    border-width: 6px;
+  }
 }
 
 #inner {
@@ -95,7 +94,11 @@ h1 {
   font-size: x-large;
   font-weight: bold;
   color: goldenrod;
-  text-shadow: 0px 0px 10px goldenrod;
+
+  &:hover {
+    text-shadow: -1px -1px 20px goldenrod, -1px 1px 20px goldenrod, 1px -1px 20px goldenrod, 1px 1px 20px goldenrod;
+    color: black;
+  }
 }
 
 footer {
@@ -109,14 +112,15 @@ a {
   text-decoration: none;
   color: white;
   font-weight: bold;
-}
 
-span {
-  margin-left: 5px;
-}
+  & > span {
+    margin-left: 5px;
+    word-spacing: 1px;
+  }
 
-svg {
-  margin-left: 1px;
+  & > svg {
+    margin-left: 1px;
+  }
 }
 
 #fb-login, #twitter-login {
@@ -125,7 +129,6 @@ svg {
   width: 100%;
   height: 30px;
   margin-bottom: 5px;
-  background-color: #1877f2;
   line-height: 30px;
   font-size: 15px;
   font-family: 'Noto Sans TC', sans-serif;
@@ -133,8 +136,20 @@ svg {
   padding: 5px;
 }
 
-#fb-login:hover{
-  background-color: #385898;
+#fb-login {
+  background-color: #1877f2;
+
+  &:hover {
+    background-color: #385898;
+  }
+}
+
+#twitter-login {
+  background-color: #00acee;
+
+  &:hover {
+    background-color: #00B6F1;
+  }
 }
 `
 
