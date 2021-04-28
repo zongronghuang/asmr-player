@@ -5,6 +5,7 @@ import AudioPanel from '../components/AudioPanel'
 import InfoButtons from '../components/InfoButtons'
 import TrackInfo from '../components/TrackInfo'
 import Loader from '../components/Loader'
+import Dialog from '../components/Dialog'
 
 import { defaultTracks, makeBackdropPromises } from '../utils/trackFactory'
 import { randomizeTracks } from '../utils/helpers'
@@ -133,6 +134,7 @@ const ASMRApp = ({ handleFBLogout }) => {
       handleDrop={handleDrop}
       shouldUseAPIData={shouldUseAPIData}
     />
+    <Dialog handleFBLogout={handleFBLogout} />
     <AudioPanel
       track={track}
       mode={mode}
