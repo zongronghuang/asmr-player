@@ -125,6 +125,7 @@ const InfoButtons = styled(InfoButtonsJSX)`
 
   .option:hover {
     color: blue;
+    box-shadow: 3px 3px goldenrod, -3px 3px goldenrod, 3px -3px goldenrod, -3px -3px goldenrod;
   }
 
   #info {
