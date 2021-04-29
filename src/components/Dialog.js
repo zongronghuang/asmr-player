@@ -1,31 +1,16 @@
-import { useRef } from 'react'
 import styled from '@emotion/styled'
 
-const DialogJSX = ({ className, handleFBLogout }) => {
-  const dialogRef = useRef(null)
-
-  const handleLogoutDialog = (status) => () => {
-    if (status === 'on') {
-      console.log('open the dialog')
-      dialogRef.current.show()
-    }
-
-    if (status === 'off') {
-      console.log('close the dialog')
-      dialogRef.current.close()
-    }
-  }
-
+const DialogJSX = ({ className, handleFBLogout, handleLogoutDialog }) => {
   return (
-    <dialog className={className} ref={dialogRef}>
+    <dialog className={className}>
       <header><strong>Logout</strong></header>
       <hr></hr>
       <section>
-        <span>Are you sure you want to log out of this app now?</span>
+        <span>Are you sure you want to log out of this app?</span>
       </section>
       <footer>
-        <button onClick={handleFBLogout}>Log out</button>
-        <button onClick={handleLogoutDialog('off')}>Stay</button>
+        <button onClick={handleFBLogout} alt="Log out">Log out</button>
+        <button onClick={handleLogoutDialog('off')} alt="Stay">Stay</button>
       </footer>
     </dialog>
   )
@@ -74,7 +59,7 @@ const Dialog = styled(DialogJSX)`
       margin-left: 5px;
 
       &:hover {
-        box-shadow: 1px 1px goldenrod, -1px 1px goldenrod, 1px -1px goldenrod, -1px -1px goldenrod;
+        box-shadow: 3px 3px goldenrod, -3px 3px goldenrod, 3px -3px goldenrod, -3px -3px goldenrod;
       }
     }
   }

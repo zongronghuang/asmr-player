@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIData }) => {
+const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIData, handleLogoutDialog }) => {
   const handleTogglingAnimations = () => {
     const imageIcon = document.querySelector('#image')
     const photographerIcon = document.querySelector('#photographer')
@@ -90,6 +90,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
         className="option"
         id="logout"
         title='Click to log out'
+        onClick={handleLogoutDialog('on')}
       >
         <FontAwesomeIcon
           icon={['fas', 'sign-out-alt']}

@@ -124,6 +124,20 @@ const ASMRApp = ({ handleFBLogout }) => {
     dragItem.style.top = `${dragItemTop}px`
   }
 
+  const handleLogoutDialog = (status) => () => {
+    const dialog = document.querySelector('dialog')
+
+    if (status === 'on') {
+      console.log('open the dialog')
+      dialog.show()
+    }
+
+    if (status === 'off') {
+      console.log('close the dialog')
+      dialog.close()
+    }
+  }
+
   return (<>
     {console.log('[render] ASMRApp')}
     {isReady || <Loader />}
@@ -134,7 +148,7 @@ const ASMRApp = ({ handleFBLogout }) => {
       handleDrop={handleDrop}
       shouldUseAPIData={shouldUseAPIData}
     />
-    <Dialog handleFBLogout={handleFBLogout} />
+    <Dialog handleFBLogout={handleFBLogout} handleLogoutDialog={handleLogoutDialog} />
     <AudioPanel
       track={track}
       mode={mode}
@@ -148,7 +162,7 @@ const ASMRApp = ({ handleFBLogout }) => {
       track={track}
       shouldUseAPIData={shouldUseAPIData}
       setShouldUseAPIData={setShouldUseAPIData}
-      handleFBLogout={handleFBLogout}
+      handleLogoutDialog={handleLogoutDialog}
     />
   </>)
 }
