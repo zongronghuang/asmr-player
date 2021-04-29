@@ -27,6 +27,11 @@ const createSignature = () => {
 
 }
 
-const runPercentEncoding = () => {
-  // 對 url 和
+const runPercentEncoding = (text) => {
+  // 目標：對 url 字元進行轉換，改用 percent encoding 格式 ( % + ASCII 十六進位制編碼)
+  // charCodeAt() 提供 UTF-16 字元的十進位對應碼 (上限 65536)
+  // toString(16) 將數字轉換為 16 進位制，並轉成字串
+  const text = encodeURIComponent(text).map(character => {
+    return '%' + character.charCodeAt(0).toString(16)
+  })
 }
