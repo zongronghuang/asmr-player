@@ -33,6 +33,10 @@ const Volume = styled(VolumeJSX)`
     border: 1px solid black;
     border-radius: 5px;
     background-color: rgb(239, 239, 239);
+
+    &:hover {
+      box-shadow: 3px 3px goldenrod, -3px 3px goldenrod, 3px -3px goldenrod, -3px -3px goldenrod;
+    }
   }
 
   & > #volume {
