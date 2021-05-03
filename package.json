@@ -2,6 +2,7 @@
   "name": "asmr-player",
   "version": "0.1.0",
   "private": true,
+  "main": "index.js",
   "dependencies": {
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",

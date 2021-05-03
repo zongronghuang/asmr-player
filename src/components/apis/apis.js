@@ -1,3 +1,5 @@
+import OAuthAuthorizationHeader from '../../utils/twitterOAuth'
+
 const apis = {
   getRandomImage: async (searchTerm) => {
     try {
@@ -43,19 +45,21 @@ const apis = {
   },
   getTwitterOAuthToken: async () => {
     try {
+      const url = `/oauth/request_token`
 
-      const url = "/oauth/authorize?oauth_token=-ba8zAAAAAABOyYnAAABeRQ--rI"
       const response = await fetch(url, {
-        method: 'GET',
-        mode: 'cors',
-        credentials: 'include',
+        method: "POST",
+        mode: "cors",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": OAuthAuthorizationHeader,
         }
       })
 
       console.log('twitter response', response)
 
+      const data = await response.text()
+      console.log('twitter data', data)
 
     } catch (error) {
       console.log('twitter error', error)

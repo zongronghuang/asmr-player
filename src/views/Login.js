@@ -15,6 +15,7 @@ const LoginJSX = ({ className, handleFBLogin }) => {
               <a href="#" id="twitter-login" onClick={() => {
                 console.log('twitter login clicked!')
                 apis.getTwitterOAuthToken()
+
               }}><FontAwesomeIcon icon={['fab', 'twitter-square']} size="lg" /><span>Twitter Login</span></a>
             </section>
           </div>
