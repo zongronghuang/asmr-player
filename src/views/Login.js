@@ -4,6 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import apis from '../components/apis/apis'
 
 const LoginJSX = ({ className, handleFBLogin }) => {
+  const handleToken = (token) => {
+    console.log('token', token)
+  }
+
   return (
     <main className={className}>
       <div className="circle" id="outer">
@@ -11,12 +15,28 @@ const LoginJSX = ({ className, handleFBLogin }) => {
           <div className="circle" id="inner">
             <section>
               <h1>ASMR Player</h1>
-              <a href="#" id="fb-login" onClick={handleFBLogin}><FontAwesomeIcon icon={['fab', 'facebook-square']} size="lg" /><span>Facebook Login</span></a>
-              <a href="#" id="twitter-login" onClick={() => {
-                console.log('twitter login clicked!')
-                apis.getTwitterOAuthToken()
+              <a href="#" id="fb-login" onClick={handleFBLogin}>
+                <FontAwesomeIcon icon={['fab', 'facebook-square']} size="lg" />
+                <span>Facebook Login</span>
+              </a>
 
-              }}><FontAwesomeIcon icon={['fab', 'twitter-square']} size="lg" /><span>Twitter Login</span></a>
+              {/* Google 登入按鈕 */}
+              <div>
+                <div id="g_id_onload"
+                  data-client_id={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
+                  data-callback="handleToken"
+
+                  data-auto_prompt="false">
+                </div>
+                <div className="g_id_signin"
+                  data-type="standard"
+                  data-size="medium"
+                  data-theme="outline"
+                  data-text="sign_in_with"
+                  data-shape="rectangular"
+                  data-logo_alignment="left">
+                </div>
+              </div>
             </section>
           </div>
         </div>
@@ -124,7 +144,7 @@ a {
   }
 }
 
-#fb-login, #twitter-login {
+#fb-login {
   display: flex;
   align-items: center;
   width: 100%;

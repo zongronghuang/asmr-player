@@ -6,12 +6,6 @@ const AuthContext = createContext({
     authResponse: null,
     loginMethod: null,
     logoutMethod: null
-  },
-  Twitter: {
-    status: null,
-    authResponse: null,
-    loginMethod: null,
-    logoutMethod: null
   }
 })
 

@@ -1,23 +1,25 @@
 import './App.css'
 
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect, useRouteMatch } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
-import { faFacebookSquare, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons'
 
 import Login from './views/Login'
 import ASMRApp from './views/ASMRApp'
 import useFacebookLogin from './hooks/useFacebookLogin'
+import useGoogleLogin from './hooks/useGoogleLogin'
 import AuthContext from './contexts/AuthContext'
 
 // 註冊 fontAwesome SVG icons
-library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt, faFacebookSquare, faTwitterSquare)
+library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt, faFacebookSquare)
 
 const AppJSX = ({ className }) => {
   const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin()
   // const [isLoggedIn, setIsLoggedIn] = useState()
+
 
   console.log('fb response', FBResponse)
   // console.log('is at login', isAtLogin)
@@ -33,6 +35,26 @@ const AppJSX = ({ className }) => {
   }
 
   console.log('updated user auth', userAuth)
+
+  useEffect(() => {
+    (function loadGoogleLibrary() {
+      const loadedScripts = document.querySelectorAll('script')
+
+      const isPresentGoogleLoginLibrary = Object.values(loadedScripts)
+        .filter(script => script.src === process.env.REACT_APP_GOOGLE_LOGIN_LIBRARY_URL)
+
+      if (isPresentGoogleLoginLibrary) {
+        console.log('google login library already exists')
+        return
+      }
+
+      const script = document.createElement('script')
+      script.src = process.env.REACT_APP_GOOGLE_LOGIN_LIBRARY_URL
+      script.async = true
+      script.defer = true
+      console.log('new google script addeds', script)
+    })()
+  }, [])
 
   return (
     < div className={className, 'App'}>
