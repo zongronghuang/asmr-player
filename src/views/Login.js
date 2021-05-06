@@ -3,11 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import apis from '../components/apis/apis'
 
-const LoginJSX = ({ className, handleFBLogin }) => {
-  const handleToken = (token) => {
-    console.log('token', token)
-  }
-
+const LoginJSX = ({ className, handleFBLogin, handleGoogleLogin }) => {
   return (
     <main className={className}>
       <div className="circle" id="outer">
@@ -20,8 +16,8 @@ const LoginJSX = ({ className, handleFBLogin }) => {
                 <span>Facebook Login</span>
               </a>
 
-              <a href="#" id="google-login">
-                <FontAwesomeIcon icon={['fab', 'google']} size="lg" />
+              <a href="#" id="google-login" onClick={handleGoogleLogin}>
+                <FontAwesomeIcon icon={['fab', 'google']} size="lg" onClick={() => console.log('google login clicked')} />
                 <span>Google Login</span>
               </a>
             </section>
@@ -135,12 +131,12 @@ a {
   display: flex;
   align-items: center;
   width: 100%;
-  height: 30px;
+  height: 25px;
   margin-bottom: 5px;
   line-height: 30px;
   font-size: 15px;
   font-family: 'Noto Sans TC', sans-serif;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 5px;
 }
 

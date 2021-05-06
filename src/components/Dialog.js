@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-const DialogJSX = ({ className, handleFBLogout, handleLogoutDialog }) => {
+const DialogJSX = ({ className, handleFBLogout, handleLogoutDialog, handleGoogleLogout }) => {
   return (
     <dialog className={className}>
       <header><strong>Logout</strong></header>
@@ -9,7 +9,8 @@ const DialogJSX = ({ className, handleFBLogout, handleLogoutDialog }) => {
         <span>Are you sure you want to log out of this app?</span>
       </section>
       <footer>
-        <button onClick={handleFBLogout} alt="Log out">Log out</button>
+        {/* <button onClick={handleFBLogout} alt="Log out">Log out</button> */}
+        <button onClick={handleGoogleLogout} alt="Log out">Log out</button>
         <button onClick={handleLogoutDialog('off')} alt="Stay">Stay</button>
       </footer>
     </dialog>

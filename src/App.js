@@ -18,9 +18,11 @@ import AuthContext from './contexts/AuthContext'
 library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt, faFacebookSquare, faGoogle)
 
 const AppJSX = ({ className }) => {
-  // const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin()
-  // const [isLoggedIn, setIsLoggedIn] = useState()
+  const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin()
+  //const [isLoggedIn, setIsLoggedIn] = useState()
+  const [GoogleResponse, handleGoogleLogin, handleGoogleLogout] = useGoogleLogin()
 
+  console.log('!!!! google response', GoogleResponse)
 
   // console.log('fb response', FBResponse)
   // console.log('is at login', isAtLogin)
@@ -28,63 +30,41 @@ const AppJSX = ({ className }) => {
   const userAuth = useContext(AuthContext)
   console.log('user auth', userAuth)
 
-  // userAuth.FB = {
-  //   status: FBResponse?.status,
-  //   authResponse: FBResponse?.authResponse,
-  //   loginMethod: handleFBLogin,
-  //   logoutMethod: handleFBLogout
-  // }
+  userAuth.FB = {
+    status: FBResponse?.status,
+    authResponse: FBResponse?.authResponse,
+    loginMethod: handleFBLogin,
+    logoutMethod: handleFBLogout
+  }
 
   console.log('updated user auth', userAuth)
-
-  useEffect(() => {
-    (function loadGoogleLibrary() {
-      const loadedScripts = document.querySelectorAll('script')
-
-      const isPresentGoogleLoginLibrary = Object.values(loadedScripts)
-        .filter(script => script.src === process.env.REACT_APP_GOOGLE_LOGIN_LIBRARY_URL)
-
-      if (isPresentGoogleLoginLibrary) {
-        console.log('google login library already exists')
-        return
-      }
-
-      const script = document.createElement('script')
-      script.src = process.env.REACT_APP_GOOGLE_LOGIN_LIBRARY_URL
-      script.async = true
-      script.defer = true
-      console.log('new google script addeds', script)
-    })()
-  })
 
   return (
     < div className={className, 'App'}>
       {console.log('[render] App')}
 
       <Router>
-        {/* {!FBResponse && <></>}
-        {FBResponse?.status !== 'connected' && <Redirect to="/login" />} */}
+        {(!FBResponse && !GoogleResponse) && <></>}
+        {(FBResponse?.status !== 'connected' && GoogleResponse?.login !== true) && <Redirect to="/login" />}
+
         <Switch>
           <Route path="/">
-            {/* {FBResponse?.status === 'connected'
+            {FBResponse?.status === 'connected' || GoogleResponse?.login
               ? (<Redirect to={{ pathname: "/app" }} />)
               : (<Redirect to={{ pathname: "/login" }} />)
-            } */}
-
-            {/*
-            <Route path="/login">
-              <Login handleFBLogin={handleFBLogin} />
-            </Route>
-            <Route path="/app">
-                <ASMRApp handleFBLogout={handleFBLogout} />
-            </Route>
-             */}
+            }
 
             <Route path="/login">
-              <Login />
+              <Login
+                handleFBLogin={handleFBLogin}
+                handleGoogleLogin={handleGoogleLogin}
+              />
             </Route>
             <Route path="/app">
-              <ASMRApp />
+              <ASMRApp
+                handleFBLogout={handleFBLogout}
+                handleGoogleLogout={handleGoogleLogout}
+              />
             </Route>
           </Route>
         </Switch>

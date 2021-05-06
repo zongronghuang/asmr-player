@@ -10,7 +10,7 @@ import Dialog from '../components/Dialog'
 import { defaultTracks, makeBackdropPromises } from '../utils/trackFactory'
 import { randomizeTracks } from '../utils/helpers'
 
-const ASMRApp = ({ handleFBLogout }) => {
+const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
   const [mode, setMode] = useState('loopAlbum')
   const [album, setAlbum] = useState(defaultTracks)
   const [track, setTrack] = useState(album[0])
@@ -148,7 +148,7 @@ const ASMRApp = ({ handleFBLogout }) => {
       handleDrop={handleDrop}
       shouldUseAPIData={shouldUseAPIData}
     />
-    <Dialog handleFBLogout={handleFBLogout} handleLogoutDialog={handleLogoutDialog} />
+    <Dialog handleFBLogout={handleFBLogout} handleLogoutDialog={handleLogoutDialog} handleGoogleLogout={handleGoogleLogout} />
     <AudioPanel
       track={track}
       mode={mode}

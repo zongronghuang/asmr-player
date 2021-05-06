@@ -1,36 +1,72 @@
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
+
+
+
+// const db = firebase.firestore()
+// db.collection("users").doc('S8W8JOEUbogt2OacWT15').update({
+//   born: 1815,
+//   first: "bbb",
+//   last: "Lovelovelove",
+// })
+//   .then(res => console.log('update res', res))
+//   .catch(error => console.log('update error', error))
+
 
 const useGoogleLogin = () => {
+  const [GoogleResponse, setGoogleResponse] = useState()
 
-  useEffect(() => {
-    // (function loadGoogleLibrary() {
-    //   const loadedScripts = document.querySelectorAll('script')
+  const handleGoogleLogin = async () => {
+    const provider = new firebase.auth.GoogleAuthProvider()
 
-    //   const isPresentGoogleLoginLibrary = Object.values(loadedScripts)
-    //     .filter(script => script.src === process.env.REACT_APP_GOOGLE_LOGIN_LIBRARY_URL)
+    try {
+      const result = await firebase.auth().signInWithPopup(provider)
+      console.log('google login result', result)
 
-    //   if (isPresentGoogleLoginLibrary) {
-    //     console.log('google login library already exists')
-    //     return
-    //   }
+      const {
+        credential,
+        credential: {
+          accessToken,
+        },
+        user
+      } = result
 
-    //   const script = document.createElement('script')
-    //   script.src = process.env.REACT_APP_GOOGLE_LOGIN_LIBRARY_URL
-    //   script.async = true
-    //   script.defer = true
-    //   console.log('new google script addeds', script)
-    // })()
+      console.log('user', user, 'crendential', credential, 'token', accessToken)
+      localStorage.setItem('googleAccessToken', accessToken)
 
+      setGoogleResponse({
+        login: true,
+        credential,
+        accessToken,
+        user
+      })
+    } catch (error) {
+      const { code, message, email, credential } = error
+      console.log('code', code, 'message', message, 'email', email, 'credential', credential)
 
-    window.onload = function () {
-      window.google.accounts.id.initialize({
-        client_id: process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID,
-        callback: (response) => { console.log('== google res', response) }
-      });
-      window.google.accounts.id.prompt();
-    };
+      setGoogleResponse({
+        login: false,
+        code,
+        message,
+        email,
+        credential
+      })
+    }
+  }
 
-  }, [])
+  const handleGoogleLogout = async () => {
+    try {
+      await firebase.auth().signOut()
+      setGoogleResponse({ login: false })
+      console.log('logout success')
+    } catch (error) {
+      console.log('logout failure', error)
+    }
+  }
+
+  return [GoogleResponse, handleGoogleLogin, handleGoogleLogout]
 }
 
 export default useGoogleLogin
