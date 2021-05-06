@@ -20,22 +20,10 @@ const LoginJSX = ({ className, handleFBLogin }) => {
                 <span>Facebook Login</span>
               </a>
 
-              {/* Google 登入按鈕 */}
-              <div>
-                <div id="g_id_onload"
-                  data-client_id={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
-                  data-login_uri={process.env.REACT_APP_GOOGLE_LOGIN_URL}
-                  data-auto_prompt="false">
-                </div>
-                <div className="g_id_signin"
-                  data-type="standard"
-                  data-size="medium"
-                  data-theme="outline"
-                  data-text="sign_in_with"
-                  data-shape="rectangular"
-                  data-logo_alignment="left">
-                </div>
-              </div>
+              <a href="#" id="google-login">
+                <FontAwesomeIcon icon={['fab', 'google']} size="lg" />
+                <span>Google Login</span>
+              </a>
             </section>
           </div>
         </div>
@@ -143,7 +131,7 @@ a {
   }
 }
 
-#fb-login {
+#fb-login, #google-login {
   display: flex;
   align-items: center;
   width: 100%;
@@ -164,11 +152,11 @@ a {
   }
 }
 
-#twitter-login {
-  background-color: #00acee;
+#google-login {
+  background-color: #4285F4;
 
   &:hover {
-    background-color: #00B6F1;
+    background-color: #C20806;
   }
 }
 `

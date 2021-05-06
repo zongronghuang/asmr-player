@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect, useRouteMatch } from 
 import styled from '@emotion/styled'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
-import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookSquare, faGoogle } from '@fortawesome/free-brands-svg-icons'
 
 // 匯入元件
 import Login from './views/Login'
@@ -15,7 +15,7 @@ import useGoogleLogin from './hooks/useGoogleLogin'
 import AuthContext from './contexts/AuthContext'
 
 // 註冊 fontAwesome SVG icons
-library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt, faFacebookSquare)
+library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt, faFacebookSquare, faGoogle)
 
 const AppJSX = ({ className }) => {
   // const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin()
