@@ -24,8 +24,7 @@ const LoginJSX = ({ className, handleFBLogin }) => {
               <div>
                 <div id="g_id_onload"
                   data-client_id={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}
-                  data-callback="handleToken"
-
+                  data-login_uri={process.env.REACT_APP_GOOGLE_LOGIN_URL}
                   data-auto_prompt="false">
                 </div>
                 <div className="g_id_signin"

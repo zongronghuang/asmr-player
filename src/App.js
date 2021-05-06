@@ -7,6 +7,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons'
 
+// 匯入元件
 import Login from './views/Login'
 import ASMRApp from './views/ASMRApp'
 import useFacebookLogin from './hooks/useFacebookLogin'
@@ -17,22 +18,22 @@ import AuthContext from './contexts/AuthContext'
 library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolumeDown, faVolumeMute, faRandom, faSync, faRedo, faClock, faInfo, faUserCircle, faGlobe, faPlane, faPlaneSlash, faImage, faHeart, faSignOutAlt, faFacebookSquare)
 
 const AppJSX = ({ className }) => {
-  const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin()
+  // const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin()
   // const [isLoggedIn, setIsLoggedIn] = useState()
 
 
-  console.log('fb response', FBResponse)
+  // console.log('fb response', FBResponse)
   // console.log('is at login', isAtLogin)
 
   const userAuth = useContext(AuthContext)
   console.log('user auth', userAuth)
 
-  userAuth.FB = {
-    status: FBResponse?.status,
-    authResponse: FBResponse?.authResponse,
-    loginMethod: handleFBLogin,
-    logoutMethod: handleFBLogout
-  }
+  // userAuth.FB = {
+  //   status: FBResponse?.status,
+  //   authResponse: FBResponse?.authResponse,
+  //   loginMethod: handleFBLogin,
+  //   logoutMethod: handleFBLogout
+  // }
 
   console.log('updated user auth', userAuth)
 
@@ -54,7 +55,7 @@ const AppJSX = ({ className }) => {
       script.defer = true
       console.log('new google script addeds', script)
     })()
-  }, [])
+  })
 
   return (
     < div className={className, 'App'}>
@@ -69,11 +70,21 @@ const AppJSX = ({ className }) => {
               ? (<Redirect to={{ pathname: "/app" }} />)
               : (<Redirect to={{ pathname: "/login" }} />)
             } */}
+
+            {/*
             <Route path="/login">
               <Login handleFBLogin={handleFBLogin} />
             </Route>
             <Route path="/app">
-              <ASMRApp handleFBLogout={handleFBLogout} />
+                <ASMRApp handleFBLogout={handleFBLogout} />
+            </Route>
+             */}
+
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/app">
+              <ASMRApp />
             </Route>
           </Route>
         </Switch>
