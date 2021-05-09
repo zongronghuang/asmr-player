@@ -16,7 +16,7 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
   const [track, setTrack] = useState(album[0])
   const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
   const [shouldUseAPIData, setShouldUseAPIData] = useState(false)
-  const [isReady, setIsReady] = useState(true)
+  const [isReady, setIsReady] = useState(false)
 
   useEffect(() => {
     const fetchBackdrops = async () => {
@@ -42,7 +42,7 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
       setShouldUseAPIData(true)
     }
 
-    //fetchBackdrops()
+    fetchBackdrops()
   }, [])
 
   const handleNextTrack = () => {

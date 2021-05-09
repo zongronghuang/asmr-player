@@ -1,9 +1,14 @@
+import { useContext } from 'react'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import apis from '../components/apis/apis'
+import AuthContext from '../contexts/AuthContext'
 
-const LoginJSX = ({ className, handleFBLogin, handleGoogleLogin }) => {
+const LoginJSX = ({ className }) => {
+  const userAuth = useContext(AuthContext)
+
+  console.log('[Login]======', userAuth.authProvider, userAuth.FB.loginMethod)
+
   return (
     <main className={className}>
       <div className="circle" id="outer">
@@ -11,13 +16,13 @@ const LoginJSX = ({ className, handleFBLogin, handleGoogleLogin }) => {
           <div className="circle" id="inner">
             <section>
               <h1>ASMR Player</h1>
-              <a href="#" id="fb-login" onClick={handleFBLogin}>
+              <a href="#" id="fb-login" onClick={userAuth.FB.loginMethod}>
                 <FontAwesomeIcon icon={['fab', 'facebook-square']} size="lg" />
                 <span>Facebook Login</span>
               </a>
 
-              <a href="#" id="google-login" onClick={handleGoogleLogin}>
-                <FontAwesomeIcon icon={['fab', 'google']} size="lg" onClick={() => console.log('google login clicked')} />
+              <a href="#" id="google-login" onClick={userAuth.Google.loginMethod}>
+                <FontAwesomeIcon icon={['fab', 'google']} size="lg" />
                 <span>Google Login</span>
               </a>
             </section>

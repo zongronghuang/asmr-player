@@ -1,6 +1,6 @@
 import './App.css'
 
-import { useContext, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect, useRouteMatch } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -19,57 +19,60 @@ library.add(faMusic, faPlay, faPause, faBackward, faForward, faVolumeUp, faVolum
 
 const AppJSX = ({ className }) => {
   const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin()
-  //const [isLoggedIn, setIsLoggedIn] = useState()
   const [GoogleResponse, handleGoogleLogin, handleGoogleLogout] = useGoogleLogin()
-
-  console.log('!!!! google response', GoogleResponse)
-
-  // console.log('fb response', FBResponse)
-  // console.log('is at login', isAtLogin)
-
-  const userAuth = useContext(AuthContext)
-  console.log('user auth', userAuth)
-
-  userAuth.FB = {
-    status: FBResponse?.status,
-    authResponse: FBResponse?.authResponse,
-    loginMethod: handleFBLogin,
-    logoutMethod: handleFBLogout
-  }
-
-  console.log('updated user auth', userAuth)
+  const [authProvider, setAuthProvider] = useState(null)
 
   return (
-    < div className={className, 'App'}>
-      {console.log('[render] App')}
+    <AuthContext.Provider value={{
+      authProvider,
+      FB: {
+        status: FBResponse?.status,
+        authResponse: FBResponse?.authResponse,
+        loginMethod: () => {
+          handleFBLogin()
+          setAuthProvider('FB')
+        },
+        logoutMethod: () => {
+          handleFBLogout()
+          setAuthProvider('')
+        }
+      },
+      Google: {
+        authResponse: GoogleResponse?.login,
+        loginMethod: () => {
+          handleGoogleLogin()
+          setAuthProvider('Google')
+        },
+        logoutMethod: () => {
+          handleGoogleLogout()
+          setAuthProvider('')
+        }
+      }
+    }}>
+      < div className={className, 'App'}>
+        {console.log('[render] App')}
 
-      <Router>
-        {(!FBResponse && !GoogleResponse) && <></>}
-        {(FBResponse?.status !== 'connected' && GoogleResponse?.login !== true) && <Redirect to="/login" />}
+        <Router>
+          {(FBResponse?.status !== 'connected' && !GoogleResponse?.login) && <Redirect to="/login" />}
 
-        <Switch>
-          <Route path="/">
-            {FBResponse?.status === 'connected' || GoogleResponse?.login
-              ? (<Redirect to={{ pathname: "/app" }} />)
-              : (<Redirect to={{ pathname: "/login" }} />)
-            }
+          <Switch>
+            <Route path="/">
+              {FBResponse?.status === 'connected' || GoogleResponse?.login
+                ? (<Redirect to={{ pathname: "/app" }} />)
+                : (<Redirect to={{ pathname: "/login" }} />)
+              }
 
-            <Route path="/login">
-              <Login
-                handleFBLogin={handleFBLogin}
-                handleGoogleLogin={handleGoogleLogin}
-              />
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/app">
+                <ASMRApp />
+              </Route>
             </Route>
-            <Route path="/app">
-              <ASMRApp
-                handleFBLogout={handleFBLogout}
-                handleGoogleLogout={handleGoogleLogout}
-              />
-            </Route>
-          </Route>
-        </Switch>
-      </Router>
-    </div >
+          </Switch>
+        </Router>
+      </div >
+    </AuthContext.Provider>
   );
 }
 

@@ -40,8 +40,7 @@ const apis = {
     } catch (error) {
       return console.error(error)
     }
-  },
-
+  }
 }
 
 export default apis

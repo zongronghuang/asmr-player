@@ -1,6 +1,20 @@
+import { useContext } from 'react'
 import styled from '@emotion/styled'
 
-const DialogJSX = ({ className, handleFBLogout, handleLogoutDialog, handleGoogleLogout }) => {
+import AuthContext from '../contexts/AuthContext'
+
+const DialogJSX = ({ className, handleLogoutDialog }) => {
+  const userAuth = useContext(AuthContext)
+
+  const chooseLogoutMethod = (authProvider) => () => {
+    // [特例] FB 使用者之前登入過，但沒有登出就關閉分頁，重開分頁貼上網址後會讀取留下的 cookie，就會自動登入進到 /app
+    // 沒有手動按登入鍵 => 無法設定 userAuth.authProvider，因此無法選出要用的登出方法
+    // 所以 userAuth.authProvider 無值時，以 'FB' 為預設值
+    // Google 用 OAuth 登入，不會留下 cookie，因此沒有這個問題 (除非把 access token 記到 cookie 中，但很危險!)
+    if (!authProvider) authProvider = 'FB'
+    userAuth[authProvider].logoutMethod()
+  }
+
   return (
     <dialog className={className}>
       <header><strong>Logout</strong></header>
@@ -9,8 +23,7 @@ const DialogJSX = ({ className, handleFBLogout, handleLogoutDialog, handleGoogle
         <span>Are you sure you want to log out of this app?</span>
       </section>
       <footer>
-        {/* <button onClick={handleFBLogout} alt="Log out">Log out</button> */}
-        <button onClick={handleGoogleLogout} alt="Log out">Log out</button>
+        <button onClick={chooseLogoutMethod(userAuth.authProvider)} alt="Log out">Log out</button>
         <button onClick={handleLogoutDialog('off')} alt="Stay">Stay</button>
       </footer>
     </dialog>
