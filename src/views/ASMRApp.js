@@ -26,7 +26,8 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
 
       // 確認是否取得所有線上背景圖片
       if (data.some(item => Boolean(item) === false)) {
-        return
+        // 如果無法取得 Unsplash API 資料，isReady 設為 true，表示已經可用 local backdrop
+        return setIsReady(true)
       } else {
         setTimeout(() => setIsReady(true), 2000)
       }
@@ -127,15 +128,8 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
   const handleLogoutDialog = (status) => () => {
     const dialog = document.querySelector('dialog')
 
-    if (status === 'on') {
-      console.log('open the dialog')
-      dialog.show()
-    }
-
-    if (status === 'off') {
-      console.log('close the dialog')
-      dialog.close()
-    }
+    if (status === 'on') dialog.show()
+    if (status === 'off') dialog.close()
   }
 
   return (<>

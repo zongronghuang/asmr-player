@@ -1,12 +1,10 @@
 const AudioTrack = ({
   track,
   mode,
-  handleCurrentTime,
   handleNextTrack,
   handlePlayback
 }) => (
   <audio
-    onTimeUpdate={handleCurrentTime}
     onEnded={handleNextTrack}
     onCanPlayThrough={handlePlayback}
     src={track.audioSrc}

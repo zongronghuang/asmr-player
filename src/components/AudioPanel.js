@@ -17,8 +17,6 @@ const AudioPanelJSX = ({
   handleDrag,
   handleDragStart
 }) => {
-  const [duration, setDuration] = useState()
-  const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState(0.5)
   const [activeButton, setActiveButton] = useState('play')
 
@@ -31,16 +29,20 @@ const AudioPanelJSX = ({
     audio.play()
       .catch(error => {
         if (error) setActiveButton('play')
-
         return console.log('有 error', error)
       })
-
     audio.volume = volume
-    console.log('playback volume', audio.volume)
-    console.log(audio.currentTime, audio.error, audio.ended, audio.readyState, audio.autoplay, audio.paused)
-
-    setDuration(audio.duration)
     setActiveButton('pause') // 隱藏 play 鍵，顯示 pause 鍵
+
+    console.log({
+      volume: audio.volume,
+      currentTime: audio.currentTime,
+      error: audio.error,
+      endedState: audio.ended,
+      readyState: audio.readyState,
+      pausedState: audio.paused,
+      autoplay: audio.autoplay,
+    })
   }
 
   const handlePause = () => {
@@ -48,10 +50,6 @@ const AudioPanelJSX = ({
 
     audio.pause()
     setActiveButton('play')  // 隱藏 pause 鍵，顯示 play 鍵
-  }
-
-  const handleCurrentTime = (e) => {
-    setCurrentTime(prevCurrentTime => e.target.currentTime)
   }
 
   // 點按圖示或拖拉 input 欄位的拉桿調整音量
@@ -121,7 +119,6 @@ const AudioPanelJSX = ({
           mode={mode}
           handleNextTrack={handleNextTrack}
           handlePlayback={handlePlayback}
-          handleCurrentTime={handleCurrentTime}
         />
       </div>
       <Modes
@@ -136,8 +133,9 @@ const AudioPanel = styled(AudioPanelJSX)`
  display: flex;
  justify-content: center;
  position: absolute; 
- bottom: 5px;
+ top: 93%;
  left: 50%;
+ height: 27px;
  transform: translate(-50%, -50%);
  text-align: center;
  padding: 10px;
@@ -159,10 +157,6 @@ const AudioPanel = styled(AudioPanelJSX)`
   animation-duration: 1.5s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
- }
-
- button:hover {
-   color: blue;
  }
 `
 

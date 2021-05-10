@@ -36,7 +36,7 @@ const TrackInfo = styled(TrackInfoJSX)`
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 100px;
-  height: 20px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;

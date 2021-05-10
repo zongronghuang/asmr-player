@@ -35,6 +35,7 @@ const Dialog = styled(DialogJSX)`
   transform: translateY(-50%);
   width: 30%;
   min-width: 200px;
+  max-width: 300px;
   border: 3px solid goldenrod;
   border-radius: 15px;
   background-color: black;

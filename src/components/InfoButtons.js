@@ -75,7 +75,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
           : (<a
             className="option"
             id="offline"
-            title={track?.remoteBackdrop ? 'Native backdrops' : 'Native backdrops only'}
+            title={track?.remoteBackdrop ? 'Native backdrops' : 'Native backdrops only due to API limit/network error'}
             onClick={() => track?.remoteBackdrop ? setShouldUseAPIData(true) : null}
           >
             <FontAwesomeIcon
@@ -125,7 +125,6 @@ const InfoButtons = styled(InfoButtonsJSX)`
   }
 
   .option:hover {
-    color: blue;
     box-shadow: 3px 3px goldenrod, -3px 3px goldenrod, 3px -3px goldenrod, -3px -3px goldenrod;
   }
 
@@ -148,9 +147,8 @@ const InfoButtons = styled(InfoButtonsJSX)`
     z-index: 1;
   }
 
-
   @keyframes float-photographer {
-    to { bottom: 140px; }
+    to { bottom: 140px;}
   }
   .float-photographer {
     animation-name: float-photographer;
@@ -159,7 +157,7 @@ const InfoButtons = styled(InfoButtonsJSX)`
   }
 
   @keyframes float-image {
-    to { bottom: 105px; }
+    to { bottom: 105px;}
   }
   .float-image {
     animation-name: float-image;
@@ -168,7 +166,7 @@ const InfoButtons = styled(InfoButtonsJSX)`
   }
 
   @keyframes float-network {
-    to { bottom: 70px; }
+    to { bottom: 70px;}
   }
   .float-network {
     animation-name: float-network;

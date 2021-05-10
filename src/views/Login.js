@@ -139,7 +139,7 @@ a {
   height: 25px;
   margin-bottom: 5px;
   line-height: 30px;
-  font-size: 15px;
+  font-size: 90%;
   font-family: 'Noto Sans TC', sans-serif;
   border-radius: 5px;
   padding: 5px;
