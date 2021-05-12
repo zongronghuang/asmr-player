@@ -8,17 +8,17 @@ const VolumeJSX = ({ className, handleVolumeUpDown, volume }) =>
 
   {
     (volume === 0)
-      ? (<button htmlFor="volume" title="Muted" alt="Muted" >
+      ? (<button htmlFor="volume" title="Muted" alt="Muted" tabIndex="4">
         <FontAwesomeIcon icon={['fas', 'volume-mute']} size="lg" />
       </button>)
       : (<button htmlFor="volume" title="Volume down" alt="Volume down" onClick={handleVolumeUpDown('down')}>
-        <FontAwesomeIcon icon={['fas', 'volume-down']} size="lg" />
+        <FontAwesomeIcon icon={['fas', 'volume-down']} size="lg" tabIndex="4" />
       </button>)
   }
 
-  <input id="volume" type="range" value={volume} title={volume} min="0" max="1" step="0.1" onChange={handleVolumeUpDown('manual')}></input>
+  <input id="volume" type="range" value={volume} title={volume} min="0" max="1" step="0.1" onChange={handleVolumeUpDown('manual')} tabIndex="5"></input>
 
-  <button htmlFor="volume" title="Volume up" alt="Volume up" onClick={handleVolumeUpDown('up')}>
+  <button htmlFor="volume" title="Volume up" alt="Volume up" onClick={handleVolumeUpDown('up')} tabIndex="6">
     <FontAwesomeIcon icon={['fas', 'volume-up']} size="lg" />
   </button>
 </div>)

@@ -142,7 +142,7 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
       handleDrop={handleDrop}
       shouldUseAPIData={shouldUseAPIData}
     />
-    <Dialog handleFBLogout={handleFBLogout} handleLogoutDialog={handleLogoutDialog} handleGoogleLogout={handleGoogleLogout} />
+    <Dialog handleLogoutDialog={handleLogoutDialog} />
     <AudioPanel
       track={track}
       mode={mode}

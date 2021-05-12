@@ -6,7 +6,7 @@ const ModesJSX = ({ className, mode, handleModeChange }) => {
     <div className={className}>
       { console.log('[render] Modes')}
 
-      <button title="Loop album" alt="Loop album"
+      <button title="Loop album" alt="Loop album" tabIndex="7"
         onClick={handleModeChange('loopAlbum')}
       >
         <FontAwesomeIcon
@@ -16,7 +16,7 @@ const ModesJSX = ({ className, mode, handleModeChange }) => {
         />
       </button>
 
-      <button title="Loop track" alt="Loop track"
+      <button title="Loop track" alt="Loop track" tabIndex="8"
         onClick={handleModeChange('loopTrack')}
       >
         <FontAwesomeIcon
@@ -26,7 +26,7 @@ const ModesJSX = ({ className, mode, handleModeChange }) => {
         />
       </button>
 
-      <button title="Shuffle all" alt="Shuffle all"
+      <button title="Shuffle all" alt="Shuffle all" tabIndex="9"
         onClick={handleModeChange('shuffleAll')}
       >
         <FontAwesomeIcon

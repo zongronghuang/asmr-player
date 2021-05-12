@@ -12,21 +12,21 @@ const PlaybackButtonsJSX = ({
 }) => (
   <div className={className}>
     {console.log('[render] PlaybackButtons')}
-    <button id="prev" onClick={handlePrevTrack} title="Previous track" alt="Previous track">
+    <button id="prev" onClick={handlePrevTrack} title="Previous track" alt="Previous track" tabIndex="1">
       <FontAwesomeIcon icon={['fas', 'backward']} size="lg" />
     </button>
 
     {
       (activeButton === 'play')
-        ? (<button id="play" title="Play" alt="Play" onClick={handlePlayback} >
+        ? (<button id="play" title="Play" alt="Play" onClick={handlePlayback} tabIndex="2" >
           <FontAwesomeIcon icon={['fas', 'play']} size="lg" />
         </button>)
-        : (<button id="pause" onClick={handlePause} title="Pause" alt="Pause">
+        : (<button id="pause" onClick={handlePause} title="Pause" alt="Pause" tabIndex="2">
           <FontAwesomeIcon icon={['fas', 'pause']} size="lg" />
         </button>)
     }
 
-    <button id="next" onClick={handleNextTrack} title="Next track" alt="Next track">
+    <button id="next" onClick={handleNextTrack} title="Next track" alt="Next track" tabIndex="3">
       <FontAwesomeIcon icon={['fas', 'forward']} size="lg" />
     </button>
   </div>

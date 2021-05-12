@@ -25,6 +25,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
         className="option"
         id="info"
         title="Click for more"
+        tabIndex="10"
         onClick={handleTogglingAnimations}
       >
         <FontAwesomeIcon icon={['fas', 'info']} size="lg" />
@@ -39,6 +40,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
             : track.localBackdrop.portfolio
         }
         target="_blank"
+        tabIndex="14"
         title={
           shouldUseAPIData && track?.remoteBackdrop
             ? `Photo by ${track.remoteBackdrop.photographer}`
@@ -58,6 +60,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
         }
         target="_blank"
         title="View source image"
+        tabIndex="13"
       >
         <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
       </a>
@@ -67,6 +70,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
           ? (<a
             className="option"
             id="online"
+            tabIndex="12"
             title="Online backdrops"
             onClick={() => setShouldUseAPIData(false)}
           >
@@ -75,6 +79,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
           : (<a
             className="option"
             id="offline"
+            tabIndex="12"
             title={track?.remoteBackdrop ? 'Native backdrops' : 'Native backdrops only due to API limit/network error'}
             onClick={() => track?.remoteBackdrop ? setShouldUseAPIData(true) : null}
           >
@@ -90,6 +95,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
         className="option"
         id="logout"
         title='Click to log out'
+        tabIndex="11"
         onClick={handleLogoutDialog('on')}
       >
         <FontAwesomeIcon
