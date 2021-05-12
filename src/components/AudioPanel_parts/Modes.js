@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const ModesJSX = ({ className, mode, handleModeChange }) => {
   return (
     <div className={className}>
-      { console.log('[render] Modes')}
+      {/* { console.log('[render] Modes')} */}
 
       <button title="Loop album" alt="Loop album" tabIndex="7"
         onClick={handleModeChange('loopAlbum')}

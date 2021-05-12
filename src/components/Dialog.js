@@ -17,7 +17,10 @@ const DialogJSX = ({ className, handleLogoutDialog }) => {
 
   return (
     <dialog className={className}>
-      <header><strong>Logout</strong></header>
+      {/* {console.log('[render] Dialog')} */}
+      <header>
+        <strong>Logout</strong>
+      </header>
       <hr></hr>
       <section>
         <span>Are you sure you want to log out of this app?</span>

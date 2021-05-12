@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 
 const LoaderJSX = ({ className }) => (
   <div className={className}>
+    {/* {console.log('[render] Loader')} */}
     <div id="shade"></div>
     <div id="frame">
       <div className="stars" id="outer">●</div>

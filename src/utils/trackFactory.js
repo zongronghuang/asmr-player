@@ -10,18 +10,14 @@ import Image_1 from '../assets/images/backdrop_1.jpg'
 import Image_2 from '../assets/images/backdrop_2.jpg'
 import Image_3 from '../assets/images/backdrop_3.jpg'
 
+// 製作曲目的材料
 const audios = [Audio_0, Audio_1, Audio_2, Audio_3]
 const images = [Image_0, Image_1, Image_2, Image_3]
-
-// image 1 http://www.vivianmaier.com/gallery/street-3/#slide-33
-
-
-// 用來搜尋圖片的曲目關鍵字
 const searchTerms = ['forest', 'seaside', 'train', 'street']
 const titles = ['Bird chirps', 'Breaking waves', 'Train in motion', 'Street bustle']
 
 // 檢查有無重覆的音訊或圖片
-const findRedundantItems = (fileArray, mediaType) => {
+const findRedundantItems = (fileArray, dataType) => {
   // 進行檔案分類並列出 id
   // 無重複檔案：{'檔案 a (路徑)': [id]}
   // 有重複檔案：{'檔案 a (路徑)': [id, id, ...]}
@@ -40,7 +36,7 @@ const findRedundantItems = (fileArray, mediaType) => {
   // 列出 id 數量大於 1 的檔案：['檔案 a (路徑)', [id, id, ...]]
   Object.entries(numeratedFiles).forEach(file => {
     if (file[1].length > 1) {
-      console.log(`Redundant ${mediaType}: ${file[0]} | id: ${file[1]}`)
+      console.log(`Redundant ${dataType}: ${file[0]} | id: ${file[1]}`)
     }
   })
 }
@@ -63,17 +59,23 @@ const makeBackdropPromises = async () => {
 
 const createDefaultTracks = (titleArray, audioArray, imageArray, keywordArray) => {
   // 必須至少有一個 image 和 audio
-  if (!imageArray.length || !audioArray.length) {
+  if (!imageArray.length || !audioArray.length || !titleArray.length || !keywordArray.length) {
     console.log('No available audios or images')
   }
 
   // image 和 audio 數量必須一致
-  if (imageArray.length !== audioArray.length) {
-    console.log(`Not equal in number: audios: ${audioArray.length} | images: ${imageArray.length}`)
+  const numberOfTracks = 4
+  const sameInNumber = [titleArray, audioArray, imageArray, keywordArray]
+    .every(array => array.length === numberOfTracks)
+
+  if (!sameInNumber) {
+    console.log(`Not equal in number: audios: ${audioArray.length} | images: ${imageArray.length} | titles: ${titleArray.length} | keywords: ${keywordArray.length}`)
   }
 
   findRedundantItems(audioArray, 'audio')
   findRedundantItems(imageArray, 'image')
+  findRedundantItems(titleArray, 'title')
+  findRedundantItems(keywordArray, 'keyword')
 
   // 建立曲目清單
   const trackList = Array(audios.length)

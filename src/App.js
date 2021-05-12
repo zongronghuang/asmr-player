@@ -50,7 +50,7 @@ const AppJSX = ({ className }) => {
       }
     }}>
       < div className={className, 'App'}>
-        {console.log('[render] App')}
+        {/* {console.log('[render] App')} */}
 
         <Router>
           {(FBResponse?.status !== 'connected' && !GoogleResponse?.login) && <Redirect to="/login" />}

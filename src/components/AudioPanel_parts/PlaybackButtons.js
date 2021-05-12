@@ -11,7 +11,7 @@ const PlaybackButtonsJSX = ({
   handlePrevTrack
 }) => (
   <div className={className}>
-    {console.log('[render] PlaybackButtons')}
+    {/* {console.log('[render] PlaybackButtons')} */}
     <button id="prev" onClick={handlePrevTrack} title="Previous track" alt="Previous track" tabIndex="1">
       <FontAwesomeIcon icon={['fas', 'backward']} size="lg" />
     </button>

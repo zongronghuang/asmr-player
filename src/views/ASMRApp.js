@@ -21,8 +21,6 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
   useEffect(() => {
     const fetchBackdrops = async () => {
       const data = await makeBackdropPromises()
-      console.log('makeBackdropPromises', makeBackdropPromises)
-      console.log('fetched data', data)
 
       // 確認是否取得所有線上背景圖片
       if (data.some(item => Boolean(item) === false)) {
@@ -79,7 +77,7 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
   const handleModeChange = (mode) => (e) => {
     // 如果是 Shuffle all 模式，則建立隨機排列曲目
     if (mode === 'shuffleAll') {
-      const randomTracks = randomizeTracks(defaultTracks)
+      const randomTracks = randomizeTracks(album)
       console.log('random tracks', randomTracks)
 
       setAlbum(prevAlbum => {
@@ -133,7 +131,7 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
   }
 
   return (<>
-    {console.log('[render] ASMRApp')}
+    {/* { console.log('[render] ASMRApp')} */}
     {isReady || <Loader />}
     <TrackInfo track={track} />
     <Backdrop

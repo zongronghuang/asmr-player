@@ -7,8 +7,6 @@ import AuthContext from '../contexts/AuthContext'
 const LoginJSX = ({ className }) => {
   const userAuth = useContext(AuthContext)
 
-  console.log('[Login]======', userAuth.authProvider, userAuth.FB.loginMethod)
-
   return (
     <main className={className}>
       <div className="circle" id="outer">

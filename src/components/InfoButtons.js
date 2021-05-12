@@ -20,7 +20,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
 
   return (
     <aside className={className}>
-      {console.log('[render] InfoButtons')}
+      {/* {console.log('[render] InfoButtons')} */}
       <a
         className="option"
         id="info"

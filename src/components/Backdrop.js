@@ -7,7 +7,6 @@ const BackdropJSX = ({
   handleDragOver,
   handleDrop
 }) => {
-  { console.log('????', track) }
   return (
     <div
       id="dropZone"
@@ -21,7 +20,7 @@ const BackdropJSX = ({
       }
     >
 
-      {console.log('[render] Backdrop')}
+      {/* {console.log('[render] Backdrop')} */}
     </div>
   )
 }

@@ -102,7 +102,7 @@ const AudioPanelJSX = ({
       onDrag={handleDrag}
       onDragStart={handleDragStart}
     >
-      {console.log('[render] AudioPanel')}
+      {/* {console.log('[render] AudioPanel')} */}
       <PlaybackButtons
         activeButton={activeButton}
         handlePlayback={handlePlayback}

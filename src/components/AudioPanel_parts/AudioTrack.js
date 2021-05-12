@@ -10,7 +10,7 @@ const AudioTrack = ({
     src={track.audioSrc}
     loop={mode === 'loopTrack'}
   >
-    {console.log('[render] AudioTrack', track.audioSrc)}
+    {/* {console.log('[render] AudioTrack', track.audioSrc)} */}
   </audio>
 )
 

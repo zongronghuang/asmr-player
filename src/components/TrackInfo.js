@@ -7,7 +7,6 @@ const TrackInfoJSX = ({ className, track }) => {
   // 更換 track 時，重新設定動畫 + 播放動畫
   // CSS 動畫效果無法依特定條件重覆播放，需用 JavaScript Animation API 達成
   useEffect(() => {
-    console.log('[useEffect] Animating TrackInfo')
     const animationTarget = document
       .getElementById('animation-target')
       .animate(
@@ -24,7 +23,7 @@ const TrackInfoJSX = ({ className, track }) => {
 
   return (
     <div className={className} id="animation-target">
-      { console.log('[render] TrackInfo')}
+      {/* { console.log('[render] TrackInfo')} */}
       <span>< FontAwesomeIcon icon={['fas', 'music']} />{`\u00A0  ${track.order} \u00A0${track.name}`}</span>
     </div >
   )

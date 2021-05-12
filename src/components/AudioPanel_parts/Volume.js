@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // 音量和設定模式元件
 const VolumeJSX = ({ className, handleVolumeUpDown, volume }) =>
 (<div className={className}>
-  {console.log('[render] Volume')}
+  {/* {console.log('[render] Volume')} */}
 
   {
     (volume === 0)
