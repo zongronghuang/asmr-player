@@ -1,70 +1,89 @@
-# Getting Started with Create React App
+# ASMR Player
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![login page demo](login_page.jpg)
 
-## Available Scripts
+**ASMR Player** combines both ambient audio recordings and visual images to provide an immersive, relaxing listening experience for the user. 
 
-In the project directory, you can run:
+This web app is a personal side project built on React and supported technologies. 
 
-### `npm start`
+Try out the [demo (added later)]().
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## :beginner: Purpose
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+I built this web app to hone and improve on my technical proficiency of [React](https://reactjs.org), social media logins ([Facebook](https://developers.facebook.com/docs/facebook-login/) and [Google](https://developers.google.com/identity)), [Firebase](https://firebase.google.com), HTML `<audio>` element, and [Unsplash API](https://unsplash.com/developers).
 
-### `npm test`
+## :musical_note: Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![app page demo](app_page.jpg)
 
-### `npm run build`
+* It has four built-in audio recordings and four photographic works.
+* When online, it can display random photograhic works from [Unsplash](https://unsplash.com/), with links to the source image and the photographer's profile page for further exploration.
+* It comes with three playback modes: 
+  * __Single track loop__: the app repeates single audio track.
+  * __Full album loop__ (__default__): the app plays all tracks in the album in fixed order and repeats the queue.
+  * __Shuffle__: the app plays the album tracks in random order. The playback is not repeated.
+* It comes with social media login via Facebook and Google.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> :warning: Note:
+Do not refresh the app repeatedly when it is in the online mode.<br/><br/>Unsplash API may block access from this app owning to a surge of requests. Once that happens, wait for a while to get unblocked.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## :mag: How to use it
 
-### `npm run eject`
+1. Clone this project to your computer:
+`git clone https://github.com/zongronghuang/asmr-player.git`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. Install required packages:
+`npm install`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Provide the environment variables required in an `.env` file:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    ```
+    HTTPS=true
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+    // Unsplash API
+    REACT_APP_BASE_URL=https://api.unsplash.com/
+    REACT_APP_ACCESS_KEY=<YOUR ACCESS KEY>
 
-## Learn More
+    // Facebook login
+    REACT_APP_FB_APP_ID=<YOUR APP ID>
+    REACT_APP_FB_API_VERSION=<YOUR API VERSION>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    // Firebase
+    REACT_APP_FIREBASE_API_KEY=<YOUR API KEY>
+    REACT_APP_FIREBASE_AUTH_DOMAIN=<YOUR AUTH DOMAIN>
+    REACT_APP_FIREBASE_PROJECT_ID=<YOUR PROJECT ID>
+    REACT_APP_FIREBASE_STORAGE_BUCKET=<YOUR STORAGE BUCKET>
+    REACT_APP_FIREBASE_DATABASE_URL=<YOUR DATABASE URL>
+    REACT_APP_FIREBASE_MESSAGING_SENDER_ID=<YOUR MESSAGING SENDER ID>
+    REACT_APP_FIREBASE_APP_ID=<YOUR APP ID>
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4. Start this web app:
+`npm start`
 
-### Code Splitting
+5. Open the web app via a web browser:
+`https://localhost:3000` or `https://192.168.0.38:3000`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## :gem: Audio and visual materials
 
-### Analyzing the Bundle Size
+:notes: [BBC Sound Effects](https://sound-effects.bbcrewind.co.uk)
+This website offers a rich collection of ambiental sounds, copyrighted by BBC, for non-comercial use.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+:framed_picture: [Unsplash](https://unsplash.com/)
+The built-in photographic works belong to the photographers on Unsplash respectively:
+* [Sebastian Unrau](https://unsplash.com/photos/sp-p7uuT0tw)
+* [Patrick Robert Doyle](https://unsplash.com/photos/31wW1qeNoeM)
+* [2y.kang](https://unsplash.com/photos/Q2ykqnomVHY)
+* [Artur Kraft](https://unsplash.com/photos/mZk3lQzf0Xo)
 
-### Making a Progressive Web App
+Random photographic works displayed in the online mode also come from Unsplash.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## :open_book: Copyright
 
-### Advanced Configuration
+I am the copyright holder of this software project. Feel free to fork and exert your creativity!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The copyright of the audio recordings and images used in the project belongs to their respective copyright holders. My use of the materials abides by their requirements.
 
-### Deployment
+If you intend to use audio recordings and images from this project, __show credit to the sources__. All use of the material must abide by the requirements of the sources.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
