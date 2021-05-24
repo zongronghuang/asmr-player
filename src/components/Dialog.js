@@ -3,8 +3,26 @@ import styled from '@emotion/styled'
 
 import AuthContext from '../contexts/AuthContext'
 
-const DialogJSX = ({ className, handleLogoutDialog }) => {
+const DialogJSX = ({
+  className,
+  dialogType,
+  handleLogoutDialog
+}) => {
   const userAuth = useContext(AuthContext)
+  const title = dialogType.toUpperCase()
+  let message = ''
+
+  switch (dialogType) {
+    case 'offline':
+      message = (<>Connection lost.<br /><br />Check the network and then try again.</>)
+      break
+    case 'API error':
+      message = (<>No online backdrops available.<br /><br />Wait a moment and then try again.</>)
+      break
+    case 'logout':
+    default:
+      message = "Are you sure you want to log out of this app?"
+  }
 
   const chooseLogoutMethod = (authProvider) => () => {
     // [特例] FB 使用者之前登入過，但沒有登出就關閉分頁，重開分頁貼上網址後會讀取留下的 cookie，就會自動登入進到 /app
@@ -16,18 +34,24 @@ const DialogJSX = ({ className, handleLogoutDialog }) => {
   }
 
   return (
-    <dialog className={className}>
+    <dialog className={className} >
       {/* {console.log('[render] Dialog')} */}
       <header>
-        <strong>Logout</strong>
+        <strong>{title}</strong>
       </header>
       <hr></hr>
       <section>
-        <span>Are you sure you want to log out of this app?</span>
+        <span>{message}</span>
       </section>
       <footer>
-        <button onClick={chooseLogoutMethod(userAuth.authProvider)} alt="Log out">Log out</button>
-        <button onClick={handleLogoutDialog('off')} alt="Stay">Stay</button>
+        {
+          dialogType === 'logout'
+            ? (<>
+              <button onClick={chooseLogoutMethod(userAuth.authProvider)} alt="Log out">Log out</button>
+              <button onClick={() => handleLogoutDialog('off')} alt="Stay">Stay</button>
+            </>)
+            : (<button onClick={() => handleLogoutDialog('off')} alt="Got it">Got it</button>)
+        }
       </footer>
     </dialog>
   )

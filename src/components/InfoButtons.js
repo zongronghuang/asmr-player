@@ -96,7 +96,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
         id="logout"
         title='Click to log out'
         tabIndex="11"
-        onClick={handleLogoutDialog('on')}
+        onClick={() => handleLogoutDialog('on')}
       >
         <FontAwesomeIcon
           icon={['fas', 'sign-out-alt']}

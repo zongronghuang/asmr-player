@@ -17,28 +17,41 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
   const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
   const [shouldUseAPIData, setShouldUseAPIData] = useState(false)
   const [isReady, setIsReady] = useState(false)
+  const [dialogType, setDialogType] = useState('logout')
+
+
 
   useEffect(() => {
     const fetchBackdrops = async () => {
-      const data = await makeBackdropPromises()
+      try {
+        const data = await makeBackdropPromises()
 
-      // 確認是否取得所有線上背景圖片
-      if (data.some(item => Boolean(item) === false)) {
+        // 確認是否取得所有線上背景圖片
+        if (data.some(item => Boolean(item) === false)) {
+          throw new Error('Fetched an incomplete set of online backdrops')
+        }
+
         // 如果無法取得 Unsplash API 資料，isReady 設為 true，表示已經可用 local backdrop
-        return setIsReady(true)
-      } else {
-        setTimeout(() => setIsReady(true), 2000)
+        const updatedAlbum = album.map((track, index) => ({
+          ...track,
+          remoteBackdrop: { ...data[index] }
+        }))
+        console.log('updated album', updatedAlbum)
+
+        setAlbum(updatedAlbum)
+        setTrack(prevTrack => updatedAlbum[prevTrack.order])
+        setShouldUseAPIData(true)
+        setIsReady(true)
+      } catch (error) {
+        console.log('fetch error', error)
+
+        setTimeout(() => {
+          setShouldUseAPIData(false)
+          setIsReady(true)
+          setDialogType('API error')
+          handleLogoutDialog('on')
+        }, 2000)
       }
-
-      const updatedAlbum = album.map((track, index) => ({
-        ...track,
-        remoteBackdrop: { ...data[index] }
-      }))
-      console.log('updated album', updatedAlbum)
-
-      setAlbum(updatedAlbum)
-      setTrack(prevTrack => updatedAlbum[prevTrack.order])
-      setShouldUseAPIData(true)
     }
 
     fetchBackdrops()
@@ -123,16 +136,32 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
     dragItem.style.top = `${dragItemTop}px`
   }
 
-  const handleLogoutDialog = (status) => () => {
+  const handleLogoutDialog = (status) => {
     const dialog = document.querySelector('dialog')
 
-    if (status === 'on') dialog.show()
+    if (status === 'on') dialog.showModal()
     if (status === 'off') dialog.close()
   }
+
+  // 監測是否(恢復)連線
+  window.addEventListener('online', () => {
+    handleLogoutDialog('off')
+    setDialogType('logout')
+  })
+
+  // 監測是否離線
+  window.addEventListener('offline', () => {
+    setDialogType('offline')
+    handleLogoutDialog('on')
+  })
 
   return (<>
     {/* { console.log('[render] ASMRApp')} */}
     {isReady || <Loader />}
+    <Dialog
+      dialogType={dialogType}
+      handleLogoutDialog={handleLogoutDialog}
+    />
     <TrackInfo track={track} />
     <Backdrop
       track={track}
@@ -140,7 +169,6 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
       handleDrop={handleDrop}
       shouldUseAPIData={shouldUseAPIData}
     />
-    <Dialog handleLogoutDialog={handleLogoutDialog} />
     <AudioPanel
       track={track}
       mode={mode}
