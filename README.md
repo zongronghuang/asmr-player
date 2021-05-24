@@ -68,9 +68,11 @@ Do not refresh the app repeatedly when it is in the online mode.<br/><br/>Unspla
 ## :gem: Audio and visual materials
 
 :notes: [BBC Sound Effects](https://sound-effects.bbcrewind.co.uk)
+
 This website offers a rich collection of ambiental sounds, copyrighted by BBC, for non-comercial use.
 
 :framed_picture: [Unsplash](https://unsplash.com/)
+
 The built-in photographic works belong to the photographers on Unsplash respectively:
 * [Sebastian Unrau](https://unsplash.com/photos/sp-p7uuT0tw)
 * [Patrick Robert Doyle](https://unsplash.com/photos/31wW1qeNoeM)
