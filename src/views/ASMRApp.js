@@ -7,10 +7,10 @@ import TrackInfo from '../components/TrackInfo'
 import Loader from '../components/Loader'
 import Dialog from '../components/Dialog'
 
-import { defaultTracks, makeBackdropPromises } from '../utils/trackFactory'
+import { defaultTracks, backdropPromises } from '../utils/trackFactory'
 import { randomizeTracks } from '../utils/helpers'
 
-const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
+const ASMRApp = () => {
   const [mode, setMode] = useState('loopAlbum')
   const [album, setAlbum] = useState(defaultTracks)
   const [track, setTrack] = useState(album[0])
@@ -19,12 +19,10 @@ const ASMRApp = ({ handleFBLogout, handleGoogleLogout }) => {
   const [isReady, setIsReady] = useState(false)
   const [dialogType, setDialogType] = useState('logout')
 
-
-
   useEffect(() => {
     const fetchBackdrops = async () => {
       try {
-        const data = await makeBackdropPromises()
+        const data = await Promise.all(backdropPromises)
 
         // 確認是否取得所有線上背景圖片
         if (data.some(item => Boolean(item) === false)) {

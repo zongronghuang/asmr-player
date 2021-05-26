@@ -58,20 +58,25 @@ const defaultTracks = [
 ]
 
 // 建立請求背景圖片的 Promise 陣列
-const makeBackdropPromises = async () => {
-  try {
-    const backdropPromises = defaultTracks.reduce((base, track) => {
-      base.push(apis.getRandomImage(track.searchTerm))
-      return base
-    }, [])
+// const makeBackdropPromises = async () => {
+//   try {
+//     const backdropPromises = defaultTracks.reduce((base, track) => {
+//       base.push(apis.getRandomImage(track.searchTerm))
+//       return base
+//     }, [])
 
-    const response = await Promise.all(backdropPromises)
+//     const response = await Promise.all(backdropPromises)
 
-    return [...response]
-  } catch (error) {
-    console.error(error)
-  }
-}
+//     return [...response]
+//   } catch (error) {
+//     console.error(error)
+//   }
+// }
 
-export { defaultTracks, makeBackdropPromises }
+const backdropPromises = defaultTracks.reduce((base, track) => {
+  base.push(apis.getRandomImage(track.searchTerm))
+  return base
+}, [])
+
+export { defaultTracks, backdropPromises }
 
