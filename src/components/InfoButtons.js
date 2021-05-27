@@ -1,109 +1,140 @@
+import { useRef } from 'react'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIData, handleLogoutDialog }) => {
-  const handleTogglingAnimations = () => {
-    const imageIcon = document.querySelector('#image')
-    const photographerIcon = document.querySelector('#photographer')
-    const offlineIcon = document.querySelector('#offline')
-    const onlineIcon = document.querySelector('#online')
-    const logoutIcon = document.querySelector('#logout')
+  const imageBtn = useRef(null)
+  const photographerBtn = useRef(null)
+  const localBackdropBtn = useRef(null)
+  const remoteBackdropBtn = useRef(null)
+  const logoutBtn = useRef(null)
 
-    photographerIcon.classList.toggle('float-photographer')
-    imageIcon.classList.toggle('float-image')
-    logoutIcon.classList.toggle('float-logout')
+  const handleTogglingAnimations = () => {
+    photographerBtn.current.classList.toggle('float-photographer')
+    imageBtn.current.classList.toggle('float-image')
+    logoutBtn.current.classList.toggle('float-logout')
 
     shouldUseAPIData && track?.remoteBackdrop
-      ? onlineIcon.classList.toggle('float-network')
-      : offlineIcon.classList.toggle('float-network')
+      ? remoteBackdropBtn.current.classList.toggle('float-network')
+      : localBackdropBtn.current.classList.toggle('float-network')
   }
+
+  // subcomponents
+  const MenuButton = () => (
+    <a
+      className="option"
+      id="info"
+      title="Click for more"
+      tabIndex="10"
+      onClick={handleTogglingAnimations}
+    >
+      <FontAwesomeIcon icon={['fas', 'info']} size="lg" />
+    </a>
+  )
+
+  const PhotographerButton = () => (
+    <a
+      className="option"
+      id="photographer"
+      href={
+        shouldUseAPIData && track?.remoteBackdrop
+          ? track.remoteBackdrop.portfolio
+          : track.localBackdrop.portfolio
+      }
+      target="_blank"
+      tabIndex="14"
+      ref={photographerBtn}
+      title={
+        shouldUseAPIData && track?.remoteBackdrop
+          ? `Photographer | ${track.remoteBackdrop.photographer}`
+          : `Photographer | ${track.localBackdrop.photographer}`
+      }
+    >
+      <FontAwesomeIcon icon={['fas', 'user-circle']} size="lg" />
+    </a>
+  )
+
+  const ImageButton = () => (
+    <a
+      className="option"
+      id="image"
+      href={
+        shouldUseAPIData && track?.remoteBackdrop
+          ? track.remoteBackdrop.source
+          : track.localBackdrop.source
+      }
+      target="_blank"
+      title="View source image"
+      tabIndex="13"
+      ref={imageBtn}
+    >
+      <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
+    </a>
+  )
+
+  const LocalBackdropButton = () => (
+    <a
+      className="option"
+      id="local_backdrop"
+      tabIndex="12"
+      title="Local backdrop"
+      ref={localBackdropBtn}
+      onClick={() =>
+        track?.remoteBackdrop
+          ? setShouldUseAPIData(true)
+          : null
+      }
+    >
+      <FontAwesomeIcon
+        icon={['fas', 'plane-slash']}
+        size="lg"
+        color={track?.remoteBackdrop ? null : 'gray'}
+      />
+    </a>
+  )
+
+  const RemoteBackdropButton = () => (
+    <a
+      className="option"
+      id="remote_backdrop"
+      tabIndex="12"
+      title="Remote backdrop"
+      ref={remoteBackdropBtn}
+      onClick={() => setShouldUseAPIData(false)}
+    >
+      <FontAwesomeIcon icon={['fas', 'plane']} size="lg" />
+    </a>
+  )
+
+  const LogoutButton = () => (
+    <a
+      className="option"
+      id="logout"
+      title='Click to log out'
+      tabIndex="11"
+      ref={logoutBtn}
+      onClick={() => handleLogoutDialog('on')}
+    >
+      <FontAwesomeIcon
+        icon={['fas', 'sign-out-alt']}
+        size="lg"
+        color="red"
+      />
+    </a>
+  )
 
   return (
     <aside className={className}>
       {/* {console.log('[render] InfoButtons')} */}
-      <a
-        className="option"
-        id="info"
-        title="Click for more"
-        tabIndex="10"
-        onClick={handleTogglingAnimations}
-      >
-        <FontAwesomeIcon icon={['fas', 'info']} size="lg" />
-      </a>
-
-      <a
-        className="option"
-        id="photographer"
-        href={
-          shouldUseAPIData && track?.remoteBackdrop
-            ? track.remoteBackdrop.portfolio
-            : track.localBackdrop.portfolio
-        }
-        target="_blank"
-        tabIndex="14"
-        title={
-          shouldUseAPIData && track?.remoteBackdrop
-            ? `Photo by ${track.remoteBackdrop.photographer}`
-            : `Photo by ${track.localBackdrop.photographer}`
-        }
-      >
-        <FontAwesomeIcon icon={['fas', 'user-circle']} size="lg" />
-      </a>
-
-      <a
-        className="option"
-        id="image"
-        href={
-          shouldUseAPIData && track?.remoteBackdrop
-            ? track.remoteBackdrop.source
-            : track.localBackdrop.source
-        }
-        target="_blank"
-        title="View source image"
-        tabIndex="13"
-      >
-        <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
-      </a>
-
+      <MenuButton />
+      <PhotographerButton />
+      <ImageButton />
       {
         shouldUseAPIData && track?.remoteBackdrop
-          ? (<a
-            className="option"
-            id="online"
-            tabIndex="12"
-            title="Online backdrops"
-            onClick={() => setShouldUseAPIData(false)}
-          >
-            <FontAwesomeIcon icon={['fas', 'plane']} size="lg" />
-          </a>)
-          : (<a
-            className="option"
-            id="offline"
-            tabIndex="12"
-            title={track?.remoteBackdrop ? 'Native backdrops' : 'Native backdrops only due to API limit/network error'}
-            onClick={() => track?.remoteBackdrop ? setShouldUseAPIData(true) : null}
-          >
-            <FontAwesomeIcon
-              icon={['fas', 'plane-slash']}
-              size="lg"
-              color={track?.remoteBackdrop ? null : 'gray'}
-            />
-          </a>)
+          ? <RemoteBackdropButton />
+          : <LocalBackdropButton />
       }
-
-      <a
-        className="option"
-        id="logout"
-        title='Click to log out'
-        tabIndex="11"
-        onClick={() => handleLogoutDialog('on')}
-      >
-        <FontAwesomeIcon
-          icon={['fas', 'sign-out-alt']}
-          size="lg"
-          color="red"
-        />
-      </a>
+      <LogoutButton />
     </aside>
   )
 }
@@ -140,10 +171,10 @@ const InfoButtons = styled(InfoButtonsJSX)`
   #logout {
     z-index: 4;
   }
-  #online, #offline {
+  #remote_backdrop, #local_backdrop {
     z-index: 3;
   }
-  #offline {
+  #local_ackdrop {
     cursor: default;
   }
   #image {

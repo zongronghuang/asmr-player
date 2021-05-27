@@ -25,7 +25,7 @@ const defaultTracks = [
   {
     order: 1,
     name: 'Breaking waves',
-    searchTerm: 'seaside',
+    searchTerm: 'sea',
     audioSrc: Audio_1,
     localBackdrop: {
       photographer: 'Patrick Robert Doyle',
@@ -57,26 +57,12 @@ const defaultTracks = [
   }
 ]
 
-// 建立請求背景圖片的 Promise 陣列
-// const makeBackdropPromises = async () => {
-//   try {
-//     const backdropPromises = defaultTracks.reduce((base, track) => {
-//       base.push(apis.getRandomImage(track.searchTerm))
-//       return base
-//     }, [])
-
-//     const response = await Promise.all(backdropPromises)
-
-//     return [...response]
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
-
 const backdropPromises = defaultTracks.reduce((base, track) => {
   base.push(apis.getRandomImage(track.searchTerm))
   return base
 }, [])
+
+console.log('backdrop promises', backdropPromises)
 
 export { defaultTracks, backdropPromises }
 
