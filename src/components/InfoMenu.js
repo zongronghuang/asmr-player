@@ -49,8 +49,8 @@ const InfoMenuJSX = ({
       target="_blank"
       title={
         shouldUseAPIData && track?.remoteBackdrop
-          ? `Photographer | ${track.remoteBackdrop.photographer}`
-          : `Photographer | ${track.localBackdrop.photographer}`
+          ? `Photo by ${track.remoteBackdrop.photographer}`
+          : `Photo by ${track.localBackdrop.photographer}`
       }
       tabIndex="14"
       ref={photographerBtn} >

@@ -10,18 +10,11 @@ const DialogJSX = ({
 }) => {
   const userAuth = useContext(AuthContext)
   const title = dialogType.toUpperCase()
-  let message = ''
 
-  switch (dialogType) {
-    case 'offline':
-      message = (<>Connection lost.<br /><br />Check the network and then try again.</>)
-      break
-    case 'API error':
-      message = (<>No online backdrops available.<br /><br />Wait a moment and then try again.</>)
-      break
-    case 'logout':
-    default:
-      message = "Are you sure you want to log out of this app?"
+  const message = {
+    "offline": (<>Connection lost.<br /><br />Check the network and then try again.</>),
+    "API error": (<>No online backdrops available.<br /><br />Wait a moment and then try again.</>),
+    "logout": "Are you sure you want to log out of this app?"
   }
 
   const chooseLogoutMethod = (authProvider) => () => {
@@ -41,7 +34,7 @@ const DialogJSX = ({
       </header>
       <hr></hr>
       <section>
-        <span>{message}</span>
+        <span>{message[dialogType]}</span>
       </section>
       <footer>
         {

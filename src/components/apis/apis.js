@@ -38,7 +38,7 @@ const apis = {
         source
       }
     } catch (error) {
-      return console.error(error)
+      return console.error('[Unsplash API error]', error)
     }
   }
 }

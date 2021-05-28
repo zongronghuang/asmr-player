@@ -9,9 +9,8 @@ const PlaybackControlJSX = ({
   handlePause,
   handleNextTrack,
   handlePrevTrack
-}) => (
-  <div className={className}>
-    {/* {console.log('[render] PlaybackControl')} */}
+}) => {
+  const PreviousTrackButton = () => (
     <button
       id="prev"
       title="Previous track"
@@ -20,27 +19,31 @@ const PlaybackControlJSX = ({
       onClick={handlePrevTrack} >
       <FontAwesomeIcon icon={['fas', 'backward']} size="lg" />
     </button>
+  )
 
-    {
-      (activeButton === 'play')
-        ? (<button
-          id="play"
-          title="Play"
-          alt="Play"
-          tabIndex="2"
-          onClick={handlePlayback} >
-          <FontAwesomeIcon icon={['fas', 'play']} size="lg" />
-        </button>)
-        : (<button
-          id="pause"
-          title="Pause"
-          alt="Pause"
-          tabIndex="2"
-          onClick={handlePause} >
-          <FontAwesomeIcon icon={['fas', 'pause']} size="lg" />
-        </button>)
-    }
+  const PlayButton = () => (
+    <button
+      id="play"
+      title="Play"
+      alt="Play"
+      tabIndex="2"
+      onClick={handlePlayback} >
+      <FontAwesomeIcon icon={['fas', 'play']} size="lg" />
+    </button>
+  )
 
+  const PauseButton = () => (
+    <button
+      id="pause"
+      title="Pause"
+      alt="Pause"
+      tabIndex="2"
+      onClick={handlePause} >
+      <FontAwesomeIcon icon={['fas', 'pause']} size="lg" />
+    </button>
+  )
+
+  const NextTrackButton = () => (
     <button
       id="next"
       title="Next track"
@@ -49,8 +52,19 @@ const PlaybackControlJSX = ({
       onClick={handleNextTrack} >
       <FontAwesomeIcon icon={['fas', 'forward']} size="lg" />
     </button>
-  </div>
-)
+  )
+
+  return (
+    <div className={className}>
+      {/* {console.log('[render] PlaybackControl')} */}
+      <PreviousTrackButton />
+
+      {(activeButton === 'play') ? <PlayButton /> : <PauseButton />}
+
+      <NextTrackButton />
+    </div>
+  )
+}
 
 const PlaybackControl = styled(PlaybackControlJSX)`
   display: flex;

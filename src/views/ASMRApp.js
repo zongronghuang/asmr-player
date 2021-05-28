@@ -25,9 +25,7 @@ const ASMRApp = () => {
         const data = await Promise.all(backdropPromises)
 
         // 確認是否取得所有線上背景圖片
-        if (data.some(item => Boolean(item) === false)) {
-          throw new Error('Fetched an incomplete set of online backdrops')
-        }
+        if (data.some(item => !!item === false)) throw new Error('Online backdrops missing')
 
         // 如果無法取得 Unsplash API 資料，isReady 設為 true，表示已經可用 local backdrop
         const updatedAlbum = album.map((track, index) => ({
@@ -41,7 +39,7 @@ const ASMRApp = () => {
         setShouldUseAPIData(true)
         setIsReady(true)
       } catch (error) {
-        console.log('fetch error', error)
+        console.error('fetch error', error)
 
         setTimeout(() => {
           setShouldUseAPIData(false)
@@ -58,71 +56,56 @@ const ASMRApp = () => {
   const handleNextTrack = () => {
     setTrack(prevTrack => {
       const prevTrackId = album.findIndex(track => track.name === prevTrack.name)
-      let newTrackId
 
-      if (prevTrackId === album.length - 1) {
-        newTrackId = 0
-      } else {
-        newTrackId = prevTrackId + 1
-      }
-
-      return album[newTrackId]
+      // 播放到專輯最後一首時，回到第一首
+      if (prevTrackId === album.length - 1) return album[0]
+      return album[prevTrackId + 1]
     })
   }
 
   const handlePrevTrack = () => {
     setTrack(prevTrack => {
       const prevTrackId = album.findIndex(track => track.name === prevTrack.name)
-      let newTrackId
 
-      if (prevTrackId === 0) {
-        newTrackId = album.length - 1
-      } else {
-        newTrackId = prevTrackId - 1
-      }
-
-      return album[newTrackId]
+      // 播放到專輯第一首時，倒退至最後一首
+      if (prevTrackId === 0) return album[album.length - 1]
+      return album[prevTrackId - 1]
     })
   }
 
   const handleModeChange = (mode) => (e) => {
+    setMode(mode)
+
     // 如果是 Shuffle all 模式，則建立隨機排列曲目
     if (mode === 'shuffleAll') {
       const randomTracks = randomizeTracks(album)
-      console.log('random tracks', randomTracks)
 
-      setAlbum(prevAlbum => {
-        return [...randomTracks]
-      })
+      setAlbum(prevAlbum => ([...randomTracks]))
     }
-
-    setMode(mode)
   }
 
   const handleDragStart = (e) => {
-    console.log('==Drag Start==')
+    console.info('==Drag Start==')
     // 取得游標和 drag item 原點的距離
     const distToDragItemOrigin = {
       left: e.clientX - e.target.offsetLeft,
       top: e.clientY - e.target.offsetTop
     }
 
-    console.log(distToDragItemOrigin)
-
     setDistToEleOrigin(distToDragItemOrigin)
   }
 
   const handleDrag = (e) => {
-    console.log('==Drag==')
+    console.info('==Drag==')
   }
 
   const handleDragOver = (e) => {
     e.preventDefault()
-    console.log('==Drag Over==')
+    console.info('==Drag Over==')
   }
 
   const handleDrop = (e) => {
-    console.log('==Drop==')
+    console.info('==Drop==')
     e.preventDefault()
     const dragItem = document.querySelector('#dragItem')
 

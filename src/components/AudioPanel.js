@@ -29,20 +29,11 @@ const AudioPanelJSX = ({
     audio.play()
       .catch(error => {
         if (error) setActiveButton('play')
-        return console.log('有 error', error)
+        console.error('Playback error', error)
       })
+
     audio.volume = volume
     setActiveButton('pause') // 隱藏 play 鍵，顯示 pause 鍵
-
-    console.log({
-      volume: audio.volume,
-      currentTime: audio.currentTime,
-      error: audio.error,
-      endedState: audio.ended,
-      readyState: audio.readyState,
-      pausedState: audio.paused,
-      autoplay: audio.autoplay,
-    })
   }
 
   const handlePause = () => {
@@ -57,41 +48,27 @@ const AudioPanelJSX = ({
     const audio = document.querySelector('audio')
     const step = 0.1
 
-    switch (method) {
-      case 'up':
-        setVolume(prevVolume => {
-          console.log('UP==old vol', prevVolume)
-          if (prevVolume >= 1) {
-            return prevVolume
-          } else {
-            // toFixed 解除浮點數運算不精確問題
-            audio.volume = Number((prevVolume + step).toFixed(1))
-            console.log('UP==new vol', audio.volume)
-            return audio.volume
-          }
-        })
-        break
-      case 'down':
-        setVolume(prevVolume => {
-          console.log('DOWN==old vol', prevVolume)
-          if (prevVolume <= 0) {
-            return prevVolume
-          } else {
-            // toFixed 解除浮點數運算不精確問題
-            audio.volume = Number((prevVolume - step).toFixed(1))
-            console.log('DOWN==new vol', audio.volume)
-            return audio.volume
-          }
-        })
-        break
-      case 'manual':
-      default:
-        console.log('manual')
-        setVolume(prevVolume => {
-          audio.volume = Number(e.target.value)
-          return audio.volume
-        })
+    const volumeChangeMethod = {
+      'up': () => setVolume(prevVolume => {
+        if (prevVolume >= 1) return prevVolume
+
+        audio.volume = Number((prevVolume + step).toFixed(1))
+        return audio.volume
+      }),
+      'down': () => setVolume(prevVolume => {
+        if (prevVolume <= 0) return prevVolume
+
+        // toFixed 解除浮點數運算不精確問題
+        audio.volume = Number((prevVolume - step).toFixed(1))
+        return audio.volume
+      }),
+      'manual': () => setVolume(prevVolume => {
+        audio.volume = Number(e.target.value)
+        return audio.volume
+      })
     }
+
+    volumeChangeMethod[method]()
   }
 
   return (
