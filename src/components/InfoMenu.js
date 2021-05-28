@@ -2,7 +2,13 @@ import { useRef } from 'react'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIData, handleLogoutDialog }) => {
+const InfoMenuJSX = ({
+  className,
+  track,
+  shouldUseAPIData,
+  setShouldUseAPIData,
+  handleLogoutDialog
+}) => {
   const imageBtn = useRef(null)
   const photographerBtn = useRef(null)
   const localBackdropBtn = useRef(null)
@@ -26,8 +32,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
       id="info"
       title="Click for more"
       tabIndex="10"
-      onClick={handleTogglingAnimations}
-    >
+      onClick={handleTogglingAnimations}>
       <FontAwesomeIcon icon={['fas', 'info']} size="lg" />
     </a>
   )
@@ -42,14 +47,13 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
           : track.localBackdrop.portfolio
       }
       target="_blank"
-      tabIndex="14"
-      ref={photographerBtn}
       title={
         shouldUseAPIData && track?.remoteBackdrop
           ? `Photographer | ${track.remoteBackdrop.photographer}`
           : `Photographer | ${track.localBackdrop.photographer}`
       }
-    >
+      tabIndex="14"
+      ref={photographerBtn} >
       <FontAwesomeIcon icon={['fas', 'user-circle']} size="lg" />
     </a>
   )
@@ -66,8 +70,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
       target="_blank"
       title="View source image"
       tabIndex="13"
-      ref={imageBtn}
-    >
+      ref={imageBtn} >
       <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
     </a>
   )
@@ -83,8 +86,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
         track?.remoteBackdrop
           ? setShouldUseAPIData(true)
           : null
-      }
-    >
+      } >
       <FontAwesomeIcon
         icon={['fas', 'plane-slash']}
         size="lg"
@@ -100,8 +102,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
       tabIndex="12"
       title="Remote backdrop"
       ref={remoteBackdropBtn}
-      onClick={() => setShouldUseAPIData(false)}
-    >
+      onClick={() => setShouldUseAPIData(false)} >
       <FontAwesomeIcon icon={['fas', 'plane']} size="lg" />
     </a>
   )
@@ -113,8 +114,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
       title='Click to log out'
       tabIndex="11"
       ref={logoutBtn}
-      onClick={() => handleLogoutDialog('on')}
-    >
+      onClick={() => handleLogoutDialog('on')} >
       <FontAwesomeIcon
         icon={['fas', 'sign-out-alt']}
         size="lg"
@@ -125,7 +125,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
 
   return (
     <aside className={className}>
-      {/* {console.log('[render] InfoButtons')} */}
+      {/* {console.log('[render] InfoMenu')} */}
       <MenuButton />
       <PhotographerButton />
       <ImageButton />
@@ -139,7 +139,7 @@ const InfoButtonsJSX = ({ className, track, shouldUseAPIData, setShouldUseAPIDat
   )
 }
 
-const InfoButtons = styled(InfoButtonsJSX)`
+const InfoMenu = styled(InfoMenuJSX)`
   position: absolute;
   right: 10px;
   bottom: 35px;
@@ -221,4 +221,4 @@ const InfoButtons = styled(InfoButtonsJSX)`
   }
 `
 
-export default InfoButtons
+export default InfoMenu

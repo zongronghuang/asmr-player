@@ -17,9 +17,7 @@ const BackdropJSX = ({
         shouldUseAPIData && track.remoteBackdrop
           ? { backgroundImage: `url(${track.remoteBackdrop.source})` }
           : { backgroundImage: `url(${track.localBackdrop.source})` }
-      }
-    >
-
+      } >
       {/* {console.log('[render] Backdrop')} */}
     </div>
   )

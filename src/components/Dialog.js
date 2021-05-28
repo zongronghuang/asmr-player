@@ -47,10 +47,11 @@ const DialogJSX = ({
         {
           dialogType === 'logout'
             ? (<>
-              <button onClick={chooseLogoutMethod(userAuth.authProvider)} alt="Log out">Log out</button>
-              <button onClick={() => handleLogoutDialog('off')} alt="Stay">Stay</button>
+              <button alt="Log out" onClick={chooseLogoutMethod(userAuth.authProvider)} >Log out</button>
+
+              <button alt="Stay" onClick={() => handleLogoutDialog('off')} >Stay</button>
             </>)
-            : (<button onClick={() => handleLogoutDialog('off')} alt="Got it">Got it</button>)
+            : (<button alt="Got it" onClick={() => handleLogoutDialog('off')} >Got it</button>)
         }
       </footer>
     </dialog>

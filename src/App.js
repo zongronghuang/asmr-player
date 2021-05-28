@@ -48,18 +48,22 @@ const AppJSX = ({ className }) => {
           setAuthProvider('')
         }
       }
-    }}>
+    }} >
       < div className={className, 'App'}>
         {/* {console.log('[render] App')} */}
 
         <Router>
-          {(FBResponse?.status !== 'connected' && !GoogleResponse?.login) && <Redirect to="/login" />}
+          {
+            (FBResponse?.status !== 'connected' && !GoogleResponse?.login)
+            && <Redirect to="/login" />
+          }
 
           <Switch>
             <Route path="/">
-              {FBResponse?.status === 'connected' || GoogleResponse?.login
-                ? (<Redirect to={{ pathname: "/app" }} />)
-                : (<Redirect to={{ pathname: "/login" }} />)
+              {
+                (FBResponse?.status === 'connected' || GoogleResponse?.login)
+                  ? (<Redirect to={{ pathname: "/app" }} />)
+                  : (<Redirect to={{ pathname: "/login" }} />)
               }
 
               <Route path="/login">

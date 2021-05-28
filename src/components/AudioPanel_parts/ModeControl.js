@@ -1,14 +1,16 @@
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const ModesJSX = ({ className, mode, handleModeChange }) => {
+const ModeControlJSX = ({ className, mode, handleModeChange }) => {
   return (
     <div className={className}>
-      {/* { console.log('[render] Modes')} */}
+      {/* { console.log('[render] ModeControl')} */}
 
-      <button title="Loop album" alt="Loop album" tabIndex="7"
-        onClick={handleModeChange('loopAlbum')}
-      >
+      <button
+        title="Loop album"
+        alt="Loop album"
+        tabIndex="7"
+        onClick={handleModeChange('loopAlbum')} >
         <FontAwesomeIcon
           icon={['fas', 'sync']}
           color={(mode === 'loopAlbum') ? 'blue' : 'black'}
@@ -16,9 +18,11 @@ const ModesJSX = ({ className, mode, handleModeChange }) => {
         />
       </button>
 
-      <button title="Loop track" alt="Loop track" tabIndex="8"
-        onClick={handleModeChange('loopTrack')}
-      >
+      <button
+        title="Loop track"
+        alt="Loop track"
+        tabIndex="8"
+        onClick={handleModeChange('loopTrack')} >
         <FontAwesomeIcon
           icon={['fas', 'redo']}
           color={(mode === 'loopTrack') ? 'blue' : 'black'}
@@ -26,9 +30,11 @@ const ModesJSX = ({ className, mode, handleModeChange }) => {
         />
       </button>
 
-      <button title="Shuffle all" alt="Shuffle all" tabIndex="9"
-        onClick={handleModeChange('shuffleAll')}
-      >
+      <button
+        title="Shuffle all"
+        alt="Shuffle all"
+        tabIndex="9"
+        onClick={handleModeChange('shuffleAll')} >
         <FontAwesomeIcon
           icon={['fas', 'random']}
           color={(mode === 'shuffleAll') ? 'blue' : 'black'}
@@ -39,7 +45,7 @@ const ModesJSX = ({ className, mode, handleModeChange }) => {
   )
 }
 
-const Modes = styled(ModesJSX)`
+const ModeControl = styled(ModeControlJSX)`
   display: flex;
   align-items: flex-start;
   border-radius: 0px 10px 10px 0px;
@@ -61,4 +67,4 @@ const Modes = styled(ModesJSX)`
   }
 `
 
-export default Modes
+export default ModeControl

@@ -14,12 +14,18 @@ const LoginJSX = ({ className }) => {
           <div className="circle" id="inner">
             <section>
               <h1>ASMR Player</h1>
-              <a href="#" id="fb-login" onClick={userAuth.FB.loginMethod}>
+              <a
+                id="fb-login"
+                href="#"
+                onClick={userAuth.FB.loginMethod} >
                 <FontAwesomeIcon icon={['fab', 'facebook-square']} size="lg" />
                 <span>Facebook Login</span>
               </a>
 
-              <a href="#" id="google-login" onClick={userAuth.Google.loginMethod}>
+              <a
+                id="google-login"
+                href="#"
+                onClick={userAuth.Google.loginMethod} >
                 <FontAwesomeIcon icon={['fab', 'google']} size="lg" />
                 <span>Google Login</span>
               </a>

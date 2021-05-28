@@ -8,8 +8,7 @@ const AudioTrack = ({
     onEnded={handleNextTrack}
     onCanPlayThrough={handlePlayback}
     src={track.audioSrc}
-    loop={mode === 'loopTrack'}
-  >
+    loop={mode === 'loopTrack'} >
     {/* {console.log('[render] AudioTrack', track.audioSrc)} */}
   </audio>
 )

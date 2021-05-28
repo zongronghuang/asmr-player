@@ -24,7 +24,10 @@ const TrackInfoJSX = ({ className, track }) => {
   return (
     <div className={className} id="animation-target">
       {/* { console.log('[render] TrackInfo')} */}
-      <span>< FontAwesomeIcon icon={['fas', 'music']} />{`\u00A0  ${track.order} \u00A0${track.name}`}</span>
+      <span>
+        <FontAwesomeIcon icon={['fas', 'music']} />
+        {`\u00A0  ${track.order} \u00A0${track.name}`}
+      </span>
     </div >
   )
 }

@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // 操作按鈕元件
-const PlaybackButtonsJSX = ({
+const PlaybackControlJSX = ({
   className,
   activeButton,
   handlePlayback,
@@ -11,28 +11,48 @@ const PlaybackButtonsJSX = ({
   handlePrevTrack
 }) => (
   <div className={className}>
-    {/* {console.log('[render] PlaybackButtons')} */}
-    <button id="prev" onClick={handlePrevTrack} title="Previous track" alt="Previous track" tabIndex="1">
+    {/* {console.log('[render] PlaybackControl')} */}
+    <button
+      id="prev"
+      title="Previous track"
+      alt="Previous track"
+      tabIndex="1"
+      onClick={handlePrevTrack} >
       <FontAwesomeIcon icon={['fas', 'backward']} size="lg" />
     </button>
 
     {
       (activeButton === 'play')
-        ? (<button id="play" title="Play" alt="Play" onClick={handlePlayback} tabIndex="2" >
+        ? (<button
+          id="play"
+          title="Play"
+          alt="Play"
+          tabIndex="2"
+          onClick={handlePlayback} >
           <FontAwesomeIcon icon={['fas', 'play']} size="lg" />
         </button>)
-        : (<button id="pause" onClick={handlePause} title="Pause" alt="Pause" tabIndex="2">
+        : (<button
+          id="pause"
+          title="Pause"
+          alt="Pause"
+          tabIndex="2"
+          onClick={handlePause} >
           <FontAwesomeIcon icon={['fas', 'pause']} size="lg" />
         </button>)
     }
 
-    <button id="next" onClick={handleNextTrack} title="Next track" alt="Next track" tabIndex="3">
+    <button
+      id="next"
+      title="Next track"
+      alt="Next track"
+      tabIndex="3"
+      onClick={handleNextTrack} >
       <FontAwesomeIcon icon={['fas', 'forward']} size="lg" />
     </button>
   </div>
 )
 
-const PlaybackButtons = styled(PlaybackButtonsJSX)`
+const PlaybackControl = styled(PlaybackControlJSX)`
   display: flex;
   align-items: flex-start;
 
@@ -49,4 +69,4 @@ const PlaybackButtons = styled(PlaybackButtonsJSX)`
   }
 `
 
-export default PlaybackButtons
+export default PlaybackControl

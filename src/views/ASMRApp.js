@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Backdrop from '../components/Backdrop'
 import AudioPanel from '../components/AudioPanel'
-import InfoButtons from '../components/InfoButtons'
+import InfoMenu from '../components/InfoMenu'
 import TrackInfo from '../components/TrackInfo'
 import Loader from '../components/Loader'
 import Dialog from '../components/Dialog'
@@ -176,7 +176,7 @@ const ASMRApp = () => {
       handleDrag={handleDrag}
       handleDragStart={handleDragStart}
     />
-    <InfoButtons
+    <InfoMenu
       track={track}
       shouldUseAPIData={shouldUseAPIData}
       setShouldUseAPIData={setShouldUseAPIData}

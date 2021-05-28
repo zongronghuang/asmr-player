@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import styled from '@emotion/styled'
 
-import PlaybackButtons from './AudioPanel_parts/PlaybackButtons'
+import PlaybackControl from './AudioPanel_parts/PlaybackControl'
 import AudioTrack from './AudioPanel_parts/AudioTrack'
-import Volume from './AudioPanel_parts/Volume'
-import Modes from './AudioPanel_parts/Modes'
+import VolumeControl from './AudioPanel_parts/VolumeControl'
+import ModeControl from './AudioPanel_parts/ModeControl'
 
 // audio 控制面板元件 (匯整上面元件)
 const AudioPanelJSX = ({
@@ -100,10 +100,9 @@ const AudioPanelJSX = ({
       draggable="true"
       id="dragItem"
       onDrag={handleDrag}
-      onDragStart={handleDragStart}
-    >
+      onDragStart={handleDragStart} >
       {/* {console.log('[render] AudioPanel')} */}
-      <PlaybackButtons
+      <PlaybackControl
         activeButton={activeButton}
         handlePlayback={handlePlayback}
         handlePause={handlePause}
@@ -111,9 +110,10 @@ const AudioPanelJSX = ({
         handlePrevTrack={handlePrevTrack}
       />
       <div>
-        <Volume
+        <VolumeControl
           handleVolumeUpDown={handleVolumeUpDown}
-          volume={volume} />
+          volume={volume}
+        />
         <AudioTrack
           track={track}
           mode={mode}
@@ -121,7 +121,7 @@ const AudioPanelJSX = ({
           handlePlayback={handlePlayback}
         />
       </div>
-      <Modes
+      <ModeControl
         handleModeChange={handleModeChange}
         mode={mode}
       />
