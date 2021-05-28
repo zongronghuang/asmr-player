@@ -59,8 +59,6 @@ const DialogJSX = ({
 }
 
 const Dialog = styled(DialogJSX)`
-  top: 50%;
-  transform: translateY(-50%);
   width: 30%;
   min-width: 200px;
   max-width: 300px;
