@@ -1,4 +1,4 @@
-import { useRef, forwardRef } from 'react'
+import { useRef, useEffect, forwardRef } from 'react'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -113,6 +113,10 @@ const InfoMenuJSX = ({
   const remoteBackdropBtn = useRef(null)
   const logoutBtn = useRef(null)
 
+  useEffect(() => {
+    showBackdropBtn()
+  }, [shouldUseAPIData])
+
   const showBackdropBtn = () => {
     if (shouldUseAPIData && track?.remoteBackdrop) {
       remoteBackdropBtn.current.style.zIndex = 3
@@ -124,7 +128,7 @@ const InfoMenuJSX = ({
     localBackdropBtn.current.style.zIndex = 3
   }
 
-  showBackdropBtn()
+
 
   const handleTogglingAnimations = () => {
     photographerBtn.current.classList.toggle('float-photographer')
