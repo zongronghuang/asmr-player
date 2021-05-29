@@ -3,6 +3,31 @@ import styled from '@emotion/styled'
 
 import AuthContext from '../contexts/AuthContext'
 
+// subcomponents
+const LogoutButton = ({ userAuth, chooseLogoutMethod }) => (
+  <button
+    alt="Log out"
+    onClick={chooseLogoutMethod(userAuth.authProvider)} >
+    Log out
+  </button>
+)
+
+const StayButton = ({ handleLogoutDialog }) => (
+  <button
+    alt="Stay"
+    onClick={() => handleLogoutDialog('off')} >
+    Stay
+  </button>
+)
+
+const GotItButton = ({ handleLogoutDialog }) => (
+  <button
+    alt="Got it"
+    onClick={() => handleLogoutDialog('off')} >
+    Got it
+  </button>
+)
+
 const DialogJSX = ({
   className,
   dialogType,
@@ -40,11 +65,13 @@ const DialogJSX = ({
         {
           dialogType === 'logout'
             ? (<>
-              <button alt="Log out" onClick={chooseLogoutMethod(userAuth.authProvider)} >Log out</button>
-
-              <button alt="Stay" onClick={() => handleLogoutDialog('off')} >Stay</button>
+              <LogoutButton
+                userAuth={userAuth}
+                chooseLogoutMethod={chooseLogoutMethod}
+              />
+              <StayButton handleLogoutDialog={handleLogoutDialog} />
             </>)
-            : (<button alt="Got it" onClick={() => handleLogoutDialog('off')} >Got it</button>)
+            : <GotItButton handleLogoutDialog={handleLogoutDialog} />
         }
       </footer>
     </dialog>
