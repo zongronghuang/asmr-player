@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 import Backdrop from '../components/Backdrop'
 import AudioPanel from '../components/AudioPanel'
@@ -7,17 +7,31 @@ import TrackInfo from '../components/TrackInfo'
 import Loader from '../components/Loader'
 import Dialog from '../components/Dialog'
 
-import { defaultTracks, backdropPromises } from '../utils/trackFactory'
+import { orderedTracks, backdropPromises } from '../utils/trackFactory'
 import { randomizeTracks } from '../utils/helpers'
 
 const ASMRApp = () => {
+  const orderedTracksWithAPIData = useRef(null)
+
   const [mode, setMode] = useState('loopAlbum')
-  const [album, setAlbum] = useState(defaultTracks)
-  const [track, setTrack] = useState(album[0])
+  const [album, setAlbum] = useState(orderedTracks)
+  const [track, setTrack] = useState(orderedTracks[0])
   const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 })
   const [shouldUseAPIData, setShouldUseAPIData] = useState(false)
   const [isReady, setIsReady] = useState(false)
   const [dialogType, setDialogType] = useState('logout')
+
+  // 監測是否(恢復)連線
+  window.addEventListener('online', () => {
+    handleLogoutDialog('off')
+    setDialogType('logout')
+  })
+
+  // 監測是否離線
+  window.addEventListener('offline', () => {
+    setDialogType('offline')
+    handleLogoutDialog('on')
+  })
 
   useEffect(() => {
     const fetchBackdrops = async () => {
@@ -25,23 +39,28 @@ const ASMRApp = () => {
         const data = await Promise.all(backdropPromises)
 
         // 確認是否取得所有線上背景圖片
-        if (data.some(item => !!item === false)) throw new Error('Online backdrops missing')
+        if (data.some(item => !!item === false)) {
+          throw new Error('Online backdrops missing')
+        }
 
         // 如果無法取得 Unsplash API 資料，isReady 設為 true，表示已經可用 local backdrop
-        const updatedAlbum = album.map((track, index) => ({
-          ...track,
-          remoteBackdrop: { ...data[index] }
-        }))
-        console.log('updated album', updatedAlbum)
+        orderedTracksWithAPIData.current = orderedTracks
+          .map((track, index) => ({
+            ...track,
+            remoteBackdrop: { ...data[index] }
+          }))
+        console.log('ordered tracks (API)', orderedTracksWithAPIData.current)
 
-        setAlbum(updatedAlbum)
-        setTrack(prevTrack => updatedAlbum[prevTrack.order])
+        setAlbum(prevAlbum => [...orderedTracksWithAPIData.current])
+        setTrack(prevTrack => [...orderedTracksWithAPIData.current][prevTrack.order])
         setShouldUseAPIData(true)
         setIsReady(true)
       } catch (error) {
         console.error('fetch error', error)
 
         setTimeout(() => {
+          setAlbum(prevAlbum => [...orderedTracks])
+          setTrack(prevTrack => [...orderedTracks][prevTrack.order])
           setShouldUseAPIData(false)
           setIsReady(true)
           setDialogType('API error')
@@ -76,11 +95,18 @@ const ASMRApp = () => {
   const handleModeChange = (mode) => (e) => {
     setMode(mode)
 
+    if (mode === 'loopAlbum' && orderedTracksWithAPIData.current) {
+      setAlbum([...orderedTracksWithAPIData.current])
+    }
+
+    if (mode === 'loopAlbum' && !orderedTracksWithAPIData.current) {
+      setAlbum([...orderedTracks])
+    }
+
     // 如果是 Shuffle all 模式，則建立隨機排列曲目
     if (mode === 'shuffleAll') {
       const randomTracks = randomizeTracks(album)
-
-      setAlbum(prevAlbum => ([...randomTracks]))
+      setAlbum(prevAlbum => [...randomTracks])
     }
   }
 
@@ -123,18 +149,6 @@ const ASMRApp = () => {
     if (status === 'on') dialog.showModal()
     if (status === 'off') dialog.close()
   }
-
-  // 監測是否(恢復)連線
-  window.addEventListener('online', () => {
-    handleLogoutDialog('off')
-    setDialogType('logout')
-  })
-
-  // 監測是否離線
-  window.addEventListener('offline', () => {
-    setDialogType('offline')
-    handleLogoutDialog('on')
-  })
 
   return (<>
     {/* { console.log('[render] ASMRApp')} */}

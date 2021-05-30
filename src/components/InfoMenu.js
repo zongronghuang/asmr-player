@@ -123,11 +123,9 @@ const InfoMenuJSX = ({
       localBackdropBtn.current.style.zIndex = -1
       return
     }
-
     remoteBackdropBtn.current.style.zIndex = -1
     localBackdropBtn.current.style.zIndex = 3
   }
-
 
 
   const handleTogglingAnimations = () => {

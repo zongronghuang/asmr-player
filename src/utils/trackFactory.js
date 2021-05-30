@@ -10,7 +10,7 @@ import Image_1 from '../assets/images/backdrop_1.jpg'
 import Image_2 from '../assets/images/backdrop_2.jpg'
 import Image_3 from '../assets/images/backdrop_3.jpg'
 
-const defaultTracks = [
+const orderedTracks = [
   {
     order: 0,
     name: 'Bird chirps',
@@ -57,12 +57,12 @@ const defaultTracks = [
   }
 ]
 
-const backdropPromises = defaultTracks.reduce((base, track) => {
+const backdropPromises = orderedTracks.reduce((base, track) => {
   base.push(apis.getRandomImage(track.searchTerm))
   return base
 }, [])
 
 console.log('backdrop promises', backdropPromises)
 
-export { defaultTracks, backdropPromises }
+export { orderedTracks, backdropPromises }
 
