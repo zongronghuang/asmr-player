@@ -111,7 +111,6 @@ const ASMRApp = () => {
   }
 
   const handleDragStart = (e) => {
-    console.info('==Drag Start==')
     // 取得游標和 drag item 原點的距離
     const distToDragItemOrigin = {
       left: e.clientX - e.target.offsetLeft,
@@ -122,16 +121,14 @@ const ASMRApp = () => {
   }
 
   const handleDrag = (e) => {
-    console.info('==Drag==')
+    e.preventDefault()
   }
 
   const handleDragOver = (e) => {
     e.preventDefault()
-    console.info('==Drag Over==')
   }
 
   const handleDrop = (e) => {
-    console.info('==Drop==')
     e.preventDefault()
     const dragItem = document.querySelector('#dragItem')
 
