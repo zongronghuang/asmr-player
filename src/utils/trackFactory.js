@@ -62,7 +62,7 @@ const backdropPromises = orderedTracks.reduce((base, track) => {
   return base
 }, [])
 
-console.log('backdrop promises', backdropPromises)
+// console.log('backdrop promises', backdropPromises)
 
 export { orderedTracks, backdropPromises }
 

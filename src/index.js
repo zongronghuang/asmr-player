@@ -18,7 +18,7 @@ import firebase from 'firebase/app'
     appId: process.env.REACT_APP_FIREBASE_APP_ID
   })
 
-  console.log('[Init] Google Firebase')
+  // console.log('[Init] Google Firebase')
 })()
 
 ReactDOM.render(

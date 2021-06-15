@@ -9,9 +9,7 @@ const useFacebookLogin = () => {
       let js
       let fjs = d.getElementsByTagName(s)[0]
 
-      if (d.getElementById(id)) {
-        return
-      }
+      if (d.getElementById(id)) { return }
 
       js = d.createElement(s)
       js.id = id
@@ -28,7 +26,7 @@ const useFacebookLogin = () => {
         version: process.env.REACT_APP_FB_API_VERSION  // 補上
       })
 
-      console.log('[!FB SDK initialized!]')
+      // console.log('[!FB SDK initialized!]')
 
       // 取得登入狀態並記錄到 localStorage
       window.FB.getLoginStatus(function (response) {
@@ -44,7 +42,7 @@ const useFacebookLogin = () => {
   // 登入 FB 並取得 access token
   const handleFBLogin = () => {
     window.FB.login(function (response) {
-      console.log('log in response', response)
+      console.log('FB login response', response)
       setFBResponse(response)
       localStorage.setItem('facebookClientToken', response?.authResponse?.accessToken)
     }, { scope: 'public_profile,email' })
@@ -58,6 +56,7 @@ const useFacebookLogin = () => {
     })
   }
 
+  // console.log('useFacebookLogin hook ready')
   return [FBResponse, handleFBLogin, handleFBLogout]
 }
 

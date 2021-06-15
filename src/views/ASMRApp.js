@@ -152,6 +152,7 @@ const ASMRApp = () => {
     {isReady || <Loader />}
     <Dialog
       dialogType={dialogType}
+      setDialogType={setDialogType}
       handleLogoutDialog={handleLogoutDialog}
     />
     <TrackInfo track={track} />

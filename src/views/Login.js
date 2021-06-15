@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { Redirect } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -6,6 +7,7 @@ import AuthContext from '../contexts/AuthContext'
 
 const LoginJSX = ({ className }) => {
   const userAuth = useContext(AuthContext)
+  const { FB, Google } = userAuth
 
   return (
     <main className={className}>
@@ -17,7 +19,7 @@ const LoginJSX = ({ className }) => {
               <a
                 id="fb-login"
                 href="#"
-                onClick={userAuth.FB.loginMethod} >
+                onClick={FB.loginMethod} >
                 <FontAwesomeIcon icon={['fab', 'facebook-square']} size="lg" />
                 <span>Facebook Login</span>
               </a>
@@ -25,7 +27,8 @@ const LoginJSX = ({ className }) => {
               <a
                 id="google-login"
                 href="#"
-                onClick={userAuth.Google.loginMethod} >
+                onClick={Google.loginMethod}
+              >
                 <FontAwesomeIcon icon={['fab', 'google']} size="lg" />
                 <span>Google Login</span>
               </a>

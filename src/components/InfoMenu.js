@@ -127,7 +127,6 @@ const InfoMenuJSX = ({
     localBackdropBtn.current.style.zIndex = 3
   }
 
-
   const handleTogglingAnimations = () => {
     photographerBtn.current.classList.toggle('float-photographer')
     imageBtn.current.classList.toggle('float-image')

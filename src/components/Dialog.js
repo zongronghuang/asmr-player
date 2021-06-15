@@ -1,13 +1,12 @@
 import { useContext } from 'react'
 import styled from '@emotion/styled'
-
 import AuthContext from '../contexts/AuthContext'
 
 // subcomponents
 const LogoutButton = ({ userAuth, chooseLogoutMethod }) => (
   <button
     alt="Log out"
-    onClick={chooseLogoutMethod(userAuth.authProvider)} >
+    onClick={() => { chooseLogoutMethod(userAuth.authProvider) }} >
     Log out
   </button>
 )
@@ -28,9 +27,21 @@ const GotItButton = ({ handleLogoutDialog }) => (
   </button>
 )
 
+const TryAgainButton = ({ handleLogoutDialog, setDialogType }) => (
+  <button
+    alt="Got it"
+    onClick={() => {
+      handleLogoutDialog('off')
+      setDialogType('logout')
+    }} >
+    Got it
+  </button>
+)
+
 const DialogJSX = ({
   className,
   dialogType,
+  setDialogType,
   handleLogoutDialog
 }) => {
   const userAuth = useContext(AuthContext)
@@ -42,13 +53,13 @@ const DialogJSX = ({
     "logout": "Are you sure you want to log out of this app?"
   }
 
-  const chooseLogoutMethod = (authProvider) => () => {
-    // [特例] FB 使用者之前登入過，但沒有登出就關閉分頁，重開分頁貼上網址後會讀取留下的 cookie，就會自動登入進到 /app
-    // 沒有手動按登入鍵 => 無法設定 userAuth.authProvider，因此無法選出要用的登出方法
-    // 所以 userAuth.authProvider 無值時，以 'FB' 為預設值
-    // Google 用 OAuth 登入，不會留下 cookie，因此沒有這個問題 (除非把 access token 記到 cookie 中，但很危險!)
-    if (!authProvider) authProvider = 'FB'
-    userAuth[authProvider].logoutMethod()
+  const chooseLogoutMethod = (authProvider) => {
+    // 如果因為其他原因 (另開分頁)，導致 authProvider === null
+    // 雖可登入 app，但無法使用對應的登出方法，因此強制更改 window.location 進行登出
+    if (!authProvider) {
+      return window.location = '/login'
+    }
+    return userAuth[authProvider].logoutMethod()
   }
 
   return (
@@ -64,14 +75,28 @@ const DialogJSX = ({
       <footer>
         {
           dialogType === 'logout'
-            ? (<>
+          && (
+            <>
               <LogoutButton
                 userAuth={userAuth}
                 chooseLogoutMethod={chooseLogoutMethod}
               />
               <StayButton handleLogoutDialog={handleLogoutDialog} />
-            </>)
-            : <GotItButton handleLogoutDialog={handleLogoutDialog} />
+            </>
+          )
+        }
+
+        {
+          dialogType === 'offline'
+          && <GotItButton handleLogoutDialog={handleLogoutDialog} />
+        }
+
+        {
+          dialogType === 'API error'
+          && <TryAgainButton
+            handleLogoutDialog={handleLogoutDialog}
+            setDialogType={setDialogType}
+          />
         }
       </footer>
     </dialog>

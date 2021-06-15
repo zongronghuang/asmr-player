@@ -17,7 +17,6 @@ const useGoogleLogin = () => {
 
       localStorage.setItem('googleAccessToken', accessToken)
       setGoogleResponse({ login: true })
-      console.log('[Google] Login success')
     } catch (error) {
       console.log(`[Google] Login failure: code=${error.code} | message=${error.message}`)
       setGoogleResponse({ login: false })
@@ -28,12 +27,12 @@ const useGoogleLogin = () => {
     try {
       await firebase.auth().signOut()
       setGoogleResponse({ login: false })
-      console.log('[Google] Logout success')
     } catch (error) {
       console.log(`[Google] Logout failure: code=${error.code} | message=${error.message}`)
     }
   }
 
+  // console.log('useGoogleLogin hook ready!')
   return [GoogleResponse, handleGoogleLogin, handleGoogleLogout]
 }
 

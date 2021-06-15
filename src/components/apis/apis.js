@@ -11,13 +11,13 @@ const apis = {
         }
       })
 
-      console.log('response', response)
+      // console.log('response', response)
 
       const { ok, statusText } = response
       if (!ok) { throw new Error(statusText) }
 
       const imageData = await response.json()
-      console.log('Fetched image data', imageData)
+      // console.log('Fetched image data', imageData)
 
       // 巢狀解構賦值 (nested destructuring) + 重新命名需要的資料
       const {
