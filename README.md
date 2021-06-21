@@ -6,7 +6,7 @@
 
 This web app is a personal side project built on React and supported technologies. 
 
-Try out the [demo app on Firebase](https://asmr-player-312716.web.app/).
+Try out the [demo app](https://asmr-player-312716.web.app/) on Firebase.
 
 ## :beginner: Purpose
 
