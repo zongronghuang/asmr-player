@@ -6,7 +6,7 @@
 
 This web app is a personal side project built on React and supported technologies. 
 
-Try out the [demo (added later)]().
+Try out the [demo app on Firebase](https://asmr-player-312716.web.app/).
 
 ## :beginner: Purpose
 
@@ -15,6 +15,7 @@ I built this web app to hone and improve on my technical proficiency of [React](
 ## :musical_note: Features
 
 ![app page demo](app_page.jpg)
+<small>:framed_picture: Credit: [Sebastian Unrau](https://unsplash.com/photos/sp-p7uuT0tw)</small>
 
 * It has four built-in audio recordings and four photographic works.
 * When online, it can display random photograhic works from [Unsplash](https://unsplash.com/), with links to the source image and the photographer's profile page for further exploration.
