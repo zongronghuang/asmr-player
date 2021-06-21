@@ -35,22 +35,25 @@ const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
   </a>
 ))
 
-const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
-  <a
-    className="option"
-    id="image"
-    href={
-      shouldUseAPIData && track?.remoteBackdrop
-        ? track.remoteBackdrop.source
-        : track.localBackdrop.source
-    }
-    target="_blank"
-    title="View source image"
-    tabIndex="13"
-    ref={ref} >
-    <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
-  </a>
-))
+const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => {
+  { console.log('image source', track) }
+  return (
+    <a
+      className="option"
+      id="image"
+      href={
+        shouldUseAPIData && track?.remoteBackdrop
+          ? track.remoteBackdrop.source
+          : track.localBackdrop.source
+      }
+      target="_blank"
+      title="View source image"
+      tabIndex="13"
+      ref={ref} >
+      <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
+    </a>
+  )
+})
 
 const LocalBackdropButton = forwardRef(({ track, setShouldUseAPIData }, ref) => (
   <a
@@ -147,7 +150,7 @@ const InfoMenuJSX = ({
       <ImageButton
         track={track}
         ref={imageBtn}
-        setShouldUseAPIData={setShouldUseAPIData}
+        shouldUseAPIData={shouldUseAPIData}
       />
       <RemoteBackdropButton
         ref={remoteBackdropBtn}

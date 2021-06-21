@@ -49,7 +49,7 @@ const ASMRApp = () => {
             ...track,
             remoteBackdrop: { ...data[index] }
           }))
-        console.log('ordered tracks (API)', orderedTracksWithAPIData.current)
+        // console.log('ordered tracks (API)', orderedTracksWithAPIData.current)
 
         setAlbum(prevAlbum => [...orderedTracksWithAPIData.current])
         setTrack(prevTrack => [...orderedTracksWithAPIData.current][prevTrack.order])
