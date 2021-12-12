@@ -1,172 +1,192 @@
-import { useContext } from 'react'
-import { Redirect } from 'react-router-dom'
-import styled from '@emotion/styled'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useContext } from "react";
+import { Redirect } from "react-router-dom";
+import styled from "@emotion/styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import AuthContext from '../contexts/AuthContext'
+import AuthContext from "../contexts/AuthContext";
 
 const LoginJSX = ({ className }) => {
-  const userAuth = useContext(AuthContext)
-  const { FB, Google } = userAuth
+  const userAuth = useContext(AuthContext);
+  const { FB, Google } = userAuth;
 
   return (
     <main className={className}>
-      <div className="circle" id="outer">
-        <div className="circle" id="middle">
-          <div className="circle" id="inner">
-            <section>
-              <h1>ASMR Player</h1>
+      <div className="circle circle-outer">
+        <div className="circle circle-middle">
+          <div className="circle circle-inner">
+            <section className="logins">
+              <h1 className="app-title">ASMR Player</h1>
               <a
-                id="fb-login"
+                className="login-btn fb-login"
                 href="#"
-                onClick={FB.loginMethod} >
-                <FontAwesomeIcon icon={['fab', 'facebook-square']} size="lg" />
-                <span>Facebook Login</span>
+                onClick={FB.loginMethod}
+              >
+                <FontAwesomeIcon icon={["fab", "facebook-square"]} size="lg" />
+                <span className="fb-login-text">Facebook Login</span>
               </a>
 
               <a
-                id="google-login"
+                className="login-btn google-login"
                 href="#"
                 onClick={Google.loginMethod}
               >
-                <FontAwesomeIcon icon={['fab', 'google']} size="lg" />
-                <span>Google Login</span>
+                <FontAwesomeIcon icon={["fab", "google"]} size="lg" />
+                <span className="google-login-text">Google Login</span>
               </a>
             </section>
           </div>
         </div>
       </div>
 
-      <footer>
-        <small>
-          Made with <FontAwesomeIcon icon={['fas', 'heart']} color={'goldenrod'} /> by <a href="https://github.com/zongronghuang/asmr-player" target="_blank">Zong-Rong</a>
+      <footer className="footer">
+        <small className="app-author">
+          Made with &nbsp;
+          <FontAwesomeIcon icon={["fas", "heart"]} color={"goldenrod"} />{" "}
+          &nbsp;by{" "}
+          <a
+            href="https://github.com/zongronghuang/asmr-player"
+            target="_blank"
+          >
+            Zong-Rong
+          </a>
         </small>
       </footer>
     </main>
-  )
-}
+  );
+};
 
 const Login = styled(LoginJSX)`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-width: 100vw;
-min-height: 100vh;
-padding: 0;
-margin: 0;
-text-align: center;
-background-color: black;
-font-family: Arial, Helvetica, sans-serif;
-
-.circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: auto;
-  border-radius: 50%;
-  border-top: 2px solid goldenrod;
-  border-bottom: 2px solid goldenrod;
-
-  &:hover {
-    border-width: 6px;
-  }
-}
-
-#inner {
-  width: 250px;
-  height: 250px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
-}
+  gap: 45%;
 
-#middle {
-  width: 300px;
-  height: 300px;
-}
+  height: 100vh;
+  background-color: #000;
 
-#outer {
-  width: 350px;
-  height: 350px;
-  transform: translate(-50%, -50%) rotate(45deg);
-}
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
 
-section {
-  display: flex;
-  align-items: space-around;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 60%;
-  height: 50%;
-  border-radius: 10%;
-  transform: rotate(-45deg);
-}
+  /* ------------------ */
+  /* GOLDEN RINGS */
+  /* ------------------ */
+  .circle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
-h1 {
-  width: 100%;
-  font-family: Courgette, Arial, cursive, monospace, sans-serif;
-  font-size: x-large;
-  font-weight: bold;
-  color: goldenrod;
+    border-radius: 50%;
 
-  &:hover {
-    text-shadow: -1px -1px 20px goldenrod, -1px 1px 20px goldenrod, 1px -1px 20px goldenrod, 1px 1px 20px goldenrod;
-    color: black;
-  }
-}
+    transition: all 0.5s;
 
-footer {
-  position: absolute;
-  bottom: 5%;
-  margin: auto;
-  color: white;
-}
+    &:hover {
+      box-shadow: -6px 6px 0 0 goldenrod, 6px -6px 0 0 goldenrod;
+    }
 
-a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
+    &.circle-outer {
+      width: 95vmin;
+      height: 95vmin;
+    }
 
-  & > span {
-    margin-left: 5px;
-    word-spacing: 1px;
+    &.circle-middle {
+      width: 85vmin;
+      height: 85vmin;
+    }
+
+    &.circle-inner {
+      width: 75vmin;
+      height: 75vmin;
+    }
   }
 
-  & > svg {
-    margin-left: 1px;
+  /* ------------------ */
+  /* LOGIN AREA */
+  /* ------------------ */
+  .logins {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+
+    width: 60%;
+    height: 60%;
   }
-}
 
-#fb-login, #google-login {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 25px;
-  margin-bottom: 5px;
-  line-height: 30px;
-  font-size: 90%;
-  font-family: 'Noto Sans TC', sans-serif;
-  border-radius: 5px;
-  padding: 5px;
-}
+  .app-title {
+    margin-bottom: auto;
 
-#fb-login {
-  background-color: #1877f2;
+    font-family: Courgette, Arial, cursive, monospace, sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: goldenrod;
 
-  &:hover {
-    background-color: #385898;
+    transition: all 0.5s;
+
+    &:hover {
+      text-shadow: -1px -1px 20px goldenrod, -1px 1px 20px goldenrod,
+        1px -1px 20px goldenrod, 1px 1px 20px goldenrod;
+      color: black;
+    }
   }
-}
 
-#google-login {
-  background-color: #4285F4;
+  .login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.4rem;
 
-  &:hover {
-    background-color: #C20806;
+    width: 80%;
+    padding: 0.2rem 0.4rem;
+    margin-bottom: 0.2rem;
+    border-radius: 5px;
+    background-color: #1877f2;
+
+    line-height: 2;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: "Noto Sans TC", sans-serif;
+
+    transition: all 0.4s;
+
+    &:hover {
+      background-color: #385898;
+    }
+
+    & > svg {
+      margin-left: 0.2rem;
+    }
   }
-}
-`
 
-export default Login
+  /* ------------------ */
+  /* FOOTER */
+  /* ------------------ */
+  .footer {
+    padding: 1.6rem 3.2rem;
+    width: 100%;
+    height: 10%;
+
+    color: white;
+    line-height: 1.8;
+
+    &:hover {
+      text-shadow: -1px -1px 20px goldenrod, -1px 1px 20px goldenrod,
+        1px -1px 20px goldenrod, 1px 1px 20px goldenrod;
+    }
+
+    & a {
+      text-decoration: none;
+      color: white;
+    }
+  }
+`;
+
+export default Login;

@@ -96,7 +96,7 @@ const AppJSX = ({ className }) => {
 }
 
 const App = styled(AppJSX)`
-  position: absolute;
+ height: 100vh;
 `
 
 export default App;
