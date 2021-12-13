@@ -187,6 +187,99 @@ const Login = styled(LoginJSX)`
       color: white;
     }
   }
+
+  /* ------------------ */
+  /* MEDIA QUERIES */
+  /* ------------------ */
+  /* MOBILE MEDIUM 375px */
+  @media (min-width: 23em) {
+    .circle-outer {
+      max-width: 420px;
+      max-height: 420px;
+    }
+    .circle-middle {
+      max-width: 380px;
+      max-height: 380px;
+    }
+    .circle-inner {
+      max-width: 340px;
+      max-height: 340px;
+    }
+
+    .app-title {
+      font-size: 2.4rem;
+    }
+
+    .login-btn {
+      gap: 0.8rem;
+
+      width: 85%;
+      padding: 0.4rem 0.8rem;
+
+      font-size: 1.2em;
+
+      & > svg {
+        font-size: 2rem;
+      }
+    }
+
+    .footer {
+      font-size: 1.4rem;
+    }
+  }
+
+  /* TABLET 768px */
+  @media (min-width: 48em) {
+    .circle-outer {
+      max-width: 75vmin;
+      max-height: 75vmin;
+    }
+    .circle-middle {
+      max-width: 65vmin;
+      max-height: 65vmin;
+    }
+    .circle-inner {
+      max-width: 55vmin;
+      max-height: 55vmin;
+    }
+
+    .app-title {
+      font-size: 4.4rem;
+    }
+
+    .login-btn {
+      /* padding: 0.8rem 1.2rem; */
+      font-size: 2rem;
+
+      & > svg {
+        font-size: 2.4rem;
+      }
+    }
+
+    .footer {
+      font-size: 2.4rem;
+    }
+  }
+
+  /* LAPTOP 1024px */
+  @media (min-width: 64em) {
+    .app-title {
+      font-size: 5.2rem;
+    }
+
+    .login-btn {
+      padding: 1.2rem 1.6rem;
+      font-size: 2.6rem;
+
+      & > svg {
+        font-size: 3rem;
+      }
+    }
+
+    .footer {
+      font-size: 3rem;
+    }
+  }
 `;
 
 export default Login;
