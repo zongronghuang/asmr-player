@@ -68,9 +68,7 @@ const Login = styled(LoginJSX)`
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
 
-  /* ------------------ */
   /* GOLDEN RINGS */
-  /* ------------------ */
   .circle {
     position: absolute;
     left: 50%;
@@ -101,9 +99,7 @@ const Login = styled(LoginJSX)`
     }
   }
 
-  /* ------------------ */
   /* LOGIN AREA */
-  /* ------------------ */
   .logins {
     position: absolute;
     left: 50%;
@@ -142,7 +138,7 @@ const Login = styled(LoginJSX)`
     justify-content: flex-start;
     gap: 0.4rem;
 
-    width: 80%;
+    width: 10rem;
     padding: 0.2rem 0.4rem;
     margin-bottom: 0.2rem;
     border-radius: 5px;
@@ -166,9 +162,7 @@ const Login = styled(LoginJSX)`
     }
   }
 
-  /* ------------------ */
   /* FOOTER */
-  /* ------------------ */
   .footer {
     padding: 1.6rem 3.2rem;
     width: 100%;
@@ -176,6 +170,8 @@ const Login = styled(LoginJSX)`
 
     color: white;
     line-height: 1.8;
+
+    transition: all 0.5s;
 
     &:hover {
       text-shadow: -1px -1px 20px goldenrod, -1px 1px 20px goldenrod,
@@ -191,7 +187,7 @@ const Login = styled(LoginJSX)`
   /* ------------------ */
   /* MEDIA QUERIES */
   /* ------------------ */
-  /* MOBILE MEDIUM 375px */
+  /* MEDIUM MOBILE 375px */
   @media (min-width: 23em) {
     .circle-outer {
       max-width: 420px;
@@ -213,17 +209,26 @@ const Login = styled(LoginJSX)`
     .login-btn {
       gap: 0.8rem;
 
-      width: 85%;
+      width: 14rem;
       padding: 0.4rem 0.8rem;
 
-      font-size: 1.2em;
-
-      & > svg {
-        font-size: 2rem;
-      }
+      font-size: 1.2rem;
     }
 
     .footer {
+      font-size: 1.4rem;
+    }
+  }
+
+  /* LARGE MOBILE 425PX */
+  @media (min-width: 26em) {
+    .app-title {
+      font-size: 3rem;
+    }
+
+    .login-btn {
+      width: 16rem;
+
       font-size: 1.4rem;
     }
   }
@@ -244,40 +249,36 @@ const Login = styled(LoginJSX)`
     }
 
     .app-title {
-      font-size: 4.4rem;
+      font-size: 3.6rem;
     }
 
     .login-btn {
-      /* padding: 0.8rem 1.2rem; */
-      font-size: 2rem;
+      width: 20rem;
 
-      & > svg {
-        font-size: 2.4rem;
-      }
+      font-size: 1.8rem;
     }
 
     .footer {
-      font-size: 2.4rem;
+      font-size: 2rem;
     }
   }
 
   /* LAPTOP 1024px */
   @media (min-width: 64em) {
     .app-title {
-      font-size: 5.2rem;
+      font-size: 3.6rem;
     }
 
     .login-btn {
-      padding: 1.2rem 1.6rem;
-      font-size: 2.6rem;
+      width: 20rem;
+      padding: 0.4rem 0.8rem;
+      margin-bottom: 1.2rem;
 
-      & > svg {
-        font-size: 3rem;
-      }
+      font-size: 2rem;
     }
 
     .footer {
-      font-size: 3rem;
+      font-size: 2rem;
     }
   }
 `;
