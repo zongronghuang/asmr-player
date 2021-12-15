@@ -21,6 +21,19 @@ body {
   width: 100vw;
 }
 
+.app-btn {
+  padding: 0.2rem 0.3rem;
+  border-radius: 8px;
+  background-color: transparent;
+  border: none;
+
+  transition: all 0.5s;
+}
+
+.app-btn:hover {
+  box-shadow: 0 0 0 1px black;
+}
+
 /* Font-size scales 
    10/12/14/16/18/20/24/30/36/44/52/62/74/86/98
 */

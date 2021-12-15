@@ -1,11 +1,13 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
+
+// import AudioPanel from "./AudioPanel";
 
 const BackdropJSX = ({
   className,
   track,
   shouldUseAPIData,
   handleDragOver,
-  handleDrop
+  handleDrop,
 }) => {
   return (
     <div
@@ -17,20 +19,22 @@ const BackdropJSX = ({
         shouldUseAPIData && track.remoteBackdrop
           ? { backgroundImage: `url(${track.remoteBackdrop.source})` }
           : { backgroundImage: `url(${track.localBackdrop.source})` }
-      } >
+      }
+    >
       {/* {console.log('[render] Backdrop')} */}
     </div>
-  )
-}
+  );
+};
 
 const Backdrop = styled(BackdropJSX)`
   background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  width: 100%;
+  background-position: 0 0;
+  background-size: 100vw 100vh;
+  width: 100vw;
   height: 100vh;
   padding: 0;
   margin: 0;
-`
+  border: none;
+`;
 
-export default Backdrop
+export default Backdrop;

@@ -1,6 +1,6 @@
-import { useRef, useEffect, forwardRef } from 'react'
-import styled from '@emotion/styled'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useRef, useEffect, forwardRef } from "react";
+import styled from "@emotion/styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // subcomponents
 const MenuButton = ({ handleTogglingAnimations }) => (
@@ -9,10 +9,11 @@ const MenuButton = ({ handleTogglingAnimations }) => (
     id="info"
     title="Click for more"
     tabIndex="10"
-    onClick={handleTogglingAnimations}>
-    <FontAwesomeIcon icon={['fas', 'info']} size="lg" />
+    onClick={handleTogglingAnimations}
+  >
+    <FontAwesomeIcon icon={["fas", "info"]} size="lg" />
   </a>
-)
+);
 
 const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
   <a
@@ -30,13 +31,16 @@ const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
         : `Photo by ${track.localBackdrop.photographer}`
     }
     tabIndex="14"
-    ref={ref} >
-    <FontAwesomeIcon icon={['fas', 'user-circle']} size="lg" />
+    ref={ref}
+  >
+    <FontAwesomeIcon icon={["fas", "user-circle"]} size="lg" />
   </a>
-))
+));
 
 const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => {
-  { console.log('image source', track) }
+  {
+    console.log("image source", track);
+  }
   return (
     <a
       className="option"
@@ -49,31 +53,35 @@ const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => {
       target="_blank"
       title="View source image"
       tabIndex="13"
-      ref={ref} >
-      <FontAwesomeIcon icon={['fas', 'image']} size="lg" />
+      ref={ref}
+    >
+      <FontAwesomeIcon icon={["fas", "image"]} size="lg" />
+    </a>
+  );
+});
+
+const LocalBackdropButton = forwardRef(
+  ({ track, setShouldUseAPIData }, ref) => (
+    <a
+      className="option"
+      id="local_backdrop"
+      tabIndex="12"
+      title="Local backdrop"
+      ref={ref}
+      onClick={() =>
+        track?.remoteBackdrop
+          ? setShouldUseAPIData(true)
+          : setShouldUseAPIData(false)
+      }
+    >
+      <FontAwesomeIcon
+        icon={["fas", "plane-slash"]}
+        size="lg"
+        color={track?.remoteBackdrop ? null : "gray"}
+      />
     </a>
   )
-})
-
-const LocalBackdropButton = forwardRef(({ track, setShouldUseAPIData }, ref) => (
-  <a
-    className="option"
-    id="local_backdrop"
-    tabIndex="12"
-    title="Local backdrop"
-    ref={ref}
-    onClick={() =>
-      track?.remoteBackdrop
-        ? setShouldUseAPIData(true)
-        : setShouldUseAPIData(false)
-    } >
-    <FontAwesomeIcon
-      icon={['fas', 'plane-slash']}
-      size="lg"
-      color={track?.remoteBackdrop ? null : 'gray'}
-    />
-  </a>
-))
+);
 
 const RemoteBackdropButton = forwardRef(({ setShouldUseAPIData }, ref) => (
   <a
@@ -82,61 +90,59 @@ const RemoteBackdropButton = forwardRef(({ setShouldUseAPIData }, ref) => (
     tabIndex="12"
     title="Remote backdrop"
     ref={ref}
-    onClick={() => setShouldUseAPIData(false)} >
-    <FontAwesomeIcon icon={['fas', 'plane']} size="lg" />
+    onClick={() => setShouldUseAPIData(false)}
+  >
+    <FontAwesomeIcon icon={["fas", "plane"]} size="lg" />
   </a>
-))
+));
 
 const LogoutButton = forwardRef(({ handleLogoutDialog }, ref) => (
   <a
     className="option"
     id="logout"
-    title='Click to log out'
+    title="Click to log out"
     tabIndex="11"
     ref={ref}
-    onClick={() => handleLogoutDialog('on')} >
-    <FontAwesomeIcon
-      icon={['fas', 'sign-out-alt']}
-      size="lg"
-      color="red"
-    />
+    onClick={() => handleLogoutDialog("on")}
+  >
+    <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="lg" color="red" />
   </a>
-))
+));
 
 const InfoMenuJSX = ({
   className,
   track,
   shouldUseAPIData,
   setShouldUseAPIData,
-  handleLogoutDialog
+  handleLogoutDialog,
 }) => {
-  const imageBtn = useRef(null)
-  const photographerBtn = useRef(null)
-  const localBackdropBtn = useRef(null)
-  const remoteBackdropBtn = useRef(null)
-  const logoutBtn = useRef(null)
+  const imageBtn = useRef(null);
+  const photographerBtn = useRef(null);
+  const localBackdropBtn = useRef(null);
+  const remoteBackdropBtn = useRef(null);
+  const logoutBtn = useRef(null);
 
   useEffect(() => {
-    showBackdropBtn()
-  }, [shouldUseAPIData])
+    showBackdropBtn();
+  }, [shouldUseAPIData]);
 
   const showBackdropBtn = () => {
     if (shouldUseAPIData && track?.remoteBackdrop) {
-      remoteBackdropBtn.current.style.zIndex = 3
-      localBackdropBtn.current.style.zIndex = -1
-      return
+      remoteBackdropBtn.current.style.zIndex = 3;
+      localBackdropBtn.current.style.zIndex = -1;
+      return;
     }
-    remoteBackdropBtn.current.style.zIndex = -1
-    localBackdropBtn.current.style.zIndex = 3
-  }
+    remoteBackdropBtn.current.style.zIndex = -1;
+    localBackdropBtn.current.style.zIndex = 3;
+  };
 
   const handleTogglingAnimations = () => {
-    photographerBtn.current.classList.toggle('float-photographer')
-    imageBtn.current.classList.toggle('float-image')
-    logoutBtn.current.classList.toggle('float-logout')
-    remoteBackdropBtn.current.classList.toggle('float-network')
-    localBackdropBtn.current.classList.toggle('float-network')
-  }
+    photographerBtn.current.classList.toggle("float-photographer");
+    imageBtn.current.classList.toggle("float-image");
+    logoutBtn.current.classList.toggle("float-logout");
+    remoteBackdropBtn.current.classList.toggle("float-network");
+    localBackdropBtn.current.classList.toggle("float-network");
+  };
 
   return (
     <aside className={className}>
@@ -161,18 +167,15 @@ const InfoMenuJSX = ({
         ref={localBackdropBtn}
         setShouldUseAPIData={setShouldUseAPIData}
       />
-      <LogoutButton
-        ref={logoutBtn}
-        handleLogoutDialog={handleLogoutDialog}
-      />
+      <LogoutButton ref={logoutBtn} handleLogoutDialog={handleLogoutDialog} />
     </aside>
-  )
-}
+  );
+};
 
 const InfoMenu = styled(InfoMenuJSX)`
   position: absolute;
-  right: 10px;
-  bottom: 35px;
+  right: 1vw;
+  bottom: 10vh;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -193,7 +196,8 @@ const InfoMenu = styled(InfoMenuJSX)`
   }
 
   .option:hover {
-    box-shadow: 3px 3px goldenrod, -3px 3px goldenrod, 3px -3px goldenrod, -3px -3px goldenrod;
+    box-shadow: 3px 3px goldenrod, -3px 3px goldenrod, 3px -3px goldenrod,
+      -3px -3px goldenrod;
   }
 
   #info {
@@ -202,7 +206,8 @@ const InfoMenu = styled(InfoMenuJSX)`
   #logout {
     z-index: 4;
   }
-  #remote_backdrop, #local_backdrop {
+  #remote_backdrop,
+  #local_backdrop {
     z-index: 3;
   }
   #local_ackdrop {
@@ -216,7 +221,9 @@ const InfoMenu = styled(InfoMenuJSX)`
   }
 
   @keyframes float-photographer {
-    to { bottom: 140px;}
+    to {
+      bottom: 140px;
+    }
   }
   .float-photographer {
     animation-name: float-photographer;
@@ -225,7 +232,9 @@ const InfoMenu = styled(InfoMenuJSX)`
   }
 
   @keyframes float-image {
-    to { bottom: 105px;}
+    to {
+      bottom: 105px;
+    }
   }
   .float-image {
     animation-name: float-image;
@@ -234,7 +243,9 @@ const InfoMenu = styled(InfoMenuJSX)`
   }
 
   @keyframes float-network {
-    to { bottom: 70px;}
+    to {
+      bottom: 70px;
+    }
   }
   .float-network {
     animation-name: float-network;
@@ -243,13 +254,15 @@ const InfoMenu = styled(InfoMenuJSX)`
   }
 
   @keyframes float-logout {
-    to {bottom: 35px;}
+    to {
+      bottom: 35px;
+    }
   }
   .float-logout {
-     animation-name: float-logout;
-     animation-duration: 0.2s;
-     animation-fill-mode: forwards;
+    animation-name: float-logout;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
   }
-`
+`;
 
-export default InfoMenu
+export default InfoMenu;
