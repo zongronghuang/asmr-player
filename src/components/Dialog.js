@@ -113,13 +113,13 @@ const DialogJSX = ({
 };
 
 const Dialog = styled(DialogJSX)`
-  width: 30%;
+  width: 75%;
   min-width: 200px;
-  max-width: 300px;
+  max-width: 500px;
   border: 3px solid goldenrod;
   border-radius: 15px;
 
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   background-color: black;
   color: goldenrod;
   font-family: Arial, Helvetica, sans-serif;
@@ -161,12 +161,45 @@ const Dialog = styled(DialogJSX)`
 
       font-weight: bold;
       color: goldenrod;
-      line-height: 20px;
+      line-height: 1.6;
       background-color: black;
 
       &:hover {
         box-shadow: 0 0 0 3px goldenrod;
       }
+    }
+  }
+
+  /* ---------- */
+  /* MEDIA QUERIES */
+  /* ---------- */
+  /* MEDIUM MOBILE 375px */
+  @media (min-width: 23em) {
+    font-size: 1.8rem;
+
+    & button {
+      padding: 0.4rem 0.8rem;
+      font-size: 1.8rem;
+    }
+  }
+
+  /* LARGE MOBILE 425px */
+  @media (min-width: 26em) {
+    font-size: 2rem;
+
+    & button {
+      padding: 0.8rem 1.2rem;
+      font-size: 2rem;
+    }
+  }
+
+  /* TABLET 768px */
+  @media (min-width: 48em) {
+    font-size: 2.4rem;
+
+    & button {
+      padding: 1.2rem 1.6rem;
+      font-size: 2.4rem;
     }
   }
 `;

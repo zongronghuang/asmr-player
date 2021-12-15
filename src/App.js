@@ -124,15 +124,12 @@ const AppJSX = ({ className }) => {
             會直接讓使用者進入 /app，但是使用者還未點選要用哪一個帳號登入，導致登入管控失敗
           */}
 
-          {/* {(FBResponse?.authResponse && authProvider === "FB") ||
+          {(FBResponse?.authResponse && authProvider === "FB") ||
           GoogleResponse?.login ? (
             <Redirect to="/app" />
           ) : (
             <Redirect to="/login" />
-          )} */}
-
-          {true ? <Redirect to="/app" /> : <Redirect to="/login" />}
-
+          )}
           <Switch>
             <Route path="/login">
               <Login />

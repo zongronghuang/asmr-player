@@ -126,10 +126,13 @@ const AudioPanel = styled(AudioPanelJSX)`
 
   @keyframes background-filler {
     100% {
-      box-shadow: 0 0 0 1px black;
+      box-shadow: 0 0 0 3px black;
       background-color: rgba(218, 165, 32, 0.5);
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
+      & svg {
+        color: goldenrod;
+      }
     }
   }
 
