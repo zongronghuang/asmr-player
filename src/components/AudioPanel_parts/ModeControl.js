@@ -64,19 +64,6 @@ const ModeControl = styled(ModeControlJSX)`
   align-items: flex-start;
   border-radius: 0px 10px 10px 0px;
 
-  /* button {
-    margin-left: 2px;
-    margin-right: 2px;
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: rgb(239, 239, 239);
-
-    &:hover {
-      box-shadow: 3px 3px goldenrod, -3px 3px goldenrod, 3px -3px goldenrod,
-        -3px -3px goldenrod;
-    }
-  } */
-
   .checked {
     color: blue;
   }

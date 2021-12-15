@@ -118,7 +118,6 @@ const AudioPanel = styled(AudioPanelJSX)`
 
   padding: 0.4rem 0.8rem;
   margin: auto;
-  /* height: 27px; */
   border-radius: 10px 10px 10px 10px;
 
   text-align: center;
@@ -137,7 +136,7 @@ const AudioPanel = styled(AudioPanelJSX)`
   :hover {
     animation-name: background-filler;
     animation-iteration-count: 1;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
   }
@@ -150,7 +149,6 @@ const AudioPanel = styled(AudioPanelJSX)`
     & svg {
       margin: auto 0.2rem;
       font-size: 1.8rem;
-      color: yellow;
     }
 
     & input[type="range"] {
@@ -163,7 +161,6 @@ const AudioPanel = styled(AudioPanelJSX)`
     & svg {
       margin: auto 0.2rem;
       font-size: 2rem;
-      color: red;
     }
 
     & input[type="range"] {
@@ -176,7 +173,6 @@ const AudioPanel = styled(AudioPanelJSX)`
     & svg {
       margin: auto 0.4rem;
       font-size: 2.4rem;
-      color: blue;
     }
 
     & input[type="range"] {
@@ -189,7 +185,6 @@ const AudioPanel = styled(AudioPanelJSX)`
     & svg {
       margin: auto 0.8rem;
       font-size: 3rem;
-      color: pink;
     }
 
     & input[type="range"] {

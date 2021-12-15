@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // subcomponents
 const MenuButton = ({ handleTogglingAnimations }) => (
   <a
-    className="option"
-    id="info"
+    className="option info"
     title="Click for more"
     tabIndex="10"
     onClick={handleTogglingAnimations}
@@ -17,8 +16,7 @@ const MenuButton = ({ handleTogglingAnimations }) => (
 
 const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
   <a
-    className="option"
-    id="photographer"
+    className="option photographer"
     href={
       shouldUseAPIData && track?.remoteBackdrop
         ? track.remoteBackdrop.portfolio
@@ -43,8 +41,7 @@ const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => {
   }
   return (
     <a
-      className="option"
-      id="image"
+      className="option image"
       href={
         shouldUseAPIData && track?.remoteBackdrop
           ? track.remoteBackdrop.source
@@ -63,8 +60,7 @@ const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => {
 const LocalBackdropButton = forwardRef(
   ({ track, setShouldUseAPIData }, ref) => (
     <a
-      className="option"
-      id="local_backdrop"
+      className="option local-backdrop"
       tabIndex="12"
       title="Local backdrop"
       ref={ref}
@@ -85,8 +81,7 @@ const LocalBackdropButton = forwardRef(
 
 const RemoteBackdropButton = forwardRef(({ setShouldUseAPIData }, ref) => (
   <a
-    className="option"
-    id="remote_backdrop"
+    className="option remote-backdrop"
     tabIndex="12"
     title="Remote backdrop"
     ref={ref}
@@ -98,14 +93,13 @@ const RemoteBackdropButton = forwardRef(({ setShouldUseAPIData }, ref) => (
 
 const LogoutButton = forwardRef(({ handleLogoutDialog }, ref) => (
   <a
-    className="option"
-    id="logout"
+    className="option logout"
     title="Click to log out"
     tabIndex="11"
     ref={ref}
     onClick={() => handleLogoutDialog("on")}
   >
-    <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="lg" color="red" />
+    <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="lg" />
   </a>
 ));
 
@@ -184,45 +178,52 @@ const InfoMenu = styled(InfoMenuJSX)`
     position: absolute;
     bottom: 0px;
     right: 5px;
-    width: 30px;
-    height: 30px;
+
+    width: 3rem;
+    height: 3rem;
     overflow: hidden;
     border-radius: 50%;
-    line-height: 30px;
+
+    font-size: 1.4rem;
+    line-height: 3rem;
     text-align: center;
     color: black;
-    background-color: rgb(239, 239, 239);
+    background-color: rgba(218, 165, 32, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     cursor: pointer;
+
+    transition: all 0.3s;
   }
 
   .option:hover {
-    box-shadow: 3px 3px goldenrod, -3px 3px goldenrod, 3px -3px goldenrod,
-      -3px -3px goldenrod;
+    box-shadow: 0 0 0 3px goldenrod;
   }
 
-  #info {
+  /* ICON DEPTH */
+  .info {
     z-index: 5;
   }
-  #logout {
+  .logout {
     z-index: 4;
   }
-  #remote_backdrop,
-  #local_backdrop {
+  .remote-backdrop,
+  .local-backdrop {
     z-index: 3;
   }
-  #local_ackdrop {
+  .local-backdrop {
     cursor: default;
   }
-  #image {
+  .image {
     z-index: 2;
   }
-  #photographer {
+  .photographer {
     z-index: 1;
   }
 
   @keyframes float-photographer {
     to {
-      bottom: 140px;
+      bottom: 16rem;
     }
   }
   .float-photographer {
@@ -233,7 +234,7 @@ const InfoMenu = styled(InfoMenuJSX)`
 
   @keyframes float-image {
     to {
-      bottom: 105px;
+      bottom: 12rem;
     }
   }
   .float-image {
@@ -244,7 +245,7 @@ const InfoMenu = styled(InfoMenuJSX)`
 
   @keyframes float-network {
     to {
-      bottom: 70px;
+      bottom: 8rem;
     }
   }
   .float-network {
@@ -255,13 +256,51 @@ const InfoMenu = styled(InfoMenuJSX)`
 
   @keyframes float-logout {
     to {
-      bottom: 35px;
+      bottom: 4rem;
     }
   }
   .float-logout {
     animation-name: float-logout;
     animation-duration: 0.2s;
     animation-fill-mode: forwards;
+  }
+
+  /* ---------- */
+  /* MEDIA QUERIES */
+  /* ---------- */
+  /* TABLET 768px */
+  @media (min-width: 48em) {
+    .option {
+      width: 4.8rem;
+      height: 4.8rem;
+
+      font-size: 2rem;
+      line-height: 4.8rem;
+    }
+
+    @keyframes float-photographer {
+      to {
+        bottom: 24rem;
+      }
+    }
+
+    @keyframes float-image {
+      to {
+        bottom: 18rem;
+      }
+    }
+
+    @keyframes float-network {
+      to {
+        bottom: 12rem;
+      }
+    }
+
+    @keyframes float-logout {
+      to {
+        bottom: 6rem;
+      }
+    }
   }
 `;
 

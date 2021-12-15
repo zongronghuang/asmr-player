@@ -78,19 +78,6 @@ const PlaybackControlJSX = ({
 const PlaybackControl = styled(PlaybackControlJSX)`
   display: flex;
   align-items: flex-start;
-
-  /* button {
-    border: 1px solid black;
-    border-radius: 5px;
-    margin-left: 2px;
-    margin-right: 2px;
-    background-color: rgb(239, 239, 239);
-
-    &:hover {
-      box-shadow: 3px 3px goldenrod, -3px 3px goldenrod, 3px -3px goldenrod,
-        -3px -3px goldenrod;
-    }
-  } */
 `;
 
 export default PlaybackControl;

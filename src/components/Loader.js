@@ -1,16 +1,20 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 const LoaderJSX = ({ className }) => (
   <div className={className}>
     {/* {console.log('[render] Loader')} */}
     <div id="shade"></div>
     <div id="frame">
-      <div className="stars" id="outer">●</div>
-      <div className="stars" id="inner">●</div>
+      <div className="stars" id="outer">
+        ●
+      </div>
+      <div className="stars" id="inner">
+        ●
+      </div>
       <div className="stars" id="core"></div>
     </div>
   </div>
-)
+);
 
 const Loader = styled(LoaderJSX)`
   position: absolute;
@@ -27,8 +31,8 @@ const Loader = styled(LoaderJSX)`
 
   #frame {
     position: absolute;
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -67,7 +71,7 @@ const Loader = styled(LoaderJSX)`
     animation-duration: 3s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-    z-index: 2
+    z-index: 2;
   }
 
   #inner {
@@ -81,7 +85,7 @@ const Loader = styled(LoaderJSX)`
     animation-timing-function: linear;
     animation-direction: reverse;
     z-index: 10;
-   }
+  }
 
   #core {
     border-radius: 50%;
@@ -90,6 +94,6 @@ const Loader = styled(LoaderJSX)`
     width: 10px;
     height: 10px;
   }
-`
+`;
 
-export default Loader
+export default Loader;
