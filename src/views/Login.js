@@ -46,6 +46,7 @@ const LoginJSX = ({ className }) => {
           <a
             href="https://github.com/zongronghuang/asmr-player"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Zong-Rong
           </a>
