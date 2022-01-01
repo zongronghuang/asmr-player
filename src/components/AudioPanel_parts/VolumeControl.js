@@ -70,13 +70,15 @@ const VolumeControlJSX = ({ className, handleVolumeUpDown, volume }) => (
 const VolumeControl = styled(VolumeControlJSX)`
   display: flex;
   justify-content: center;
+
   margin-right: 5px;
   margin-left: 5px;
 
   & > #volume {
-    cursor: pointer;
     margin-left: 2px;
     margin-right: 2px;
+
+    cursor: pointer;
   }
 
   & > #mode {

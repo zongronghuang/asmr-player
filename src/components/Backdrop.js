@@ -27,14 +27,15 @@ const BackdropJSX = ({
 };
 
 const Backdrop = styled(BackdropJSX)`
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: cover;
   width: 100vw;
   height: 100vh;
   padding: 0;
   margin: 0;
   border: none;
+
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: cover;
 `;
 
 export default Backdrop;

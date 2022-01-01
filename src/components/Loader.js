@@ -3,15 +3,11 @@ import styled from "@emotion/styled";
 const LoaderJSX = ({ className }) => (
   <div className={className}>
     {/* {console.log('[render] Loader')} */}
-    <div id="shade"></div>
-    <div id="frame">
-      <div className="stars" id="outer">
-        ●
-      </div>
-      <div className="stars" id="inner">
-        ●
-      </div>
-      <div className="stars" id="core"></div>
+    <div className="shade"></div>
+    <div className="frame">
+      <div className="star outer-star">●</div>
+      <div className="star inner-star">●</div>
+      <div className="star core"></div>
     </div>
   </div>
 );
@@ -22,33 +18,37 @@ const Loader = styled(LoaderJSX)`
   height: 100vh;
   z-index: 20;
 
-  #shade {
+  .shade {
     width: 100%;
     height: 100%;
+
     background-color: black;
     opacity: 0.7;
   }
 
-  #frame {
+  .frame {
     position: absolute;
-    width: 250px;
     height: 250px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    width: 250px;
+    border: 3px solid goldenrod;
+    border-radius: 25%;
+
     background-color: black;
     text-align: center;
     line-height: 300px;
     color: goldenrod;
-    border: 3px solid goldenrod;
-    border-radius: 25%;
   }
 
-  .stars {
+  .star {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
     border-radius: 50%;
   }
 
@@ -62,37 +62,40 @@ const Loader = styled(LoaderJSX)`
     }
   }
 
-  #outer {
+  .outer-star {
     width: 200px;
     height: 200px;
     border-top: 3px solid goldenrod;
     border-bottom: 3px solid goldenrod;
+    z-index: 2;
+
     animation-name: orbitting;
     animation-duration: 3s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
-    z-index: 2;
   }
 
-  #inner {
-    border-top: 3px solid goldenrod;
-    border-bottom: 3px solid goldenrod;
+  .inner-star {
     width: 100px;
     height: 100px;
+    border-top: 3px solid goldenrod;
+    border-bottom: 3px solid goldenrod;
+    z-index: 10;
+
     animation-name: orbitting;
     animation-duration: 6s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-direction: reverse;
-    z-index: 10;
   }
 
-  #core {
-    border-radius: 50%;
-    border: 5px solid goldenrod;
-    background-color: white;
+  .core {
     width: 10px;
     height: 10px;
+    border-radius: 50%;
+    border: 5px solid goldenrod;
+
+    background-color: white;
   }
 `;
 

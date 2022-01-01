@@ -62,6 +62,7 @@ const ModeControlJSX = ({ className, mode, handleModeChange }) => (
 const ModeControl = styled(ModeControlJSX)`
   display: flex;
   align-items: flex-start;
+
   border-radius: 0px 10px 10px 0px;
 
   .checked {
