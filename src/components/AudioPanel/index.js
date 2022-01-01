@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 
-import PlaybackControl from "./AudioPanel_parts/PlaybackControl";
-import AudioTrack from "./AudioPanel_parts/AudioTrack";
-import VolumeControl from "./AudioPanel_parts/VolumeControl";
-import ModeControl from "./AudioPanel_parts/ModeControl";
+import PlaybackControl from "./PlaybackControl";
+import AudioTrack from "./AudioTrack";
+import VolumeControl from "./VolumeControl";
+import ModeControl from "./ModeControl";
 
 // audio 控制面板元件 (匯整上面元件)
 const AudioPanelJSX = ({

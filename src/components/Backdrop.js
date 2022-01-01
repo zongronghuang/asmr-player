@@ -1,7 +1,5 @@
 import styled from "@emotion/styled";
 
-// import AudioPanel from "./AudioPanel";
-
 const BackdropJSX = ({
   className,
   track,
