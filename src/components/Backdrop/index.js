@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 
+import LocalBackdrop from "./LocalBackdrop";
+import RemoteBackdrop from "./RemoteBackdrop";
+
 const BackdropJSX = ({
   className,
   track,
@@ -13,12 +16,18 @@ const BackdropJSX = ({
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       className={className}
-      style={
-        shouldUseAPIData && track.remoteBackdrop
-          ? { backgroundImage: `url(${track.remoteBackdrop.source})` }
-          : { backgroundImage: `url(${track.localBackdrop.source})` }
-      }
+      // style={
+      //   shouldUseAPIData && track.remoteBackdrop
+      //     ? { backgroundImage: `url(${track.remoteBackdrop.source})` }
+      //     : { backgroundImage: `url(${track.localBackdrop.source})` }
+      // }
     >
+      {shouldUseAPIData && track.remoteBackdrop ? (
+        <RemoteBackdrop track={track} />
+      ) : (
+        <LocalBackdrop />
+      )}
+
       {/* {console.log('[render] Backdrop')} */}
     </div>
   );
