@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
-const RemoteBackdropJSX = ({ track, className }) => (
+const RemoteBackdropJSX = ({ remoteBackdrop, className }) => (
   <div
     className={className}
-    style={{ backgroundImage: `url(${track.remoteBackdrop.source})` }}
+    style={{ backgroundImage: `url(${remoteBackdrop.source})` }}
   >
     {/* {console.log('[render] RemoteBackdrop')} */}
   </div>

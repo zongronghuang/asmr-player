@@ -169,7 +169,7 @@ const InfoMenuJSX = ({
 const InfoMenu = styled(InfoMenuJSX)`
   position: absolute;
   right: 1vw;
-  bottom: 10vh;
+  bottom: 5vh;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;

@@ -112,7 +112,7 @@ const AudioPanel = styled(AudioPanelJSX)`
   align-items: center;
   gap: 10px;
   position: absolute;
-  top: 93vh;
+  top: 85vh;
   left: 50vw;
   transform: translateX(-50%);
 

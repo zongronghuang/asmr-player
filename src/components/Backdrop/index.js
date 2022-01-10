@@ -16,14 +16,9 @@ const BackdropJSX = ({
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       className={className}
-      // style={
-      //   shouldUseAPIData && track.remoteBackdrop
-      //     ? { backgroundImage: `url(${track.remoteBackdrop.source})` }
-      //     : { backgroundImage: `url(${track.localBackdrop.source})` }
-      // }
     >
       {shouldUseAPIData && track.remoteBackdrop ? (
-        <RemoteBackdrop track={track} />
+        <RemoteBackdrop remoteBackdrop={track.remoteBackdrop} />
       ) : (
         <LocalBackdrop />
       )}
