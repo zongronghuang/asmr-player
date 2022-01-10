@@ -16,17 +16,21 @@ const MenuButton = ({ handleTogglingAnimations }) => (
 
 const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
   <a
-    className="option photographer"
+    className={
+      shouldUseAPIData && track?.remoteBackdrop
+        ? "option photographer"
+        : "option photographer non-clickable"
+    }
     href={
       shouldUseAPIData && track?.remoteBackdrop
         ? track.remoteBackdrop.portfolio
-        : track.localBackdrop.portfolio
+        : null
     }
     target="_blank"
     title={
       shouldUseAPIData && track?.remoteBackdrop
         ? `Photo by ${track.remoteBackdrop.photographer}`
-        : `Photo by ${track.localBackdrop.photographer}`
+        : `Not available`
     }
     tabIndex="14"
     ref={ref}
@@ -41,14 +45,22 @@ const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => {
   }
   return (
     <a
-      className="option image"
+      className={
+        shouldUseAPIData && track?.remoteBackdrop
+          ? "option image"
+          : "option image non-clickable"
+      }
       href={
         shouldUseAPIData && track?.remoteBackdrop
           ? track.remoteBackdrop.source
-          : track.localBackdrop.source
+          : null
       }
       target="_blank"
-      title="View source image"
+      title={
+        shouldUseAPIData && track?.remoteBackdrop
+          ? "View source image"
+          : "Default backdrop"
+      }
       tabIndex="13"
       ref={ref}
     >
@@ -219,6 +231,11 @@ const InfoMenu = styled(InfoMenuJSX)`
   }
   .photographer {
     z-index: 1;
+  }
+
+  .non-clickable {
+    cursor: default;
+    pointer-events: none;
   }
 
   @keyframes float-photographer {
