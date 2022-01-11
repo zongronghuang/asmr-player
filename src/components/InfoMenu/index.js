@@ -1,117 +1,12 @@
-import { useRef, useEffect, forwardRef } from "react";
+import { useRef, useEffect } from "react";
 import styled from "@emotion/styled";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import MenuButton from "./MenuButton";
-
-// subcomponents
-// const MenuButton = ({ handleTogglingAnimations }) => (
-//   <a
-//     className="option info"
-//     title="Click for more"
-//     tabIndex="10"
-//     onClick={handleTogglingAnimations}
-//   >
-//     <FontAwesomeIcon icon={["fas", "info"]} size="lg" />
-//   </a>
-// );
-
-const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
-  <a
-    className="option photographer"
-    href={
-      shouldUseAPIData && track?.remoteBackdrop
-        ? track.remoteBackdrop.portfolio
-        : null
-    }
-    target="_blank"
-    title={
-      shouldUseAPIData && track?.remoteBackdrop
-        ? `Photo by ${track.remoteBackdrop.photographer}`
-        : `Not available`
-    }
-    tabIndex="14"
-    ref={ref}
-  >
-    <FontAwesomeIcon icon={["fas", "user-circle"]} size="lg" />
-  </a>
-));
-
-const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => {
-  {
-    console.log("image source", track);
-  }
-  return (
-    <a
-      className="option image"
-      href={
-        shouldUseAPIData && track?.remoteBackdrop
-          ? track.remoteBackdrop.source
-          : null
-      }
-      target="_blank"
-      title={
-        shouldUseAPIData && track?.remoteBackdrop
-          ? "View source image"
-          : "Default backdrop"
-      }
-      tabIndex="13"
-      ref={ref}
-    >
-      <FontAwesomeIcon icon={["fas", "image"]} size="lg" />
-    </a>
-  );
-});
-
-const LocalBackdropButton = forwardRef(
-  ({ track, setShouldUseAPIData, toggleClickability }, ref) => (
-    <a
-      className="option local-backdrop"
-      tabIndex="12"
-      title="Local backdrop"
-      ref={ref}
-      onClick={() =>
-        track?.remoteBackdrop
-          ? setShouldUseAPIData(true) || toggleClickability()
-          : setShouldUseAPIData(false)
-      }
-    >
-      <FontAwesomeIcon
-        icon={["fas", "plane-slash"]}
-        size="lg"
-        color={track?.remoteBackdrop ? null : "gray"}
-      />
-    </a>
-  )
-);
-
-const RemoteBackdropButton = forwardRef(
-  ({ setShouldUseAPIData, toggleClickability }, ref) => (
-    <a
-      className="option remote-backdrop"
-      tabIndex="12"
-      title="Remote backdrop"
-      ref={ref}
-      onClick={() => {
-        setShouldUseAPIData(false) || toggleClickability();
-      }}
-    >
-      <FontAwesomeIcon icon={["fas", "plane"]} size="lg" />
-    </a>
-  )
-);
-
-const LogoutButton = forwardRef(({ handleLogoutDialog }, ref) => (
-  <a
-    className="option logout"
-    title="Click to log out"
-    tabIndex="11"
-    ref={ref}
-    onClick={() => handleLogoutDialog("on")}
-  >
-    <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="lg" />
-  </a>
-));
+import PhotographerButton from "./PhotographerButton";
+import ImageButton from "./ImageButton";
+import LocalBackdropButton from "./LocalBackdropButton";
+import RemoteBackdropButton from "./RemoteBackdropButton";
+import LogoutButton from "./LogoutButton";
 
 const InfoMenuJSX = ({
   className,
