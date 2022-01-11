@@ -14,6 +14,7 @@ const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => {
           : null
       }
       target="_blank"
+      rel="noopener noreferrer"
       title={
         shouldUseAPIData && track?.remoteBackdrop
           ? "View source image"

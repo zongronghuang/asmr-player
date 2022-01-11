@@ -10,6 +10,7 @@ const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
         : null
     }
     target="_blank"
+    rel="noopener noreferrer"
     title={
       shouldUseAPIData && track?.remoteBackdrop
         ? `Photo by ${track.remoteBackdrop.photographer}`
