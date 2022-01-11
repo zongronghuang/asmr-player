@@ -2,25 +2,23 @@ import { useRef, useEffect, forwardRef } from "react";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import MenuButton from "./MenuButton";
+
 // subcomponents
-const MenuButton = ({ handleTogglingAnimations }) => (
-  <a
-    className="option info"
-    title="Click for more"
-    tabIndex="10"
-    onClick={handleTogglingAnimations}
-  >
-    <FontAwesomeIcon icon={["fas", "info"]} size="lg" />
-  </a>
-);
+// const MenuButton = ({ handleTogglingAnimations }) => (
+//   <a
+//     className="option info"
+//     title="Click for more"
+//     tabIndex="10"
+//     onClick={handleTogglingAnimations}
+//   >
+//     <FontAwesomeIcon icon={["fas", "info"]} size="lg" />
+//   </a>
+// );
 
 const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
   <a
-    className={
-      shouldUseAPIData && track?.remoteBackdrop
-        ? "option photographer"
-        : "option photographer non-clickable"
-    }
+    className="option photographer"
     href={
       shouldUseAPIData && track?.remoteBackdrop
         ? track.remoteBackdrop.portfolio
@@ -45,11 +43,7 @@ const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => {
   }
   return (
     <a
-      className={
-        shouldUseAPIData && track?.remoteBackdrop
-          ? "option image"
-          : "option image non-clickable"
-      }
+      className="option image"
       href={
         shouldUseAPIData && track?.remoteBackdrop
           ? track.remoteBackdrop.source
@@ -70,7 +64,7 @@ const ImageButton = forwardRef(({ track, shouldUseAPIData }, ref) => {
 });
 
 const LocalBackdropButton = forwardRef(
-  ({ track, setShouldUseAPIData }, ref) => (
+  ({ track, setShouldUseAPIData, toggleClickability }, ref) => (
     <a
       className="option local-backdrop"
       tabIndex="12"
@@ -78,7 +72,7 @@ const LocalBackdropButton = forwardRef(
       ref={ref}
       onClick={() =>
         track?.remoteBackdrop
-          ? setShouldUseAPIData(true)
+          ? setShouldUseAPIData(true) || toggleClickability()
           : setShouldUseAPIData(false)
       }
     >
@@ -91,17 +85,21 @@ const LocalBackdropButton = forwardRef(
   )
 );
 
-const RemoteBackdropButton = forwardRef(({ setShouldUseAPIData }, ref) => (
-  <a
-    className="option remote-backdrop"
-    tabIndex="12"
-    title="Remote backdrop"
-    ref={ref}
-    onClick={() => setShouldUseAPIData(false)}
-  >
-    <FontAwesomeIcon icon={["fas", "plane"]} size="lg" />
-  </a>
-));
+const RemoteBackdropButton = forwardRef(
+  ({ setShouldUseAPIData, toggleClickability }, ref) => (
+    <a
+      className="option remote-backdrop"
+      tabIndex="12"
+      title="Remote backdrop"
+      ref={ref}
+      onClick={() => {
+        setShouldUseAPIData(false) || toggleClickability();
+      }}
+    >
+      <FontAwesomeIcon icon={["fas", "plane"]} size="lg" />
+    </a>
+  )
+);
 
 const LogoutButton = forwardRef(({ handleLogoutDialog }, ref) => (
   <a
@@ -142,6 +140,11 @@ const InfoMenuJSX = ({
     localBackdropBtn.current.style.zIndex = 3;
   };
 
+  const toggleClickability = () => {
+    photographerBtn.current.classList.toggle("non-clickable");
+    imageBtn.current.classList.toggle("non-clickable");
+  };
+
   const handleTogglingAnimations = () => {
     photographerBtn.current.classList.toggle("float-photographer");
     imageBtn.current.classList.toggle("float-image");
@@ -167,11 +170,13 @@ const InfoMenuJSX = ({
       <RemoteBackdropButton
         ref={remoteBackdropBtn}
         setShouldUseAPIData={setShouldUseAPIData}
+        toggleClickability={toggleClickability}
       />
       <LocalBackdropButton
         track={track}
         ref={localBackdropBtn}
         setShouldUseAPIData={setShouldUseAPIData}
+        toggleClickability={toggleClickability}
       />
       <LogoutButton ref={logoutBtn} handleLogoutDialog={handleLogoutDialog} />
     </aside>
@@ -224,7 +229,7 @@ const InfoMenu = styled(InfoMenuJSX)`
     z-index: 3;
   }
   .local-backdrop {
-    cursor: default;
+    cursor: pointer;
   }
   .image {
     z-index: 2;
