@@ -101,7 +101,8 @@ const AudioPanelJSX = ({
           handlePlayback={handlePlayback}
         />
       </div>
-      <ModeControl handleModeChange={handleModeChange} mode={mode} />
+      {/* <ModeControl handleModeChange={handleModeChange} mode={mode} /> */}
+      <ModeControl handleModeChange={handleModeChange} />
     </div>
   );
 };

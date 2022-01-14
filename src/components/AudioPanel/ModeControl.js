@@ -1,14 +1,17 @@
 import styled from "@emotion/styled";
+import { useSelector, useDispatch } from "react-redux";
+import { switchMode } from "../../redux/audioSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // subcomponents
-const LoopAlbumButton = ({ mode, handleModeChange }) => (
+const LoopAlbumButton = ({ mode, handleModeChange, dispatch }) => (
   <button
     className="app-btn"
     title="Loop album"
     alt="Loop album"
     tabIndex="7"
-    onClick={handleModeChange("loopAlbum")}
+    // onClick={handleModeChange("loopAlbum")}
+    onClick={() => dispatch(switchMode({ mode: "loopAlbum" }))}
   >
     <FontAwesomeIcon
       icon={["fas", "sync"]}
@@ -18,13 +21,14 @@ const LoopAlbumButton = ({ mode, handleModeChange }) => (
   </button>
 );
 
-const LoopTrackButton = ({ mode, handleModeChange }) => (
+const LoopTrackButton = ({ mode, dispatch, handleModeChange }) => (
   <button
     className="app-btn"
     title="Loop track"
     alt="Loop track"
     tabIndex="8"
-    onClick={handleModeChange("loopTrack")}
+    // onClick={handleModeChange("loopTrack")}
+    onClick={() => dispatch(switchMode({ mode: "loopTrack" }))}
   >
     <FontAwesomeIcon
       icon={["fas", "redo"]}
@@ -34,13 +38,14 @@ const LoopTrackButton = ({ mode, handleModeChange }) => (
   </button>
 );
 
-const ShuffleAllButton = ({ mode, handleModeChange }) => (
+const ShuffleAllButton = ({ mode, dispatch, handleModeChange }) => (
   <button
     className="app-btn"
     title="Shuffle all"
     alt="Shuffle all"
     tabIndex="9"
-    onClick={handleModeChange("shuffleAll")}
+    // onClick={handleModeChange("shuffleAll")}
+    onClick={() => dispatch(switchMode({ mode: "shuffleAll" }))}
   >
     <FontAwesomeIcon
       icon={["fas", "random"]}
@@ -50,14 +55,34 @@ const ShuffleAllButton = ({ mode, handleModeChange }) => (
   </button>
 );
 
-const ModeControlJSX = ({ className, mode, handleModeChange }) => (
-  <div className={className}>
-    {/* { console.log('[render] ModeControl')} */}
-    <LoopAlbumButton mode={mode} handleModeChange={handleModeChange} />
-    <LoopTrackButton mode={mode} handleModeChange={handleModeChange} />
-    <ShuffleAllButton mode={mode} handleModeChange={handleModeChange} />
-  </div>
-);
+const ModeControlJSX = ({ className, handleModeChange }) => {
+  const mode = useSelector((state) => {
+    console.log("redux--mode", state.audio.mode);
+    return state.audio.mode;
+  });
+  const dispatch = useDispatch();
+
+  return (
+    <div className={className}>
+      {/* { console.log('[render] ModeControl')} */}
+      <LoopAlbumButton
+        mode={mode}
+        handleModeChange={handleModeChange}
+        dispatch={dispatch}
+      />
+      <LoopTrackButton
+        mode={mode}
+        handleModeChange={handleModeChange}
+        dispatch={dispatch}
+      />
+      <ShuffleAllButton
+        mode={mode}
+        handleModeChange={handleModeChange}
+        dispatch={dispatch}
+      />
+    </div>
+  );
+};
 
 const ModeControl = styled(ModeControlJSX)`
   display: flex;

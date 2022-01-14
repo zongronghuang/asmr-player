@@ -39,7 +39,7 @@ import ASMRApp from "./views/ASMRApp";
 import useFacebookLogin from "./hooks/useFacebookLogin";
 import useGoogleLogin from "./hooks/useGoogleLogin";
 import AuthContext from "./contexts/AuthContext";
-import NoMatchRoute from "./routing/NoMatchRoute";
+import NoMatchRoute from "./routes/NoMatchRoute";
 
 // 註冊 fontAwesome SVG icons
 library.add(
