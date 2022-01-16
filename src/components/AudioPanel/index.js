@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { switchMode, switchTrack } from "../../redux/audioSlice";
 import styled from "@emotion/styled";
 
 import PlaybackControl from "./PlaybackControl";
@@ -10,13 +12,13 @@ import ModeControl from "./ModeControl";
 const AudioPanelJSX = ({
   className,
   track,
-  mode,
-  handleNextTrack,
-  handlePrevTrack,
-  handleModeChange,
+  // handleNextTrack,
+  // handlePrevTrack,
   handleDrag,
   handleDragStart,
 }) => {
+  const mode = useSelector((state) => state.audio.mode);
+  const dispatch = useDispatch();
   const [volume, setVolume] = useState(0.5);
   const [activeButton, setActiveButton] = useState("play");
 
@@ -86,8 +88,10 @@ const AudioPanelJSX = ({
         activeButton={activeButton}
         handlePlayback={handlePlayback}
         handlePause={handlePause}
-        handleNextTrack={handleNextTrack}
-        handlePrevTrack={handlePrevTrack}
+        // handleNextTrack={handleNextTrack}
+        // handlePrevTrack={handlePrevTrack}
+        switchTrack={switchTrack}
+        dispatch={dispatch}
       />
       <div>
         <VolumeControl
@@ -97,12 +101,13 @@ const AudioPanelJSX = ({
         <AudioTrack
           track={track}
           mode={mode}
-          handleNextTrack={handleNextTrack}
+          dispatch={dispatch}
+          // handleNextTrack={handleNextTrack}
+          switchTrack={switchTrack}
           handlePlayback={handlePlayback}
         />
       </div>
-      {/* <ModeControl handleModeChange={handleModeChange} mode={mode} /> */}
-      <ModeControl handleModeChange={handleModeChange} />
+      <ModeControl mode={mode} switchMode={switchMode} dispatch={dispatch} />
     </div>
   );
 };

@@ -7,6 +7,7 @@ const MenuButton = ({ handleTogglingAnimations }) => (
     tabIndex="10"
     onClick={handleTogglingAnimations}
   >
+    {/* {console.log("[render] MenuButton")} */}
     <FontAwesomeIcon icon={["fas", "info"]} size="lg" />
   </a>
 );

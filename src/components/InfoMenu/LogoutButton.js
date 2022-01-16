@@ -9,6 +9,7 @@ const LogoutButton = forwardRef(({ handleLogoutDialog }, ref) => (
     ref={ref}
     onClick={() => handleLogoutDialog("on")}
   >
+    {/* {console.log("[render] LogoutButton")} */}
     <FontAwesomeIcon icon={["fas", "sign-out-alt"]} size="lg" />
   </a>
 ));

@@ -2,14 +2,14 @@ import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // subcomponents
-const PreviousTrackButton = ({ handlePrevTrack }) => (
+const PreviousTrackButton = ({ switchTrack, dispatch }) => (
   <button
     id="prev"
     className="app-btn"
     title="Previous track"
     alt="Previous track"
     tabIndex="1"
-    onClick={handlePrevTrack}
+    onClick={() => dispatch(switchTrack({ direction: "backward" }))}
   >
     <FontAwesomeIcon icon={["fas", "backward"]} size="lg" />
   </button>
@@ -40,14 +40,14 @@ const PauseButton = ({ handlePause }) => (
   </button>
 );
 
-const NextTrackButton = ({ handleNextTrack }) => (
+const NextTrackButton = ({ switchTrack, dispatch }) => (
   <button
     id="next"
     className="app-btn"
     title="Next track"
     alt="Next track"
     tabIndex="3"
-    onClick={handleNextTrack}
+    onClick={() => dispatch(switchTrack({ direction: "forward" }))}
   >
     <FontAwesomeIcon icon={["fas", "forward"]} size="lg" />
   </button>
@@ -58,12 +58,12 @@ const PlaybackControlJSX = ({
   activeButton,
   handlePlayback,
   handlePause,
-  handleNextTrack,
-  handlePrevTrack,
+  switchTrack,
+  dispatch,
 }) => (
   <div className={className}>
     {/* {console.log('[render] PlaybackControl')} */}
-    <PreviousTrackButton handlePrevTrack={handlePrevTrack} />
+    <PreviousTrackButton switchTrack={switchTrack} dispatch={dispatch} />
 
     {activeButton === "play" ? (
       <PlayButton handlePlayback={handlePlayback} />
@@ -71,7 +71,7 @@ const PlaybackControlJSX = ({
       <PauseButton handlePause={handlePause} />
     )}
 
-    <NextTrackButton handleNextTrack={handleNextTrack} />
+    <NextTrackButton switchTrack={switchTrack} dispatch={dispatch} />
   </div>
 );
 

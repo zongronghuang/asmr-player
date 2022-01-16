@@ -12,6 +12,7 @@ const RemoteBackdropButton = forwardRef(
         setShouldUseAPIData(false) || toggleClickability();
       }}
     >
+      {/* {console.log("[render] RemoteBackdropButton")} */}
       <FontAwesomeIcon icon={["fas", "plane"]} size="lg" />
     </a>
   )

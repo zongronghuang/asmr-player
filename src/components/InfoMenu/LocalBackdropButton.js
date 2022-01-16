@@ -14,6 +14,7 @@ const LocalBackdropButton = forwardRef(
           : setShouldUseAPIData(false)
       }
     >
+      {/* {console.log("[render] LocalBackdropButton")} */}
       <FontAwesomeIcon
         icon={["fas", "plane-slash"]}
         size="lg"

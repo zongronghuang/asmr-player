@@ -19,6 +19,7 @@ const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
     tabIndex="14"
     ref={ref}
   >
+    {/* {console.log("[render] PhotographerButton")} */}
     <FontAwesomeIcon icon={["fas", "user-circle"]} size="lg" />
   </a>
 ));

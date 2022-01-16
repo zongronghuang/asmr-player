@@ -130,6 +130,7 @@ const AppJSX = ({ className }) => {
           ) : (
             <Redirect to="/login" />
           )}
+          {/* {true ? <Redirect to="/app" /> : <Redirect to="/login" />} */}
           <Switch>
             <Route path="/login">
               <Login />
