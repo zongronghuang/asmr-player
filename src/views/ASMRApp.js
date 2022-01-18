@@ -9,6 +9,7 @@ import TrackInfo from "../components/TrackInfo";
 import Loader from "../components/Loader";
 import Dialog from "../components/Dialog";
 import useNetworkListeners from "../hooks/useNetworkListeners";
+import useDragAndDrop from "../hooks/useDragAndDrop";
 
 import { addAPIData } from "../redux/audioSlice";
 import { backdropPromises } from "../utils/trackFactory";
@@ -18,36 +19,43 @@ const ASMRAppJSX = () => {
   const dispatch = useDispatch();
 
   // 用 useReducer 整理或 useState 整理?
-  const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 });
+  // const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 });
   const [shouldUseAPIData, setShouldUseAPIData] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [dialogType, setDialogType] = useState("logout");
 
+  const dragItemRef = useRef();
+  const dropZoneRef = useRef();
+  // useDragAndDrop({
+  //   dragItem: dragItemRef.current,
+  //   dropZone: dropZoneRef.current,
+  // });
   ////////// audio panel drag & drop handlers
   // 整理成 custom hook?
-  const handleDragStart = (e) => {
-    // 取得游標和 drag item 原點的距離
-    const distToDragItemOrigin = {
-      left: e.clientX - e.target.offsetLeft,
-      top: e.clientY - e.target.offsetTop,
-    };
-    setDistToEleOrigin(distToDragItemOrigin);
-  };
-  const handleDrag = (e) => e.preventDefault();
-  const handleDragOver = (e) => e.preventDefault();
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const dragItem = document.querySelector("#dragItem");
+  // const handleDragStart = (e) => {
+  //   // 取得游標和 drag item 原點的距離
+  //   const distToDragItemOrigin = {
+  //     left: e.clientX - e.target.offsetLeft,
+  //     top: e.clientY - e.target.offsetTop,
+  //   };
+  //   setDistToEleOrigin(distToDragItemOrigin);
+  // };
+  // const handleDrag = (e) => e.preventDefault();
+  // const handleDragOver = (e) => e.preventDefault();
+  // const handleDrop = (e) => {
+  //   e.preventDefault();
+  //   const dragItem = document.querySelector("#dragItem");
 
-    // 計算 drag item 降落位置 (新的 left 和 top)
-    const dragItemLeft = e.clientX - distToEleOrigin.left;
-    const dragItemTop = e.clientY - distToEleOrigin.top;
+  //   // 計算 drag item 降落位置 (新的 left 和 top)
+  //   const dragItemLeft = e.clientX - distToEleOrigin.left;
+  //   const dragItemTop = e.clientY - distToEleOrigin.top;
 
-    dragItem.style.left = `${dragItemLeft}px`;
-    dragItem.style.top = `${dragItemTop}px`;
-  };
+  //   dragItem.style.left = `${dragItemLeft}px`;
+  //   dragItem.style.top = `${dragItemTop}px`;
+  // };
 
-  ////////// Misc handler
+  ////////// Misc handler\
+  // add dialogRef
   const handleLogoutDialog = (status) => {
     const dialog = document.querySelector("dialog");
     if (status === "on") dialog.showModal();
@@ -96,6 +104,13 @@ const ASMRAppJSX = () => {
     // fetchBackdrops();
   }, []);
 
+  useEffect(() => {
+    useDragAndDrop({
+      dragItem: dragItemRef.current,
+      dropZone: dropZoneRef.current,
+    });
+  }, []);
+
   return (
     <>
       {/* { console.log('[render] ASMRApp')} */}
@@ -109,14 +124,16 @@ const ASMRAppJSX = () => {
       <TrackInfo track={track} />
       <Backdrop
         track={track}
-        handleDragOver={handleDragOver}
-        handleDrop={handleDrop}
+        ref={dropZoneRef}
+        // handleDragOver={handleDragOver}
+        // handleDrop={handleDrop}
         shouldUseAPIData={shouldUseAPIData}
       />
       <AudioPanel
         track={track}
-        handleDrag={handleDrag}
-        handleDragStart={handleDragStart}
+        ref={dragItemRef}
+        // handleDrag={handleDrag}
+        // handleDragStart={handleDragStart}
       />
       <InfoMenu
         track={track}

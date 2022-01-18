@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Redirect } from "react-router-dom";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

@@ -4,7 +4,7 @@ const LocalBackdropJSX = ({ className }) => (
   <div className={className}>
     <div className="slogan">
       <h1 className="slogan__title">Deep Breaths</h1>
-      <h3 className="slogan__subtitle">THROUGH YOUR NOSE</h3>
+      <h3 className="slogan__subtitle">THROUGH ‧ YOUR ‧ NOSE</h3>
     </div>
     {/* {console.log('[render] LocalBackdrop')} */}
   </div>
