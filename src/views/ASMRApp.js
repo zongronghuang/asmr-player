@@ -8,6 +8,7 @@ import InfoMenu from "../components/InfoMenu";
 import TrackInfo from "../components/TrackInfo";
 import Loader from "../components/Loader";
 import Dialog from "../components/Dialog";
+import useNetworkListeners from "../hooks/useNetworkListeners";
 
 import { addAPIData } from "../redux/audioSlice";
 import { backdropPromises } from "../utils/trackFactory";
@@ -53,28 +54,17 @@ const ASMRAppJSX = () => {
     if (status === "off") dialog.close();
   };
 
-  // 整理成 custom hook?
-  useEffect(() => {
-    const onlineHandler = () => {
+  // 監聽網路連線狀態
+  useNetworkListeners({
+    onlineHandler() {
       handleLogoutDialog("off");
       setDialogType("logout");
-    };
-
-    const offlineHandler = () => {
+    },
+    offlineHandler() {
       setDialogType("offline");
       handleLogoutDialog("on");
-    };
-
-    // 監聽 App 連線和離線變化
-    window.addEventListener("online", onlineHandler);
-    window.addEventListener("offline", offlineHandler);
-
-    // Unmount 時清除事件監聽器，避免 memory leak
-    return () => {
-      window.removeEventListener("online", onlineHandler);
-      window.removeEventListener("offline", offlineHandler);
-    };
-  }, []);
+    },
+  });
 
   useEffect(() => {
     const fetchBackdrops = async () => {
@@ -103,14 +93,14 @@ const ASMRAppJSX = () => {
       }
     };
 
-    fetchBackdrops();
+    // fetchBackdrops();
   }, []);
 
   return (
     <>
       {/* { console.log('[render] ASMRApp')} */}
-      {isReady || <Loader />}
-      {/* {true || <Loader />} */}
+      {/* {isReady || <Loader />} */}
+      {true || <Loader />}
       <Dialog
         dialogType={dialogType}
         setDialogType={setDialogType}
