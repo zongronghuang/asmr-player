@@ -104,12 +104,10 @@ const ASMRAppJSX = () => {
     // fetchBackdrops();
   }, []);
 
-  useEffect(() => {
-    useDragAndDrop({
-      dragItem: dragItemRef.current,
-      dropZone: dropZoneRef.current,
-    });
-  }, []);
+  useDragAndDrop({
+    dragItem: dragItemRef,
+    dropZone: dropZoneRef,
+  });
 
   return (
     <>

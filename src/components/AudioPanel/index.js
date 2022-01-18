@@ -14,6 +14,8 @@ const AudioPanelJSX = forwardRef(({ className, track }, ref) => {
   const [volume, setVolume] = useState(0.5);
   const [activeButton, setActiveButton] = useState("play");
 
+  console.log("audio panel ref", ref);
+
   const handlePlayback = () => {
     const audio = document.querySelector("audio");
 
@@ -70,7 +72,7 @@ const AudioPanelJSX = forwardRef(({ className, track }, ref) => {
   return (
     <div
       className={className}
-      draggable="true"
+      // draggable="true"
       id="dragItem"
       ref={ref}
       // onDrag={handleDrag}
