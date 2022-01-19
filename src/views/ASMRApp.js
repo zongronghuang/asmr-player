@@ -22,17 +22,17 @@ const ASMRAppJSX = () => {
   const [shouldUseAPIData, setShouldUseAPIData] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [dialogType, setDialogType] = useState("logout");
-
-  // 建立 dialog 處理器
   const dialogRef = useRef();
+  const dragItemRef = useRef();
+  const dropZoneRef = useRef();
+
+  // 建立 logout dialog 處理器
   const handleLogoutDialog = (status) => {
     if (status === "on") dialogRef.current.showModal();
     if (status === "off") dialogRef.current.close();
   };
 
   // 添加 drag and drop 功能
-  const dragItemRef = useRef();
-  const dropZoneRef = useRef();
   useDragAndDrop({ dragItemRef, dropZoneRef });
 
   // 監聽網路連線狀態
