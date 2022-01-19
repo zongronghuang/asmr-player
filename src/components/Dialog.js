@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, forwardRef } from "react";
 import styled from "@emotion/styled";
 import AuthContext from "../contexts/AuthContext";
 
@@ -38,79 +38,76 @@ const TryAgainButton = ({ handleLogoutDialog, setDialogType }) => (
   </button>
 );
 
-const DialogJSX = ({
-  className,
-  dialogType,
-  setDialogType,
-  handleLogoutDialog,
-}) => {
-  const userAuth = useContext(AuthContext);
-  const title = dialogType.toUpperCase();
+const DialogJSX = forwardRef(
+  ({ className, dialogType, setDialogType, handleLogoutDialog }, ref) => {
+    const userAuth = useContext(AuthContext);
+    const title = dialogType.toUpperCase();
 
-  const message = {
-    offline: (
-      <>
-        Connection lost.
-        <br />
-        <br />
-        Check the network and then try again.
-      </>
-    ),
-    "API error": (
-      <>
-        No online backdrops available.
-        <br />
-        <br />
-        Wait a moment and then try again.
-      </>
-    ),
-    logout: "Are you sure you want to log out of this app?",
-  };
+    const message = {
+      offline: (
+        <>
+          Connection lost.
+          <br />
+          <br />
+          Check the network and then try again.
+        </>
+      ),
+      "API error": (
+        <>
+          No online backdrops available.
+          <br />
+          <br />
+          Wait a moment and then try again.
+        </>
+      ),
+      logout: "Are you sure you want to log out of this app?",
+    };
 
-  const chooseLogoutMethod = (authProvider) => {
-    // 如果因為其他原因 (另開分頁)，導致 authProvider === null
-    // 雖可登入 app，但無法使用對應的登出方法，因此強制更改 window.location 進行登出
-    if (!authProvider) {
-      return (window.location = "/login");
-    }
-    return userAuth[authProvider].logoutMethod();
-  };
+    const chooseLogoutMethod = (authProvider) => {
+      // 如果因為其他原因 (另開分頁)，導致 authProvider === null
+      // 雖可登入 app，但無法使用對應的登出方法，因此強制更改 window.location 進行登出
+      if (!authProvider) {
+        return (window.location = "/login");
+      }
+      return userAuth[authProvider].logoutMethod();
+    };
 
-  return (
-    <dialog className={className}>
-      {/* {console.log('[render] Dialog')} */}
-      <header className="dialog-title">
-        <strong>{title}</strong>
-      </header>
-      <hr></hr>
-      <section>
-        <span className="dialog-content">{message[dialogType]}</span>
-      </section>
-      <footer>
-        {dialogType === "logout" && (
-          <>
-            <LogoutButton
-              userAuth={userAuth}
-              chooseLogoutMethod={chooseLogoutMethod}
+    return (
+      <dialog className={className} ref={ref}>
+        {/* {console.log('[render] Dialog')} */}
+        <header className="dialog-title">
+          <strong>{title}</strong>
+        </header>
+        <hr></hr>
+        <section>
+          <span className="dialog-content">{message[dialogType]}</span>
+        </section>
+        <footer>
+          {dialogType === "logout" && (
+            <>
+              <LogoutButton
+                userAuth={userAuth}
+                chooseLogoutMethod={chooseLogoutMethod}
+              />
+              <StayButton handleLogoutDialog={handleLogoutDialog} />
+            </>
+          )}
+
+          {dialogType === "offline" && (
+            <GotItButton handleLogoutDialog={handleLogoutDialog} />
+          )}
+
+          {dialogType === "API error" && (
+            <TryAgainButton
+              handleLogoutDialog={handleLogoutDialog}
+              setDialogType={setDialogType}
             />
-            <StayButton handleLogoutDialog={handleLogoutDialog} />
-          </>
-        )}
-
-        {dialogType === "offline" && (
-          <GotItButton handleLogoutDialog={handleLogoutDialog} />
-        )}
-
-        {dialogType === "API error" && (
-          <TryAgainButton
-            handleLogoutDialog={handleLogoutDialog}
-            setDialogType={setDialogType}
-          />
-        )}
-      </footer>
-    </dialog>
-  );
-};
+          )}
+        </footer>
+      </dialog>
+    );
+  }
+);
 
 const Dialog = styled(DialogJSX)`
   width: 75%;

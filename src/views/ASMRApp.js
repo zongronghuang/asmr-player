@@ -23,12 +23,11 @@ const ASMRAppJSX = () => {
   const [isReady, setIsReady] = useState(false);
   const [dialogType, setDialogType] = useState("logout");
 
-  ////////// Misc handler\
-  // add dialogRef
+  // 建立 dialog 處理器
+  const dialogRef = useRef();
   const handleLogoutDialog = (status) => {
-    const dialog = document.querySelector("dialog");
-    if (status === "on") dialog.showModal();
-    if (status === "off") dialog.close();
+    if (status === "on") dialogRef.current.showModal();
+    if (status === "off") dialogRef.current.close();
   };
 
   // 添加 drag and drop 功能
@@ -87,6 +86,7 @@ const ASMRAppJSX = () => {
         dialogType={dialogType}
         setDialogType={setDialogType}
         handleLogoutDialog={handleLogoutDialog}
+        ref={dialogRef}
       />
       <TrackInfo track={track} />
       <Backdrop
