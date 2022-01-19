@@ -7,13 +7,7 @@ import RemoteBackdrop from "./RemoteBackdrop";
 const BackdropJSX = forwardRef(
   ({ className, track, shouldUseAPIData }, ref) => {
     return (
-      <div
-        id="dropZone"
-        ref={ref}
-        // onDragOver={handleDragOver}
-        // onDrop={handleDrop}
-        className={className}
-      >
+      <div ref={ref} className={className}>
         {shouldUseAPIData && track.remoteBackdrop ? (
           <RemoteBackdrop remoteBackdrop={track.remoteBackdrop} />
         ) : (
@@ -25,31 +19,6 @@ const BackdropJSX = forwardRef(
     );
   }
 );
-
-// const BackdropJSX = ({
-//   className,
-//   track,
-//   shouldUseAPIData,
-//   // handleDragOver,
-//   // handleDrop,
-// }) => {
-//   return (
-//     <div
-//       id="dropZone"
-//       // onDragOver={handleDragOver}
-//       // onDrop={handleDrop}
-//       className={className}
-//     >
-//       {shouldUseAPIData && track.remoteBackdrop ? (
-//         <RemoteBackdrop remoteBackdrop={track.remoteBackdrop} />
-//       ) : (
-//         <LocalBackdrop />
-//       )}
-
-//       {/* {console.log('[render] Backdrop')} */}
-//     </div>
-//   );
-// };
 
 const Backdrop = styled(BackdropJSX)`
   width: 100vw;

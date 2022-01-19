@@ -19,40 +19,9 @@ const ASMRAppJSX = () => {
   const dispatch = useDispatch();
 
   // 用 useReducer 整理或 useState 整理?
-  // const [distToEleOrigin, setDistToEleOrigin] = useState({ left: 0, top: 0 });
   const [shouldUseAPIData, setShouldUseAPIData] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [dialogType, setDialogType] = useState("logout");
-
-  const dragItemRef = useRef();
-  const dropZoneRef = useRef();
-  // useDragAndDrop({
-  //   dragItem: dragItemRef.current,
-  //   dropZone: dropZoneRef.current,
-  // });
-  ////////// audio panel drag & drop handlers
-  // 整理成 custom hook?
-  // const handleDragStart = (e) => {
-  //   // 取得游標和 drag item 原點的距離
-  //   const distToDragItemOrigin = {
-  //     left: e.clientX - e.target.offsetLeft,
-  //     top: e.clientY - e.target.offsetTop,
-  //   };
-  //   setDistToEleOrigin(distToDragItemOrigin);
-  // };
-  // const handleDrag = (e) => e.preventDefault();
-  // const handleDragOver = (e) => e.preventDefault();
-  // const handleDrop = (e) => {
-  //   e.preventDefault();
-  //   const dragItem = document.querySelector("#dragItem");
-
-  //   // 計算 drag item 降落位置 (新的 left 和 top)
-  //   const dragItemLeft = e.clientX - distToEleOrigin.left;
-  //   const dragItemTop = e.clientY - distToEleOrigin.top;
-
-  //   dragItem.style.left = `${dragItemLeft}px`;
-  //   dragItem.style.top = `${dragItemTop}px`;
-  // };
 
   ////////// Misc handler\
   // add dialogRef
@@ -61,6 +30,11 @@ const ASMRAppJSX = () => {
     if (status === "on") dialog.showModal();
     if (status === "off") dialog.close();
   };
+
+  // 添加 drag and drop 功能
+  const dragItemRef = useRef();
+  const dropZoneRef = useRef();
+  useDragAndDrop({ dragItemRef, dropZoneRef });
 
   // 監聽網路連線狀態
   useNetworkListeners({
@@ -104,11 +78,6 @@ const ASMRAppJSX = () => {
     // fetchBackdrops();
   }, []);
 
-  useDragAndDrop({
-    dragItem: dragItemRef,
-    dropZone: dropZoneRef,
-  });
-
   return (
     <>
       {/* { console.log('[render] ASMRApp')} */}
@@ -123,16 +92,9 @@ const ASMRAppJSX = () => {
       <Backdrop
         track={track}
         ref={dropZoneRef}
-        // handleDragOver={handleDragOver}
-        // handleDrop={handleDrop}
         shouldUseAPIData={shouldUseAPIData}
       />
-      <AudioPanel
-        track={track}
-        ref={dragItemRef}
-        // handleDrag={handleDrag}
-        // handleDragStart={handleDragStart}
-      />
+      <AudioPanel track={track} ref={dragItemRef} />
       <InfoMenu
         track={track}
         shouldUseAPIData={shouldUseAPIData}
