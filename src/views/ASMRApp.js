@@ -74,14 +74,14 @@ const ASMRAppJSX = () => {
       }
     };
 
-    // fetchBackdrops();
+    fetchBackdrops();
   }, []);
 
   return (
     <>
       {/* { console.log('[render] ASMRApp')} */}
-      {/* {isReady || <Loader />} */}
-      {true || <Loader />}
+      {isReady || <Loader />}
+      {/* {true || <Loader />} */}
       <Dialog
         dialogType={dialogType}
         setDialogType={setDialogType}
