@@ -9,40 +9,63 @@ const useDragAndDrop = ({ dragItemRef, dropZoneRef }) => {
     top: 0,
   });
 
-  // 取得游標和 drag item 原點的距離
-  const handleDragStart = (e) => {
-    distanceRef.current = {
-      left: e.clientX - e.target.offsetLeft,
-      top: e.clientY - e.target.offsetTop,
-    };
-  };
+  const dragItemEvents = [
+    {
+      name: "dragstart",
+      handler(e) {
+        // 取得游標和 drag item 原點的距離
+        distanceRef.current = {
+          left: e.clientX - e.target.offsetLeft,
+          top: e.clientY - e.target.offsetTop,
+        };
+      },
+    },
+    {
+      name: "drag",
+      handler(e) {
+        e.preventDefault();
+      },
+    },
+  ];
 
-  const handleDrag = (e) => e.preventDefault();
-  const handleDragOver = (e) => e.preventDefault();
-
-  // 計算 drag item 原點降落位置 (新的 left 和 top)
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const { left, top } = distanceRef.current;
-    const dragItemLeft = e.clientX - left;
-    const dragItemTop = e.clientY - top;
-    dragItemRef.current.style.left = `${dragItemLeft}px`;
-    dragItemRef.current.style.top = `${dragItemTop}px`;
-  };
+  const dropZoneEvents = [
+    {
+      name: "dragover",
+      handler(e) {
+        e.preventDefault();
+      },
+    },
+    {
+      name: "drop",
+      handler(e) {
+        // 計算 drag item 原點降落位置 (新的 left 和 top)
+        e.preventDefault();
+        const { left, top } = distanceRef.current;
+        const dragItemLeft = e.clientX - left;
+        const dragItemTop = e.clientY - top;
+        dragItemRef.current.style.left = `${dragItemLeft}px`;
+        dragItemRef.current.style.top = `${dragItemTop}px`;
+      },
+    },
+  ];
 
   useEffect(() => {
     dragItemRef.current.setAttribute("draggable", true);
-    dragItemRef.current.addEventListener("dragstart", handleDragStart);
-    dragItemRef.current.addEventListener("drag", handleDrag);
-    dropZoneRef.current.addEventListener("dragover", handleDragOver);
-    dropZoneRef.current.addEventListener("drop", handleDrop);
+    dragItemEvents.forEach((e) =>
+      dragItemRef.current.addEventListener(e.name, e.handler)
+    );
+    dropZoneEvents.forEach((e) =>
+      dropZoneRef.current.addEventListener(e.name, e.handler)
+    );
 
     return () => {
       dragItemRef.current.removeAttribute("draggable");
-      dragItemRef.current.removeEventListener("dragstart", handleDragStart);
-      dragItemRef.current.removeEventListener("drag", handleDrag);
-      dropZoneRef.current.removeEventListener("dragover", handleDragOver);
-      dropZoneRef.current.removeEventListener("drop", handleDrop);
+      dragItemEvents.forEach((e) =>
+        dragItemRef.current.removeEventListener(e.name, e.handler)
+      );
+      dropZoneEvents.forEach((e) =>
+        dropZoneRef.current.removeEventListener(e.name, e.handler)
+      );
     };
   }, []);
 };
