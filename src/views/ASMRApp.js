@@ -23,8 +23,8 @@ const ASMRAppJSX = () => {
   const [isReady, setIsReady] = useState(false);
   const [dialogType, setDialogType] = useState("logout");
   const dialogRef = useRef();
-  const dragItemRef = useRef();
-  const dropZoneRef = useRef();
+  const audioPanelRef = useRef();
+  const backdropRef = useRef();
 
   // 建立 logout dialog 處理器
   const handleLogoutDialog = (status) => {
@@ -33,7 +33,7 @@ const ASMRAppJSX = () => {
   };
 
   // 添加 drag and drop 功能
-  useDragAndDrop({ dragItemRef, dropZoneRef });
+  useDragAndDrop({ dragItemRef: audioPanelRef, dropZoneRef: backdropRef });
 
   // 監聽網路連線狀態
   useNetworkListeners({
@@ -74,14 +74,14 @@ const ASMRAppJSX = () => {
       }
     };
 
-    // fetchBackdrops();
+    fetchBackdrops();
   }, []);
 
   return (
     <>
       {/* { console.log('[render] ASMRApp')} */}
-      {/* {isReady || <Loader />} */}
-      {true || <Loader />}
+      {isReady || <Loader />}
+      {/* {true || <Loader />} */}
       <Dialog
         dialogType={dialogType}
         setDialogType={setDialogType}
@@ -91,10 +91,10 @@ const ASMRAppJSX = () => {
       <TrackInfo track={track} />
       <Backdrop
         track={track}
-        ref={dropZoneRef}
+        ref={backdropRef}
         shouldUseAPIData={shouldUseAPIData}
       />
-      <AudioPanel track={track} ref={dragItemRef} />
+      <AudioPanel track={track} ref={audioPanelRef} />
       <InfoMenu
         track={track}
         shouldUseAPIData={shouldUseAPIData}
