@@ -9,7 +9,7 @@ const AudioTrack = forwardRef(
       loop={mode === "loopTrack"}
       ref={ref}
     >
-      {console.log("[render] AudioTrack", track.audioSrc)}
+      {/* {console.log("[render] AudioTrack", track.audioSrc)} */}
     </audio>
   )
 );

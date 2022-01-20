@@ -59,6 +59,9 @@ const useDragAndDrop = ({ dragItemRef, dropZoneRef }) => {
   useEffect(() => {
     // 讓 drag item 能夠被拖曳
     dragItemRef.current.setAttribute("draggable", true);
+    const originalPosition = getComputedStyle(
+      dragItemRef.current
+    ).getPropertyValue("position");
     dragItemRef.current.style.position = "absolute";
 
     dragItemEvents.forEach((e) =>
@@ -69,7 +72,10 @@ const useDragAndDrop = ({ dragItemRef, dropZoneRef }) => {
     );
 
     return () => {
+      // 回復 drag item 先前狀態
       dragItemRef.current.removeAttribute("draggable");
+      dragItemRef.current.style.position = originalPosition;
+
       dragItemEvents.forEach((e) =>
         dragItemRef.current.removeEventListener(e.name, e.handler)
       );
