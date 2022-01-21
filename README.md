@@ -10,7 +10,7 @@ Try out the [demo app](https://asmr-player-312716.web.app/) on Firebase.
 
 ## :beginner: Purpose
 
-I built this web app to hone and improve on my technical proficiency of [React](https://reactjs.org), social media logins ([Facebook](https://developers.facebook.com/docs/facebook-login/) and [Google](https://developers.google.com/identity)), [Firebase](https://firebase.google.com), HTML `<audio>` element, and [Unsplash API](https://unsplash.com/developers).
+I built this web app to hone and improve on my technical proficiency of [React](https://reactjs.org) with supported technologies ([Redux Toolkit](https://redux-toolkit.js.org/), [React Redux](https://react-redux.js.org/), [React Router](https://v5.reactrouter.com/web/guides/quick-start), [Emotion.js](https://emotion.sh/docs/introduction)), social media logins ([Facebook](https://developers.facebook.com/docs/facebook-login/) and [Google](https://developers.google.com/identity)), [Firebase](https://firebase.google.com), and [Unsplash API](https://unsplash.com/developers).
 
 ## :musical_note: Features
 
