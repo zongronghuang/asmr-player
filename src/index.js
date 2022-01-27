@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import "./utils/createFirebaseApp"; // 建立 firebaseApp 實體
 
 ReactDOM.render(
   <React.StrictMode>
