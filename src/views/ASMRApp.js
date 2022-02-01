@@ -11,8 +11,9 @@ import Dialog from "../components/Dialog";
 import useNetworkListeners from "../hooks/useNetworkListeners";
 import useDragAndDrop from "../hooks/useDragAndDrop";
 
-import { addAPIData } from "../redux/audioSlice";
+import { addRemoteImages, addAudioSrcs } from "../redux/audioSlice";
 import { backdropPromises } from "../utils/trackFactory";
+import { fetchAudioURLs } from "../apis/firebase/fetchAudioURLs";
 
 const ASMRAppJSX = () => {
   const track = useSelector((state) => ({ ...state.audio.track }));
@@ -47,6 +48,25 @@ const ASMRAppJSX = () => {
     },
   });
 
+  // 取得 Firebase 上的 audio 網址
+  useEffect(() => {
+    const resolveAudioURLs = async () => {
+      try {
+        const urls = await fetchAudioURLs();
+        if (!urls.length) throw new Error("[Error] No available audios found");
+        dispatch(addAudioSrcs({ urls }));
+      } catch (error) {
+        console.error(`[Error] Failed to resolve audio URLs: ${error}`);
+        setDialogType("audio error");
+        handleLogoutDialog("on");
+        setIsReady(true);
+      }
+    };
+
+    resolveAudioURLs();
+  }, []);
+
+  // 取得 Unsplash 的圖片網址
   useEffect(() => {
     const fetchBackdrops = async () => {
       try {
@@ -54,19 +74,19 @@ const ASMRAppJSX = () => {
 
         // 確認是否取得所有線上背景圖片
         if (data.some((item) => !!item === false)) {
-          throw new Error("Online backdrops missing");
+          throw new Error("[Error] Some remote backdrops missing");
         }
         // 加入 API 資料 (背景圖片) 到 redux store
-        dispatch(addAPIData({ data }));
+        dispatch(addRemoteImages({ data }));
         setShouldUseAPIData(true);
         // 可用本地及 API 背景圖片
         setIsReady(true);
       } catch (error) {
-        console.error("fetch error", error);
+        console.error(`[Error] Failed to fetch remote backdrops: ${error}`);
 
         setTimeout(() => {
           setShouldUseAPIData(false);
-          setDialogType("API error");
+          setDialogType("image error");
           handleLogoutDialog("on");
           // 可用本地背景圖片
           setIsReady(true);
@@ -74,14 +94,14 @@ const ASMRAppJSX = () => {
       }
     };
 
-    // fetchBackdrops();
+    fetchBackdrops();
   }, []);
 
   return (
     <>
       {/* { console.log('[render] ASMRApp')} */}
-      {/* {isReady || <Loader />} */}
-      {true || <Loader />}
+      {isReady || <Loader />}
+      {/* {true || <Loader />} */}
       <Dialog
         dialogType={dialogType}
         setDialogType={setDialogType}

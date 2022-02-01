@@ -21,7 +21,7 @@ const VolumeDownButton = ({ handleVolumeUpDown }) => (
     title="Volume down"
     alt="Volume down"
     tabIndex="4"
-    onClick={() => handleVolumeUpDown("down")}
+    onClick={(e) => handleVolumeUpDown(e, "down")}
   >
     <FontAwesomeIcon icon={["fas", "volume-down"]} size="lg" />
   </button>
@@ -37,7 +37,7 @@ const VolumeRangeBar = ({ volume, handleVolumeUpDown }) => (
     max="1"
     step="0.1"
     tabIndex="5"
-    onChange={() => handleVolumeUpDown("manual")}
+    onChange={(e) => handleVolumeUpDown(e, "manual")}
   />
 );
 
@@ -48,7 +48,7 @@ const VolumeUpButton = ({ handleVolumeUpDown }) => (
     title="Volume up"
     alt="Volume up"
     tabIndex="6"
-    onClick={() => handleVolumeUpDown("up")}
+    onClick={(e) => handleVolumeUpDown(e, "up")}
   >
     <FontAwesomeIcon icon={["fas", "volume-up"]} size="lg" />
   </button>

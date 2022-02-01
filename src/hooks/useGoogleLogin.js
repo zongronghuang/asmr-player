@@ -21,7 +21,7 @@ const useGoogleLogin = () => {
       localStorage.setItem("googleAccessToken", token);
       setGoogleResponse({ login: true });
     } catch (error) {
-      console.log(
+      console.error(
         `[Google] Login failure: code=${error.code} | message=${error.message}`
       );
       setGoogleResponse({ login: false });
@@ -34,7 +34,7 @@ const useGoogleLogin = () => {
       await signOut(auth);
       setGoogleResponse({ login: false });
     } catch (error) {
-      console.log(
+      console.error(
         `[Google] Logout failure: code=${error.code} | message=${error.message}`
       );
     }

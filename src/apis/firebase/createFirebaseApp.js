@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 
-// Firebase 初始化
+// Firebase 初始化 + 建立實體
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,

@@ -11,7 +11,7 @@ import ModeControl from "./ModeControl";
 const AudioPanelJSX = forwardRef(({ className, track }, ref) => {
   const mode = useSelector((state) => state.audio.mode);
   const dispatch = useDispatch();
-  const [volume, setVolume] = useState(0.5);
+  const [volume, setVolume] = useState(0.3);
   const [activeButton, setActiveButton] = useState("play");
   const audioRef = useRef();
 
@@ -33,29 +33,29 @@ const AudioPanelJSX = forwardRef(({ className, track }, ref) => {
   };
 
   // 點按圖示或拖拉 input 欄位的拉桿調整音量
-  const handleVolumeUpDown = (method, e) => {
+  const handleVolumeUpDown = (e, method) => {
     const step = 0.1;
     const volumeChangeMethod = {
-      up: () =>
+      up: (e) =>
         setVolume((prevVolume) => {
           if (prevVolume >= 1) return prevVolume;
           audioRef.current.volume = Number((prevVolume + step).toFixed(1));
           return audioRef.current.volume;
         }),
-      down: () =>
+      down: (e) =>
         setVolume((prevVolume) => {
           if (prevVolume <= 0) return prevVolume;
           audioRef.current.volume = Number((prevVolume - step).toFixed(1)); // toFixed 解除浮點數運算不精確問題
           return audioRef.current.volume;
         }),
-      manual: () =>
+      manual: (e) =>
         setVolume((prevVolume) => {
           audioRef.current.volume = Number(e.target.value);
           return audioRef.current.volume;
         }),
     };
 
-    volumeChangeMethod[method]();
+    volumeChangeMethod[method](e);
   };
 
   return (

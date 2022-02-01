@@ -49,7 +49,7 @@ export const audioSlice = createSlice({
         track: { ...album[nextTrackId] },
       };
     },
-    addAPIData(state, action) {
+    addRemoteImages(state, action) {
       const { track, album, originalAlbum } = current(state);
       const { data } = action.payload;
       const updatedOriginalAlbum = originalAlbum.map((track, id) => ({
@@ -69,10 +69,32 @@ export const audioSlice = createSlice({
         track: updatedTrack,
       };
     },
+    addAudioSrcs(state, action) {
+      const { track, album, originalAlbum } = current(state);
+      const { urls } = action.payload;
+
+      const updatedOriginalAlbum = originalAlbum.map((track, id) => ({
+        ...track,
+        audioSrc: urls[id],
+      }));
+      const updatedAlbum = album.map((track, id) => ({
+        ...track,
+        audioSrc: urls[id],
+      }));
+      const updatedTrack = { ...updatedAlbum[track.order] };
+
+      return {
+        ...state,
+        originalAlbum: updatedOriginalAlbum,
+        album: updatedAlbum,
+        track: updatedTrack,
+      };
+    },
   },
 });
 
 // 匯出 action creators
-export const { switchMode, switchTrack, addAPIData } = audioSlice.actions;
+export const { switchMode, switchTrack, addRemoteImages, addAudioSrcs } =
+  audioSlice.actions;
 // 匯出所有 reducer 方法
 export default audioSlice.reducer;
