@@ -1,68 +1,44 @@
 import { useContext, forwardRef } from "react";
 import styled from "@emotion/styled";
-import AuthContext from "../contexts/AuthContext";
+import AuthContext from "../../contexts/AuthContext";
 
-// subcomponents
-const LogoutButton = ({ userAuth, chooseLogoutMethod }) => (
-  <button
-    alt="Log out"
-    onClick={() => {
-      chooseLogoutMethod(userAuth.authProvider);
-    }}
-  >
-    Log out
-  </button>
-);
+import GotItButton from "./GotItButton";
+import LogoutButton from "./LogoutButton";
+import StayButton from "./StayButton";
+import TryAgainButton from "./TryAgainButton";
 
-const StayButton = ({ handleLogoutDialog }) => (
-  <button alt="Stay" onClick={() => handleLogoutDialog("off")}>
-    Stay
-  </button>
-);
-
-const GotItButton = ({ handleLogoutDialog }) => (
-  <button alt="Got it" onClick={() => handleLogoutDialog("off")}>
-    Got it
-  </button>
-);
-
-const TryAgainButton = ({ handleLogoutDialog, setDialogType }) => (
-  <button
-    alt="Got it"
-    onClick={() => {
-      handleLogoutDialog("off");
-      setDialogType("logout");
-    }}
-  >
-    Got it
-  </button>
-);
+const messages = {
+  offline: (
+    <>
+      Connection lost.
+      <br />
+      <br />
+      Check the network and then try again.
+    </>
+  ),
+  "image error": (
+    <>
+      No online backdrops available.
+      <br />
+      <br />
+      Wait a moment and then try again.
+    </>
+  ),
+  "audio error": (
+    <>
+      No audios available.
+      <br />
+      <br />
+      Wait a moment and then try again.
+    </>
+  ),
+  logout: "Are you sure you want to log out of this app?",
+};
 
 const DialogJSX = forwardRef(
   ({ className, dialogType, setDialogType, handleLogoutDialog }, ref) => {
     const userAuth = useContext(AuthContext);
     const title = dialogType.toUpperCase();
-
-    const message = {
-      offline: (
-        <>
-          Connection lost.
-          <br />
-          <br />
-          Check the network and then try again.
-        </>
-      ),
-      "API error": (
-        <>
-          No online backdrops available.
-          <br />
-          <br />
-          Wait a moment and then try again.
-        </>
-      ),
-      logout: "Are you sure you want to log out of this app?",
-    };
-
     const chooseLogoutMethod = (authProvider) => {
       // 如果因為其他原因 (另開分頁)，導致 authProvider === null
       // 雖可登入 app，但無法使用對應的登出方法，因此強制更改 window.location 進行登出
@@ -80,7 +56,7 @@ const DialogJSX = forwardRef(
         </header>
         <hr></hr>
         <section>
-          <span className="dialog-content">{message[dialogType]}</span>
+          <span className="dialog-content">{messages[dialogType]}</span>
         </section>
         <footer>
           {dialogType === "logout" && (
