@@ -70,6 +70,9 @@ const ASMRAppJSX = () => {
   useEffect(() => {
     const fetchBackdrops = async () => {
       try {
+        // 如果 localStorage 裡沒有圖片 || 時間間隔超過 1 小時 => 用 API 的圖片
+        // 其他狀況 => 用 localStorage 圖片
+
         const data = await Promise.all(backdropPromises);
 
         // 確認是否取得所有線上背景圖片

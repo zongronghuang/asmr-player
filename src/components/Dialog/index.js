@@ -73,7 +73,7 @@ const DialogJSX = forwardRef(
             <GotItButton handleLogoutDialog={handleLogoutDialog} />
           )}
 
-          {dialogType === "API error" && (
+          {(dialogType === "image error" || dialogType === "audio error") && (
             <TryAgainButton
               handleLogoutDialog={handleLogoutDialog}
               setDialogType={setDialogType}
