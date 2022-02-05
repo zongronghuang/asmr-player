@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { addRemoteImages, addAudioSrcs } from "../redux/audioSlice";
 import styled from "@emotion/styled";
 
 import Backdrop from "../components/Backdrop";
@@ -8,12 +9,18 @@ import InfoMenu from "../components/InfoMenu";
 import TrackInfo from "../components/TrackInfo";
 import Loader from "../components/Loader";
 import Dialog from "../components/Dialog";
+
 import useNetworkListeners from "../hooks/useNetworkListeners";
 import useDragAndDrop from "../hooks/useDragAndDrop";
 
-import { addRemoteImages, addAudioSrcs } from "../redux/audioSlice";
-import { backdropPromises } from "../utils/trackFactory";
+import { getRandomImage } from "../apis/unsplash/getRandomImage";
 import { fetchAudioURLs } from "../apis/firebase/fetchAudioURLs";
+import { trackList } from "../utils/track_list";
+import {
+  canSendImageRequests,
+  getImagesFromLocalStorage,
+  updateImagesToLocalStorage,
+} from "../utils/image_helpers";
 
 const ASMRAppJSX = () => {
   const track = useSelector((state) => ({ ...state.audio.track }));
@@ -21,7 +28,7 @@ const ASMRAppJSX = () => {
 
   // 用 useReducer 整理或 useState 整理?
   const [shouldUseAPIData, setShouldUseAPIData] = useState(false);
-  const [isReady, setIsReady] = useState(false);
+  const [isAppReady, setIsAppReady] = useState(false);
   const [dialogType, setDialogType] = useState("logout");
   const dialogRef = useRef();
   const audioPanelRef = useRef();
@@ -56,10 +63,10 @@ const ASMRAppJSX = () => {
         if (!urls.length) throw new Error("[Error] No available audios found");
         dispatch(addAudioSrcs({ urls }));
       } catch (error) {
-        console.error(`[Error] Failed to resolve audio URLs: ${error}`);
+        console.error(error);
         setDialogType("audio error");
         handleLogoutDialog("on");
-        setIsReady(true);
+        setIsAppReady(true);
       }
     };
 
@@ -70,30 +77,51 @@ const ASMRAppJSX = () => {
   useEffect(() => {
     const fetchBackdrops = async () => {
       try {
-        // 如果 localStorage 裡沒有圖片 || 時間間隔超過 1 小時 => 用 API 的圖片
-        // 其他狀況 => 用 localStorage 圖片
+        const currentTime = Date.now();
 
-        const data = await Promise.all(backdropPromises);
-
-        // 確認是否取得所有線上背景圖片
-        if (data.some((item) => !!item === false)) {
-          throw new Error("[Error] Some remote backdrops missing");
+        // 如果不能發 API => 從 local storage 拿舊圖片
+        if (!canSendImageRequests(currentTime)) {
+          const imageData = getImagesFromLocalStorage();
+          if (imageData) {
+            dispatch(addRemoteImages({ data: imageData }));
+            setShouldUseAPIData(true);
+          }
+          setIsAppReady(true);
         }
-        // 加入 API 資料 (背景圖片) 到 redux store
-        dispatch(addRemoteImages({ data }));
-        setShouldUseAPIData(true);
-        // 可用本地及 API 背景圖片
-        setIsReady(true);
-      } catch (error) {
-        console.error(`[Error] Failed to fetch remote backdrops: ${error}`);
 
+        // 如果能夠發 API => 從 API 拿新圖片
+        if (canSendImageRequests(currentTime)) {
+          updateImagesToLocalStorage({ currentTime });
+
+          const imageRequests = trackList.map((track) =>
+            getRandomImage(track.searchTerm)
+          );
+          const imageResponses = await Promise.all(imageRequests);
+          const imageData = await Promise.all(imageResponses);
+
+          // console.log("imageData", imageData);
+          dispatch(addRemoteImages({ data: imageData }));
+          setShouldUseAPIData(true);
+          setIsAppReady(true); // 可用本地及 API 背景圖片
+          updateImagesToLocalStorage({ imageData });
+        }
+      } catch (error) {
+        // API 請求得到錯誤 => 從 local storage 拿舊圖片
+        console.error("[Unsplash Error]", error);
+        const imageData = getImagesFromLocalStorage();
+        if (imageData) {
+          dispatch(addRemoteImages({ data: imageData }));
+          setShouldUseAPIData(true);
+        }
+
+        // 如果 local storage 沒有舊圖片 => 跳出錯誤訊息
         setTimeout(() => {
-          setShouldUseAPIData(false);
-          setDialogType("image error");
-          handleLogoutDialog("on");
-          // 可用本地背景圖片
-          setIsReady(true);
-        }, 2000);
+          if (!imageData) {
+            setDialogType("image error");
+            handleLogoutDialog("on");
+          }
+          setIsAppReady(true);
+        }, 1000);
       }
     };
 
@@ -103,7 +131,7 @@ const ASMRAppJSX = () => {
   return (
     <>
       {/* { console.log('[render] ASMRApp')} */}
-      {isReady || <Loader />}
+      {isAppReady || <Loader />}
       {/* {true || <Loader />} */}
       <Dialog
         dialogType={dialogType}

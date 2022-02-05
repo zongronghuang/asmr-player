@@ -1,12 +1,12 @@
 import { createSlice, current } from "@reduxjs/toolkit";
-import { orderedTracks } from "../utils/trackFactory";
-import { randomizeTracks } from "../utils/helpers";
+import { trackList } from "../utils/track_list";
+import { randomizeTracks } from "../utils/audio_helpers";
 
 const initialState = {
-  originalAlbum: orderedTracks,
+  originalAlbum: trackList,
   mode: "loopAlbum",
-  album: [...orderedTracks],
-  track: { ...orderedTracks[0] },
+  album: [...trackList],
+  track: { ...trackList[0] },
 };
 
 export const audioSlice = createSlice({

@@ -1,6 +1,4 @@
-import { getRandomImage } from "../apis/unsplash/getRandomImage";
-
-const orderedTracks = [
+export const trackList = [
   {
     order: 0,
     name: "Camp fire",
@@ -50,10 +48,3 @@ const orderedTracks = [
     audioSrc: "",
   },
 ];
-
-const backdropPromises = orderedTracks.reduce((base, track) => {
-  base.push(getRandomImage(track.searchTerm));
-  return base;
-}, []);
-
-export { orderedTracks, backdropPromises };

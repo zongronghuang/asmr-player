@@ -8,29 +8,28 @@ export const getRandomImage = async (searchTerm) => {
     },
   };
 
-  try {
-    const response = await fetch(RESOURCE_URL, REQUEST_OPTIONS);
-    const { ok, statusText } = response;
-    if (!ok) {
-      throw new Error(statusText);
-    }
-    const imageData = await response.json();
-    // console.log('Fetched image data', imageData)
-    const {
-      urls: { regular: source },
-      user: {
-        name: photographer,
-        links: { html: portfolio },
-      },
-    } = imageData;
+  return fetch(RESOURCE_URL, REQUEST_OPTIONS)
+    .then((response) => {
+      const { ok, statusText } = response;
+      if (!ok) {
+        throw new Error(statusText);
+      }
 
-    return {
-      photographer,
-      portfolio,
-      source,
-    };
-  } catch (error) {
-    console.error("[Unsplash API Error]", error);
-    return;
-  }
+      return response.json();
+    })
+    .then((data) => {
+      const {
+        urls: { regular: source },
+        user: {
+          name: photographer,
+          links: { html: portfolio },
+        },
+      } = data;
+
+      return {
+        photographer,
+        portfolio,
+        source,
+      };
+    });
 };
