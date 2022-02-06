@@ -1,4 +1,5 @@
 import { useContext, forwardRef } from "react";
+import { createPortal } from "react-dom";
 import styled from "@emotion/styled";
 import AuthContext from "../../contexts/AuthContext";
 
@@ -7,6 +8,7 @@ import LogoutButton from "./LogoutButton";
 import StayButton from "./StayButton";
 import TryAgainButton from "./TryAgainButton";
 
+const modalRoot = document.querySelector("#modal-root");
 const messages = {
   offline: (
     <>
@@ -48,7 +50,7 @@ const DialogJSX = forwardRef(
       return userAuth[authProvider].logoutMethod();
     };
 
-    return (
+    return createPortal(
       <dialog className={className} ref={ref}>
         {/* {console.log('[render] Dialog')} */}
         <header className="dialog-title">
@@ -80,7 +82,8 @@ const DialogJSX = forwardRef(
             />
           )}
         </footer>
-      </dialog>
+      </dialog>,
+      modalRoot
     );
   }
 );
