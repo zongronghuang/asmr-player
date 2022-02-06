@@ -96,8 +96,7 @@ const ASMRAppJSX = () => {
           const imageRequests = trackList.map((track) =>
             getRandomImage(track.searchTerm)
           );
-          const imageResponses = await Promise.all(imageRequests);
-          const imageData = await Promise.all(imageResponses);
+          const imageData = await Promise.all(imageRequests);
 
           // console.log("imageData", imageData);
           dispatch(addRemoteImages({ data: imageData }));
