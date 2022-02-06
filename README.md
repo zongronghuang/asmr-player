@@ -10,24 +10,29 @@ Try out the [demo app](https://asmr-player-312716.web.app/) on Firebase.
 
 ## :beginner: Purpose
 
-I built this web app to hone and improve on my technical proficiency of [React](https://reactjs.org) with supported technologies ([Redux Toolkit](https://redux-toolkit.js.org/), [React Redux](https://react-redux.js.org/), [React Router](https://v5.reactrouter.com/web/guides/quick-start), [Emotion.js](https://emotion.sh/docs/introduction)), social media logins ([Facebook](https://developers.facebook.com/docs/facebook-login/) and [Google](https://developers.google.com/identity)), [Firebase](https://firebase.google.com), and [Unsplash API](https://unsplash.com/developers).
+I built this web app to hone and improve on my technical proficiency:
+
+- React ecosystem: [React](https://reactjs.org), [Redux Toolkit](https://redux-toolkit.js.org/), [React Redux](https://react-redux.js.org/), [React Router](https://v5.reactrouter.com/web/guides/quick-start), and [Emotion.js](https://emotion.sh/docs/introduction)
+- Firebase: [Hosting](https://firebase.google.com/docs/hosting), [Authentication](https://firebase.google.com/docs/auth), and [Cloud Storage](https://firebase.google.com/docs/storage)
+- Facebook: [Facebook Login](https://developers.facebook.com/docs/facebook-login/)
+- Third-party resources: [Unsplash API](https://unsplash.com/developers) and [Font Awesome](https://fontawesome.com)
 
 ## :musical_note: Features
 
 ![app page demo](app_page.jpg)
 <small>:framed_picture: Credit: [Cristian Palmer](https://unsplash.com/photos/XexawgzYOBc)</small>
 
-- It has four built-in audio recordings and an animated gradient backdrop.
-- When online, it can display random photograhic works from [Unsplash](https://unsplash.com/), with links to the source image and the photographer's profile page for further exploration.
-- It comes with three playback modes:
+- Access to eight audio recordings stored in Firebase Cloud Storage.
+- Two kinds of app backdrops:
+  - **Animated color-gradient backdrop**
+  - **Unsplash photographs**: Random images that match the audio recordings, with links to the source image and the photographer's profile page. Unsplash photographs are available when the app has Internet connection.
+- Draggable control panel with audio controls and three playback modes:
   - **Single track loop**: the app repeates single audio track.
   - **Full album loop** (**default**): the app plays all tracks in the album in fixed order and repeats the queue.
   - **Shuffle**: the app plays the album tracks in random order. The playback is not repeated.
-- It comes with social media login via Facebook and Google.
-- It is responsive to desktop and mobile devices.
-
-> :warning: Note:
-> Do not refresh the app repeatedly when it is in the online mode.<br/><br/>The Unsplash API may block access from this app owning to a surge of requests. Once that happens, wait for a while to get unblocked.
+- Social media logins: Facebook and Google
+- Responsive to desktop and mobile devices
+- Reusing Unsplash backdrop images fetched in last hour to optimize API usage and user experience
 
 ## :mag: How to use it
 
