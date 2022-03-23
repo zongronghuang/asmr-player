@@ -14,7 +14,7 @@ I built this web app to hone and improve on my technical proficiency:
 
 - React ecosystem: [React](https://reactjs.org), [Redux Toolkit](https://redux-toolkit.js.org/), [React Redux](https://react-redux.js.org/), [React Router](https://v5.reactrouter.com/web/guides/quick-start), and [Emotion.js](https://emotion.sh/docs/introduction)
 - Firebase: [Hosting](https://firebase.google.com/docs/hosting), [Authentication](https://firebase.google.com/docs/auth), and [Cloud Storage](https://firebase.google.com/docs/storage)
-- Facebook: [Facebook Login](https://developers.facebook.com/docs/facebook-login/)
+- Facebook: [Facebook Login](https://developers.facebook.com/docs/facebook-login/) (Available soon after SDK upgrade)
 - Third-party resources: [Unsplash API](https://unsplash.com/developers) and [Font Awesome](https://fontawesome.com)
 
 ## :musical_note: Features
