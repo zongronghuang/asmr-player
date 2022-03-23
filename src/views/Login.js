@@ -15,14 +15,14 @@ const LoginJSX = ({ className }) => {
           <div className="circle circle-inner">
             <section className="logins">
               <h1 className="app-title">ASMR Player</h1>
-              <a
+              {/* <a
                 className="login-btn fb-login"
                 href="#"
                 onClick={FB.loginMethod}
               >
                 <FontAwesomeIcon icon={["fab", "facebook-square"]} size="lg" />
                 <span className="fb-login-text">Facebook Login</span>
-              </a>
+              </a> */}
 
               <a
                 className="login-btn google-login"
@@ -109,14 +109,20 @@ const Login = styled(LoginJSX)`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: flex-start;
+    justify-content: center; */
     gap: 1.6rem;
+    gap: 0;
 
     width: 60%;
     height: 60%;
   }
 
   .app-title {
-    margin-bottom: auto;
+    /* margin-bottom: auto; */
 
     font-family: Courgette, Arial, cursive, monospace, sans-serif;
     font-size: 2rem;

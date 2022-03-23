@@ -95,10 +95,12 @@ const Dialog = styled(DialogJSX)`
   border: 3px solid goldenrod;
   border-radius: 15px;
 
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   background-color: black;
   color: goldenrod;
   font-family: Arial, Helvetica, sans-serif;
+
+  overflow: hidden;
 
   .dialog-title {
     padding: 0.4rem 0;
