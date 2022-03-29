@@ -78,8 +78,7 @@ const AppJSX = ({ className }) => {
       value={{
         authProvider,
         FB: {
-          status: FBResponse?.status,
-          authResponse: FBResponse?.authResponse,
+          authResponse: FBResponse?.login,
           loginMethod: () => {
             handleFBLogin();
             setAuthProvider("FB");
@@ -107,25 +106,7 @@ const AppJSX = ({ className }) => {
         {/* {console.log('[render] App')} */}
 
         <Router>
-          {/* 
-            FB SDK 有 getLoginStatus 方法，每次載入 app 時就會回傳使用者的登入狀態，
-            如果 access token 未過期，再一次自動回傳登入狀態和 access token
-          
-            [假如走到 NoMatchRoute]：
-            此時 authProvider === null，但 context 中已有 FB 登入資料 (FB 自動回傳)。
-            按下登出鍵後，必須確認 FBResponse 和 authProvider，才能阻止再次自動登入
-          */}
-
-          {/* 
-            採用 Google 登入時，不檢查 authProvider
-            
-            使用 GoogleResponse?.login && authProvider === 'Google' 做為 gate 的話，
-            因為 && 的 short-circuit evaluation 特性，
-            會直接讓使用者進入 /app，但是使用者還未點選要用哪一個帳號登入，導致登入管控失敗
-          */}
-
-          {(FBResponse?.authResponse && authProvider === "FB") ||
-          GoogleResponse?.login ? (
+          {FBResponse?.login || GoogleResponse?.login ? (
             <Redirect to="/app" />
           ) : (
             <Redirect to="/login" />

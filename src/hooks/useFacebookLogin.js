@@ -1,84 +1,50 @@
-// import { useState } from "react";
-// import {
-//   getAuth,
-//   signOut,
-//   signInWithPopup,
-//   GoogleAuthProvider,
-// } from "firebase/auth";
-
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import {
+  getAuth,
+  signOut,
+  signInWithPopup,
+  FacebookAuthProvider,
+} from "firebase/auth";
 
 const useFacebookLogin = () => {
-  const [FBResponse, setFBResponse] = useState();
+  const [FBResponse, setFBResponse] = useState({ login: false });
+  const provider = new FacebookAuthProvider();
+  const auth = getAuth();
 
-  useEffect(function logInToFB() {
-    // IIFE 立即取得 FB SDK
-    (function loadFBSDK(d, s, id) {
-      let js;
-      let fjs = d.getElementsByTagName(s)[0];
+  provider.addScope("email"); // 向 Facebook 取得登入者的 email
 
-      if (d.getElementById(id)) {
-        return;
-      }
+  const handleFBLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const credential = FacebookAuthProvider.credentialFromResult(result);
+      const accessToken = credential.accessToken;
 
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
+      setFBResponse({ login: true });
+      localStorage.setItem("facebookClientToken", accessToken);
+    } catch (error) {
+      const credential = FacebookAuthProvider.credentialFromError(error);
 
-    // FB SDK 初始化
-    window.fbAsyncInit = function () {
-      window.FB.init({
-        appId: process.env.REACT_APP_FB_APP_ID, // 補上
-        cookie: true,
-        xfbml: true,
-        version: process.env.REACT_APP_FB_API_VERSION, // 補上
-      });
-
-      // console.log('[!FB SDK initialized!]')
-
-      // 取得登入狀態並記錄到 localStorage
-      window.FB.getLoginStatus(function (response) {
-        localStorage.setItem(
-          "facebookClientToken",
-          response?.authResponse?.accessToken
-        );
-        setFBResponse(response);
-      });
-
-      // 顯示 FB 登入頁面
-      window.FB.AppEvents.logPageView();
-    };
-  }, []);
-
-  // 登入 FB 並取得 access token
-  const handleFBLogin = () => {
-    window.FB.login(
-      function (response) {
-        console.log("FB login response", response);
-        setFBResponse(response);
-        localStorage.setItem(
-          "facebookClientToken",
-          response?.authResponse?.accessToken
-        );
-      },
-      { scope: "public_profile,email" }
-    );
-  };
-
-  // 登出並取得 access token
-  const handleFBLogout = () => {
-    window.FB.logout(function (response) {
-      localStorage.setItem(
-        "facebookClientToken",
-        response?.authResponse?.accessToken
+      setFBResponse({ login: false });
+      console.error(
+        `[FB] Login failure: code=${error.code} | message=${error.message} | credential-type=${credential}`
       );
-      setFBResponse(response);
-    });
+    }
   };
 
-  // console.log('useFacebookLogin hook ready')
+  const handleFBLogout = async () => {
+    try {
+      const result = await signOut(auth);
+
+      setFBResponse({ login: false });
+      localStorage.removeItem("facebookClientToken");
+    } catch (error) {
+      console.error(
+        `[FB] Logout failure: code=${error.code} | message=${error.message}`
+      );
+    }
+  };
+
   return [FBResponse, handleFBLogin, handleFBLogout];
 };
 

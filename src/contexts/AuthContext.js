@@ -1,18 +1,17 @@
-import { createContext } from 'react'
+import { createContext } from "react";
 
 const AuthContext = createContext({
   authProvider: null,
   FB: {
-    status: null,
     authResponse: null,
     loginMethod: null,
-    logoutMethod: null
+    logoutMethod: null,
   },
   Google: {
     authResponse: null,
     loginMethod: null,
-    logoutMethod: null
-  }
-})
+    logoutMethod: null,
+  },
+});
 
-export default AuthContext
+export default AuthContext;
