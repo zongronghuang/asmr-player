@@ -2,7 +2,7 @@ import "./App.css";
 
 import { useState } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
@@ -105,20 +105,24 @@ const AppJSX = ({ className }) => {
       <div className={(className, "App")}>
         {/* {console.log('[render] App')} */}
 
-        <Router>
-          {FBResponse?.login || GoogleResponse?.login ? (
-            <Redirect to="/app" />
-          ) : (
-            <Redirect to="/login" />
-          )}
-          {/* {true ? <Redirect to="/app" /> : <Redirect to="/login" />} */}
+        <Router basename="/">
           <Switch>
+            <Redirect exact from="/" to="/login" />
+
             <Route path="/login">
-              <Login />
+              {FBResponse.login || GoogleResponse.login ? (
+                <Redirect to="/app" />
+              ) : (
+                <Login />
+              )}
             </Route>
 
             <Route path="/app">
-              <ASMRApp />
+              {FBResponse.login || GoogleResponse.login ? (
+                <ASMRApp />
+              ) : (
+                <Redirect to="/login" />
+              )}
             </Route>
 
             <NoMatchRoute />

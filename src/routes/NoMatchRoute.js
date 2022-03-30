@@ -1,10 +1,10 @@
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect } from "react-router-dom";
 
 const NoMatchRoute = () => (
   <Route>
-    {console.log('entered * route')}
-    <Redirect to={{ pathname: '/app' }} />
+    {console.log("No matched route")}
+    <Redirect to="/login" />
   </Route>
-)
+);
 
-export default NoMatchRoute
+export default NoMatchRoute;

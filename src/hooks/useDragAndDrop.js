@@ -72,6 +72,11 @@ const useDragAndDrop = ({ dragItemRef, dropZoneRef }) => {
     );
 
     return () => {
+      // 登出後回到 Login 頁，useDragAndDrop 會執行 cleanup，但是dragItemRef 內沒有紀錄任何元素，無法順利完成 cleanup。
+      if (!dragItemRef.current) {
+        return;
+      }
+
       // 回復 drag item 先前狀態
       dragItemRef.current.removeAttribute("draggable");
       dragItemRef.current.style.position = originalPosition;

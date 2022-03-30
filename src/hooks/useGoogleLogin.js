@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 
 const useGoogleLogin = () => {
-  const [GoogleResponse, setGoogleResponse] = useState();
+  const [GoogleResponse, setGoogleResponse] = useState({ login: false });
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
 
@@ -32,6 +32,7 @@ const useGoogleLogin = () => {
     try {
       const auth = getAuth();
       await signOut(auth);
+      localStorage.removeItem("googleAccessToken");
       setGoogleResponse({ login: false });
     } catch (error) {
       console.error(
