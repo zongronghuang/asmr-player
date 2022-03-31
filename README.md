@@ -14,7 +14,7 @@ I built this web app to hone and improve on my technical proficiency:
 
 - React ecosystem: [React](https://reactjs.org), [Redux Toolkit](https://redux-toolkit.js.org/), [React Redux](https://react-redux.js.org/), [React Router](https://v5.reactrouter.com/web/guides/quick-start), and [Emotion.js](https://emotion.sh/docs/introduction)
 - Firebase: [Hosting](https://firebase.google.com/docs/hosting), [Authentication](https://firebase.google.com/docs/auth), and [Cloud Storage](https://firebase.google.com/docs/storage)
-- Third-party resources: [Unsplash API](https://unsplash.com/developers) and [Font Awesome](https://fontawesome.com)
+- Third-party resources: [Unsplash API](https://unsplash.com/developers), [BBC Sound Effects](https://sound-effects.bbcrewind.co.uk), and [Font Awesome](https://fontawesome.com)
 
 ## :musical_note: Features
 
@@ -23,15 +23,16 @@ I built this web app to hone and improve on my technical proficiency:
 
 - Access to eight audio recordings stored in Firebase Cloud Storage.
 - Two kinds of app backdrops:
-  - **Animated color-gradient backdrop**
-  - **Unsplash photographs**: Random images that match the audio recordings, with links to the source image and the photographer's profile page. Unsplash photographs are available when the app has Internet connection.
+  - **Animated color-gradient backdrop**: This backdrop is available when you are online or offline.
+  - **Unsplash photographs**: This kind of backdrop shows a random image that matches the current audio's theme. It is available only when there's Internet connection.
 - Draggable control panel with audio controls and three playback modes:
+  - **Full album loop** (default): the app plays all tracks in the album in sequence repeatedly.
   - **Single track loop**: the app repeates single audio track.
-  - **Full album loop** (**default**): the app plays all tracks in the album in fixed order and repeats the queue.
   - **Shuffle**: the app plays the album tracks in random order. The playback is not repeated.
-- Social media logins: Facebook and Google
-- Responsive to desktop and mobile devices
-- Reusing Unsplash backdrop images fetched in last hour to optimize API usage and user experience
+- Access control via Facebook and Google logins (powered by Firebase).
+- Routing control for handling invalid user-input URLs and unauthenticated access.
+- Responsive to desktop and mobile devices.
+- Retaining backdrop images fetched from Unsplash for one hour to minimize API requests while ensuring smooth user experience.
 
 ## :mag: How to use it
 
