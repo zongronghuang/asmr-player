@@ -6,7 +6,8 @@ import AuthContext from "../contexts/AuthContext";
 
 const LoginJSX = ({ className }) => {
   const userAuth = useContext(AuthContext);
-  const { FB, Google } = userAuth;
+  // const { FB, Google } = userAuth;
+  const { Google } = userAuth;
 
   return (
     <main className={className}>
@@ -15,14 +16,14 @@ const LoginJSX = ({ className }) => {
           <div className="circle circle-inner">
             <section className="logins">
               <h1 className="app-title">ASMR Player</h1>
-              <a
+              {/* <a
                 className="login-btn fb-login"
                 href="#"
                 onClick={FB.loginMethod}
               >
                 <FontAwesomeIcon icon={["fab", "facebook-square"]} size="lg" />
                 <span className="fb-login-text">Facebook Login</span>
-              </a>
+              </a> */}
 
               <a
                 className="login-btn google-login"
@@ -109,13 +110,7 @@ const Login = styled(LoginJSX)`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-items: flex-start;
-    justify-content: center; */
     gap: 1.6rem;
-    gap: 0;
 
     width: 60%;
     height: 60%;

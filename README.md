@@ -29,7 +29,7 @@ I built this web app to hone and improve on my technical proficiency:
   - **Full album loop** (default): the app plays all tracks in the album in sequence repeatedly.
   - **Single track loop**: the app repeates single audio track.
   - **Shuffle**: the app plays the album tracks in random order. The playback is not repeated.
-- Access control via Facebook and Google logins (powered by Firebase).
+- Access control via Google login (powered by Firebase).
 - Routing control for handling invalid user-input URLs and unauthenticated access.
 - Responsive to desktop and mobile devices.
 - Retaining backdrop images fetched from Unsplash for one hour to minimize API requests while ensuring smooth user experience.
@@ -50,10 +50,6 @@ I built this web app to hone and improve on my technical proficiency:
    // Unsplash API
    REACT_APP_BASE_URL=https://api.unsplash.com/
    REACT_APP_ACCESS_KEY=<YOUR ACCESS KEY>
-
-   // Facebook login
-   REACT_APP_FB_APP_ID=<YOUR APP ID>
-   REACT_APP_FB_API_VERSION=<YOUR API VERSION>
 
    // Firebase
    REACT_APP_FIREBASE_API_KEY=<YOUR API KEY>
