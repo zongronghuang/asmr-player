@@ -1,6 +1,14 @@
-export const getRandomImage = async (searchTerm) => {
-  const RESOURCE_URL = `${process.env.REACT_APP_BASE_URL}photos/random?query=${searchTerm}&orientation=landscape`;
-  const REQUEST_OPTIONS = {
+type RandomImage = {
+  photographer: string;
+  portfolio: string;
+  source: string;
+};
+
+export const getRandomImage = async (
+  searchTerm: string
+): Promise<RandomImage> => {
+  const RESOURCE_URL: string = `${process.env.REACT_APP_BASE_URL}photos/random?query=${searchTerm}&orientation=landscape`;
+  const REQUEST_OPTIONS: RequestInit = {
     mode: "cors",
     headers: {
       "Content-Type": "application/json",

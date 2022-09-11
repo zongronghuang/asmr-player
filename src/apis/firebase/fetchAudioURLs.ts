@@ -6,10 +6,12 @@ const storage = getStorage(firebaseApp);
 const audioFolder = "audios";
 const listRef = ref(storage, audioFolder);
 
-export const fetchAudioURLs = async () => {
+type URLPromises = Promise<string>[];
+
+export const fetchAudioURLs = async (): Promise<string[] | undefined> => {
   try {
     // 取得 audioFolder 內所有音檔的 full path
-    const urlPromises = [];
+    const urlPromises: URLPromises = [];
     const data = await listAll(listRef);
     data.items.forEach((itemRef) => {
       const urlPromise = getDownloadURL(ref(storage, itemRef.fullPath));
