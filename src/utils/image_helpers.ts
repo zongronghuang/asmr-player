@@ -1,7 +1,10 @@
+type TimeStamp = number 
+
+
 // 判斷能否更新 localStorage 裡的圖片網址
-const canSendImageRequests = (currentTime) => {
+const canSendImageRequests = (currentTime: TimeStamp): boolean => {
   const maxInterval = 3600000; // 3600000 ms = 1 小時
-  const lastFetchTime = localStorage.getItem("last_fetch_time") || 0;
+  const lastFetchTime = Number(localStorage.getItem("last_fetch_time")) || 0;
   const canUpdate = currentTime - lastFetchTime > maxInterval;
 
   return canUpdate;
@@ -14,11 +17,15 @@ const getImagesFromLocalStorage = () => {
   if (!imageData) {
     return null;
   }
-  return JSON.parse(localStorage.getItem("image_urls"));
+  return JSON.parse(localStorage.getItem("image_urls") || 'null');
 };
 
 // 更新 localStorage 的 remote backdrop URLs 和取得時間
-const updateImagesToLocalStorage = ({ currentTime, imageData }) => {
+type TimeAndImages = {
+  currentTime: TimeStamp,
+  imageData: 
+}
+const updateImagesToLocalStorage = ({ currentTime, imageData }): void => {
   if (currentTime) {
     localStorage.setItem("last_fetch_time", JSON.stringify(currentTime));
   }
@@ -26,7 +33,7 @@ const updateImagesToLocalStorage = ({ currentTime, imageData }) => {
   if (Array.isArray(imageData)) {
     localStorage.setItem("image_urls", JSON.stringify(imageData));
   } else {
-    localStorage.setItem("image_urls", null);
+    localStorage.setItem("image_urls", 'null');
   }
 };
 

@@ -1,8 +1,15 @@
-const getRandomNum = (max) => {
+type Track = {
+  order: number;
+  name: string;
+  searchTerm: string;
+  audioSrc: string;
+};
+
+const getRandomNum = (max: number): number => {
   return Math.floor(Math.random() * max);
 };
 
-const isInIncrementalOrder = (trackArray) => {
+const isInIncrementalOrder = (trackArray: Track[]): boolean => {
   // 以 order 0 的曲目作為分界點，將 trackArray 拆成兩個子陣列
   const orderZeroId = trackArray.findIndex((track) => track.order === 0);
   const tracksFromOrderZero = trackArray.slice(orderZeroId);
@@ -16,8 +23,8 @@ const isInIncrementalOrder = (trackArray) => {
 };
 
 // 建立 randomizeTracks() 讓專輯曲目順序符合直觀的隨機順序
-const randomizeTracks = (trackArray) => {
-  const usedIndexes = [];
+const randomizeTracks = (trackArray: Track[]): Track[] => {
+  const usedIndexes: number[] = [];
   const randomTracks = Array(trackArray.length);
   let index = getRandomNum(trackArray.length);
 
