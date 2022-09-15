@@ -1,4 +1,5 @@
-type RandomImage = {
+// public types
+export type RandomImage = {
   photographer: string;
   portfolio: string;
   source: string;

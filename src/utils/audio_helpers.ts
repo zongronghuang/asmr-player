@@ -1,9 +1,4 @@
-type Track = {
-  order: number;
-  name: string;
-  searchTerm: string;
-  audioSrc: string;
-};
+import { Track } from "./track_list";
 
 const getRandomNum = (max: number): number => {
   return Math.floor(Math.random() * max);

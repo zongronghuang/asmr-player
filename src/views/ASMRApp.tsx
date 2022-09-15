@@ -30,9 +30,10 @@ const ASMRAppJSX = () => {
   const [shouldUseAPIData, setShouldUseAPIData] = useState(false);
   const [isAppReady, setIsAppReady] = useState(false);
   const [dialogType, setDialogType] = useState("logout");
-  const dialogRef = useRef();
-  const audioPanelRef = useRef();
-  const backdropRef = useRef();
+  const dialogRef = useRef<HTMLDialogElement>();
+  const audioPanelRef = useRef<HTMLDivElement>();
+  const backdropRef: React.MutableRefObject<HTMLDivElement | undefined> =
+    useRef<HTMLDivElement>();
 
   // 建立 logout dialog 處理器
   const handleLogoutDialog = (status) => {

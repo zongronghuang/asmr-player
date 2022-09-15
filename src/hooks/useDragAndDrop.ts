@@ -1,8 +1,14 @@
-import { useEffect, useRef } from "react";
+import React, { ReactHTMLElement, useEffect, useRef } from "react";
 
 // useDragAndDrop 可以在同一個 drop zone 上面，設定一個以上的 drag item
 // drop zone 和 drag item 都要以 ref 的形態傳入
-const useDragAndDrop = ({ dragItemRef, dropZoneRef }) => {
+const useDragAndDrop = ({
+  dragItemRef,
+  dropZoneRef,
+}: {
+  dragItemRef: React.ReactNode;
+  dropZoneRef: React.ReactNode;
+}) => {
   // 紀錄滑鼠游標和 drag item 原點之間的距離
   // 不用 useState，因為 event listener 只會取得 initial state (closure)，不會更新 => 改用 useRef
   // useState 要和 React 提供的 onClick, onDoubleClick... 併用，才會取得更新的 state
@@ -14,7 +20,7 @@ const useDragAndDrop = ({ dragItemRef, dropZoneRef }) => {
   const dragItemEvents = [
     {
       name: "dragstart",
-      handler(e) {
+      handler(e: DragEvent) {
         // 取得游標和 drag item 原點的距離
         dragDistanceRef.current = {
           left: e.clientX - e.target.offsetLeft,
@@ -25,7 +31,7 @@ const useDragAndDrop = ({ dragItemRef, dropZoneRef }) => {
     },
     {
       name: "drag",
-      handler(e) {
+      handler(e: DragEvent) {
         e.preventDefault();
       },
     },
@@ -33,13 +39,13 @@ const useDragAndDrop = ({ dragItemRef, dropZoneRef }) => {
   const dropZoneEvents = [
     {
       name: "dragover",
-      handler(e) {
+      handler(e: DragEvent) {
         e.preventDefault();
       },
     },
     {
       name: "drop",
-      handler(e) {
+      handler(e: DragEvent) {
         // 計算 drag item 原點降落位置 (新的 left 和 top)
         // 用 isDraggedRef 判斷元件是否被拖曳，被拖曳的元件才會重新計算位置
         e.preventDefault();

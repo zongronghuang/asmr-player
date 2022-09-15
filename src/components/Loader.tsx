@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const LoaderJSX = ({ className }) => (
+const LoaderJSX = ({ className }: { className: string }) => (
   <div className={className}>
     {/* {console.log('[render] Loader')} */}
     <div className="shade"></div>

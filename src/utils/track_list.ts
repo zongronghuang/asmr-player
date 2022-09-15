@@ -1,4 +1,11 @@
-export const trackList = [
+export type Track = {
+  order: number;
+  name: string;
+  searchTerm: string;
+  audioSrc: string;
+};
+
+export const trackList: Track[] = [
   {
     order: 0,
     name: "Camp fire",

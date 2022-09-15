@@ -4,6 +4,7 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
+  OAuthCredential,
 } from "firebase/auth";
 
 const useGoogleLogin = () => {
