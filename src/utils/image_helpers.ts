@@ -1,5 +1,10 @@
-type TimeStamp = number 
+type TimeStamp = number;
 
+type ImageItem = {
+  photographer: string;
+  portfolio: string;
+  source: string;
+};
 
 // 判斷能否更新 localStorage 裡的圖片網址
 const canSendImageRequests = (currentTime: TimeStamp): boolean => {
@@ -11,21 +16,23 @@ const canSendImageRequests = (currentTime: TimeStamp): boolean => {
 };
 
 // 取得 localStorage 裡的 remote backdrop URLs
-const getImagesFromLocalStorage = () => {
+const getImagesFromLocalStorage = (): string | null => {
   console.log("get images from local");
   const imageData = localStorage.getItem("image_urls");
   if (!imageData) {
     return null;
   }
-  return JSON.parse(localStorage.getItem("image_urls") || 'null');
+  return JSON.parse(localStorage.getItem("image_urls") || "null");
 };
 
 // 更新 localStorage 的 remote backdrop URLs 和取得時間
-type TimeAndImages = {
-  currentTime: TimeStamp,
-  imageData: 
-}
-const updateImagesToLocalStorage = ({ currentTime, imageData }): void => {
+const updateImagesToLocalStorage = ({
+  currentTime,
+  imageData,
+}: {
+  currentTime: TimeStamp;
+  imageData: ImageItem[];
+}): void => {
   if (currentTime) {
     localStorage.setItem("last_fetch_time", JSON.stringify(currentTime));
   }
@@ -33,7 +40,7 @@ const updateImagesToLocalStorage = ({ currentTime, imageData }): void => {
   if (Array.isArray(imageData)) {
     localStorage.setItem("image_urls", JSON.stringify(imageData));
   } else {
-    localStorage.setItem("image_urls", 'null');
+    localStorage.setItem("image_urls", "null");
   }
 };
 
