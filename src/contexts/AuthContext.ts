@@ -1,16 +1,16 @@
 import { createContext } from "react";
 
 const AuthContext = createContext({
-  authProvider: null,
+  authProvider: "",
   FB: {
-    authResponse: null,
-    loginMethod: null,
-    logoutMethod: null,
+    authResponse: "",
+    loginMethod: () => {},
+    logoutMethod: () => {},
   },
   Google: {
-    authResponse: null,
-    loginMethod: null,
-    logoutMethod: null,
+    authResponse: "",
+    loginMethod: () => {},
+    logoutMethod: () => {},
   },
 });
 

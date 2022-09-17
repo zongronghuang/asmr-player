@@ -8,8 +8,10 @@ import LogoutButton from "./LogoutButton";
 import StayButton from "./StayButton";
 import TryAgainButton from "./TryAgainButton";
 
-const modalRoot = document.querySelector("#modal-root");
-const messages = {
+import { AuthContextData, Object } from "../../types";
+
+const modalRoot = document.querySelector("#modal-root") as HTMLElement;
+const messages: Object = {
   offline: (
     <>
       Connection lost.
@@ -37,56 +39,62 @@ const messages = {
   logout: "Are you sure you want to log out of this app?",
 };
 
-const DialogJSX = forwardRef(
-  ({ className, dialogType, setDialogType, handleLogoutDialog }, ref) => {
-    const userAuth = useContext(AuthContext);
-    const title = dialogType.toUpperCase();
-    const chooseLogoutMethod = (authProvider) => {
-      // 如果因為其他原因 (另開分頁)，導致 authProvider === null
-      // 雖可登入 app，但無法使用對應的登出方法，因此強制更改 window.location 進行登出
-      if (!authProvider) {
-        return (window.location = "/login");
-      }
-      return userAuth[authProvider].logoutMethod();
-    };
-
-    return createPortal(
-      <dialog className={className} ref={ref}>
-        {/* {console.log('[render] Dialog')} */}
-        <header className="dialog-title">
-          <strong>{title}</strong>
-        </header>
-        <hr></hr>
-        <section>
-          <span className="dialog-content">{messages[dialogType]}</span>
-        </section>
-        <footer>
-          {dialogType === "logout" && (
-            <>
-              <LogoutButton
-                userAuth={userAuth}
-                chooseLogoutMethod={chooseLogoutMethod}
-              />
-              <StayButton handleLogoutDialog={handleLogoutDialog} />
-            </>
-          )}
-
-          {dialogType === "offline" && (
-            <GotItButton handleLogoutDialog={handleLogoutDialog} />
-          )}
-
-          {(dialogType === "image error" || dialogType === "audio error") && (
-            <TryAgainButton
-              handleLogoutDialog={handleLogoutDialog}
-              setDialogType={setDialogType}
-            />
-          )}
-        </footer>
-      </dialog>,
-      modalRoot
-    );
+const DialogJSX = forwardRef<
+  HTMLDialogElement,
+  {
+    className: string;
+    dialogType: string;
+    setDialogType: (type: string) => void;
+    handleLogoutDialog: (status: string) => void;
   }
-);
+>(({ className, dialogType, setDialogType, handleLogoutDialog }, ref) => {
+  const userAuth: AuthContextData = useContext(AuthContext);
+  const title = dialogType.toUpperCase();
+  const chooseLogoutMethod = (authProvider: string) => {
+    // 如果因為其他原因 (另開分頁)，導致 authProvider === null
+    // 雖可登入 app，但無法使用對應的登出方法，因此強制更改 window.location 進行登出
+    if (!authProvider) {
+      return ((window as Window).location = "/login");
+    }
+    return userAuth[authProvider].logoutMethod();
+  };
+
+  return createPortal(
+    <dialog className={className} ref={ref}>
+      {/* {console.log('[render] Dialog')} */}
+      <header className="dialog-title">
+        <strong>{title}</strong>
+      </header>
+      <hr></hr>
+      <section>
+        <span className="dialog-content">{messages[dialogType]}</span>
+      </section>
+      <footer>
+        {dialogType === "logout" && (
+          <>
+            <LogoutButton
+              userAuth={userAuth}
+              chooseLogoutMethod={chooseLogoutMethod}
+            />
+            <StayButton handleLogoutDialog={handleLogoutDialog} />
+          </>
+        )}
+
+        {dialogType === "offline" && (
+          <GotItButton handleLogoutDialog={handleLogoutDialog} />
+        )}
+
+        {(dialogType === "image error" || dialogType === "audio error") && (
+          <TryAgainButton
+            handleLogoutDialog={handleLogoutDialog}
+            setDialogType={setDialogType}
+          />
+        )}
+      </footer>
+    </dialog>,
+    modalRoot
+  );
+});
 
 const Dialog = styled(DialogJSX)`
   width: 75%;
