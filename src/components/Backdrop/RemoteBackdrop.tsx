@@ -1,6 +1,14 @@
 import styled from "@emotion/styled";
 
-const RemoteBackdropJSX = ({ remoteBackdrop, className }) => (
+import { ImageMetadata } from "../../types";
+
+const RemoteBackdropJSX = ({
+  remoteBackdrop,
+  className,
+}: {
+  remoteBackdrop: ImageMetadata;
+  className?: string;
+}) => (
   <div
     className={className}
     style={{ backgroundImage: `url(${remoteBackdrop.source})` }}

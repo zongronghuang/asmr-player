@@ -1,10 +1,6 @@
-type TimeStamp = number;
+import { ImageMetadata } from "../types";
 
-type ImageItem = {
-  photographer: string;
-  portfolio: string;
-  source: string;
-};
+type TimeStamp = number;
 
 // 判斷能否更新 localStorage 裡的圖片網址
 const canSendImageRequests = (currentTime: TimeStamp): boolean => {
@@ -31,7 +27,7 @@ const updateImagesToLocalStorage = ({
   imageData,
 }: {
   currentTime: TimeStamp;
-  imageData: ImageItem[];
+  imageData: ImageMetadata[];
 }): void => {
   if (currentTime) {
     localStorage.setItem("last_fetch_time", JSON.stringify(currentTime));

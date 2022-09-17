@@ -1,13 +1,8 @@
-// public types
-export type RandomImage = {
-  photographer: string;
-  portfolio: string;
-  source: string;
-};
+import { ImageMetadata } from "../../types";
 
 export const getRandomImage = async (
   searchTerm: string
-): Promise<RandomImage> => {
+): Promise<ImageMetadata> => {
   const RESOURCE_URL: string = `${process.env.REACT_APP_BASE_URL}photos/random?query=${searchTerm}&orientation=landscape`;
   const REQUEST_OPTIONS: RequestInit = {
     mode: "cors",

@@ -1,9 +1,4 @@
-export type Track = {
-  order: number;
-  name: string;
-  searchTerm: string;
-  audioSrc: string;
-};
+import { Track } from "../types";
 
 export const trackList: Track[] = [
   {
