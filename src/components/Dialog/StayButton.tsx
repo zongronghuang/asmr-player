@@ -1,7 +1,9 @@
-const StayButton = ({
-  handleLogoutDialog,
-}: {
+type StayButtonProps = {
   handleLogoutDialog: (status: string) => void;
-}) => <button onClick={() => handleLogoutDialog("off")}>Stay</button>;
+};
+
+const StayButton = ({ handleLogoutDialog }: StayButtonProps) => (
+  <button onClick={() => handleLogoutDialog("off")}>Stay</button>
+);
 
 export default StayButton;

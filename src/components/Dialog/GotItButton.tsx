@@ -1,7 +1,9 @@
-const GotItButton = ({
-  handleLogoutDialog,
-}: {
+type GotItButtonProps = {
   handleLogoutDialog: (status: string) => void;
-}) => <button onClick={() => handleLogoutDialog("off")}>Got it</button>;
+};
+
+const GotItButton = ({ handleLogoutDialog }: GotItButtonProps) => (
+  <button onClick={() => handleLogoutDialog("off")}>Got it</button>
+);
 
 export default GotItButton;

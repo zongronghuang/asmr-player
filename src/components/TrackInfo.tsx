@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { Track } from "../utils/track_list";
+import { Track } from "../types";
 
 // 音訊資訊元件 (名稱)
 const TrackInfoJSX = ({

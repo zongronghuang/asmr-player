@@ -8,18 +8,28 @@ import LocalBackdropButton from "./LocalBackdropButton";
 import RemoteBackdropButton from "./RemoteBackdropButton";
 import LogoutButton from "./LogoutButton";
 
+import { Track } from "../../types";
+
+type InfoMenuProps = {
+  className: string;
+  track: Track;
+  shouldUseAPIData: boolean;
+  setShouldUseAPIData: (flag: boolean) => {};
+  handleLogoutDialog: (status: string) => {};
+};
+
 const InfoMenuJSX = ({
   className,
   track,
   shouldUseAPIData,
   setShouldUseAPIData,
   handleLogoutDialog,
-}) => {
-  const imageBtn = useRef(null);
-  const photographerBtn = useRef(null);
-  const localBackdropBtn = useRef(null);
-  const remoteBackdropBtn = useRef(null);
-  const logoutBtn = useRef(null);
+}: InfoMenuProps) => {
+  const imageBtnRef = useRef<HTMLAnchorElement | null>(null);
+  const photographerBtnRef = useRef<HTMLAnchorElement | null>(null);
+  const localBackdropBtnRef = useRef<HTMLAnchorElement | null>(null);
+  const remoteBackdropBtnRef = useRef<HTMLAnchorElement | null>(null);
+  const logoutBtnRef = useRef<HTMLAnchorElement | null>(null);
 
   useEffect(() => {
     showBackdropBtn();
@@ -27,25 +37,25 @@ const InfoMenuJSX = ({
 
   const showBackdropBtn = () => {
     if (shouldUseAPIData && track?.remoteBackdrop) {
-      remoteBackdropBtn.current.style.zIndex = 3;
-      localBackdropBtn.current.style.zIndex = -1;
+      remoteBackdropBtnRef.current!.style.zIndex = "3";
+      localBackdropBtnRef.current!.style.zIndex = "-1";
       return;
     }
-    remoteBackdropBtn.current.style.zIndex = -1;
-    localBackdropBtn.current.style.zIndex = 3;
+    remoteBackdropBtnRef.current!.style.zIndex = "-1";
+    localBackdropBtnRef.current!.style.zIndex = "3";
   };
 
   const toggleClickability = () => {
-    photographerBtn.current.classList.toggle("non-clickable");
-    imageBtn.current.classList.toggle("non-clickable");
+    photographerBtnRef.current!.classList.toggle("non-clickable");
+    imageBtnRef.current!.classList.toggle("non-clickable");
   };
 
   const handleTogglingAnimations = () => {
-    photographerBtn.current.classList.toggle("float-photographer");
-    imageBtn.current.classList.toggle("float-image");
-    logoutBtn.current.classList.toggle("float-logout");
-    remoteBackdropBtn.current.classList.toggle("float-network");
-    localBackdropBtn.current.classList.toggle("float-network");
+    photographerBtnRef.current!.classList.toggle("float-photographer");
+    imageBtnRef.current!.classList.toggle("float-image");
+    logoutBtnRef.current!.classList.toggle("float-logout");
+    remoteBackdropBtnRef.current!.classList.toggle("float-network");
+    localBackdropBtnRef.current!.classList.toggle("float-network");
   };
 
   return (
@@ -54,26 +64,29 @@ const InfoMenuJSX = ({
       <MenuButton handleTogglingAnimations={handleTogglingAnimations} />
       <PhotographerButton
         track={track}
-        ref={photographerBtn}
+        ref={photographerBtnRef}
         shouldUseAPIData={shouldUseAPIData}
       />
       <ImageButton
         track={track}
-        ref={imageBtn}
+        ref={imageBtnRef}
         shouldUseAPIData={shouldUseAPIData}
       />
       <RemoteBackdropButton
-        ref={remoteBackdropBtn}
+        ref={remoteBackdropBtnRef}
         setShouldUseAPIData={setShouldUseAPIData}
         toggleClickability={toggleClickability}
       />
       <LocalBackdropButton
         track={track}
-        ref={localBackdropBtn}
+        ref={localBackdropBtnRef}
         setShouldUseAPIData={setShouldUseAPIData}
         toggleClickability={toggleClickability}
       />
-      <LogoutButton ref={logoutBtn} handleLogoutDialog={handleLogoutDialog} />
+      <LogoutButton
+        ref={logoutBtnRef}
+        handleLogoutDialog={handleLogoutDialog}
+      />
     </aside>
   );
 };

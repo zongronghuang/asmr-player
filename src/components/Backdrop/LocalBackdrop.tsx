@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 
-const LocalBackdropJSX = ({ className }: { className?: string }) => (
+type LocalBackdropProps = { className?: string };
+
+const LocalBackdropJSX = ({ className }: LocalBackdropProps) => (
   <div className={className}>
     <div className="slogan">
       <h1 className="slogan__title">Deep Breaths</h1>

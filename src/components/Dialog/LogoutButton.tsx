@@ -1,12 +1,11 @@
 import { AuthContextData } from "../../types";
 
-const LogoutButton = ({
-  userAuth,
-  chooseLogoutMethod,
-}: {
+type LogoutButtonProps = {
   userAuth: AuthContextData;
   chooseLogoutMethod: (method: string) => void;
-}) => (
+};
+
+const LogoutButton = ({ userAuth, chooseLogoutMethod }: LogoutButtonProps) => (
   <button
     onClick={() => {
       chooseLogoutMethod(userAuth.authProvider);

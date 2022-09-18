@@ -1,13 +1,23 @@
 import { forwardRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
+import { Track } from "../../types";
+
+type PhotographerButtonProps = {
+  track: Track;
+  shouldUseAPIData: boolean;
+};
+
+const PhotographerButton = forwardRef<
+  HTMLAnchorElement,
+  PhotographerButtonProps
+>(({ track, shouldUseAPIData }, ref) => (
   <a
     className="option photographer"
     href={
       shouldUseAPIData && track?.remoteBackdrop
         ? track.remoteBackdrop.portfolio
-        : null
+        : ""
     }
     target="_blank"
     rel="noopener noreferrer"
@@ -16,7 +26,7 @@ const PhotographerButton = forwardRef(({ track, shouldUseAPIData }, ref) => (
         ? `Photo by ${track.remoteBackdrop.photographer}`
         : `Not available`
     }
-    tabIndex="14"
+    tabIndex={14}
     ref={ref}
   >
     {/* {console.log("[render] PhotographerButton")} */}

@@ -1,10 +1,12 @@
+type TryAgainButtonProps = {
+  handleLogoutDialog: (stauts: string) => void;
+  setDialogType: (type: string) => void;
+};
+
 const TryAgainButton = ({
   handleLogoutDialog,
   setDialogType,
-}: {
-  handleLogoutDialog: (stauts: string) => void;
-  setDialogType: (type: string) => void;
-}) => (
+}: TryAgainButtonProps) => (
   <button
     onClick={() => {
       handleLogoutDialog("off");

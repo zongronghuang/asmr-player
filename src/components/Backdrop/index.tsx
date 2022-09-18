@@ -6,26 +6,27 @@ import RemoteBackdrop from "./RemoteBackdrop";
 
 import { Track } from "../../types";
 
-const BackdropJSX = forwardRef<
-  HTMLDivElement,
-  {
-    className: string;
-    track: Track;
-    shouldUseAPIData: boolean;
-  }
->(({ className, track, shouldUseAPIData }, ref) => {
-  return (
-    <div ref={ref} className={className}>
-      {shouldUseAPIData && track.remoteBackdrop ? (
-        <RemoteBackdrop remoteBackdrop={track.remoteBackdrop} />
-      ) : (
-        <LocalBackdrop />
-      )}
+type BackdropProps = {
+  className: string;
+  track: Track;
+  shouldUseAPIData: boolean;
+};
 
-      {/* {console.log('[render] Backdrop')} */}
-    </div>
-  );
-});
+const BackdropJSX = forwardRef<HTMLDivElement, BackdropProps>(
+  ({ className, track, shouldUseAPIData }, ref) => {
+    return (
+      <div ref={ref} className={className}>
+        {shouldUseAPIData && track.remoteBackdrop ? (
+          <RemoteBackdrop remoteBackdrop={track.remoteBackdrop} />
+        ) : (
+          <LocalBackdrop />
+        )}
+
+        {/* {console.log('[render] Backdrop')} */}
+      </div>
+    );
+  }
+);
 
 const Backdrop = styled(BackdropJSX)`
   width: 100vw;
