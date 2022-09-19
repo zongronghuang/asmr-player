@@ -1,13 +1,29 @@
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Action, Dispatch } from "@reduxjs/toolkit";
+
+type ReduxActionDispatch = {
+  switchMode: (action: { mode: string }) => Action;
+  dispatch: Dispatch;
+};
+
+type ModeControlProps = {
+  className?: string;
+  mode: string;
+} & ReduxActionDispatch;
 
 // subcomponents
-const LoopAlbumButton = ({ mode, switchMode, dispatch }) => (
+const LoopAlbumButton = ({
+  mode,
+  switchMode,
+  dispatch,
+}: {
+  mode: string;
+} & ReduxActionDispatch) => (
   <button
     className="app-btn"
     title="Loop album"
-    alt="Loop album"
-    tabIndex="7"
+    tabIndex={7}
     onClick={() => dispatch(switchMode({ mode: "loopAlbum" }))}
   >
     <FontAwesomeIcon
@@ -18,12 +34,17 @@ const LoopAlbumButton = ({ mode, switchMode, dispatch }) => (
   </button>
 );
 
-const LoopTrackButton = ({ mode, switchMode, dispatch }) => (
+const LoopTrackButton = ({
+  mode,
+  switchMode,
+  dispatch,
+}: {
+  mode: string;
+} & ReduxActionDispatch) => (
   <button
     className="app-btn"
     title="Loop track"
-    alt="Loop track"
-    tabIndex="8"
+    tabIndex={8}
     onClick={() => dispatch(switchMode({ mode: "loopTrack" }))}
   >
     <FontAwesomeIcon
@@ -34,12 +55,15 @@ const LoopTrackButton = ({ mode, switchMode, dispatch }) => (
   </button>
 );
 
-const ShuffleAllButton = ({ mode, switchMode, dispatch }) => (
+const ShuffleAllButton = ({
+  mode,
+  switchMode,
+  dispatch,
+}: { mode: string } & ReduxActionDispatch) => (
   <button
     className="app-btn"
     title="Shuffle all"
-    alt="Shuffle all"
-    tabIndex="9"
+    tabIndex={9}
     onClick={() => dispatch(switchMode({ mode: "shuffleAll" }))}
   >
     <FontAwesomeIcon
@@ -50,7 +74,12 @@ const ShuffleAllButton = ({ mode, switchMode, dispatch }) => (
   </button>
 );
 
-const ModeControlJSX = ({ className, mode, switchMode, dispatch }) => (
+const ModeControlJSX = ({
+  className,
+  mode,
+  switchMode,
+  dispatch,
+}: ModeControlProps) => (
   <div className={className}>
     {/* {console.log("[render] ModeControl")} */}
     <LoopAlbumButton mode={mode} switchMode={switchMode} dispatch={dispatch} />

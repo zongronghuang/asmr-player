@@ -8,84 +8,97 @@ import AudioTrack from "./AudioTrack";
 import VolumeControl from "./VolumeControl";
 import ModeControl from "./ModeControl";
 
-const AudioPanelJSX = forwardRef(({ className, track }, ref) => {
-  const mode = useSelector((state) => state.audio.mode);
-  const dispatch = useDispatch();
-  const [volume, setVolume] = useState(0.3);
-  const [activeButton, setActiveButton] = useState("play");
-  const audioRef = useRef();
+import { Object, Track } from "../../types";
+import { RootState } from "../../redux/store";
 
-  const handlePlayback = () => {
-    // 發生 onCanPlayThrough 事件時，AudioTrack 元件設計為會自動播放
-    // 第一次事件發生時，瀏覽器要求使用者必須手動觸發播放，否則會跑出錯誤訊息
-    // 用 catch() 接到錯誤訊息並忽略
-    audioRef.current.play().catch((error) => {
-      if (error) setActiveButton("play");
-      console.error("Playback error", error);
-    });
-    audioRef.current.volume = volume;
-    setActiveButton("pause"); // 隱藏 play 鍵，顯示 pause 鍵
-  };
+type AudioPanelProps = {
+  className: string;
+  track: Track;
+};
 
-  const handlePause = () => {
-    audioRef.current.pause();
-    setActiveButton("play"); // 隱藏 pause 鍵，顯示 play 鍵
-  };
+const AudioPanelJSX = forwardRef<HTMLDivElement, AudioPanelProps>(
+  ({ className, track }, ref) => {
+    const mode = useSelector((state: RootState) => state.audio.mode);
+    const dispatch = useDispatch();
+    const [volume, setVolume] = useState(0.3);
+    const [activeButton, setActiveButton] = useState("play");
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // 點按圖示或拖拉 input 欄位的拉桿調整音量
-  const handleVolumeUpDown = (e, method) => {
-    const step = 0.1;
-    const volumeChangeMethod = {
-      up: (e) =>
-        setVolume((prevVolume) => {
-          if (prevVolume >= 1) return prevVolume;
-          audioRef.current.volume = Number((prevVolume + step).toFixed(1));
-          return audioRef.current.volume;
-        }),
-      down: (e) =>
-        setVolume((prevVolume) => {
-          if (prevVolume <= 0) return prevVolume;
-          audioRef.current.volume = Number((prevVolume - step).toFixed(1)); // toFixed 解除浮點數運算不精確問題
-          return audioRef.current.volume;
-        }),
-      manual: (e) =>
-        setVolume((prevVolume) => {
-          audioRef.current.volume = Number(e.target.value);
-          return audioRef.current.volume;
-        }),
+    const handlePlayback = () => {
+      // 發生 onCanPlayThrough 事件時，AudioTrack 元件設計為會自動播放
+      // 第一次事件發生時，瀏覽器要求使用者必須手動觸發播放，否則會跑出錯誤訊息
+      // 用 catch() 接到錯誤訊息並忽略
+      audioRef.current!.play().catch((error) => {
+        if (error) setActiveButton("play");
+        console.error("Playback error", error);
+      });
+      audioRef.current!.volume = volume;
+      setActiveButton("pause"); // 隱藏 play 鍵，顯示 pause 鍵
     };
 
-    volumeChangeMethod[method](e);
-  };
+    const handlePause = () => {
+      audioRef.current!.pause();
+      setActiveButton("play"); // 隱藏 pause 鍵，顯示 play 鍵
+    };
 
-  return (
-    <div className={className} ref={ref}>
-      {/* {console.log('[render] AudioPanel')} */}
-      <PlaybackControl
-        activeButton={activeButton}
-        handlePlayback={handlePlayback}
-        handlePause={handlePause}
-        switchTrack={switchTrack}
-        dispatch={dispatch}
-      />
-      <div>
-        <VolumeControl
-          handleVolumeUpDown={handleVolumeUpDown}
-          volume={volume}
-        />
-        <AudioTrack
-          track={track}
-          mode={mode}
-          ref={audioRef}
-          dispatch={dispatch}
-          switchTrack={switchTrack}
+    // 點按圖示或拖拉 input 欄位的拉桿調整音量
+    const handleVolumeUpDown = (
+      e: React.ChangeEvent | React.MouseEvent,
+      method: string
+    ) => {
+      const step = 0.1;
+      const volumeChangeMethod: Object = {
+        up: () =>
+          setVolume((prevVolume) => {
+            if (prevVolume >= 1) return prevVolume;
+            audioRef.current!.volume = Number((prevVolume + step).toFixed(1));
+            return audioRef.current!.volume;
+          }),
+        down: () =>
+          setVolume((prevVolume) => {
+            if (prevVolume <= 0) return prevVolume;
+            audioRef.current!.volume = Number((prevVolume - step).toFixed(1)); // toFixed 解除浮點數運算不精確問題
+            return audioRef.current!.volume;
+          }),
+        manual: (e: React.ChangeEvent<HTMLInputElement>) =>
+          setVolume((prevVolume) => {
+            audioRef.current!.volume = Number(e.target.value);
+            return audioRef.current!.volume;
+          }),
+      };
+
+      volumeChangeMethod[method](e);
+    };
+
+    return (
+      <div className={className} ref={ref}>
+        {/* {console.log('[render] AudioPanel')} */}
+        <PlaybackControl
+          activeButton={activeButton}
           handlePlayback={handlePlayback}
+          handlePause={handlePause}
+          switchTrack={switchTrack}
+          dispatch={dispatch}
         />
+        <div>
+          <VolumeControl
+            handleVolumeUpDown={handleVolumeUpDown}
+            volume={volume}
+          />
+          <AudioTrack
+            track={track}
+            mode={mode}
+            ref={audioRef}
+            dispatch={dispatch}
+            switchTrack={switchTrack}
+            handlePlayback={handlePlayback}
+          />
+        </div>
+        <ModeControl mode={mode} switchMode={switchMode} dispatch={dispatch} />
       </div>
-      <ModeControl mode={mode} switchMode={switchMode} dispatch={dispatch} />
-    </div>
-  );
-});
+    );
+  }
+);
 
 const AudioPanel = styled(AudioPanelJSX)`
   display: flex;

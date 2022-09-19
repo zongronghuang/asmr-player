@@ -16,3 +16,5 @@ if (process.env.NODE_ENV !== "production" && module.hot) {
 }
 
 export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
