@@ -11,11 +11,11 @@ import LogoutButton from "./LogoutButton";
 import { Track } from "../../types";
 
 type InfoMenuProps = {
-  className: string;
+  className?: string;
   track: Track;
   shouldUseAPIData: boolean;
-  setShouldUseAPIData: (flag: boolean) => {};
-  handleLogoutDialog: (status: string) => {};
+  setShouldUseAPIData: (flag: boolean) => void;
+  handleLogoutDialog: (status: string) => void;
 };
 
 const InfoMenuJSX = ({

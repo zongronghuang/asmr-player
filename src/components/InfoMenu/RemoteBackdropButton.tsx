@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type RemoteBackdropButtonProps = {
-  setShouldUseAPIData: (flag: boolean) => {};
+  setShouldUseAPIData: (flag: boolean) => void;
   toggleClickability: () => void;
 };
 
@@ -16,7 +16,8 @@ const RemoteBackdropButton = forwardRef<
     title="Remote backdrop"
     ref={ref}
     onClick={() => {
-      setShouldUseAPIData(false) || toggleClickability();
+      setShouldUseAPIData(false);
+      toggleClickability();
     }}
   >
     {/* {console.log("[render] RemoteBackdropButton")} */}

@@ -1,4 +1,4 @@
-import { Track } from "./track_list";
+import { Track } from "../types";
 
 const getRandomNum = (max: number): number => {
   return Math.floor(Math.random() * max);

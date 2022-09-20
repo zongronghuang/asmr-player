@@ -12,7 +12,7 @@ import { Object, Track } from "../../types";
 import { RootState } from "../../redux/store";
 
 type AudioPanelProps = {
-  className: string;
+  className?: string;
   track: Track;
 };
 

@@ -7,7 +7,7 @@ import RemoteBackdrop from "./RemoteBackdrop";
 import { Track } from "../../types";
 
 type BackdropProps = {
-  className: string;
+  className?: string;
   track: Track;
   shouldUseAPIData: boolean;
 };

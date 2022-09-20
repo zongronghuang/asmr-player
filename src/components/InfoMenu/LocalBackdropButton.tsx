@@ -5,7 +5,7 @@ import { Track } from "../../types";
 
 type LocalBackdropButtonProps = {
   track: Track;
-  setShouldUseAPIData: (flag: boolean) => {};
+  setShouldUseAPIData: (flag: boolean) => void;
   toggleClickability: () => void;
 };
 
@@ -18,11 +18,14 @@ const LocalBackdropButton = forwardRef<
     tabIndex={12}
     title="Local backdrop"
     ref={ref}
-    onClick={() =>
-      track?.remoteBackdrop
-        ? setShouldUseAPIData(true) || toggleClickability()
-        : setShouldUseAPIData(false)
-    }
+    onClick={() => {
+      if (track?.remoteBackdrop) {
+        setShouldUseAPIData(true);
+        toggleClickability();
+      } else {
+        setShouldUseAPIData(false);
+      }
+    }}
   >
     {/* {console.log("[render] LocalBackdropButton")} */}
     <FontAwesomeIcon

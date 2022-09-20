@@ -26,8 +26,8 @@ const updateImagesToLocalStorage = ({
   currentTime,
   imageData,
 }: {
-  currentTime: TimeStamp;
-  imageData: ImageMetadata[];
+  currentTime?: TimeStamp;
+  imageData?: ImageMetadata[];
 }): void => {
   if (currentTime) {
     localStorage.setItem("last_fetch_time", JSON.stringify(currentTime));
