@@ -10,7 +10,7 @@ import TryAgainButton from "./TryAgainButton";
 
 import { AuthContextData, Object } from "../../types";
 type DialogProps = {
-  className: string;
+  className?: string;
   dialogType: string;
   setDialogType: (type: string) => void;
   handleLogoutDialog: (status: string) => void;

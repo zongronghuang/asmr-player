@@ -9,7 +9,7 @@ const TrackInfoJSX = ({
   className,
   track,
 }: {
-  className: string;
+  className?: string;
   track: Track;
 }) => {
   // 更換 track 時，重新設定動畫 + 播放動畫

@@ -1,4 +1,4 @@
-import React, { ReactHTMLElement, useEffect, useRef } from "react";
+import React, { ReactHTMLElement, useEffect, useRef, RefObject } from "react";
 
 // useDragAndDrop 可以在同一個 drop zone 上面，設定一個以上的 drag item
 // drop zone 和 drag item 都要以 ref 的形態傳入
@@ -6,8 +6,8 @@ const useDragAndDrop = ({
   dragItemRef,
   dropZoneRef,
 }: {
-  dragItemRef: React.ReactNode;
-  dropZoneRef: React.ReactNode;
+  dragItemRef: RefObject<HTMLDivElement>;
+  dropZoneRef: RefObject<HTMLDivElement>;
 }) => {
   // 紀錄滑鼠游標和 drag item 原點之間的距離
   // 不用 useState，因為 event listener 只會取得 initial state (closure)，不會更新 => 改用 useRef

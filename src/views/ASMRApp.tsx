@@ -22,23 +22,24 @@ import {
   updateImagesToLocalStorage,
 } from "../utils/image_helpers";
 
+import { RootState } from "../redux/store";
+
 const ASMRAppJSX = () => {
-  const track = useSelector((state) => ({ ...state.audio.track }));
+  const track = useSelector((state: RootState) => ({ ...state.audio.track }));
   const dispatch = useDispatch();
 
   // 用 useReducer 整理或 useState 整理?
-  const [shouldUseAPIData, setShouldUseAPIData] = useState(false);
-  const [isAppReady, setIsAppReady] = useState(false);
-  const [dialogType, setDialogType] = useState("logout");
-  const dialogRef = useRef<HTMLDialogElement>();
-  const audioPanelRef = useRef<HTMLDivElement>();
-  const backdropRef: React.MutableRefObject<HTMLDivElement | undefined> =
-    useRef<HTMLDivElement>();
+  const [shouldUseAPIData, setShouldUseAPIData] = useState<boolean>(false);
+  const [isAppReady, setIsAppReady] = useState<boolean>(false);
+  const [dialogType, setDialogType] = useState<string>("logout");
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const audioPanelRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
 
   // 建立 logout dialog 處理器
-  const handleLogoutDialog = (status) => {
-    if (status === "on") dialogRef.current.showModal();
-    if (status === "off") dialogRef.current.close();
+  const handleLogoutDialog = (status: string) => {
+    if (status === "on") dialogRef.current!.showModal();
+    if (status === "off") dialogRef.current!.close();
   };
 
   // 添加 drag and drop 功能
@@ -60,8 +61,8 @@ const ASMRAppJSX = () => {
   useEffect(() => {
     const resolveAudioURLs = async () => {
       try {
-        const urls = await fetchAudioURLs();
-        if (!urls.length) throw new Error("[Error] No available audios found");
+        const urls: string[] | undefined = await fetchAudioURLs();
+        if (!urls!.length) throw new Error("[Error] No available audios found");
         dispatch(addAudioSrcs({ urls }));
       } catch (error) {
         console.error(error);
