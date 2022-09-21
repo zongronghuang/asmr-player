@@ -1,4 +1,6 @@
-import React, { ReactHTMLElement, useEffect, useRef, RefObject } from "react";
+import React, { useEffect, useRef, RefObject } from "react";
+
+import { Object } from "../types";
 
 // useDragAndDrop 可以在同一個 drop zone 上面，設定一個以上的 drag item
 // drop zone 和 drag item 都要以 ref 的形態傳入
@@ -17,14 +19,15 @@ const useDragAndDrop = ({
     top: 0,
   });
   const isDraggedRef = useRef(false);
-  const dragItemEvents = [
+  const dragItemEvents: Object[] = [
     {
       name: "dragstart",
       handler(e: DragEvent) {
         // 取得游標和 drag item 原點的距離
+        let dragItem = e.target as HTMLDivElement;
         dragDistanceRef.current = {
-          left: e.clientX - e.target.offsetLeft,
-          top: e.clientY - e.target.offsetTop,
+          left: e.clientX - dragItem.offsetLeft,
+          top: e.clientY - dragItem.offsetTop,
         };
         isDraggedRef.current = true;
       },
@@ -36,7 +39,7 @@ const useDragAndDrop = ({
       },
     },
   ];
-  const dropZoneEvents = [
+  const dropZoneEvents: Object[] = [
     {
       name: "dragover",
       handler(e: DragEvent) {
@@ -55,8 +58,8 @@ const useDragAndDrop = ({
         }
         const dragItemLeft = e.clientX - left;
         const dragItemTop = e.clientY - top;
-        dragItemRef.current.style.left = `${dragItemLeft}px`;
-        dragItemRef.current.style.top = `${dragItemTop}px`;
+        dragItemRef.current!.style.left = `${dragItemLeft}px`;
+        dragItemRef.current!.style.top = `${dragItemTop}px`;
         isDraggedRef.current = false;
       },
     },
@@ -64,17 +67,18 @@ const useDragAndDrop = ({
 
   useEffect(() => {
     // 讓 drag item 能夠被拖曳
-    dragItemRef.current.setAttribute("draggable", true);
+    dragItemRef.current!.setAttribute("draggable", "true");
     const originalPosition = getComputedStyle(
-      dragItemRef.current
+      dragItemRef.current!
     ).getPropertyValue("position");
-    dragItemRef.current.style.position = "absolute";
+    dragItemRef.current!.style.position = "absolute";
 
     dragItemEvents.forEach((e) =>
-      dragItemRef.current.addEventListener(e.name, e.handler)
+      dragItemRef.current!.addEventListener(e.name, e.handler)
     );
+
     dropZoneEvents.forEach((e) =>
-      dropZoneRef.current.addEventListener(e.name, e.handler)
+      dropZoneRef.current!.addEventListener(e.name, e.handler)
     );
 
     return () => {
@@ -88,10 +92,10 @@ const useDragAndDrop = ({
       dragItemRef.current.style.position = originalPosition;
 
       dragItemEvents.forEach((e) =>
-        dragItemRef.current.removeEventListener(e.name, e.handler)
+        dragItemRef.current!.removeEventListener(e.name, e.handler)
       );
       dropZoneEvents.forEach((e) =>
-        dropZoneRef.current.removeEventListener(e.name, e.handler)
+        dropZoneRef.current!.removeEventListener(e.name, e.handler)
       );
     };
   }, []);

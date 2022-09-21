@@ -6,6 +6,8 @@ import {
   FacebookAuthProvider,
 } from "firebase/auth";
 
+import { FirebaseError } from "firebase/app";
+
 const useFacebookLogin = () => {
   const [FBResponse, setFBResponse] = useState({ login: false });
   const provider = new FacebookAuthProvider();
@@ -18,17 +20,23 @@ const useFacebookLogin = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       const credential = FacebookAuthProvider.credentialFromResult(result);
-      const accessToken = credential.accessToken;
+      const accessToken = credential!.accessToken!;
 
       setFBResponse({ login: true });
       localStorage.setItem("facebookClientToken", accessToken);
     } catch (error) {
-      const credential = FacebookAuthProvider.credentialFromError(error);
+      // error 為 FirebaseError
+      if (error instanceof FirebaseError) {
+        const credential = FacebookAuthProvider.credentialFromError(error);
 
-      setFBResponse({ login: false });
-      console.error(
-        `[FB] Login failure: code=${error.code} | message=${error.message} | credential-type=${credential}`
-      );
+        setFBResponse({ login: false });
+        console.error(
+          `[FB] Login failure: code=${error.code} | message=${error.message} | credential-type=${credential}`
+        );
+      }
+
+      // 其他類型 error
+      console.error("[FB] Login failure: ", error);
     }
   };
 
@@ -39,9 +47,12 @@ const useFacebookLogin = () => {
       setFBResponse({ login: false });
       localStorage.removeItem("facebookClientToken");
     } catch (error) {
-      console.error(
-        `[FB] Logout failure: code=${error.code} | message=${error.message}`
-      );
+      if (error instanceof FirebaseError) {
+        console.error(
+          `[FB] Logout failure: code=${error.code} | message=${error.message}`
+        );
+      }
+      console.error("[FB] logout failure: ", error);
     }
   };
 

@@ -4,8 +4,9 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
-  OAuthCredential,
 } from "firebase/auth";
+
+import { FirebaseError } from "firebase/app";
 
 const useGoogleLogin = () => {
   const [GoogleResponse, setGoogleResponse] = useState({ login: false });
@@ -16,16 +17,22 @@ const useGoogleLogin = () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
+      const token = credential!.accessToken!;
       const user = result.user;
 
       localStorage.setItem("googleAccessToken", token);
       setGoogleResponse({ login: true });
     } catch (error) {
-      console.error(
-        `[Google] Login failure: code=${error.code} | message=${error.message}`
-      );
-      setGoogleResponse({ login: false });
+      // error 為 FirebaseError
+      if (error instanceof FirebaseError) {
+        console.error(
+          `[Google] Login failure: code=${error.code} | message=${error.message}`
+        );
+        setGoogleResponse({ login: false });
+      }
+
+      // 其他類型 error
+      console.error("[Google] Login failure: ", error);
     }
   };
 
@@ -36,9 +43,15 @@ const useGoogleLogin = () => {
       localStorage.removeItem("googleAccessToken");
       setGoogleResponse({ login: false });
     } catch (error) {
-      console.error(
-        `[Google] Logout failure: code=${error.code} | message=${error.message}`
-      );
+      // error 為 FirebaseError
+      if (error instanceof FirebaseError) {
+        console.error(
+          `[Google] Logout failure: code=${error.code} | message=${error.message}`
+        );
+      }
+
+      // 其他類型 error
+      console.error("[Google] Logout failure: ", error);
     }
   };
 
