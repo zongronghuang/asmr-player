@@ -41,6 +41,8 @@ import useGoogleLogin from "./hooks/useGoogleLogin";
 import AuthContext from "./contexts/AuthContext";
 import NoMatchRoute from "./routes/NoMatchRoute";
 
+import { AuthContextData } from "./types";
+
 // 註冊 fontAwesome SVG icons
 library.add(
   faMusic,
@@ -71,14 +73,14 @@ const AppJSX = ({ className }: { className?: string }) => {
   const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin();
   const [GoogleResponse, handleGoogleLogin, handleGoogleLogout] =
     useGoogleLogin();
-  const [authProvider, setAuthProvider] = useState(null);
+  const [authProvider, setAuthProvider] = useState<string | null>(null);
 
   return (
     <AuthContext.Provider
       value={{
-        authProvider,
+        authProvider: "",
         FB: {
-          authResponse: FBResponse?.login,
+          authResponse: FBResponse.login,
           loginMethod: () => {
             handleFBLogin();
             setAuthProvider("FB");
@@ -102,7 +104,7 @@ const AppJSX = ({ className }: { className?: string }) => {
         },
       }}
     >
-      <div className={(className, "App")}>
+      <div className={`${className} App`}>
         {/* {console.log('[render] App')} */}
 
         <Router basename="/">

@@ -7,9 +7,12 @@ import {
 } from "firebase/auth";
 
 import { FirebaseError } from "firebase/app";
+import { Object } from "../types";
 
-const useGoogleLogin = () => {
-  const [GoogleResponse, setGoogleResponse] = useState({ login: false });
+const useGoogleLogin = (): [Object, () => void, () => void] => {
+  const [GoogleResponse, setGoogleResponse] = useState<Object>({
+    login: false,
+  });
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
 
