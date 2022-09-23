@@ -1,7 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, StateFromReducersMapObject } from "@reduxjs/toolkit";
 import audioReducer from "./audioSlice";
+import { Object } from "../types";
 
-const store = configureStore({
+const store: Object = configureStore({
   reducer: {
     audio: audioReducer,
   },

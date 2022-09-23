@@ -7,10 +7,11 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import "./apis/firebase/createFirebaseApp"; // 建立 firebaseApp 實體
+import { Store, AnyAction } from "@reduxjs/toolkit";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={store as Store<any, AnyAction>}>
       <App />
     </Provider>
   </React.StrictMode>,
