@@ -9,7 +9,9 @@ import {
 import { FirebaseError } from "firebase/app";
 import { Object } from "../types";
 
-const useGoogleLogin = (): [Object, () => void, () => void] => {
+type UseGoogleLoginProps = [Object, () => void, () => void];
+
+const useGoogleLogin = (): UseGoogleLoginProps => {
   const [GoogleResponse, setGoogleResponse] = useState<Object>({
     login: false,
   });

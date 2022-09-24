@@ -4,7 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import AuthContext from "../contexts/AuthContext";
 
-const LoginJSX = ({ className }: { className?: string }) => {
+type LoginProps = { className?: string };
+
+const LoginJSX = ({ className }: LoginProps) => {
   const userAuth = useContext(AuthContext);
   // const { FB, Google } = userAuth;
   const { Google } = userAuth;

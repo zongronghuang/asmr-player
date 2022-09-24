@@ -4,14 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Track } from "../types";
 
+type TrackInfoProps = { className?: string; track: Track };
+
 // 音訊資訊元件 (名稱)
-const TrackInfoJSX = ({
-  className,
-  track,
-}: {
-  className?: string;
-  track: Track;
-}) => {
+const TrackInfoJSX = ({ className, track }: TrackInfoProps) => {
   // 更換 track 時，重新設定動畫 + 播放動畫
   // CSS 動畫效果無法依特定條件重覆播放，需用 JavaScript Animation API 達成
   useEffect(() => {

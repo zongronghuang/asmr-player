@@ -9,7 +9,9 @@ import {
 import { FirebaseError } from "firebase/app";
 import { Object } from "../types";
 
-const useFacebookLogin = (): [Object, () => void, () => void] => {
+type UseFacebookLoginProps = [Object, () => void, () => void];
+
+const useFacebookLogin = (): UseFacebookLoginProps => {
   const [FBResponse, setFBResponse] = useState({ login: false });
   const provider = new FacebookAuthProvider();
   const auth = getAuth();

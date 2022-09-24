@@ -24,7 +24,9 @@ import {
 
 import { RootState } from "../redux/store";
 
-const ASMRAppJSX = () => {
+type ASMRAppProps = { className?: string };
+
+const ASMRAppJSX = ({ className }: ASMRAppProps) => {
   const track = useSelector((state: RootState) => ({ ...state.audio.track }));
   const dispatch = useDispatch();
 

@@ -7,19 +7,16 @@ type ReduxActionDispatch = {
   dispatch: Dispatch;
 };
 
-type ModeControlProps = {
-  className?: string;
+// subcomponents
+type ModeControlButtonProps = {
   mode: string;
 } & ReduxActionDispatch;
 
-// subcomponents
 const LoopAlbumButton = ({
   mode,
   switchMode,
   dispatch,
-}: {
-  mode: string;
-} & ReduxActionDispatch) => (
+}: ModeControlButtonProps) => (
   <button
     className="app-btn"
     title="Loop album"
@@ -38,9 +35,7 @@ const LoopTrackButton = ({
   mode,
   switchMode,
   dispatch,
-}: {
-  mode: string;
-} & ReduxActionDispatch) => (
+}: ModeControlButtonProps) => (
   <button
     className="app-btn"
     title="Loop track"
@@ -59,7 +54,7 @@ const ShuffleAllButton = ({
   mode,
   switchMode,
   dispatch,
-}: { mode: string } & ReduxActionDispatch) => (
+}: ModeControlButtonProps) => (
   <button
     className="app-btn"
     title="Shuffle all"
@@ -73,6 +68,11 @@ const ShuffleAllButton = ({
     />
   </button>
 );
+
+type ModeControlProps = {
+  className?: string;
+  mode: string;
+} & ReduxActionDispatch;
 
 const ModeControlJSX = ({
   className,

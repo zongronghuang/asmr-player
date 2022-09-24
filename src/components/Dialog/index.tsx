@@ -9,6 +9,7 @@ import StayButton from "./StayButton";
 import TryAgainButton from "./TryAgainButton";
 
 import { AuthContextData, Object } from "../../types";
+
 type DialogProps = {
   className?: string;
   dialogType: string;

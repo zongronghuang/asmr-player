@@ -10,6 +10,8 @@ export type ImageMetadata = {
   source: string;
 };
 
+export type TimeStamp = number;
+
 // remoteBackdrop 在收到 API 回應後才會加入 track
 export type Track = {
   order: number;

@@ -1,6 +1,4 @@
-import { ImageMetadata } from "../types";
-
-type TimeStamp = number;
+import { ImageMetadata, TimeStamp } from "../types";
 
 // 判斷能否更新 localStorage 裡的圖片網址
 const canSendImageRequests = (currentTime: TimeStamp): boolean => {

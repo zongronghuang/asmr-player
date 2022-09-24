@@ -7,13 +7,6 @@ type ReduxActionDispatch = {
   dispatch: Dispatch;
 };
 
-type PlaybackControlProps = {
-  className?: string;
-  activeButton: string;
-  handlePlayback: () => void;
-  handlePause: () => void;
-} & ReduxActionDispatch;
-
 // subcomponents
 const PreviousTrackButton = ({
   switchTrack,
@@ -59,6 +52,13 @@ const NextTrackButton = ({ switchTrack, dispatch }: ReduxActionDispatch) => (
     <FontAwesomeIcon icon={["fas", "forward"]} size="lg" />
   </button>
 );
+
+type PlaybackControlProps = {
+  className?: string;
+  activeButton: string;
+  handlePlayback: () => void;
+  handlePause: () => void;
+} & ReduxActionDispatch;
 
 const PlaybackControlJSX = ({
   className,

@@ -7,12 +7,6 @@ type VolumeHandler = (
   method: string
 ) => void;
 
-type VolumeControlProps = {
-  className?: string;
-  handleVolumeUpDown: VolumeHandler;
-  volume: number;
-};
-
 // subcomponents
 const MuteButton = () => (
   <button className="app-btn" title="Muted" tabIndex={4}>
@@ -69,6 +63,12 @@ const VolumeUpButton = ({
     <FontAwesomeIcon icon={["fas", "volume-up"]} size="lg" />
   </button>
 );
+
+type VolumeControlProps = {
+  className?: string;
+  handleVolumeUpDown: VolumeHandler;
+  volume: number;
+};
 
 const VolumeControlJSX = ({
   className,

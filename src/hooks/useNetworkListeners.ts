@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 
+type UseNetworkListenersProps = {
+  onlineHandler: () => void;
+  offlineHandler: () => void;
+};
+
 const useNetworkListeners = ({
   onlineHandler,
   offlineHandler,
-}: {
-  onlineHandler: () => void;
-  offlineHandler: () => void;
-}) => {
+}: UseNetworkListenersProps) => {
   useEffect(() => {
     // console.log("[hook] useNetworkListeners");
     // 監聽 App 連線和離線變化

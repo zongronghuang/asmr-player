@@ -69,7 +69,9 @@ library.add(
   faGoogle
 );
 
-const AppJSX = ({ className }: { className?: string }) => {
+type AppProps = { className?: string };
+
+const AppJSX = ({ className }: AppProps) => {
   const [FBResponse, handleFBLogin, handleFBLogout] = useFacebookLogin();
   const [GoogleResponse, handleGoogleLogin, handleGoogleLogout] =
     useGoogleLogin();
